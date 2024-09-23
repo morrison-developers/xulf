@@ -1,0 +1,9 @@
+{
+  "name": "xulf-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/xulf-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["xulf"],
+  "// targets": "to see all targets run: nx show project xulf-e2e --web",
+  "targets": {}
+}

@@ -1,0 +1,9 @@
+{
+  "name": "xulf",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/xulf",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project xulf --web",
+  "targets": {}
+}
