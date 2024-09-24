@@ -1,0 +1,18 @@
+{
+  "name": "morrison-developers",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/morrison-developers",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project morrison-developers --web",
+  "targets": {
+    "serve": {
+      "executor": "@nrwl/next:build",
+      "options": {
+        "port": 4201,
+        "buildTarget": "morrison-developers:build",
+        "hmr": true
+      }
+    }
+  }
+}

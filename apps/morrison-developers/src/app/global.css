@@ -1,0 +1,98 @@
+/* Base Colors (Light Mode) */
+:root {
+  /* Primary Colors */
+  --color-primary: #007BFF;
+  --color-primary-light: #66B2FF;
+  --color-primary-dark: #0056B3;
+
+  /* Accent Colors */
+  --color-secondary: #FFC107;
+  --color-secondary-light: #FFE082;
+  --color-secondary-dark: #FF8F00;
+
+  /* Neutral Colors */
+  --color-background: #F5F5F5;
+  --color-background-secondary: #E0E0E0;
+  --color-surface: #FFFFFF;
+  --color-text: #212121;
+  --color-text-secondary: #757575;
+  --color-text-inverted: #FFFFFF;
+
+  /* Border & Divider Colors */
+  --color-border: #BDBDBD;
+  --color-divider: #E0E0E0;
+
+  /* Interactive States */
+  --color-hover: #0056B3;
+  --color-focus: #80D8FF;
+  --color-active: #004085;
+  --color-disabled: #E0E0E0;
+
+  /* Feedback Colors */
+  --color-success: #28A745;
+  --color-error: #DC3545;
+  --color-warning: #FFC107;
+  --color-info: #17A2B8;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Primary Colors */
+    --color-primary: #66B2FF;
+    --color-primary-light: #99CFFF;
+    --color-primary-dark: #0056B3;
+
+    /* Accent Colors */
+    --color-secondary: #FFD54F;
+    --color-secondary-light: #FFF176;
+    --color-secondary-dark: #FFA000;
+
+    /* Neutral Colors */
+    --color-background: #121212;
+    --color-background-secondary: #1D1D1D;
+    --color-surface: #1E1E1E;
+    --color-text: #E0E0E0;
+    --color-text-secondary: #B3B3B3;
+    --color-text-inverted: #000000;
+
+    /* Border & Divider Colors */
+    --color-border: #424242;
+    --color-divider: #2E2E2E;
+
+    /* Interactive States */
+    --color-hover: #99CFFF;
+    --color-focus: #33BFFF;
+    --color-active: #0056B3;
+    --color-disabled: #424242;
+
+    /* Feedback Colors */
+    --color-success: #81C784;
+    --color-error: #E57373;
+    --color-warning: #FFB74D;
+    --color-info: #64B5F6;
+  }
+}
+
+/* Example Usage */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-hover);
+}
+
+button {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverted);
+}
+
+button:disabled {
+  background-color: var(--color-disabled);
+}

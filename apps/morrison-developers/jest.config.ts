@@ -1,10 +1,10 @@
 export default {
-  displayName: 'xulf',
+  displayName: 'morrison-developers',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/apps/xulf',
+  coverageDirectory: '../../coverage/apps/morrison-developers',
 };
