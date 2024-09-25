@@ -1,82 +1,106 @@
 # Xulf
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This guide provides detailed steps for working with the Nx monorepo, including generating components, libraries, and projects, as well as testing and troubleshooting common issues.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## 1. Generating a New Shared Component
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+To generate a new component, use the following command:
 
-## Finish your CI setup
-
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/gVoZ0SBGRn)
-
-
-## Run tasks
-
-To run the dev server for your app, use:
-
-```sh
-npx nx dev xulf
+```bash
+nx g @nrwl/react:component <component-name> --directory=libs/shared-ui/src/lib/<component-name>
 ```
 
-To create a production bundle:
+For example, to generate a `test` component in the `libs/shared-ui/src/lib/test` directory, run:
 
-```sh
-npx nx build xulf
+```bash
+nx g @nrwl/react:component test --directory=libs/shared-ui/src/lib/test
 ```
 
-To see all available targets to run for a project, run:
+### Troubleshooting:
+If you encounter errors such as "Failed to process project graph," try resetting the Nx cache:
 
-```sh
-npx nx show project xulf
-```
-        
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/next:app demo
+```bash
+nx reset
 ```
 
-To generate a new library, use:
+## 2. Creating a New Library in `libs/`
 
-```sh
-npx nx g @nx/react:lib mylib
+To create a new library inside the `libs/` directory, use the following command:
+
+```bash
+nx g @nrwl/react:library <library-name> --directory=libs
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+For example, to create a library called `shared-ui`:
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+```bash
+nx g @nrwl/react:library shared-ui --directory=libs
+```
 
+This will generate the library inside `libs/shared-ui`.
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 3. Creating a New Project in `apps/`
 
-## Install Nx Console
+To create a new project inside the `apps/` directory, use the following command:
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+```bash
+nx g @nrwl/react:app <app-name>
+```
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+For example, to create a new project called `resturant-app`:
 
-## Useful links
+```bash
+nx g @nrwl/react:app resturant-app
+```
 
-Learn more:
+This will generate the project in the `apps/resturant-app` directory.
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/next?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 4. Testing Affected Projects
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Nx allows you to test only the affected projects after making changes. To test all affected projects, run:
+
+```bash
+nx affected --target=test
+```
+
+You can also build affected projects with:
+
+```bash
+nx affected --target=build
+```
+
+## 5. Installing Nx CLI Extension for VSCode
+
+You can install the **Nx Console** extension in Visual Studio Code for a better developer experience. This extension allows you to generate components, libraries, and projects directly from the VSCode interface.
+
+### Steps to Install Nx Console:
+1. Open **Visual Studio Code**.
+2. Go to the **Extensions** tab (or press `Ctrl+Shift+X`).
+3. Search for **Nx Console**.
+4. Click **Install**.
+
+### How to Use Nx Console:
+1. Open the Nx Console by pressing `Ctrl+Shift+P` and typing `Nx:`.
+2. Select the desired action (generate a component, run affected tests, etc.) from the menu.
+3. Follow the prompts in the UI to run the commands.
+
+## 6. Additional Information
+
+- **Nx DevTools**: Nx provides a set of tools to visualize project dependencies and explore the structure of your monorepo. You can run the following command to open a graphical view of your project dependencies:
+
+  ```bash
+  nx graph
+  ```
+
+- **Project Reset**: If you encounter project graph issues or errors, you can always run:
+
+  ```bash
+  nx reset
+  ```
+
+  This will clear the project graph cache and often resolve issues.
+
+- **Efficient Testing**: Nx automatically runs tasks in parallel to optimize your workflow. You can customize these settings in the `nx.json` file.
+
+For more details, check the official Nx documentation: [Nx Documentation](https://nx.dev/)
+
