@@ -1,4 +1,4 @@
-// apps/nextjs-app/src/pages/about.tsx
+// apps/nextjs-app/about.tsx
 export default function AboutPage() {
   return (
     <div>
