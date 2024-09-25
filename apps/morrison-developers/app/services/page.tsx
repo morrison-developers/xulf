@@ -1,4 +1,8 @@
 // apps/nextjs-app/services/page.tsx
+import { metadata as servicesMetadata } from './metadata';
+
+export const metadata = servicesMetadata;
+
 export default function ServicesPage() {
   return (
     <div>
