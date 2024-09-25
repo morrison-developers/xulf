@@ -1,4 +1,6 @@
-import styled from '@emotion/styled';
+'use client';
+
+import styled from 'styled-components';
 
 const StyledPage = styled.div`
   .page {
@@ -9,7 +11,7 @@ export default function Index() {
   /*
    * Replace the elements below with your own.
    *
-   * Note: The corresponding styles are in the ./index.@emotion/styled file.
+   * Note: The corresponding styles are in the ./index.styled-components file.
    */
   return (
     <StyledPage>
@@ -18,7 +20,7 @@ export default function Index() {
           <div id="welcome">
             <h1>
               <span> Hello there, </span>
-              Welcome xulf 👋
+              Welcome morrison-developers 👋
             </h1>
           </div>
 
@@ -402,7 +404,7 @@ export default function Index() {
                 </svg>
                 View project details
               </summary>
-              <pre>nx show project xulf --web</pre>
+              <pre>nx show project morrison-developers --web</pre>
             </details>
             <details>
               <summary>
