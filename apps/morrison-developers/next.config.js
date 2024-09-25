@@ -14,8 +14,8 @@ const nextConfig = {
   },
 
   compiler: {
-    // For other options, see https://nextjs.org/docs/architecture/nextjs-compiler#emotion
-    emotion: true,
+    // For other options, see https://styled-components.com/docs/tooling#babel-plugin
+    styledComponents: true,
   },
 };
 
