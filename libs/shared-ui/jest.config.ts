@@ -1,10 +1,10 @@
 export default {
-  displayName: 'ui-components',
-  preset: '../jest.preset.js',
+  displayName: 'shared-ui',
+  preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/react/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../coverage/ui-components',
+  coverageDirectory: '../../coverage/libs/shared-ui',
 };
