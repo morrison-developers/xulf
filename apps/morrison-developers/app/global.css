@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pathway+Extreme:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+
 :root {
   /* Dark Theme Background Colors */
   --dark-background: #191d1b;
@@ -46,19 +48,27 @@
   --primary-accent-color-lighter: var(--light-primary-accent-color-lighter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Override with Dark Mode Variables */
-    --background: var(--dark-background);
-    --background-darker: var(--dark-background-darker);
-    --background-darkest: var(--dark-background-darkest);
-    --background-light: var(--dark-background-light);
-    --background-lightest: var(--dark-background-lightest);
-    
-    --text: var(--dark-text);
+.dark-theme {
+  --background: var(--dark-background);
+  --background-darker: var(--dark-background-darker);
+  --background-darkest: var(--dark-background-darkest);
+  --background-light: var(--dark-background-light);
+  --background-lightest: var(--dark-background-lightest);
+  
+  --text: var(--dark-text);
 
-    --primary-accent-color: var(--dark-primary-accent-color);
-    --primary-accent-color-darker: var(--dark-primary-accent-color-darker);
-    --primary-accent-color-lighter: var(--dark-primary-accent-color-lighter);
-  }
+  --primary-accent-color: var(--dark-primary-accent-color);
+  --primary-accent-color-darker: var(--dark-primary-accent-color-darker);
+  --primary-accent-color-lighter: var(--dark-primary-accent-color-lighter);
+}
+
+body {
+  background: var(--background-lighter);
+}
+
+h1 {
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
 }

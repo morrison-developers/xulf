@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Button from './button';
+import FloatingNavBar from './floating-nav-bar';
 
-describe('Button', () => {
+describe('FloatingNavBar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Button />);
+    const { baseElement } = render(<FloatingNavBar />);
     expect(baseElement).toBeTruthy();
   });
 });
