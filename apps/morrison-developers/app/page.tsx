@@ -1,11 +1,11 @@
 'use client';
 
 import styled from 'styled-components';
-import { FloatingNavBar } from '@xulf/ui';
-import { ThemeContextProvider } from '@xulf/ui';
+import { FloatingNavBar, ThemeContextProvider } from '@xulf/ui';
 
 const StyledPage = styled.div`
   .page {
+    height: 700vh;
   }
 `;
 

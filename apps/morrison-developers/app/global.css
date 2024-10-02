@@ -2,17 +2,17 @@
 
 :root {
   /* Dark Theme Background Colors */
+  --dark-background-lighter: #313a36;
+  --dark-background-light: #252b28;
   --dark-background: #191d1b;
+  --dark-background-dark: #161a18;
   --dark-background-darker: #131614;
   --dark-background-darkest: #0e100f;
-  --dark-background-light: #252b28;
-  --dark-background-lightest: #313a36;
-  --dark-background-dark: #161a18;
 
   /* Light Theme Background Colors */
+  --light-background-lighter: #f4fbf8;
+  --light-background-light: #e4f3ec;
   --light-background: #daebe4;
-  --light-background-lighter: #e4f3ec;
-  --light-background-lightest: #f4fbf8;
   --light-background-dark: #cfe2da;
   --light-background-darker: #bbd6cc;
   --light-background-darkest: #abc3bb;
@@ -35,25 +35,27 @@
   --font-heading: "Pathway Extreme";
 
   /* Default (Light Mode) Variables */
+  --background-lightest: var(--light-background-lightest);
+  --background-light: var(--light-background-light);
   --background: var(--light-background);
+  --background-dark: var(--light-background-dark);
   --background-darker: var(--light-background-darker);
   --background-darkest: var(--light-background-darkest);
-  --background-light: var(--light-background-light);
-  --background-lightest: var(--light-background-lightest);
   
   --text: var(--light-text);
 
+  --primary-accent-color-lighter: var(--light-primary-accent-color-lighter);
   --primary-accent-color: var(--light-primary-accent-color);
   --primary-accent-color-darker: var(--light-primary-accent-color-darker);
-  --primary-accent-color-lighter: var(--light-primary-accent-color-lighter);
 }
 
 .dark-theme {
+  --background-lighter: var(--dark-background-lighter);
+  --background-light: var(--dark-background-light);
   --background: var(--dark-background);
+  --background-dark: var(--dark-background-dark);
   --background-darker: var(--dark-background-darker);
   --background-darkest: var(--dark-background-darkest);
-  --background-light: var(--dark-background-light);
-  --background-lightest: var(--dark-background-lightest);
   
   --text: var(--dark-text);
 
@@ -63,7 +65,15 @@
 }
 
 body {
-  background: var(--background-lighter);
+  background: var(--background-light);
+  position: relative;  /* Needed for absolutely positioned elements inside the body */
+  overflow-x: hidden;  /* Hide horizontal overflow if the content is too wide */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 700dvh;  /* Set the body height to 700% of the dynamic viewport height */
 }
 
 h1 {
