@@ -1,7 +1,7 @@
 import { useContext, useState, ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Switch from '@mui/joy/Switch';
-import { ThemeContext } from '@xulf/ui';
+import { ThemeContext } from '../theme/theme-context';
 
 interface FloatingNavBarProps {
   children?: ReactNode;

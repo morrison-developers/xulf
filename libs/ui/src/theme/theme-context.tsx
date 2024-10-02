@@ -1,8 +1,10 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 
 export const ThemeContext = createContext({
-  toggleTheme: () => {},
-  mode: 'light',
+  toggleTheme: () => {
+    // This will be overwritten by the actual implementation
+  },
+  mode: 'light' as 'light' | 'dark',
 });
 
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {

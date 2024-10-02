@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@xulf/shared-ui": ["libs/shared-ui/src/index.ts"],
-      "@xulf/ui": ["ui/src/index.ts"]
+      "@xulf/layouts": ["libs/src/index.ts"],
+      "@xulf/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
