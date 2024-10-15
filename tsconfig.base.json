@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@xulf/layouts": ["libs/src/index.ts"],
+      "@xulf/layouts": ["libs/layouts/src/index.ts"],
       "@xulf/ui": ["libs/ui/src/index.ts"]
     }
   },
