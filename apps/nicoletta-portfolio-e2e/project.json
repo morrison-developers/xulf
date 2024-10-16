@@ -1,0 +1,9 @@
+{
+  "name": "nicoletta-portfolio-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nicoletta-portfolio-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["nicoletta-portfolio"],
+  "// targets": "to see all targets run: nx show project nicoletta-portfolio-e2e --web",
+  "targets": {}
+}
