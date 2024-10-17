@@ -12,6 +12,7 @@
     "@mantine/hooks": "^7.12.2",
     "@mantine/next": "^6.0.22",
     "@mui/joy": "^5.0.0-beta.48",
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^11.11.9",
     "next": "14.2.3",
     "react": "18.3.1",

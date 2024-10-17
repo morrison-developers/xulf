@@ -82,9 +82,10 @@ export default function Index() {
         className={'background-image'}
         src="/hero@2x.jpg"
         alt="description"
-        quality={75} // Optional: Adjust quality (1-100)
+        quality={100} // Optional: Adjust quality (1-100)
         fill // New syntax for making the image fill the container
         style={{ objectFit: 'cover' }} // Ensures the image covers the container without stretching
+        priority={true}
       />
       {/* BACKGROUND IMAGE */}
 

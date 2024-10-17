@@ -45,4 +45,9 @@ Thumbs.db
 .next
 out
 
+# Storybook
 storybook-static
+
+# Ignore all environment files
+.env
+.env.*
