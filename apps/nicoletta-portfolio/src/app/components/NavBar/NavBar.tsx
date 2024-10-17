@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { ContactInner } from "../Contact/Contact";
@@ -71,11 +71,12 @@ const ContentBox = styled(motion.div)`
   left: 1rem;
   max-width: 23em;
   width: 23em;
-  overflow-y: auto; /* Enable scrolling if content exceeds the max height */
-  padding: 2rem; /* Safe zone padding around the edges */
   color: white;
   max-height: 40em;
-  
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+
   @media (max-width: 47em) {
     bottom: 5rem;
     width: 96vw;
@@ -87,15 +88,111 @@ const ContentBox = styled(motion.div)`
   }
 `;
 
-// Inner wrapper to ensure padding on scroll
-const InnerContent = styled.div`
-  padding: 1rem; /* Inner content padding to give space within the scrollable area */
+// Inner wrapper to ensure scrolling inside the padded area with reversed scroll indicators
+const InnerContent = styled.div<InnerContentProps>`
+  max-height: calc(40em - 4rem); /* Subtract the padding (2rem top and bottom) from the height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  box-sizing: border-box; /* Padding is included in the size calculation */
+  position: relative;
+
+  /* Hide scrollbar for WebKit browsers */
+  &::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+  }
+
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none; /* Hide scrollbar */
+
+  /* Adding a white shadow for top and bottom, removing based on scroll position */
+  box-shadow: ${({ isScrollable, isScrolledToTop, isScrolledToBottom }) => {
+    if (!isScrollable) {
+      // No shadows when content is smaller than the container
+      return "none";
+    }
+    if (isScrolledToTop && !isScrolledToBottom) {
+      // If scrolled to the top, remove the top shadow but keep the bottom shadow
+      return "0px 10px 10px -10px rgba(255, 255, 255, 0.5)";
+    } else if (!isScrolledToTop && isScrolledToBottom) {
+      // If scrolled to the bottom, remove the bottom shadow but keep the top shadow
+      return "0px -10px 10px -10px rgba(255, 255, 255, 0.5)";
+    } else if (!isScrolledToTop && !isScrolledToBottom) {
+      // In the middle: show both shadows
+      return "0px -10px 10px -10px rgba(255, 255, 255, 0.5), 0px 10px 10px -10px rgba(255, 255, 255, 0.5)";
+    } else {
+      return "none";
+    }
+  }};
+  transition: box-shadow 0.3s ease-in-out;
+
+  @media (max-width: 47em) {
+    max-height: calc(26em - 4rem); /* Adjust height for smaller screens */
+  }
 `;
 
-// Define the components for each section
-const About = () => <InnerContent>Write a biography / main read</InnerContent>;
+// Define the props for InnerContent
+interface InnerContentProps {
+  isScrollable: boolean;
+  isScrolledToTop: boolean;
+  isScrolledToBottom: boolean;
+  children: React.ReactNode;
+}
+
+const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isScrolledToTop, setIsScrolledToTop] = useState(true);
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
+  const [isScrollable, setIsScrollable] = useState(false);
+  const innerContentRef = useRef<HTMLDivElement>(null);
+
+  // Scroll event handler to toggle top and bottom shadows
+  const handleScroll = () => {
+    if (innerContentRef.current) {
+      const scrollTop = innerContentRef.current.scrollTop;
+      const scrollHeight = innerContentRef.current.scrollHeight;
+      const clientHeight = innerContentRef.current.clientHeight;
+
+      // Detect if the content is at the top
+      setIsScrolledToTop(scrollTop === 0);
+
+      // Detect if the content is at the bottom (more precise calculation)
+      setIsScrolledToBottom(Math.ceil(scrollTop + clientHeight) >= scrollHeight);
+    }
+  };
+
+  useEffect(() => {
+    const ref = innerContentRef.current;
+    if (ref) {
+      // Check if the content is scrollable (i.e., content height exceeds container height)
+      setIsScrollable(ref.scrollHeight > ref.clientHeight);
+
+      // Add scroll event listener
+      ref.addEventListener("scroll", handleScroll);
+    }
+
+    // Clean up event listener on unmount
+    return () => {
+      if (ref) {
+        ref.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [children]); // Re-run this logic if the children content changes
+
+  return (
+    <InnerContent
+      ref={innerContentRef}
+      isScrollable={isScrollable}
+      isScrolledToTop={isScrolledToTop}
+      isScrolledToBottom={isScrolledToBottom}
+    >
+      {children}
+    </InnerContent>
+  );
+};
+
+
+// Example components
+const About = () => <ScrollableContent>Write a biography / main read</ScrollableContent>;
 const Projects = () => (
-  <InnerContent>
+  <ScrollableContent>
     <p>Project 1</p>
     <p>Project 2</p>
     <p>Project 3</p>
@@ -107,10 +204,10 @@ const Projects = () => (
     <p>Project 9</p>
     <p>Project 10</p>
     <p>These are the Projects component.</p>
-  </InnerContent>
+  </ScrollableContent>
 );
-const Calendar = () => <InnerContent>Here is the Calendar component.</InnerContent>;
-const Contact = () => <InnerContent><ContactInner /></InnerContent>;
+const Calendar = () => <ScrollableContent>Here is the Calendar component.</ScrollableContent>;
+const Contact = () => <ScrollableContent><ContactInner /></ScrollableContent>;
 
 // NavBar component with Framer Motion animation
 export const NavBar = (): JSX.Element => {
