@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
+import { ContactInner } from "../Contact/Contact";
 
 // Styled component for the navigation bar
 const StyledNavBar = styled.nav`
@@ -9,25 +10,25 @@ const StyledNavBar = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 23em;
   padding: 1rem;
   z-index: 10;
   justify-content: flex-start;
-
+  
   @media (max-width: 47em) {
     position: absolute;
     height: fit-content;
     width: 96vw;
-    bottom: 0.5rem;
-    top: auto;
-    left: 50%;
-    transform: translateX(-50%);
     padding: 1rem;
     background: linear-gradient(to bottom, rgba(44, 103, 156, 0.4), rgba(52, 119, 176, 0.4));
     backdrop-filter: blur(10px);
     border-radius: 0.5rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    bottom: 0.5rem;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
     justify-content: center;
   }
 
@@ -70,11 +71,11 @@ const ContentBox = styled(motion.div)`
   left: 1rem;
   max-width: 23em;
   width: 23em;
-  max-height: 15em;
   overflow-y: auto; /* Enable scrolling if content exceeds the max height */
   padding: 2rem; /* Safe zone padding around the edges */
   color: white;
-
+  max-height: 40em;
+  
   @media (max-width: 47em) {
     bottom: 5rem;
     width: 96vw;
@@ -82,6 +83,7 @@ const ContentBox = styled(motion.div)`
     top: auto;
     left: 50%;
     transform: translateX(-50%);
+    max-height: 26em;
   }
 `;
 
@@ -108,7 +110,7 @@ const Projects = () => (
   </InnerContent>
 );
 const Calendar = () => <InnerContent>Here is the Calendar component.</InnerContent>;
-const Contact = () => <InnerContent>Contact us via email or phone component!</InnerContent>;
+const Contact = () => <InnerContent><ContactInner /></InnerContent>;
 
 // NavBar component with Framer Motion animation
 export const NavBar = (): JSX.Element => {
