@@ -75,15 +75,15 @@ export const ContactInner = (): JSX.Element => {
 
     // Send the email
     emailjs.send(
-      'service_ym5d1a9',         // Replace with your EmailJS service ID
-      'template_6f9y8jr',        // Replace with your EmailJS template ID
+      process.env.EMAILJS_SERVICE_ID || '',
+      process.env.EMAILJS_TEMPLATE_ID || '',
       {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_email: 'morrison.andrew422@gmail.com',  // The email you're sending to
+        to_email: process.env.EMAILJS_TO|| '',  // The email you're sending to
       },
-      'ByP6s0S2KP764l6dn'        // Replace with your EmailJS user ID
+      process.env.EMAILJS_USER_ID || ''        // Replace with your EmailJS user ID
     )
     .then((response) => {
       console.log('SUCCESS!', response.status, response.text);
