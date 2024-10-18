@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Container, Typography } from '@mui/joy';
 import { motion } from 'framer-motion';
 import { NavBar } from './components/NavBar/NavBar'
+import { useState } from 'react';
 
 
 const StyledPage = styled.div`
@@ -70,6 +71,7 @@ const StyledPage = styled.div`
 `;
 
 export default function Index() {
+  const [backgroundLoaded, setBackgroundLoaded] = useState<boolean>(false);
   /*
    * Replace the elements below with your own.
    *
@@ -78,20 +80,28 @@ export default function Index() {
   return ( 
     <StyledPage>
       {/* BACKGROUND IMAGE */}
-      <Image
-        className={'background-image'}
-        src="/hero@2x.jpg"
-        alt="description"
-        quality={100} // Optional: Adjust quality (1-100)
-        fill // New syntax for making the image fill the container
-        style={{ objectFit: 'cover' }} // Ensures the image covers the container without stretching
-        priority={true}
-      />
+      <motion.div
+        style={{ position: 'absolute', width: '100vw', height: '100dvh' }}
+        initial={{ scale: 1.1, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1 }}
+        onAnimationComplete={() => setBackgroundLoaded(true)}
+      >
+        <Image
+          className={'background-image'}
+          src="/hero@2x.jpg"
+          alt="description"
+          quality={100}
+          fill
+          style={{ objectFit: 'cover' }}
+          priority={true}
+        />
+      </motion.div>
       {/* BACKGROUND IMAGE */}
 
       <Container className="title">
         <div className="title-content">
-          <img 
+          <img
             src="/nicoletta-signature.gif"
             alt="Nicoletta Berry"
             className="gif-title"
@@ -108,7 +118,9 @@ export default function Index() {
           </motion.div>
         </div>
       </Container>
-      <NavBar />
+      {backgroundLoaded && (
+        <NavBar />
+      )}
     </StyledPage>
   );
 }

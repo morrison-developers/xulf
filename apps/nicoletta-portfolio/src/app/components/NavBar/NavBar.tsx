@@ -1,8 +1,17 @@
 import { useEffect, useState, useRef } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { ContactInner } from "../Contact/Contact";
+import { ContactInner } from "./Contact/Contact";
+import { AboutInner } from './About/About';
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 // Styled component for the navigation bar
 const StyledNavBar = styled.nav`
   display: flex;
@@ -14,6 +23,8 @@ const StyledNavBar = styled.nav`
   padding: 1rem;
   z-index: 10;
   justify-content: flex-start;
+
+  animation: ${fadeIn} 0.5s ease-in-out;
   
   @media (max-width: 47em) {
     position: absolute;
@@ -190,7 +201,7 @@ const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({ children }
 
 
 // Example components
-const About = () => <ScrollableContent>Write a biography / main read</ScrollableContent>;
+const About = () => (<ScrollableContent><AboutInner /></ScrollableContent>);
 const Projects = () => (
   <ScrollableContent>
     <p>Project 1</p>
