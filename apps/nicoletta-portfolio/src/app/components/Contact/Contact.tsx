@@ -62,9 +62,10 @@ export const ContactInner = (): JSX.Element => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
+    setFormData((prevState) => {
+      const newState = { ...prevState, [name]: value };
+      console.log("Updated formData:", newState);  // Log form data on every input change
+      return newState;
     });
   };
 
@@ -73,27 +74,53 @@ export const ContactInner = (): JSX.Element => {
 
     setLoading(true);  // Start the loading animation
 
+    // Debug: Log environment variables and form data
+    console.log("Form Data:", formData);
+    console.log("Service ID:", process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID);
+    console.log("Template ID:", process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID);
+    console.log("To email:", process.env.NEXT_PUBLIC_EMAILJS_TO);
+    console.log("User ID:", process.env.NEXT_PUBLIC_EMAILJS_USER_ID);
+
+    // Error handling for missing env variables
+    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID) {
+      console.error("Missing EMAILJS Service ID");
+    }
+    if (!process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID) {
+      console.error("Missing EMAILJS Template ID");
+    }
+    if (!process.env.NEXT_PUBLIC_EMAILJS_USER_ID) {
+      console.error("Missing EMAILJS User ID");
+    }
+    if (!process.env.NEXT_PUBLIC_EMAILJS_TO) {
+      console.error("Missing recipient email");
+    }
+
     // Send the email
     emailjs.send(
-      process.env.EMAILJS_SERVICE_ID || '',
-      process.env.EMAILJS_TEMPLATE_ID || '',
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
       {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_email: process.env.EMAILJS_TO|| '',  // The email you're sending to
+        to_email: process.env.NEXT_PUBLIC_EMAILJS_TO || '',  // The email you're sending to
       },
-      process.env.EMAILJS_USER_ID || ''        // Replace with your EmailJS user ID
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID || ''        // Replace with your EmailJS user ID
     )
-    .then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-      setLoading(false);  // Stop the loading animation
-      setSubmitted(true);  // Show the thank you message
-    })
-    .catch((err) => {
-      console.log('FAILED...', err);
-      setLoading(false);  // Stop the loading animation if failed
-    });
+      .then((response) => {
+        console.log('SUCCESS! Response Status:', response.status);
+        console.log('Response Text:', response.text);
+        setLoading(false);  // Stop the loading animation
+        setSubmitted(true);  // Show the thank you message
+      })
+      .catch((err) => {
+        console.error('FAILED...', err);  // Use console.error for better error visibility
+        if (err.response) {
+          console.error('Error response status:', err.response.status);
+          console.error('Error response text:', err.response.text);
+        }
+        setLoading(false);  // Stop the loading animation if failed
+      });
   };
 
   if (submitted) {
