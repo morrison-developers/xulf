@@ -188,7 +188,7 @@ const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({ children }
 const About = () => (<ScrollableContent><AboutInner /></ScrollableContent>);
 const Projects = () => (
   <ScrollableContent>
-    <p>ORPHEAUS//EURIDICES</p>
+    <h2>COMING SOON</h2>
   </ScrollableContent>
 );
 const Calendar = () => <ScrollableContent><CalendarInner /></ScrollableContent>;

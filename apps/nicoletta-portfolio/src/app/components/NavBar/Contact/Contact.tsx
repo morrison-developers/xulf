@@ -64,7 +64,6 @@ export const ContactInner = (): JSX.Element => {
     const { name, value } = e.target;
     setFormData((prevState) => {
       const newState = { ...prevState, [name]: value };
-      console.log("Updated formData:", newState);  // Log form data on every input change
       return newState;
     });
   };
@@ -73,13 +72,6 @@ export const ContactInner = (): JSX.Element => {
     e.preventDefault();
 
     setLoading(true);  // Start the loading animation
-
-    // Debug: Log environment variables and form data
-    console.log("Form Data:", formData);
-    console.log("Service ID:", process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID);
-    console.log("Template ID:", process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID);
-    console.log("To email:", process.env.NEXT_PUBLIC_EMAILJS_TO);
-    console.log("User ID:", process.env.NEXT_PUBLIC_EMAILJS_USER_ID);
 
     // Error handling for missing env variables
     if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID) {
@@ -138,7 +130,7 @@ export const ContactInner = (): JSX.Element => {
       )}
 
       <Typography level="h4" component="h1">
-        Contact the Artist
+        Contact Nicoletta
       </Typography>
       <Box>
         <Typography>Name</Typography>
