@@ -1,7 +1,18 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState, useRef } from "react";
+import styled, { keyframes } from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { ContactInner } from "../Contact/Contact";
+import { ContactInner } from "./Contact/Contact";
+import { AboutInner } from './About/About';
+import { CalendarInner } from "./Calander/Calander";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 // Styled component for the navigation bar
 const StyledNavBar = styled.nav`
@@ -14,7 +25,8 @@ const StyledNavBar = styled.nav`
   padding: 1rem;
   z-index: 10;
   justify-content: flex-start;
-  
+  animation: ${fadeIn} 0.5s ease-in-out;
+
   @media (max-width: 47em) {
     position: absolute;
     height: fit-content;
@@ -34,7 +46,7 @@ const StyledNavBar = styled.nav`
 
   button {
     background: none;
-    border: 1px solid white;
+    border: 0.5px solid #ffffff;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -71,11 +83,12 @@ const ContentBox = styled(motion.div)`
   left: 1rem;
   max-width: 23em;
   width: 23em;
-  overflow-y: auto; /* Enable scrolling if content exceeds the max height */
-  padding: 2rem; /* Safe zone padding around the edges */
   color: white;
   max-height: 40em;
-  
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+
   @media (max-width: 47em) {
     bottom: 5rem;
     width: 96vw;
@@ -87,45 +100,121 @@ const ContentBox = styled(motion.div)`
   }
 `;
 
-// Inner wrapper to ensure padding on scroll
-const InnerContent = styled.div`
-  padding: 1rem; /* Inner content padding to give space within the scrollable area */
+// Inner wrapper to ensure scrolling inside the padded area with reversed scroll indicators
+const InnerContent = styled.div<InnerContentProps>`
+  max-height: calc(40em - 4rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: relative;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  scrollbar-width: none;
+
+  box-shadow: ${({ isScrollable, isScrolledToTop, isScrolledToBottom }) => {
+    if (!isScrollable) {
+      return "none";
+    }
+    if (isScrolledToTop && !isScrolledToBottom) {
+      return "0px 10px 10px -10px rgba(255, 255, 255, 0.5)";
+    } else if (!isScrolledToTop && isScrolledToBottom) {
+      return "0px -10px 10px -10px rgba(255, 255, 255, 0.5)";
+    } else if (!isScrolledToTop && !isScrolledToBottom) {
+      return "0px -10px 10px -10px rgba(255, 255, 255, 0.5), 0px 10px 10px -10px rgba(255, 255, 255, 0.5)";
+    } else {
+      return "none";
+    }
+  }};
+  transition: box-shadow 0.3s ease-in-out;
+
+  @media (max-width: 47em) {
+    max-height: calc(26em - 4rem);
+  }
 `;
 
-// Define the components for each section
-const About = () => <InnerContent>Write a biography / main read</InnerContent>;
-const Projects = () => (
-  <InnerContent>
-    <p>Project 1</p>
-    <p>Project 2</p>
-    <p>Project 3</p>
-    <p>Project 4</p>
-    <p>Project 5</p>
-    <p>Project 6</p>
-    <p>Project 7</p>
-    <p>Project 8</p>
-    <p>Project 9</p>
-    <p>Project 10</p>
-    <p>These are the Projects component.</p>
-  </InnerContent>
-);
-const Calendar = () => <InnerContent>Here is the Calendar component.</InnerContent>;
-const Contact = () => <InnerContent><ContactInner /></InnerContent>;
+// Define the props for InnerContent
+interface InnerContentProps {
+  isScrollable: boolean;
+  isScrolledToTop: boolean;
+  isScrolledToBottom: boolean;
+  children: React.ReactNode;
+}
 
-// NavBar component with Framer Motion animation
+const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isScrolledToTop, setIsScrolledToTop] = useState(true);
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
+  const [isScrollable, setIsScrollable] = useState(false);
+  const innerContentRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (innerContentRef.current) {
+      const scrollTop = innerContentRef.current.scrollTop;
+      const scrollHeight = innerContentRef.current.scrollHeight;
+      const clientHeight = innerContentRef.current.clientHeight;
+
+      setIsScrolledToTop(scrollTop === 0);
+      setIsScrolledToBottom(Math.ceil(scrollTop + clientHeight) >= scrollHeight);
+    }
+  };
+
+  useEffect(() => {
+    const ref = innerContentRef.current;
+    if (ref) {
+      setIsScrollable(ref.scrollHeight > ref.clientHeight);
+      ref.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (ref) {
+        ref.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [children]);
+
+  return (
+    <InnerContent
+      ref={innerContentRef}
+      isScrollable={isScrollable}
+      isScrolledToTop={isScrolledToTop}
+      isScrolledToBottom={isScrolledToBottom}
+    >
+      {children}
+    </InnerContent>
+  );
+};
+
+const About = () => (<ScrollableContent><AboutInner /></ScrollableContent>);
+const Projects = () => (
+  <ScrollableContent>
+    <p>ORPHEAUS//EURIDICES</p>
+  </ScrollableContent>
+);
+const Calendar = () => <ScrollableContent><CalendarInner /></ScrollableContent>;
+const Contact = () => <ScrollableContent><ContactInner /></ScrollableContent>;
+
 export const NavBar = (): JSX.Element => {
   const [activeComponent, setActiveComponent] = useState<string | null>(null);
   const [content, setContent] = useState<JSX.Element | null>(null);
 
-  // Function to handle button clicks and toggle content visibility
   const handleButtonClick = (componentName: string, component: JSX.Element) => {
     if (activeComponent === componentName) {
-      setActiveComponent(null); // Close the content if the same button is clicked
+      setActiveComponent(null);
     } else {
-      setContent(component); // Show new content directly
+      setContent(component);
       setActiveComponent(componentName);
     }
   };
+
+  // Force removal of active class when no content is active
+  useEffect(() => {
+    if (!activeComponent) {
+      document.querySelectorAll('button.active').forEach(button => {
+        button.classList.remove('active');
+      });
+    }
+  }, [activeComponent]);
 
   return (
     <>
@@ -146,7 +235,7 @@ export const NavBar = (): JSX.Element => {
           className={activeComponent === "calendar" ? "active" : ""}
           onClick={() => handleButtonClick("calendar", <Calendar />)}
         >
-          Calendar
+          Upcoming
         </button>
         <button
           className={activeComponent === "contact" ? "active" : ""}
