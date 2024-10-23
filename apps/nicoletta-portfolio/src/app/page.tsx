@@ -101,6 +101,7 @@ export default function Index() {
 
       <Container className="title">
         <div className="title-content">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/nicoletta-signature.gif"
             alt="Nicoletta Berry"

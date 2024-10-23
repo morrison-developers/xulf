@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { ContactInner } from "./Contact/Contact";
 import { AboutInner } from './About/About';
+import { CalendarInner } from "./Calander/Calander";
 
 const fadeIn = keyframes`
   from {
@@ -12,6 +13,7 @@ const fadeIn = keyframes`
     opacity: 1;
   }
 `;
+
 // Styled component for the navigation bar
 const StyledNavBar = styled.nav`
   display: flex;
@@ -23,9 +25,8 @@ const StyledNavBar = styled.nav`
   padding: 1rem;
   z-index: 10;
   justify-content: flex-start;
-
   animation: ${fadeIn} 0.5s ease-in-out;
-  
+
   @media (max-width: 47em) {
     position: absolute;
     height: fit-content;
@@ -45,7 +46,7 @@ const StyledNavBar = styled.nav`
 
   button {
     background: none;
-    border: 1px solid white;
+    border: 0.5px solid #ffffff;
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -101,33 +102,26 @@ const ContentBox = styled(motion.div)`
 
 // Inner wrapper to ensure scrolling inside the padded area with reversed scroll indicators
 const InnerContent = styled.div<InnerContentProps>`
-  max-height: calc(40em - 4rem); /* Subtract the padding (2rem top and bottom) from the height */
-  overflow-y: auto; /* Enable vertical scrolling */
-  box-sizing: border-box; /* Padding is included in the size calculation */
+  max-height: calc(40em - 4rem);
+  overflow-y: auto;
+  box-sizing: border-box;
   position: relative;
 
-  /* Hide scrollbar for WebKit browsers */
   &::-webkit-scrollbar {
-    display: none; /* Hide scrollbar */
+    display: none;
   }
 
-  /* Hide scrollbar for Firefox */
-  scrollbar-width: none; /* Hide scrollbar */
+  scrollbar-width: none;
 
-  /* Adding a white shadow for top and bottom, removing based on scroll position */
   box-shadow: ${({ isScrollable, isScrolledToTop, isScrolledToBottom }) => {
     if (!isScrollable) {
-      // No shadows when content is smaller than the container
       return "none";
     }
     if (isScrolledToTop && !isScrolledToBottom) {
-      // If scrolled to the top, remove the top shadow but keep the bottom shadow
       return "0px 10px 10px -10px rgba(255, 255, 255, 0.5)";
     } else if (!isScrolledToTop && isScrolledToBottom) {
-      // If scrolled to the bottom, remove the bottom shadow but keep the top shadow
       return "0px -10px 10px -10px rgba(255, 255, 255, 0.5)";
     } else if (!isScrolledToTop && !isScrolledToBottom) {
-      // In the middle: show both shadows
       return "0px -10px 10px -10px rgba(255, 255, 255, 0.5), 0px 10px 10px -10px rgba(255, 255, 255, 0.5)";
     } else {
       return "none";
@@ -136,7 +130,7 @@ const InnerContent = styled.div<InnerContentProps>`
   transition: box-shadow 0.3s ease-in-out;
 
   @media (max-width: 47em) {
-    max-height: calc(26em - 4rem); /* Adjust height for smaller screens */
+    max-height: calc(26em - 4rem);
   }
 `;
 
@@ -154,17 +148,13 @@ const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({ children }
   const [isScrollable, setIsScrollable] = useState(false);
   const innerContentRef = useRef<HTMLDivElement>(null);
 
-  // Scroll event handler to toggle top and bottom shadows
   const handleScroll = () => {
     if (innerContentRef.current) {
       const scrollTop = innerContentRef.current.scrollTop;
       const scrollHeight = innerContentRef.current.scrollHeight;
       const clientHeight = innerContentRef.current.clientHeight;
 
-      // Detect if the content is at the top
       setIsScrolledToTop(scrollTop === 0);
-
-      // Detect if the content is at the bottom (more precise calculation)
       setIsScrolledToBottom(Math.ceil(scrollTop + clientHeight) >= scrollHeight);
     }
   };
@@ -172,20 +162,16 @@ const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({ children }
   useEffect(() => {
     const ref = innerContentRef.current;
     if (ref) {
-      // Check if the content is scrollable (i.e., content height exceeds container height)
       setIsScrollable(ref.scrollHeight > ref.clientHeight);
-
-      // Add scroll event listener
       ref.addEventListener("scroll", handleScroll);
     }
 
-    // Clean up event listener on unmount
     return () => {
       if (ref) {
         ref.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [children]); // Re-run this logic if the children content changes
+  }, [children]);
 
   return (
     <InnerContent
@@ -199,41 +185,36 @@ const ScrollableContent: React.FC<{ children: React.ReactNode }> = ({ children }
   );
 };
 
-
-// Example components
 const About = () => (<ScrollableContent><AboutInner /></ScrollableContent>);
 const Projects = () => (
   <ScrollableContent>
-    <p>Project 1</p>
-    <p>Project 2</p>
-    <p>Project 3</p>
-    <p>Project 4</p>
-    <p>Project 5</p>
-    <p>Project 6</p>
-    <p>Project 7</p>
-    <p>Project 8</p>
-    <p>Project 9</p>
-    <p>Project 10</p>
-    <p>These are the Projects component.</p>
+    <p>ORPHEAUS//EURIDICES</p>
   </ScrollableContent>
 );
-const Calendar = () => <ScrollableContent>Here is the Calendar component.</ScrollableContent>;
+const Calendar = () => <ScrollableContent><CalendarInner /></ScrollableContent>;
 const Contact = () => <ScrollableContent><ContactInner /></ScrollableContent>;
 
-// NavBar component with Framer Motion animation
 export const NavBar = (): JSX.Element => {
   const [activeComponent, setActiveComponent] = useState<string | null>(null);
   const [content, setContent] = useState<JSX.Element | null>(null);
 
-  // Function to handle button clicks and toggle content visibility
   const handleButtonClick = (componentName: string, component: JSX.Element) => {
     if (activeComponent === componentName) {
-      setActiveComponent(null); // Close the content if the same button is clicked
+      setActiveComponent(null);
     } else {
-      setContent(component); // Show new content directly
+      setContent(component);
       setActiveComponent(componentName);
     }
   };
+
+  // Force removal of active class when no content is active
+  useEffect(() => {
+    if (!activeComponent) {
+      document.querySelectorAll('button.active').forEach(button => {
+        button.classList.remove('active');
+      });
+    }
+  }, [activeComponent]);
 
   return (
     <>
@@ -254,7 +235,7 @@ export const NavBar = (): JSX.Element => {
           className={activeComponent === "calendar" ? "active" : ""}
           onClick={() => handleButtonClick("calendar", <Calendar />)}
         >
-          Calendar
+          Upcoming
         </button>
         <button
           className={activeComponent === "contact" ? "active" : ""}
