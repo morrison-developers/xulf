@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import Image from 'next/image';
-import { Container, Typography } from '@mui/joy';
+import { Container } from '@mui/joy';
 import { motion } from 'framer-motion';
 import { NavBar } from './components/NavBar/NavBar'
 import { useState } from 'react';
@@ -107,16 +107,16 @@ export default function Index() {
             alt="Nicoletta Berry"
             className="gif-title"
           />
-          <motion.div
+          {/* <motion.div
             initial={{ x: '-10vw', opacity: 0 }} // Starts off-screen to the left
             animate={{ x: 0, opacity: 1 }} // Moves to the center of the screen
             transition={{ type: 'spring', stiffness: 100, damping: 40, duration: 1.6}}
             className='subtitle'
           >
             <Typography level="h4" component="h4">
-              Soprano | Producer | Curator
+               Nicoletta Berry
             </Typography>
-          </motion.div>
+          </motion.div> */}
         </div>
       </Container>
       {backgroundLoaded && (
