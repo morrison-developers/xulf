@@ -19,7 +19,7 @@ export const calander = [
     date: "Saturday, March 8, 2025",
     time: "8:00 PM",
     title: "ORPHEUS//EURYDICE | City Lyric Opera's Baroque Festival",
-    description: "Nicoletta teams up with City Lyric Opera to produce ORPHEUS//EURYDICE, blending Baroque works and a contemporary world premiere. This innovative program explores themes of loss, grief, and renewal.",
+    description: "Nicoletta teams up and makes her curatorial debut with City Lyric Opera to produce ORPHEUS//EURYDICE, blending Baroque works and a contemporary world premiere by composer Rebecca Scout Nelson. ",
     location: "TBA",
     link: null
   }
