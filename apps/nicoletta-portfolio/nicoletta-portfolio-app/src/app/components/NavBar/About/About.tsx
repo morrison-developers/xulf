@@ -16,15 +16,15 @@ export const StyledHeading = styled.h3`
   color: #fff; /* Example color */
 `;
 
-const StyledStrong = styled.strong`
-  font-weight: bold;
-  color: #fff; /* Strong text color */
-`;
+// const StyledStrong = styled.strong`
+//   font-weight: bold;
+//   color: #fff; /* Strong text color */
+// `;
 
-const StyledEmphasis = styled.em`
-  font-style: italic;
-  color: #fff; /* Color for emphasized text */
-`;
+// const StyledEmphasis = styled.em`
+//   font-style: italic;
+//   color: #fff; /* Color for emphasized text */
+// `;
 
 // AboutInner Component
 export const AboutInner = () => {
