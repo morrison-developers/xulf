@@ -89,24 +89,35 @@ export default function Index() {
       >
         <Image
           className={'background-image'}
-          src="/hero@2x.jpg"
+          src="/hero@2x.webp"
           alt="description"
           quality={100}
           fill
           style={{ objectFit: 'cover' }}
           priority={true}
+          placeholder="blur"
+          blurDataURL="/hero.minified.webp" 
         />
       </motion.div>
       {/* BACKGROUND IMAGE */}
 
       <Container className="title">
         <div className="title-content">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/nicoletta-signature.gif"
-            alt="Nicoletta Berry"
-            className="gif-title"
-          />
+          <picture>
+            {/* WebP image for mobile */}
+            <source
+              srcSet="/nicoletta-signature.webp"
+              type="image/webp"
+              media="(max-width: 64em)" // Adjust breakpoint as needed
+              />
+            {/* Fallback to GIF for larger screens */}
+            <img
+              src="/nicoletta-signature.gif"
+              alt="Nicoletta Berry"
+              className="gif-title"
+            />
+        </picture>
+
           {/* <motion.div
             initial={{ x: '-10vw', opacity: 0 }} // Starts off-screen to the left
             animate={{ x: 0, opacity: 1 }} // Moves to the center of the screen
