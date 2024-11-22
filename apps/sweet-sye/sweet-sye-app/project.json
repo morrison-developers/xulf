@@ -1,0 +1,9 @@
+{
+  "name": "sweet-sye",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/sweet-sye",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project sweet-sye --web",
+  "targets": {}
+}
