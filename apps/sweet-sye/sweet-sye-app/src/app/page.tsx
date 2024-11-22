@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { FloatingNavBar } from '@xulf/ui';
+import { FloatingNavBar, ThemeContextProvider } from '@xulf/ui';
 
 const StyledPage = styled.div`
   .page {
@@ -11,9 +11,11 @@ const StyledPage = styled.div`
 export default function Index() {
   return (
     <StyledPage>
-      <FloatingNavBar>
-        <h1>Sweet Sye Entertainment</h1>
-      </FloatingNavBar>
+      <ThemeContextProvider>
+        <FloatingNavBar>
+          <h1>Sweet Sye Entertainment</h1>
+        </FloatingNavBar>
+      </ThemeContextProvider>
     </StyledPage>
   );
 }
