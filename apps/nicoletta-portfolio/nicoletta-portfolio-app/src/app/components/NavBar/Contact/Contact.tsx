@@ -74,30 +74,30 @@ export const ContactInner = (): JSX.Element => {
     setLoading(true);  // Start the loading animation
 
     // Error handling for missing env variables
-    if (!process.env.EMAILJS_SERVICE_ID) {
+    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID) {
       console.error("Missing EMAILJS Service ID");
     }
-    if (!process.env.EMAILJS_TEMPLATE_ID) {
+    if (!process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID) {
       console.error("Missing EMAILJS Template ID");
     }
-    if (!process.env.EMAILJS_USER_ID) {
+    if (!process.env.NEXT_PUBLIC_EMAILJS_USER_ID) {
       console.error("Missing EMAILJS User ID");
     }
-    if (!process.env.EMAILJS_TO) {
+    if (!process.env.NEXT_PUBLIC_EMAILJS_TO) {
       console.error("Missing recipient email");
     }
 
     // Send the email
     emailjs.send(
-      process.env.EMAILJS_SERVICE_ID || '',
-      process.env.EMAILJS_TEMPLATE_ID || '',
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
       {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
         to_email: process.env.EMAILJS_TO || '',  // The email you're sending to
       },
-      process.env.EMAILJS_USER_ID || ''      // Replace with your EmailJS user ID
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID || ''      // Replace with your EmailJS user ID
     )
       .then((response) => {
         console.log('SUCCESS! Response Status:', response.status);
