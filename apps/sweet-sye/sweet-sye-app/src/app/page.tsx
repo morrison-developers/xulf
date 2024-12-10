@@ -12,10 +12,13 @@ export default function Index() {
   return (
     <StyledPage>
       <ThemeContextProvider>
-        <FloatingNavBar>
-          <h1>Sweet Sye Entertainment</h1>
+        <FloatingNavBar
+          logo={ <img src="/logo@2x.webp" alt="Logo" /> }
+        >
+          <img src="/title@2x.webp" alt="Sweet Sye Entertainment" style={{ width: '10rem' }} />
         </FloatingNavBar>
       </ThemeContextProvider>
     </StyledPage>
+
   );
 }

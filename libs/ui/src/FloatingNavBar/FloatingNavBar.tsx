@@ -17,7 +17,7 @@ const StyledFloatingNavBar = styled.div<{ backgroundColor?: string; textColor?: 
   height: auto;
   min-height: 5.5em;
   margin: 0 auto;
-  border-radius: 4px;
+  border-radius: 0.25rem;
   background: ${({ backgroundColor }) => backgroundColor || 'var(--background, #daebe4)'};
   color: ${({ textColor }) => textColor || 'var(--text, #000)'};
   display: flex;
@@ -30,6 +30,10 @@ const StyledFloatingNavBar = styled.div<{ backgroundColor?: string; textColor?: 
   transform: translateX(-50%);
 
   z-index: 10;
+
+  img {
+    max-width: 4rem;
+  }
 `;
 
 const StyledDiv = styled.div`
