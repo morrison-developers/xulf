@@ -6,7 +6,7 @@ import { Container } from '@mui/joy';
 import { motion } from 'framer-motion';
 import { NavBar } from './components/NavBar/NavBar'
 import { useState } from 'react';
-
+import { Analytics } from "@vercel/analytics/react"
 
 const StyledPage = styled.div`
   position: relative;
@@ -133,6 +133,7 @@ export default function Index() {
       {backgroundLoaded && (
         <NavBar />
       )}
+      <Analytics/>
     </StyledPage>
   );
 }
