@@ -1,3 +1,4 @@
+'use client';
 import { useContext, useState, ReactNode } from 'react';
 import styled from '@emotion/styled';
 import Switch from '@mui/joy/Switch';

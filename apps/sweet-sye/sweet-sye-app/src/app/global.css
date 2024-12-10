@@ -11,7 +11,7 @@
 
   /* Light Theme Background Colors */
   --light-background-lighter: #fbe4e4;
-  --light-background-light: #f3cccc;
+  --light-background-light: #ffffff;
   --light-background: #ebadad;
   --light-background-dark: #e28d8d;
   --light-background-darker: #d86a6a;
@@ -73,7 +73,7 @@ body {
 html, body {
   margin: 0;
   padding: 0;
-  height: 700dvh;  /* Set the body height to 700% of the dynamic viewport height */
+  /* height: 700dvh;  Set the body height to 700% of the dynamic viewport height */
 }
 
 h1 {
