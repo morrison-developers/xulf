@@ -97,7 +97,7 @@ export const ContactInner = (): JSX.Element => {
         message: formData.message,
         to_email: process.env.NEXT_PUBLIC_EMAILJS_TO || '',  // The email you're sending to
       },
-      process.env.NEXT_PUBLIC_EMAILJS_USER_ID || ''        // Replace with your EmailJS user ID
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID || ''      // Replace with your EmailJS user ID
     )
       .then((response) => {
         console.log('SUCCESS! Response Status:', response.status);
