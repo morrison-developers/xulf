@@ -16,7 +16,7 @@ interface LinkTreeProps {
 // Styled container for the LinkTree
 const StyledLinkTree = styled.div`
   padding: 1rem;
-  background-color: #d0362b;
+  background-color: #eeeeee;
   border-radius: 4px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 `;
