@@ -43,9 +43,9 @@ const StyledLinkTree = styled.div`
 `
 
 const links = [
+  { url: 'https://www.eventbrite.com/e/friends-by-the-fireplace-a-holiday-cabaret-tickets-1085248831469', text: 'Get Tickets', icon: <BookOnline /> },
   { url: 'https://www.instagram.com/sweetsyeentertainment/', text: 'Instagram', icon: <Instagram /> },
   { url: 'mailto:contact@sweetsye.com', text: 'Contact Us', icon: <AlternateEmail /> },
-  { url: 'https://www.eventbrite.com/e/friends-by-the-fireplace-a-holiday-cabaret-tickets-1085248831469', text: 'Get Tickets', icon: <BookOnline /> },
 ];
 
 export default function Index(): JSX.Element {
