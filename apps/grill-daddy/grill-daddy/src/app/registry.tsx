@@ -47,3 +47,5 @@ const exampleItem: GrillItem = {
 
 
 console.log(exampleItem, exampleState);
+
+export type { GrillItem, GrillState } from './types/grill-types';

@@ -7,4 +7,4 @@ export interface GrillItem {
   state: GrillState;
 }
 
-export type GrillState = 'before-grill' | 'first-side' | 'second-side' | 'done'
+export type GrillState = 'before-grill' | 'first-side' | 'second-side' | 'done';

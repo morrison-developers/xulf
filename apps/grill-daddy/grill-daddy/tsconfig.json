@@ -30,7 +30,7 @@
     "../../../dist/apps/grill-daddy/grill-daddy/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "../jest.setup.ts"  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",
