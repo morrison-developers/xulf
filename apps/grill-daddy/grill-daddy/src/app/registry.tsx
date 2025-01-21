@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
+import { GrillItem, GrillState } from './types/grill-types';
+
 export function StyledComponentsRegistry({
   children,
 }: {
@@ -31,3 +33,17 @@ export function StyledComponentsRegistry({
     </StyleSheetManager>
   );
 }
+
+const exampleState: GrillState = 'before-grill';
+
+const exampleItem: GrillItem = {
+  id: '1',
+  name: 'Burger 1',
+  cookTime: 600,
+  flipTime: 300,
+  targetTemp: 160,
+  state: 'before-grill',
+};
+
+
+console.log(exampleItem, exampleState);
