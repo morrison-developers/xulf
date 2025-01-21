@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { GrillItem, GrillState } from '../../registry'
+import { GrillProvider } from '../../context/GrillContext';
 
 import styled from 'styled-components';
 
@@ -23,6 +24,11 @@ export const GrillItemForm = ({ onAdd }: { onAdd: (item: GrillItem) => void }) =
   };
 
   const handleSubmit = () => {
+    if (!formState.name || formState.cookTime <= 0 || formState.flipTime <= 0 || formState.targetTemp <= 0) {
+      alert('Please fill out all fields with valid values.');
+      return;
+    }
+  
     const newItem: GrillItem = {
       id: crypto.randomUUID(),
       name: formState.name,
@@ -32,7 +38,16 @@ export const GrillItemForm = ({ onAdd }: { onAdd: (item: GrillItem) => void }) =
       state: 'before-grill',
     };
     onAdd(newItem);
-  }
+  
+    // Reset the form after submission
+    setFormState({
+      name: '',
+      cookTime: 0,
+      flipTime: 0,
+      targetTemp: 0,
+    });
+  };
+  
 
   return (
     <StyledGrillItemForm>

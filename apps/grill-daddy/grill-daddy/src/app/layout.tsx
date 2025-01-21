@@ -1,5 +1,6 @@
 import './global.css';
 import { StyledComponentsRegistry } from './registry';
+import { GrillProvider } from './context/GrillContext';
 
 export const metadata = {
   title: 'Grill Daddy',
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <GrillProvider>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </GrillProvider>
       </body>
     </html>
   );
