@@ -1,73 +1,70 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import GrillItemForm from './GrillItemForm';
+import { jest } from '@jest/globals';
 
-// Mock `crypto.randomUUID` globally
-beforeAll(() => {
-  Object.defineProperty(global, 'crypto', {
-    value: {
-      randomUUID: jest.fn(() => 'mocked-uuid'),
-    },
-    writable: true,
-  });
+// Mock crypto.randomUUID
+beforeEach(() => {
+  if (!global.crypto.randomUUID) {
+    Object.defineProperty(global.crypto, 'randomUUID', {
+      value: jest.fn().mockReturnValue('mocked-uuid'),
+    });
+  }
 });
 
 describe('GrillItemForm', () => {
-  it('should render successfully', () => {
-    const { baseElement } = render(<GrillItemForm onAdd={() => {}} />);
-    expect(baseElement).toBeTruthy();
+  const mockOnAdd = jest.fn();
+
+  beforeEach(() => {
+    mockOnAdd.mockClear();
   });
 
   it('should render all input fields', () => {
-    render(<GrillItemForm onAdd={() => {}} />);
-    
+    render(<GrillItemForm onAdd={mockOnAdd} />);
+
     expect(screen.getByPlaceholderText('Item Name')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Cook Time (s)')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Flip Time (s)')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Target Temp (°F)')).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: /temperature/i })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: /thickness/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /add item/i })).toBeInTheDocument();
   });
 
   it('should update state when inputs change', () => {
-    render(<GrillItemForm onAdd={() => {}} />);
-    
-    const nameInput = screen.getByPlaceholderText('Item Name');
-    const cookTimeInput = screen.getByPlaceholderText('Cook Time (s)');
-    const flipTimeInput = screen.getByPlaceholderText('Flip Time (s)');
-    const targetTempInput = screen.getByPlaceholderText('Target Temp (°F)');
-
-    fireEvent.change(nameInput, { target: { value: 'Burger 1' } });
-    fireEvent.change(cookTimeInput, { target: { value: '300' } });
-    fireEvent.change(flipTimeInput, { target: { value: '150' } });
-    fireEvent.change(targetTempInput, { target: { value: '160' } });
-
-    expect(nameInput).toHaveValue('Burger 1');
-    expect(cookTimeInput).toHaveValue(300);
-    expect(flipTimeInput).toHaveValue(150);
-    expect(targetTempInput).toHaveValue(160);
-  });
-
-  it('should call onAdd with the correct item when the form is submitted', () => {
-    const mockOnAdd = jest.fn(); // Mock the onAdd function
     render(<GrillItemForm onAdd={mockOnAdd} />);
 
     const nameInput = screen.getByPlaceholderText('Item Name');
-    const cookTimeInput = screen.getByPlaceholderText('Cook Time (s)');
-    const flipTimeInput = screen.getByPlaceholderText('Flip Time (s)');
-    const targetTempInput = screen.getByPlaceholderText('Target Temp (°F)');
-    const submitButton = screen.getByText('Add Item');
+    const temperatureSelect = screen.getByRole('combobox', { name: /temperature/i });
+    const thicknessSelect = screen.getByRole('combobox', { name: /thickness/i });
 
-    fireEvent.change(nameInput, { target: { value: 'Burger 1' } });
-    fireEvent.change(cookTimeInput, { target: { value: '300' } });
-    fireEvent.change(flipTimeInput, { target: { value: '150' } });
-    fireEvent.change(targetTempInput, { target: { value: '160' } });
+    fireEvent.change(nameInput, { target: { value: 'Test Steak' } });
+    fireEvent.change(temperatureSelect, { target: { value: 'rare' } });
+    fireEvent.change(thicknessSelect, { target: { value: '1.5' } });
+
+    expect(nameInput).toHaveValue('Test Steak');
+    expect(temperatureSelect).toHaveValue('rare');
+    expect(thicknessSelect).toHaveValue('1.5');
+  });
+
+  it('should call onAdd with the correct item when the form is submitted', () => {
+    render(<GrillItemForm onAdd={mockOnAdd} />);
+
+    const nameInput = screen.getByPlaceholderText('Item Name');
+    const temperatureSelect = screen.getByRole('combobox', { name: /temperature/i });
+    const thicknessSelect = screen.getByRole('combobox', { name: /thickness/i });
+    const submitButton = screen.getByRole('button', { name: /add item/i });
+
+    fireEvent.change(nameInput, { target: { value: 'Test Steak' } });
+    fireEvent.change(temperatureSelect, { target: { value: 'mediumRare' } });
+    fireEvent.change(thicknessSelect, { target: { value: '1.25' } });
 
     fireEvent.click(submitButton);
 
+    expect(mockOnAdd).toHaveBeenCalledTimes(1);
     expect(mockOnAdd).toHaveBeenCalledWith({
-      id: 'mocked-uuid', // Since we mocked crypto.randomUUID
-      name: 'Burger 1',
-      cookTime: 300,
-      flipTime: 150,
-      targetTemp: 160,
+      id: 'mocked-uuid',
+      name: 'Test Steak',
+      cookTime: 11,
+      flipTime: 6,
+      targetTemp: 'mediumRare',
       state: 'before-grill',
     });
   });

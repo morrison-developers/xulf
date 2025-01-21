@@ -23,17 +23,39 @@ export default function Index() {
     <StyledPage>
       <div>
         <h1>Grill Items</h1>
-        <GrillItemForm onAdd={handleAddGrillItem} />
-        <div>
-          <h2>Active Items</h2>
-          <ul>
-            {state.activeGrillItems.length === 0 && <li>No active grill items</li>}
-            {state.activeGrillItems.map((item) => {
-              console.log('[UI] Rendering active item:', item);
-              return <li key={item.id}>{item.name}</li>;
-            })}
-          </ul>
-        </div>
+
+        {!state.cookingMode ? (
+          // Grill item form only available before cooking starts
+          <GrillItemForm onAdd={handleAddGrillItem} />
+        ) : (
+          <p>Cooking mode is active! Timers are running...</p>
+        )}
+
+        <h2>Active Items</h2>
+        <ul>
+          {state.activeGrillItems.map((item) => (
+            <li key={item.id}>
+              <span>{item.name}</span>
+              {/* Add timer functionality here */}
+            </li>
+          ))}
+        </ul>
+
+        {state.cookingMode && (
+          <div>
+            <h2>Cooking Mode Active</h2>
+            <p>Timers will run for each item.</p>
+          </div>
+        )}
+        {state.cookingMode ?
+          <button onClick={() => dispatch({ type: 'END_COOKING' })}>
+            Cancel Cooking
+          </button>
+          :
+          <button onClick={() => dispatch({ type: 'START_COOKING' })}>
+            Start Cooking
+          </button>
+        }
       </div>
     </StyledPage>
   );

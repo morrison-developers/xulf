@@ -6,16 +6,21 @@ import { GrillItem } from '../registry';
 type GrillState = {
   activeGrillItems: GrillItem[];
   completedGrillItems: GrillItem[];
+  cookingMode: boolean; // Indicates if cooking mode is active
 };
 
 type GrillAction =
   | { type: 'ADD_ITEM'; payload: GrillItem }
   | { type: 'MARK_DONE'; payload: string }
-  | { type: 'LOAD_STATE'; payload: GrillState };
+  | { type: 'LOAD_STATE'; payload: GrillState }
+  | { type: 'START_COOKING' }
+  | { type: 'END_COOKING' }
+  | { type: 'RESET' };
 
 const initialState: GrillState = {
   activeGrillItems: [],
   completedGrillItems: [],
+  cookingMode: false,
 };
 
 const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
@@ -31,17 +36,38 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
       const item = state.activeGrillItems.find((item) => item.id === action.payload);
       if (!item) return state;
       return {
+        ...state,
         activeGrillItems: state.activeGrillItems.filter((item) => item.id !== action.payload),
         completedGrillItems: [...state.completedGrillItems, { ...item, state: 'done' }],
       };
     case 'LOAD_STATE':
       console.log('[Reducer] Loading state from localStorage:', action.payload);
-      return action.payload;
+      return {
+        ...action.payload,
+        cookingMode: action.payload.cookingMode ?? false, // Ensure cookingMode is always defined
+      };
+    case 'START_COOKING':
+      console.log('[Reducer] Starting cooking mode');
+      return {
+        ...state,
+        cookingMode: true,
+      };
+    case 'END_COOKING':
+      console.log('[Reducer] Ending cooking mode');
+      return {
+        ...state,
+        cookingMode: false,
+      };
+    case 'RESET':
+      console.log('[Reducer] Resetting state to initial');
+      return initialState;
     default:
       console.warn('[Reducer] Unknown action type:', (action as any).type); // Use `as any` here
       return state;
   }
 };
+
+
 
 export const GrillContext = createContext<{
   state: GrillState;
@@ -61,10 +87,10 @@ export const GrillProvider: React.FC<GrillProviderProps> = ({ children }: GrillP
 
   // Ensure localStorage is only accessed on the client
   useEffect(() => {
-    const savedState = localStorage.getItem("grillState");
+    const savedState = localStorage.getItem('grillState');
     if (savedState) {
-      console.log("[GrillProvider] Loaded state from localStorage:", JSON.parse(savedState));
-      dispatch({ type: "LOAD_STATE", payload: JSON.parse(savedState) });
+      console.log('[GrillProvider] Loaded state from localStorage:', JSON.parse(savedState));
+      dispatch({ type: 'LOAD_STATE', payload: JSON.parse(savedState) });
     }
     setIsHydrated(true); // Signal that hydration is complete
   }, []);
@@ -72,8 +98,8 @@ export const GrillProvider: React.FC<GrillProviderProps> = ({ children }: GrillP
   // Save state to localStorage whenever it updates
   useEffect(() => {
     if (isHydrated) {
-      console.log("[GrillProvider] State updated. Saving to localStorage:", state);
-      localStorage.setItem("grillState", JSON.stringify(state));
+      console.log('[GrillProvider] State updated. Saving to localStorage:', state);
+      localStorage.setItem('grillState', JSON.stringify(state));
     }
   }, [state, isHydrated]);
 
@@ -84,8 +110,6 @@ export const GrillProvider: React.FC<GrillProviderProps> = ({ children }: GrillP
 
   return <GrillContext.Provider value={{ state, dispatch }}>{children}</GrillContext.Provider>;
 };
-
-
 
 export const useGrill = () => {
   const context = useContext(GrillContext);
