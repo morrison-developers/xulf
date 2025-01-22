@@ -2,7 +2,7 @@ import './global.css';
 import { StyledComponentsRegistry } from './registry';
 
 export const metadata = {
-  title: 'Nicoletta Berry | Soprano, Producer, Curator',
+  title: 'Page Under Construction',
   description: `Nicoletta Berry's personal portfolio`,
 };
 
