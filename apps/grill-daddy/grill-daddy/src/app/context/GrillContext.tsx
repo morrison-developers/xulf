@@ -2,11 +2,13 @@
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect, useState } from 'react';
 import { GrillItem } from '../registry';
+import { calculateStartTimes } from '../utils/grillUtils';
 
 type GrillState = {
   activeGrillItems: GrillItem[];
   completedGrillItems: GrillItem[];
   cookingMode: boolean; // Indicates if cooking mode is active
+  totalCookTime: number; // Tracks the maximum cook time of all items
 };
 
 type GrillAction =
@@ -15,58 +17,107 @@ type GrillAction =
   | { type: 'LOAD_STATE'; payload: GrillState }
   | { type: 'START_COOKING' }
   | { type: 'END_COOKING' }
-  | { type: 'RESET' };
+  | { type: 'RESET' }
+  | { type: 'FLIP_ITEM'; payload: string }
+  | { type: 'COMPLETE_ITEM'; payload: string }
+  | { type: 'REMOVE_ITEM'; payload: string };
 
 const initialState: GrillState = {
   activeGrillItems: [],
   completedGrillItems: [],
   cookingMode: false,
+  totalCookTime: 0,
 };
 
 const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
-  console.log('[Reducer] Action received:', action);
   switch (action.type) {
-    case 'ADD_ITEM':
-      console.log('[Reducer] Adding item to activeGrillItems:', action.payload);
+    case 'ADD_ITEM': {
+      const newTotalCookTime = Math.max(
+        state.totalCookTime,
+        action.payload.cookTime
+      );
+
+      // Recalculate wait times for all items
+      const updatedItems = calculateStartTimes(
+        [...state.activeGrillItems, action.payload],
+        newTotalCookTime
+      );
+
       return {
         ...state,
-        activeGrillItems: [...state.activeGrillItems, action.payload],
+        activeGrillItems: updatedItems,
+        totalCookTime: newTotalCookTime,
       };
-    case 'MARK_DONE':
-      const item = state.activeGrillItems.find((item) => item.id === action.payload);
-      if (!item) return state;
+    }
+    case 'REMOVE_ITEM': {
+      const updatedItems = state.activeGrillItems.filter((item) => item.id !== action.payload);
+
+      const newTotalCookTime =
+        updatedItems.length > 0
+          ? Math.max(...updatedItems.map((item) => item.cookTime))
+          : 0;
+
+      const recalculatedItems = calculateStartTimes(updatedItems, newTotalCookTime);
+
       return {
         ...state,
-        activeGrillItems: state.activeGrillItems.filter((item) => item.id !== action.payload),
-        completedGrillItems: [...state.completedGrillItems, { ...item, state: 'done' }],
+        activeGrillItems: recalculatedItems,
+        totalCookTime: newTotalCookTime,
       };
+    }
+    case 'FLIP_ITEM': {
+      // Transition item to the `time-to-flip` phase
+      return {
+        ...state,
+        activeGrillItems: state.activeGrillItems.map((item) =>
+          item.id === action.payload
+            ? { ...item, state: 'time-to-flip' }
+            : item
+        ),
+      };
+    }
+    case 'COMPLETE_ITEM': {
+      // Transition item to `time-to-remove` phase
+      return {
+        ...state,
+        activeGrillItems: state.activeGrillItems.map((item) =>
+          item.id === action.payload
+            ? { ...item, state: 'time-to-remove' }
+            : item
+        ),
+      };
+    }
+    case 'MARK_DONE': {
+      // Mark the item as fully completed
+      return {
+        ...state,
+        activeGrillItems: state.activeGrillItems.map((item) =>
+          item.id === action.payload ? { ...item, state: 'done' } : item
+        ),
+      };
+    }
     case 'LOAD_STATE':
-      console.log('[Reducer] Loading state from localStorage:', action.payload);
       return {
         ...action.payload,
-        cookingMode: action.payload.cookingMode ?? false, // Ensure cookingMode is always defined
+        cookingMode: action.payload.cookingMode ?? false,
       };
     case 'START_COOKING':
-      console.log('[Reducer] Starting cooking mode');
       return {
         ...state,
         cookingMode: true,
       };
     case 'END_COOKING':
-      console.log('[Reducer] Ending cooking mode');
       return {
         ...state,
         cookingMode: false,
       };
     case 'RESET':
-      console.log('[Reducer] Resetting state to initial');
       return initialState;
     default:
-      console.warn('[Reducer] Unknown action type:', (action as any).type); // Use `as any` here
+      console.warn('[Reducer] Unknown action type:', (action as any).type);
       return state;
   }
 };
-
 
 
 export const GrillContext = createContext<{
@@ -89,7 +140,6 @@ export const GrillProvider: React.FC<GrillProviderProps> = ({ children }: GrillP
   useEffect(() => {
     const savedState = localStorage.getItem('grillState');
     if (savedState) {
-      console.log('[GrillProvider] Loaded state from localStorage:', JSON.parse(savedState));
       dispatch({ type: 'LOAD_STATE', payload: JSON.parse(savedState) });
     }
     setIsHydrated(true); // Signal that hydration is complete
@@ -98,7 +148,6 @@ export const GrillProvider: React.FC<GrillProviderProps> = ({ children }: GrillP
   // Save state to localStorage whenever it updates
   useEffect(() => {
     if (isHydrated) {
-      console.log('[GrillProvider] State updated. Saving to localStorage:', state);
       localStorage.setItem('grillState', JSON.stringify(state));
     }
   }, [state, isHydrated]);
@@ -116,6 +165,23 @@ export const useGrill = () => {
   if (!context) {
     throw new Error('useGrill must be used within a GrillProvider');
   }
-  console.log('[useGrill] Context accessed:', context);
-  return context;
+
+  const { state, dispatch } = context;
+
+  const onFlip = (id: string) => {
+    console.log('[GrillContext] Flipping item:', id);
+    dispatch({ type: 'FLIP_ITEM', payload: id });
+  };
+
+  const onComplete = (id: string) => {
+    console.log('[GrillContext] Completing item:', id);
+    dispatch({ type: 'COMPLETE_ITEM', payload: id });
+  };
+
+  const handleAddGrillItem = (item: GrillItem) => {
+    dispatch({ type: 'ADD_ITEM', payload: item });
+  };
+
+  return { state, dispatch, onFlip, onComplete, handleAddGrillItem };
 };
+

@@ -8,8 +8,8 @@ const StyledGrillItemForm = styled.div`
   color: pink;
 `;
 
-export const GrillItemForm = ({ onAdd }: { onAdd: (item: GrillItem) => void }) => {
-  const { dispatch } = useGrill();
+export const GrillItemForm = () => {
+  const { handleAddGrillItem, dispatch } = useGrill();
   const [formState, setFormState] = useState({
     name: '',
     temperature: 'medium' as TargetTemp,
@@ -25,34 +25,33 @@ export const GrillItemForm = ({ onAdd }: { onAdd: (item: GrillItem) => void }) =
 
   const handleSubmit = () => {
     const { temperature, thickness } = formState;
-
-    // Validate temperature and thickness
+  
     const temperatureData = cookData.steak.temperatures[temperature];
     if (!temperatureData) {
       alert('Invalid temperature selection.');
       return;
     }
-
+  
     const thicknessTimes = temperatureData.times[thickness as number];
     if (!thicknessTimes) {
       alert('Invalid thickness selection.');
       return;
     }
-
+  
     const cookTime = thicknessTimes[0] + thicknessTimes[1];
-
+    const flipTime = thicknessTimes[0];
+  
     const newItem: GrillItem = {
       id: crypto.randomUUID(),
       name: formState.name || 'Unnamed Item',
-      cookTime,
-      flipTime: thicknessTimes[0],
+      cookTime, // Store as minutes
+      flipTime, // Store as minutes
       targetTemp: temperature,
-      state: 'before-grill',
+      state: 'waiting',
     };
-
-    onAdd(newItem);
-
-    // Reset form state
+  
+    handleAddGrillItem(newItem);
+  
     setFormState({
       name: '',
       temperature: 'medium' as TargetTemp,
@@ -61,7 +60,7 @@ export const GrillItemForm = ({ onAdd }: { onAdd: (item: GrillItem) => void }) =
   };
 
   const handleReset = () => {
-    dispatch({ type: 'RESET' }); // Dispatch the RESET action to clear submitted items
+    dispatch({ type: 'RESET' });
   };
 
   return (

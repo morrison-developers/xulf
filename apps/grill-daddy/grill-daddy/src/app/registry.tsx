@@ -4,9 +4,6 @@ import React, { useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
-import { GrillItem, GrillState } from './types/grill-types';
-import { cookData } from './data/cookData';
-
 export function StyledComponentsRegistry({
   children,
 }: {
@@ -35,19 +32,6 @@ export function StyledComponentsRegistry({
   );
 }
 
-// const exampleState: GrillState = 'before-grill';
-
-// const exampleItem: GrillItem = {
-//   id: '1',
-//   name: 'Burger 1',
-//   cookTime: 600,
-//   flipTime: 300,
-//   targetTemp: 160,
-//   state: 'before-grill',
-// };
-// console.log(exampleItem, exampleState);
-
-
-
-export type { GrillItem, GrillState } from './types/grill-types';
+export type { GrillItem, GrillState, CookData } from './types/grill-types';
 export { cookData } from './data/cookData'
+export { default as GrillItemCard } from './Components/GrillItem/GrillItem';

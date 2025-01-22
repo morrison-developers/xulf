@@ -1,9 +1,10 @@
 'use client';
 
-import styled from 'styled-components';
 import GrillItemForm from './Components/GrillItemForm/GrillItemForm';
-import { GrillItem } from './registry';
+import { GrillItem, GrillItemCard, cookData } from './registry';
 import { useGrill } from './context/GrillContext';
+
+import styled from 'styled-components';
 
 const StyledPage = styled.div`
   .page {
@@ -12,34 +13,42 @@ const StyledPage = styled.div`
 
 
 export default function Index() {
-  const { state, dispatch } = useGrill();
+  const { state, onFlip, dispatch, onComplete } = useGrill();
   
   const handleAddGrillItem = (item: GrillItem) => {
     dispatch({ type: 'ADD_ITEM', payload: item });
-    console.log('[handleAddGrillItem] Dispatching ADD_ITEM:', item);
+  };
+
+  const handleRemove = (id: string) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
 
   return (
     <StyledPage>
       <div>
-        <h1>Grill Items</h1>
+        <h1>Grill Dashboard</h1>
 
         {!state.cookingMode ? (
           // Grill item form only available before cooking starts
-          <GrillItemForm onAdd={handleAddGrillItem} />
+          <GrillItemForm />
         ) : (
           <p>Cooking mode is active! Timers are running...</p>
         )}
 
         <h2>Active Items</h2>
-        <ul>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {state.activeGrillItems.map((item) => (
-            <li key={item.id}>
-              <span>{item.name}</span>
-              {/* Add timer functionality here */}
-            </li>
+            <GrillItemCard
+              key={item.id}
+              item={item}
+              onFlip={onFlip}
+              cookingMode={state.cookingMode}
+              onComplete={onComplete}
+              cookData={cookData}
+              onRemove={handleRemove}
+            />
           ))}
-        </ul>
+        </div>
 
         {state.cookingMode && (
           <div>
