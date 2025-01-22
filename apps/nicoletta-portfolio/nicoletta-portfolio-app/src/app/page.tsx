@@ -1,139 +1,64 @@
 'use client';
 
+import { Analytics } from "@vercel/analytics/react";
 import styled from 'styled-components';
-import Image from 'next/image';
-import { Container } from '@mui/joy';
-import { motion } from 'framer-motion';
-import { NavBar } from './components/NavBar/NavBar'
-import { useState } from 'react';
-import { Analytics } from "@vercel/analytics/react"
-
-const StyledPage = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 100dvh;
-
-  .background-image {
-    position: absolute;
-    width: 100vw;
-    height: 100dvh;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .title {
-    color: black;
-    z-index: 2;
-    position: relative;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    position: relative;
-    
-    .title-content {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .gif-title {
-      width: 28em; /* Adjust based on your design */
-      @media (max-width: 31.25em) {
-        width: 20em;
-      }
-      margin-bottom: 1rem; /* Space between gif and h4 */
-    }
-    h4 {
-      transform: translate(-1.5rem, -6rem);
-      @media (max-width: 31.25em) {
-        transform: translate(-1.5rem,-4.6rem);
-        font-size: 0.9rem;
-      }
-      color: #cccccc;
-      margin-top: 1rem; /* Space between the gif and h4 */
-    }
-
-    .hero {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-
-      background: trans
-    }
-  }
-`;
 
 export default function Index() {
-  const [backgroundLoaded, setBackgroundLoaded] = useState<boolean>(false);
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.styled-components file.
-   */
-  return ( 
-    <StyledPage>
-      {/* BACKGROUND IMAGE */}
-      <motion.div
-        style={{ position: 'absolute', width: '100vw', height: '100dvh' }}
-        initial={{ scale: 1.1, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1 }}
-        onAnimationComplete={() => setBackgroundLoaded(true)}
+  return (
+    <Container>
+      <Analytics />
+      <Heading>🚧 This Page is Under Construction 🚧</Heading>
+      <Subheading>
+        We're working hard to bring this page to life. In the meantime, if you
+        have any questions or need to get in touch, feel free to contact me!
+      </Subheading>
+      <Button
+        onClick={() => (window.location.href = 'mailto:nicolettaberrysoprano@gmail.com')}
       >
-        <Image
-          className={'background-image'}
-          src="/hero@2x.webp"
-          alt="description"
-          quality={100}
-          fill
-          style={{ objectFit: 'cover' }}
-          priority={true}
-          placeholder="blur"
-          blurDataURL="/hero.minified.webp" 
-        />
-      </motion.div>
-      {/* BACKGROUND IMAGE */}
-
-      <Container className="title">
-        <div className="title-content">
-          <picture>
-            {/* WebP image for mobile */}
-            <source
-              srcSet="/nicoletta-signature.webp"
-              type="image/webp"
-              media="(max-width: 64em)" // Adjust breakpoint as needed
-              />
-            {/* Fallback to GIF for larger screens */}
-            <img
-              src="/nicoletta-signature.gif"
-              alt="Nicoletta Berry"
-              className="gif-title"
-            />
-        </picture>
-
-          {/* <motion.div
-            initial={{ x: '-10vw', opacity: 0 }} // Starts off-screen to the left
-            animate={{ x: 0, opacity: 1 }} // Moves to the center of the screen
-            transition={{ type: 'spring', stiffness: 100, damping: 40, duration: 1.6}}
-            className='subtitle'
-          >
-            <Typography level="h4" component="h4">
-               Nicoletta Berry
-            </Typography>
-          </motion.div> */}
-        </div>
-      </Container>
-      {backgroundLoaded && (
-        <NavBar />
-      )}
-      <Analytics/>
-    </StyledPage>
+        Contact Me
+      </Button>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f7f8fc;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+`;
+
+const Heading = styled.h1`
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+`;
+
+const Subheading = styled.p`
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+`;
+
+const Button = styled.button`
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
