@@ -1,0 +1,40 @@
+'use client';
+
+import { useGrill } from '../context/GrillContext';
+import { GrillItemCard } from '../registry';
+import { cookData } from '../registry';
+
+export default function Cooking() {
+  const { state, dispatch, onComplete } = useGrill(); // Use onComplete from context
+
+  const handleStartCooking = () => {
+    dispatch({ type: 'START_COOKING' });
+  };
+
+  return (
+    <div>
+      <h1>Cooking Mode</h1>
+      <h2>Active Items</h2>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {state.activeGrillItems.map((item) => (
+          <GrillItemCard
+            key={item.id}
+            item={item}
+            cookingMode={state.cookingMode}
+            onComplete={onComplete} // Allow marking items as complete
+            cookData={cookData}
+            onRemove={() => console.log('removed')} // Disable onRemove in cookingMode
+          />
+        ))}
+      </div>
+      {!state.cookingMode ? (
+        <button onClick={handleStartCooking}>Start Cooking</button>
+      ) : (
+        <button onClick={() => dispatch({ type: 'END_COOKING' })}>
+          End Cooking
+        </button>
+      )}
+      <button disabled>Enter Demo Mode (Coming Soon)</button>
+    </div>
+  );
+}

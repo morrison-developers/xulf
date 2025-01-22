@@ -6,8 +6,9 @@ export interface GrillItem {
   targetTemp: TargetTemp;
   state: GrillState;
   thickness?: number; // Thickness in inches, optional
-  startTime?: number;
+  startTime?: number | null;
   waitToStart?: number;
+  remainingTime?: number;
 }
 
 export type TargetTemp = 'rare' | 'mediumRare' | 'medium' | 'mediumWell' | 'well';

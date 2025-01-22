@@ -35,3 +35,4 @@ export function StyledComponentsRegistry({
 export type { GrillItem, GrillState, CookData } from './types/grill-types';
 export { cookData } from './data/cookData'
 export { default as GrillItemCard } from './Components/GrillItem/GrillItem';
+export { default as GrillItemForm } from './Components/GrillItemForm/GrillItemForm';

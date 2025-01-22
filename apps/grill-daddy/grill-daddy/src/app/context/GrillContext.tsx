@@ -8,6 +8,7 @@ type GrillState = {
   activeGrillItems: GrillItem[];
   completedGrillItems: GrillItem[];
   cookingMode: boolean; // Indicates if cooking mode is active
+  readyToCook: boolean; // Indicates if the grill is ready to start cooking
   totalCookTime: number; // Tracks the maximum cook time of all items
 };
 
@@ -18,28 +19,33 @@ type GrillAction =
   | { type: 'START_COOKING' }
   | { type: 'END_COOKING' }
   | { type: 'RESET' }
+  | { type: 'SET_READY_TO_COOK' }
   | { type: 'FLIP_ITEM'; payload: string }
   | { type: 'COMPLETE_ITEM'; payload: string }
-  | { type: 'REMOVE_ITEM'; payload: string };
+  | { type: 'REMOVE_ITEM'; payload: string }
+  | { type: 'UPDATE_TIMERS' };
 
 const initialState: GrillState = {
   activeGrillItems: [],
   completedGrillItems: [],
   cookingMode: false,
+  readyToCook: false,
   totalCookTime: 0,
 };
 
 const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
   switch (action.type) {
     case 'ADD_ITEM': {
-      const newTotalCookTime = Math.max(
-        state.totalCookTime,
-        action.payload.cookTime
-      );
+      const newItem = {
+        ...action.payload,
+        remainingTime: action.payload.cookTime, // Initial remaining time
+        startTime: null, // Timer not started yet
+      };
 
-      // Recalculate wait times for all items
+      const newTotalCookTime = Math.max(state.totalCookTime, newItem.remainingTime);
+
       const updatedItems = calculateStartTimes(
-        [...state.activeGrillItems, action.payload],
+        [...state.activeGrillItems, newItem],
         newTotalCookTime
       );
 
@@ -47,6 +53,7 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
         ...state,
         activeGrillItems: updatedItems,
         totalCookTime: newTotalCookTime,
+        readyToCook: updatedItems.length > 0, // Set readyToCook if items exist
       };
     }
     case 'REMOVE_ITEM': {
@@ -54,7 +61,7 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
 
       const newTotalCookTime =
         updatedItems.length > 0
-          ? Math.max(...updatedItems.map((item) => item.cookTime))
+          ? Math.max(...updatedItems.map((item) => item.remainingTime || 0))
           : 0;
 
       const recalculatedItems = calculateStartTimes(updatedItems, newTotalCookTime);
@@ -63,10 +70,16 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
         ...state,
         activeGrillItems: recalculatedItems,
         totalCookTime: newTotalCookTime,
+        readyToCook: recalculatedItems.length > 0, // Update readyToCook status
+      };
+    }
+    case 'SET_READY_TO_COOK': {
+      return {
+        ...state,
+        readyToCook: true,
       };
     }
     case 'FLIP_ITEM': {
-      // Transition item to the `time-to-flip` phase
       return {
         ...state,
         activeGrillItems: state.activeGrillItems.map((item) =>
@@ -77,7 +90,6 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
       };
     }
     case 'COMPLETE_ITEM': {
-      // Transition item to `time-to-remove` phase
       return {
         ...state,
         activeGrillItems: state.activeGrillItems.map((item) =>
@@ -88,7 +100,6 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
       };
     }
     case 'MARK_DONE': {
-      // Mark the item as fully completed
       return {
         ...state,
         activeGrillItems: state.activeGrillItems.map((item) =>
@@ -96,29 +107,60 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
         ),
       };
     }
-    case 'LOAD_STATE':
+    case 'LOAD_STATE': {
       return {
         ...action.payload,
         cookingMode: action.payload.cookingMode ?? false,
+        readyToCook: action.payload.activeGrillItems.length > 0, // Set readyToCook based on loaded items
       };
-    case 'START_COOKING':
+    }
+    case 'START_COOKING': {
+      const startTime = Date.now();
       return {
         ...state,
         cookingMode: true,
+        readyToCook: false, // Clear readyToCook when cooking starts
+        activeGrillItems: state.activeGrillItems.map((item) => ({
+          ...item,
+          startTime: startTime,
+        })),
       };
-    case 'END_COOKING':
+    }
+    case 'END_COOKING': {
       return {
         ...state,
         cookingMode: false,
+        activeGrillItems: state.activeGrillItems.map((item) => ({
+          ...item,
+          remainingTime: 0, // Reset remaining time
+          startTime: null, // Clear start time
+        })),
       };
-    case 'RESET':
+    }
+    case 'UPDATE_TIMERS': {
+      const currentTime = Date.now();
+      return {
+        ...state,
+        activeGrillItems: state.activeGrillItems.map((item) => {
+          if (!item.startTime) return item;
+          const elapsedTime = (currentTime - item.startTime) / 1000;
+          const newRemainingTime = Math.max(item.cookTime - elapsedTime, 0);
+          return {
+            ...item,
+            remainingTime: newRemainingTime,
+          };
+        }),
+      };
+    }
+    case 'RESET': {
       return initialState;
-    default:
+    }
+    default: {
       console.warn('[Reducer] Unknown action type:', (action as any).type);
       return state;
+    }
   }
 };
-
 
 export const GrillContext = createContext<{
   state: GrillState;
@@ -136,23 +178,47 @@ export const GrillProvider: React.FC<GrillProviderProps> = ({ children }: GrillP
   const [state, dispatch] = useReducer(grillReducer, initialState);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // Ensure localStorage is only accessed on the client
+  // Timer synchronization
+  useEffect(() => {
+    if (state.cookingMode) {
+      const interval = setInterval(() => {
+        dispatch({ type: 'UPDATE_TIMERS' });
+      }, 1000); // Update every second
+
+      return () => clearInterval(interval); // Cleanup on unmount
+    }
+  }, [state.cookingMode]);
+
+  // Rehydrate state from localStorage on load
   useEffect(() => {
     const savedState = localStorage.getItem('grillState');
     if (savedState) {
-      dispatch({ type: 'LOAD_STATE', payload: JSON.parse(savedState) });
+      const parsedState = JSON.parse(savedState);
+      const currentTime = Date.now();
+
+      // Recalculate remaining time
+      parsedState.activeGrillItems = parsedState.activeGrillItems.map((item: GrillItem) => {
+        if (!item.startTime) return item;
+        const elapsedTime = (currentTime - item.startTime) / 1000;
+        const newRemainingTime = Math.max(item.cookTime - elapsedTime, 0);
+        return {
+          ...item,
+          remainingTime: newRemainingTime,
+        };
+      });
+
+      dispatch({ type: 'LOAD_STATE', payload: parsedState });
     }
-    setIsHydrated(true); // Signal that hydration is complete
+    setIsHydrated(true);
   }, []);
 
-  // Save state to localStorage whenever it updates
+  // Persist state to localStorage
   useEffect(() => {
     if (isHydrated) {
       localStorage.setItem('grillState', JSON.stringify(state));
     }
   }, [state, isHydrated]);
 
-  // Only render children when hydration is complete
   if (!isHydrated) {
     return null; // Or a loading spinner
   }
@@ -173,10 +239,8 @@ export const useGrill = () => {
   };
 
   const handleAddGrillItem = (item: GrillItem) => {
-    console.log('ADD_ITEM')
     dispatch({ type: 'ADD_ITEM', payload: item });
   };
 
   return { state, dispatch, onComplete, handleAddGrillItem };
 };
-

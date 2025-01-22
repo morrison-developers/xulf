@@ -64,10 +64,8 @@ export const GrillItemForm = () => {
 
   const handleSubmit = () => {
     const { name, temperature, thickness } = formState;
-    console.log('Form State:', formState); // Debug form state
 
     if (!name.trim()) {
-      console.log('Error: Name cannot be empty');
       setError('Name cannot be empty.');
       return;
     }
@@ -96,7 +94,6 @@ export const GrillItemForm = () => {
       state: 'waiting',
     };
 
-    console.log('Context handleAddGrillItem:', handleAddGrillItem);
     handleAddGrillItem(newItem);
     setFormState({
       name: '',

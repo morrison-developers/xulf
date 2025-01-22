@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import GrillItemForm from './GrillItemForm';
 import { GrillContext } from '../../context/GrillContext';
 import { jest } from '@jest/globals';
-import { cookData } from '../../data/cookData';
 
 // Mock crypto.randomUUID
 beforeEach(() => {
@@ -15,7 +14,6 @@ beforeEach(() => {
 });
 
 describe('GrillItemForm', () => {
-  const mockHandleAddGrillItem = jest.fn(() => console.log('***MOCK HANDLE ADD GRILL ITEM***'));
   const mockDispatch = jest.fn();
   const mockContextValue = {
     handleAddGrillItem: jest.fn(),
@@ -25,6 +23,7 @@ describe('GrillItemForm', () => {
       completedGrillItems: [],
       cookingMode: false,
       totalCookTime: 0,
+      readyToCook: false,
     },
   };
 

@@ -8,4 +8,7 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../coverage/apps/grill-daddy/grill-daddy',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  fakeTimers: {
+    enableGlobally: true,
+  },
 };

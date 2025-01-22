@@ -16,7 +16,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
       <GrillProvider>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <main>{children}</main>
+        </StyledComponentsRegistry>
       </GrillProvider>
       </body>
     </html>
