@@ -168,20 +168,15 @@ export const useGrill = () => {
 
   const { state, dispatch } = context;
 
-  const onFlip = (id: string) => {
-    console.log('[GrillContext] Flipping item:', id);
-    dispatch({ type: 'FLIP_ITEM', payload: id });
-  };
-
   const onComplete = (id: string) => {
-    console.log('[GrillContext] Completing item:', id);
     dispatch({ type: 'COMPLETE_ITEM', payload: id });
   };
 
   const handleAddGrillItem = (item: GrillItem) => {
+    console.log('ADD_ITEM')
     dispatch({ type: 'ADD_ITEM', payload: item });
   };
 
-  return { state, dispatch, onFlip, onComplete, handleAddGrillItem };
+  return { state, dispatch, onComplete, handleAddGrillItem };
 };
 

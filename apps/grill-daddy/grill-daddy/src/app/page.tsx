@@ -13,11 +13,7 @@ const StyledPage = styled.div`
 
 
 export default function Index() {
-  const { state, onFlip, dispatch, onComplete } = useGrill();
-  
-  const handleAddGrillItem = (item: GrillItem) => {
-    dispatch({ type: 'ADD_ITEM', payload: item });
-  };
+  const { state, dispatch, onComplete } = useGrill();
 
   const handleRemove = (id: string) => {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
@@ -41,7 +37,6 @@ export default function Index() {
             <GrillItemCard
               key={item.id}
               item={item}
-              onFlip={onFlip}
               cookingMode={state.cookingMode}
               onComplete={onComplete}
               cookData={cookData}

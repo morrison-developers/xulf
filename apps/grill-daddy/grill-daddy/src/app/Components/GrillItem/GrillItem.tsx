@@ -45,7 +45,6 @@ interface GrillItemCardProps {
   item: GrillItem;
   cookData: CookData;
   cookingMode: boolean;
-  onFlip: (id: string) => void;
   onComplete: (id: string) => void;
   onRemove: (id: string) => void;
 }
@@ -54,7 +53,6 @@ const GrillItemCard: React.FC<GrillItemCardProps> = ({
   item,
   cookData,
   cookingMode,
-  onFlip,
   onComplete,
   onRemove,
 }) => {
@@ -172,6 +170,7 @@ const GrillItemCard: React.FC<GrillItemCardProps> = ({
       <div className="progress-bar">
       <div
         className="progress"
+        role="progressbar"
         style={{
           width: `${
             currentPhase === 'waiting'

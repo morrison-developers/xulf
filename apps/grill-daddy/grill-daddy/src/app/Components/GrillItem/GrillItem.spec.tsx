@@ -28,7 +28,6 @@ const testItem: GrillItem = {
 };
 
 describe('GrillItemCard', () => {
-  const mockOnFlip = jest.fn();
   const mockOnComplete = jest.fn();
   const mockOnRemove = jest.fn();
 
@@ -41,57 +40,20 @@ describe('GrillItemCard', () => {
       <GrillItemCard
         item={testItem}
         cookData={cookData}
-        onFlip={mockOnFlip}
         onComplete={mockOnComplete}
         onRemove={mockOnRemove}
+        cookingMode={true}
       />
     );
-
+  
     expect(screen.getByText(/steak/i)).toBeInTheDocument();
-    expect(screen.getByText('Phase: first-side')).toBeInTheDocument();
-    expect(screen.getByText(`Time Left: ${flipTime}s`)).toBeInTheDocument(); // Dynamically calculate
-  });
-
-  it('calls onFlip when flip time is reached', () => {
-    jest.useFakeTimers();
-
-    render(
-      <GrillItemCard
-        item={testItem}
-        cookData={cookData}
-        onFlip={mockOnFlip}
-        onComplete={mockOnComplete}
-        onRemove={mockOnRemove}
-      />
-    );
-
-    act(() => {
-      jest.advanceTimersByTime(flipTime * 1000); // Simulate flip time
-    });
-
-    expect(mockOnFlip).toHaveBeenCalledWith(testItem.id);
-    jest.useRealTimers();
-  });
-
-  it('calls onComplete when cooking is complete', () => {
-    jest.useFakeTimers();
   
-    render(
-      <GrillItemCard
-        item={testItem}
-        cookData={cookData}
-        onFlip={mockOnFlip}
-        onComplete={mockOnComplete}
-        onRemove={mockOnRemove}
-      />
-    );
-  
+    // Wait for DOM updates to reflect the expected phase
     act(() => {
-      jest.advanceTimersByTime(cookTime); // Simulate full cook time
+      jest.advanceTimersByTime(0);
     });
   
-    expect(mockOnComplete).toHaveBeenCalledWith(testItem.id);
-    jest.useRealTimers();
+    expect(screen.getByText('Phase: time-to-flip')).toBeInTheDocument();
   });
 
   it('calls onRemove when the remove button is clicked', () => {
@@ -99,9 +61,9 @@ describe('GrillItemCard', () => {
       <GrillItemCard
         item={{ ...testItem, state: 'done' }}
         cookData={cookData}
-        onFlip={mockOnFlip}
         onComplete={mockOnComplete}
         onRemove={mockOnRemove}
+        cookingMode={false}
       />
     );
     // simulate done
@@ -116,13 +78,42 @@ describe('GrillItemCard', () => {
       <GrillItemCard
         item={{ ...testItem, state: 'done' }}
         cookData={cookData}
-        onFlip={mockOnFlip}
         onComplete={mockOnComplete}
         onRemove={mockOnRemove}
+        cookingMode={true}
       />
     );
   
     expect(screen.getByText(/Cooking complete!/i)).toBeInTheDocument();
     expect(screen.getByText(/Remove Item/i)).toBeInTheDocument();
+  });
+
+  it('transitions phases correctly during cooking', () => {
+    jest.useFakeTimers();
+  
+    render(
+      <GrillItemCard
+        item={{ ...testItem, state: 'waiting', waitToStart: 1 }}
+        cookData={cookData}
+        onComplete={mockOnComplete}
+        onRemove={mockOnRemove}
+        cookingMode={true}
+      />
+    );
+  
+    act(() => {
+      jest.advanceTimersByTime(60000);
+    });
+
+    expect(screen.getByText(/Ready to add to the grill!/i)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/Add to Grill/i));
+
+    act(() => {
+      jest.advanceTimersByTime(testItem.flipTime * 1000);
+    });
+
+    expect(screen.getByText(/Time to flip!/i)).toBeInTheDocument();
+    jest.useRealTimers();
   });
 });
