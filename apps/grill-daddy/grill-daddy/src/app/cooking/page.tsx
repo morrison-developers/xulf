@@ -1,14 +1,21 @@
 'use client';
 
 import { useGrill } from '../context/GrillContext';
+import { useRouter } from 'next/navigation';
 import { GrillItemCard } from '../registry';
 import { cookData } from '../registry';
 
 export default function Cooking() {
-  const { state, dispatch, onComplete } = useGrill(); // Use onComplete from context
+  const { state, dispatch, onComplete } = useGrill();
+  const router = useRouter();
 
   const handleStartCooking = () => {
     dispatch({ type: 'START_COOKING' });
+  };
+
+  const handleEndCooking = () => {
+    dispatch({ type: 'END_COOKING' }); // Dispatch state update
+    router.push('/dashboard'); // Redirect explicitly
   };
 
   return (
@@ -30,9 +37,7 @@ export default function Cooking() {
       {!state.cookingMode ? (
         <button onClick={handleStartCooking}>Start Cooking</button>
       ) : (
-        <button onClick={() => dispatch({ type: 'END_COOKING' })}>
-          End Cooking
-        </button>
+        <button onClick={handleEndCooking}>End Cooking</button>
       )}
       <button disabled>Enter Demo Mode (Coming Soon)</button>
     </div>

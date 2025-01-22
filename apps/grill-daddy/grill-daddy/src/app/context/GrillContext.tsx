@@ -130,13 +130,15 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
       return {
         ...state,
         cookingMode: false,
+        readyToCook: true,
         activeGrillItems: state.activeGrillItems.map((item) => ({
           ...item,
           remainingTime: 0, // Reset remaining time
-          startTime: null, // Clear start time
+          startTime: null,  // Clear start time
+          isComplete: false, // Reset completion status if applicable
         })),
       };
-    }
+    }  
     case 'UPDATE_TIMERS': {
       const currentTime = Date.now();
       return {
