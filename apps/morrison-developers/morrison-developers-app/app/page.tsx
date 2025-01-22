@@ -25,7 +25,9 @@ export default function Index() {
     <ThemeContextProvider>
       <StyledPage>
         {/* NAV BAR */}
-        <FloatingNavBar>
+        <FloatingNavBar
+          logo={<img src="/site-logo-main.svg" alt="Logo" />}
+        >
           <h1>Home</h1>
           <h1>About</h1>
           <h1>Contact</h1>

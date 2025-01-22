@@ -1,4 +1,5 @@
-export * from './floating-nav-bar/floating-nav-bar';
-export * from './theme/theme-context';
+export * from './FloatingNavBar/FloatingNavBar';
+export * from './theme/ThemeContext';
 export * from './theme/theme';
+export * from './LinkTree/LinkTree'
 
