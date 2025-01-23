@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useGrill } from '../../context/GrillContext';
-import { GrillItem, GrillItemForm } from '../../registry';
 
 const StyledPreviewSection = styled.div`
   margin: 1rem 4rem;
@@ -61,10 +59,6 @@ export default function GrillItemPreview() {
     dispatch({ type: 'REMOVE_ITEM', payload: id });
   };
 
-  const calculateTotalCookTime = () => {
-    return state.activeGrillItems.reduce((total, item) => total + item.cookTime, 0);
-  };
-
   function camelCaseToPlainText(camelCaseString: string): string {
     return camelCaseString
       .replace(/([a-z0-9])([A-Z])/g, '$1 $2') // Add space before uppercase letters
@@ -95,7 +89,7 @@ export default function GrillItemPreview() {
 
       {state.activeGrillItems.length > 0 && (
         <div className="total-time">
-          Estimated Total Cook Time: {calculateTotalCookTime()} minutes
+          Estimated Total Cook Time: {state.totalCookTime} minutes
         </div>
       )}
 

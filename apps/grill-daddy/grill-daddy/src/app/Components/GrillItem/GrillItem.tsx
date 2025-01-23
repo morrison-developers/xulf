@@ -1,20 +1,49 @@
+// GrillItemCard.tsx
 import React, { useState, useEffect } from 'react';
-import { useTimer } from 'react-use-precision-timer';
 
-import { GrillItem, CookData } from '../../registry';
+import { GrillItem, CookData, Checkpoints, GrillState } from '../../registry';
 import { getCookingTimes } from '../../utils/grillUtils';
-import { useGrill } from '../../context/GrillContext';
 
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
-const StyledGrillItem = styled.div`
+const wiggle = keyframes`
+  0% { transform: rotate(0deg); }
+  70% { transform: rotate(0deg); }
+  75% { transform: rotate(-2deg); }
+  80% { transform: rotate(2deg); }
+  85% { transform: rotate(-1.5deg); }
+  90% { transform: rotate(1.5deg); }
+  95% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+`;
+
+
+const StyledGrillItem = styled.div<{
+  isDone: boolean;
+  isPromptPhase: boolean;
+  timeInPrompt: number;
+}>`
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
   margin: 16px;
-  background: ${(props: { isDone: boolean }) => (props.isDone ? '#d4edda' : 'white')};
+  background: ${({ isDone, isPromptPhase, timeInPrompt }) =>
+    isDone
+      ? '#d4edda'
+      : isPromptPhase
+      ? `rgba(255, 0, 0, ${Math.min(timeInPrompt / 60, 1)})`
+      : 'white'};
   width: 300px;
   text-align: center;
+  color: ${({ isPromptPhase, timeInPrompt }) =>
+    isPromptPhase && timeInPrompt >= 60 ? 'white' : 'black'};
+  animation: ${({ isPromptPhase }) =>
+    isPromptPhase
+      ? css`
+          ${wiggle} 1s ease-in-out 0s infinite alternate;
+        `
+      : 'none'};
+  cursor: pointer; /* Makes the card clickable */
 
   .progress-bar {
     background: #eee;
@@ -29,15 +58,6 @@ const StyledGrillItem = styled.div`
       height: 100%;
       transition: width 0.3s;
     }
-  }
-
-  .flip-alert, .done-alert {
-    color: red;
-    font-weight: bold;
-  }
-
-  .done-alert {
-    margin-top: 10px;
   }
 `;
 
@@ -59,14 +79,37 @@ const GrillItemCard: React.FC<GrillItemCardProps> = ({
   const [remainingTime, setRemainingTime] = useState((item.waitToStart || 0) * 60);
   const [currentPhase, setCurrentPhase] = useState(item.state || 'waiting');
   const [isDone, setIsDone] = useState(item.state === 'done');
+  const [timeInPrompt, setTimeInPrompt] = useState(0);
 
   const { flipTime, cookTime } = getCookingTimes(item, cookData);
-  const { state } = useGrill();
 
-  // Timers for each phase
-  const waitTimer = useTimer({ delay: (item.waitToStart || 0) * 60000 }, () => {});
-  const flipTimer = useTimer({ delay: flipTime * 60000 }, () => {});
-  const postFlipTimer = useTimer({ delay: (cookTime - flipTime) * 60000 }, () => {});
+  const isPromptPhase = ['before-grill', 'time-to-flip', 'time-to-remove'].includes(currentPhase);
+
+  const map = {
+    currentPhase,
+    remainingTime,
+    cookTimes: [
+      { phase: 'waiting' as GrillState, time: (item.waitToStart || 0) * 60 },
+      { phase: 'first-side' as GrillState, time: flipTime * 60 },
+      { phase: 'second-side' as GrillState, time: (cookTime - flipTime) * 60 },
+    ],
+  };
+
+  useEffect(() => {
+    let promptTimer: NodeJS.Timeout | null = null;
+
+    if (isPromptPhase) {
+      promptTimer = setInterval(() => {
+        setTimeInPrompt((prev) => prev + 1);
+      }, 1000);
+    } else {
+      setTimeInPrompt(0);
+    }
+
+    return () => {
+      if (promptTimer) clearInterval(promptTimer);
+    };
+  }, [isPromptPhase]);
 
   useEffect(() => {
     if (!cookingMode) return;
@@ -101,70 +144,91 @@ const GrillItemCard: React.FC<GrillItemCardProps> = ({
   const handleAddToGrill = () => {
     setCurrentPhase('first-side');
     setRemainingTime(flipTime * 60);
-    flipTimer.start();
   };
 
   const handleNextPhase = () => {
     if (currentPhase === 'time-to-flip') {
       setCurrentPhase('second-side');
       setRemainingTime((cookTime - flipTime) * 60);
-      postFlipTimer.start();
     } else if (currentPhase === 'time-to-remove') {
       setCurrentPhase('done');
       setIsDone(true);
       onComplete(item.id);
     }
   };
+  
+  const invisibleText = (
+    <p style={{ visibility: 'hidden', height: '1em' }}>Placeholder text</p>
+  );
 
   const renderPhase = () => {
+    const promptText = (text: string, color: string) => (
+      <p style={{ color, fontWeight: 'bold', marginTop: '16px' }}>{text}</p>
+    );
+  
     switch (currentPhase) {
       case 'waiting':
-        return <p>Waiting to start: {formatTime(remainingTime)}</p>;
+        return (
+          <div>
+            {invisibleText}
+            {promptText('Waiting to start...', 'black')}
+          </div>
+        );
       case 'before-grill':
         return (
           <div>
-            <p style={{ color: 'red', fontWeight: 'bold' }}>Ready to add to the grill!</p>
-            <button onClick={handleAddToGrill}>Add to Grill</button>
+            {promptText('Ready to add to the grill!', 'red')}
           </div>
         );
       case 'first-side':
-        return <p>Side 1 Timer: {formatTime(remainingTime)}</p>;
+        return (
+          <div>
+            {invisibleText}
+            {promptText('Cooking first side...', 'black')}
+          </div>
+        );
       case 'time-to-flip':
         return (
           <div>
-            <p style={{ color: 'orange', fontWeight: 'bold' }}>Time to flip!</p>
-            <button onClick={handleNextPhase}>Flip Item</button>
+            {promptText('Time to flip!', 'orange')}
           </div>
         );
       case 'second-side':
-        return <p>Side 2 Timer: {formatTime(remainingTime)}</p>;
+        return (
+          <div>
+            {invisibleText}
+            {promptText('Cooking second side...', 'black')}
+          </div>
+        );
       case 'time-to-remove':
         return (
           <div>
-            <p style={{ color: 'green', fontWeight: 'bold' }}>Time to remove!</p>
-            <button onClick={handleNextPhase}>Remove Item</button>
+            {promptText('Time to remove!', 'green')}
           </div>
         );
       case 'done':
         return (
           <div>
-            <p className="done-alert">Cooking complete! Remove the item from the grill.</p>
-            <button onClick={() => onRemove(item.id)}>Remove Item</button>
+            {promptText('Cooking complete! Remove the item from the grill.', 'black')}
           </div>
         );
       default:
         return null;
-    }
-  };
-
-  const formatTime = (timeInSeconds: number): string => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    return `${minutes}m ${seconds}s`;
-  };
-
+      }
+    };
   return (
-    <StyledGrillItem isDone={isDone}>
+    <StyledGrillItem
+      isDone={isDone}
+      isPromptPhase={isPromptPhase}
+      timeInPrompt={timeInPrompt}
+      onClick={() => {
+        if (isPromptPhase) {
+          // Handle the alarm acknowledgment
+          if (currentPhase === 'before-grill') handleAddToGrill();
+          if (currentPhase === 'time-to-flip' || currentPhase === 'time-to-remove') handleNextPhase();
+        }
+      }}
+    >
       <h3>{item.name}</h3>
       <p>Phase: {currentPhase}</p>
       <div className="progress-bar">
@@ -184,20 +248,7 @@ const GrillItemCard: React.FC<GrillItemCardProps> = ({
         }}
       />
       </div>
-      <ul>
-        <li>
-          <strong>Wait to Start:</strong> {formatTime((item.waitToStart || 0) * 60)}
-        </li>
-        <li>
-          <strong>First Side:</strong> {formatTime(flipTime * 60)}
-        </li>
-        <li>
-          <strong>Second Side:</strong> {formatTime((cookTime - flipTime) * 60)}
-        </li>
-        <li>
-          <strong>Total Time:</strong> {formatTime(state.totalCookTime * 60)}
-        </li>
-      </ul>
+      <Checkpoints map={map} />
       {renderPhase()}
     </StyledGrillItem>
   );

@@ -37,3 +37,4 @@ export { cookData } from './data/cookData'
 export { default as GrillItemCard } from './Components/GrillItem/GrillItem';
 export { default as GrillItemForm } from './Components/GrillItemForm/GrillItemForm';
 export { default as GrillItemPreview } from './Components/GrillItemPreview/GrillItemPreview';
+export { default as Checkpoints } from './Components/Checkpoints/Checkpoints'
