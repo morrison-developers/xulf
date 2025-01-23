@@ -23,6 +23,7 @@ type GrillAction =
   | { type: 'FLIP_ITEM'; payload: string }
   | { type: 'COMPLETE_ITEM'; payload: string }
   | { type: 'REMOVE_ITEM'; payload: string }
+  | { type: 'SET_COOKING_MODE'; payload: boolean }
   | { type: 'UPDATE_TIMERS' };
 
 const initialState: GrillState = {
@@ -138,7 +139,10 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
           isComplete: false, // Reset completion status if applicable
         })),
       };
-    }  
+    }
+    case 'SET_COOKING_MODE': {
+      return { ...state, cookingMode: action.payload };
+    }
     case 'UPDATE_TIMERS': {
       const currentTime = Date.now();
       return {

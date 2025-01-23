@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useGrill } from '../context/GrillContext';
 import { useRouter } from 'next/navigation';
 import { GrillItemCard } from '../registry';
@@ -8,6 +9,13 @@ import { cookData } from '../registry';
 export default function Cooking() {
   const { state, dispatch, onComplete } = useGrill();
   const router = useRouter();
+
+  useEffect(() => {
+    if (state.cookingMode || !state.readyToCook) {
+      dispatch({ type: 'SET_COOKING_MODE', payload: false });
+      dispatch({ type: 'SET_READY_TO_COOK' });
+    }
+  }, []);
 
   const handleStartCooking = () => {
     dispatch({ type: 'START_COOKING' });
