@@ -33,7 +33,8 @@ const StyledGrillItem = styled.div<{
       : isPromptPhase
       ? `rgba(255, 0, 0, ${Math.min(timeInPrompt / 60, 1)})`
       : 'white'};
-  width: 300px;
+  width: 50%;
+  max-width: 40em;
   text-align: center;
   color: ${({ isPromptPhase, timeInPrompt }) =>
     isPromptPhase && timeInPrompt >= 60 ? 'white' : 'black'};

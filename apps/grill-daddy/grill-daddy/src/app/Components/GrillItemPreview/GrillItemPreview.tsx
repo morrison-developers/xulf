@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useGrill } from '../../context/GrillContext';
 
 const StyledPreviewSection = styled.div`
-  margin: 1rem 4rem;
+  margin: 1rem;
   max-width: 44em;
   border: 1px solid #ddd;
   border-radius: 5px;

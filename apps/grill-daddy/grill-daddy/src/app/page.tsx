@@ -7,7 +7,8 @@ import { useRouter } from 'next/navigation';
 const StyledLandingPage = styled.div`
   padding: 20px;
   font-family: Arial, sans-serif;
-
+  max-width: 40em;
+  margin: 0 auto;
   .section {
     margin-bottom: 40px;
   }

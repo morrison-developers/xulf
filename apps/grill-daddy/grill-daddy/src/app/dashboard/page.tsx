@@ -3,6 +3,15 @@
 import { GrillItemForm, GrillItemPreview } from '../registry';
 import { useRouter } from 'next/navigation';
 import { useGrill } from '../context/GrillContext';
+import styled from 'styled-components';
+
+const DashboardContainer = styled.div`
+  max-width: 40em;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+`;
 
 export default function Dashboard() {
   const { state } = useGrill(); // Access the current grill state
@@ -17,13 +26,12 @@ export default function Dashboard() {
   };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <DashboardContainer>
       <GrillItemForm />
       <GrillItemPreview />
-      <button onClick={handleNavigateToCooking} style={{ marginTop: '20px' }}>
+      <button onClick={handleNavigateToCooking}>
         Go to Cooking Section
       </button>
-    </div>
+    </DashboardContainer>
   );
 }

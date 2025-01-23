@@ -12,7 +12,8 @@ const StyledGrillItemForm = styled.div`
   background: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
-  width: 300px;
+  max-width: 40em;
+  margin: 1rem;
 
   form {
     display: flex;
