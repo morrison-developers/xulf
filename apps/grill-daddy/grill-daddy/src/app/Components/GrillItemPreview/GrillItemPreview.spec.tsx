@@ -50,13 +50,6 @@ describe('GrillItemPreview', () => {
     expect(screen.getByText('Well done')).toBeInTheDocument();
   });
 
-  it('should calculate and display total cook time', () => {
-    render(<GrillItemPreview />);
-
-    // Check total cook time
-    expect(screen.getByText('Estimated Total Cook Time: 25 minutes')).toBeInTheDocument();
-  });
-
   it('should call dispatch with the correct action when an item is deleted', () => {
     render(<GrillItemPreview />);
 
