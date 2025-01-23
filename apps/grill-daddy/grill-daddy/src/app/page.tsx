@@ -127,14 +127,14 @@ export default function LandingPage() {
 
   return (
     <StyledLandingPage>
-      <h1>Welcome to Grill Daddy</h1>
+      <h1>Welcome to Grillio</h1>
 
       <div className="section">
         <p>
-          Grill Daddy is your ultimate BBQ assistant, designed to make grilling
+          Grillio is your ultimate BBQ assistant, designed to make grilling
           easier and more enjoyable. Whether you're cooking burgers, steaks, or
           veggies, this app ensures everything is cooked perfectly every time.
-          Developed with care using modern web technologies, Grill Daddy is the
+          Developed with care using modern web technologies, Grillio is the
           ideal companion for both casual and serious grillers.
         </p>
       </div>
