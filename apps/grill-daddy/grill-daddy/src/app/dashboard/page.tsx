@@ -1,6 +1,6 @@
 'use client';
 
-import { GrillItemForm } from '../registry';
+import { GrillItemForm, GrillItemPreview } from '../registry';
 import { useRouter } from 'next/navigation';
 import { useGrill } from '../context/GrillContext';
 
@@ -20,7 +20,7 @@ export default function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <GrillItemForm />
-      {/* Placeholder for streamlined info about added items */}
+      <GrillItemPreview />
       <button onClick={handleNavigateToCooking} style={{ marginTop: '20px' }}>
         Go to Cooking Section
       </button>
