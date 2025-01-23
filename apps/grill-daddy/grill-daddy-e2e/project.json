@@ -1,0 +1,9 @@
+{
+  "name": "grill-daddy-e2e",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/grill-daddy/grill-daddy-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["grill-daddy"],
+  "// targets": "to see all targets run: nx show project grill-daddy-e2e --web",
+  "targets": {}
+}
