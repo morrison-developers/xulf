@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default {
   displayName: 'sweet-sye',
   preset: '../../../jest.preset.js',

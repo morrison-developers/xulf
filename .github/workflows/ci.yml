@@ -14,25 +14,59 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      # Checkout the code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # This enables task distribution via Nx Cloud
-      # Run this command as early as possible, before dependencies are installed
-      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
-      - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
-
-      # Cache node_modules
-      - uses: actions/setup-node@v4
+      # Set up Node.js environment and cache dependencies
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - run: npm ci --legacy-peer-deps
-      - uses: nrwl/nx-set-shas@v4
+      # Install Dependencies
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
-      # - run: npx nx affected -t lint test build e2e-ci
+      # Verify Nx Installation
+      - name: Check Nx Installation
+        run: npx nx --version
+
+      # Run Affected Lint
+      - name: Run Affected Lint
+        run: npx nx affected --target=lint --parallel=3 --base=main --head=HEAD
+
+      # Run Affected Unit Tests
+      - name: Run Affected Unit Tests
+        run: npx nx affected --target=test --parallel=3 --base=main --head=HEAD
+
+      # Build Affected Projects
+      - name: Build Affected Projects
+        run: npx nx affected --target=build --parallel=3 --base=main --head=HEAD
+
+      # Run Affected E2E Tests
+      - name: Run Affected E2E Tests
+        run: npx nx affected --target=e2e --parallel=3 --base=main --head=HEAD
+
+      # Deploy Affected Projects to Vercel
+      - name: Deploy Affected Projects to Vercel
+        run: |
+          affected_apps=$(npx nx affected:apps --base=main --head=HEAD)
+          for app in $affected_apps; do
+            echo "Checking app: $app"
+            if [[ "$app" == "sweet-sye-app" || "$app" == "nicoletta-portfolio-app" ]]; then
+              echo "Deploying $app to Vercel..."
+              npx vercel --cwd=apps/$app --token=$VERCEL_TOKEN --prod
+            else
+              echo "Skipping $app as it's not a deployable app."
+            fi
+          done
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      # End Nx Cloud Distributed CI
+      - name: Stop Nx Cloud Distributed CI
+        run: npx nx-cloud stop-ci-run

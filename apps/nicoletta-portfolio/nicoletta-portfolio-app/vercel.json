@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "nicoletta-portfolio",
+  "builds": [
+    {
+      "src": "apps/nicoletta-portfolio/nicoletta-portfolio-app/next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "framework": "nextjs",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "apps/nicoletta-portfolio/nicoletta-portfolio-app/$1"
+    }
+  ]
+}

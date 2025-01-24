@@ -67,7 +67,6 @@ interface GrillItemCardProps {
   cookData: CookData;
   cookingMode: boolean;
   onComplete: (id: string) => void;
-  onRemove: (id: string) => void;
 }
 
 const GrillItemCard: React.FC<GrillItemCardProps> = ({
@@ -75,7 +74,6 @@ const GrillItemCard: React.FC<GrillItemCardProps> = ({
   cookData,
   cookingMode,
   onComplete,
-  onRemove,
 }) => {
   const [remainingTime, setRemainingTime] = useState((item.waitToStart || 0) * 60);
   const [currentPhase, setCurrentPhase] = useState(item.state || 'waiting');
@@ -140,7 +138,7 @@ const GrillItemCard: React.FC<GrillItemCardProps> = ({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [cookingMode, currentPhase, remainingTime]);
+  }, [cookingMode, currentPhase, remainingTime, cookTime, flipTime]);
 
   const handleAddToGrill = () => {
     setCurrentPhase('first-side');

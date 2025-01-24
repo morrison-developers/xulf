@@ -28,7 +28,7 @@ export default function Cooking() {
       dispatch({ type: 'SET_COOKING_MODE', payload: false });
       dispatch({ type: 'SET_READY_TO_COOK' });
     }
-  }, []);
+  }, [state.cookingMode, state.readyToCook, dispatch]); 
 
   const handleStartCooking = () => {
     dispatch({ type: 'START_COOKING' });
@@ -55,7 +55,6 @@ export default function Cooking() {
             cookingMode={state.cookingMode}
             onComplete={onComplete} // Allow marking items as complete
             cookData={cookData}
-            onRemove={() => console.log('removed')} // Disable onRemove in cookingMode
           />
         ))}
       </div>

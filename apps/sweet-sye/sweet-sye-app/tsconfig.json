@@ -29,7 +29,8 @@
     "../../../apps/sweet-sye/sweet-sye/.next/types/**/*.ts",
     "../../../dist/apps/sweet-sye/sweet-sye/.next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../../dist/apps/sweet-sye/.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

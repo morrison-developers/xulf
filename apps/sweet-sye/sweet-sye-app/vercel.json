@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "sweet-sye",
+  "builds": [
+    {
+      "src": "apps/sweet-sye/sweet-sye-app/next.config.js",
+      "use": "@vercel/next"
+    }
+  ],
+  "framework": "nextjs",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "apps/sweet-sye/sweet-sye-app/$1"
+    }
+  ]
+}

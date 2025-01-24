@@ -4,13 +4,15 @@ import { Analytics } from "@vercel/analytics/react";
 import styled from 'styled-components';
 
 export default function Index() {
+
+  const message = `We're working hard to bring this page to life. In the meantime, if you
+        have any questions or need to get in touch, feel free to contact me!`
   return (
     <Container>
       <Analytics />
       <Heading>🚧 This Page is Under Construction 🚧</Heading>
       <Subheading>
-        We're working hard to bring this page to life. In the meantime, if you
-        have any questions or need to get in touch, feel free to contact me!
+        {message}
       </Subheading>
       <Button
         onClick={() => (window.location.href = 'mailto:nicolettaberrysoprano@gmail.com')}

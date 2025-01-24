@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import GrillItemCard from './GrillItem';
 import { GrillItem, cookData } from '../../registry';
 
@@ -29,7 +29,6 @@ const testItem: GrillItem = {
 
 describe('GrillItemCard', () => {
   const mockOnComplete = jest.fn();
-  const mockOnRemove = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -41,7 +40,6 @@ describe('GrillItemCard', () => {
         item={testItem}
         cookData={cookData}
         onComplete={mockOnComplete}
-        onRemove={mockOnRemove}
         cookingMode={true}
       />
     );
@@ -62,7 +60,6 @@ describe('GrillItemCard', () => {
         item={{ ...testItem, state: 'done' }}
         cookData={cookData}
         onComplete={mockOnComplete}
-        onRemove={mockOnRemove}
         cookingMode={true}
       />
     );
@@ -78,7 +75,6 @@ describe('GrillItemCard', () => {
         item={{ ...testItem, state: 'waiting', waitToStart: 1 }}
         cookData={cookData}
         onComplete={mockOnComplete}
-        onRemove={mockOnRemove}
         cookingMode={true}
       />
     );
