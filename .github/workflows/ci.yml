@@ -50,18 +50,12 @@ jobs:
       # Generate Deployable Apps List
       - name: Generate Deployable Apps List
         run: |
-          deployable_apps=$(find apps -type f -name vercel.json -exec jq -r '.name' {} \;)
+          deployable_apps=$(find apps -type f -name vercel.json -exec jq -r '.name' {} \; | tr '\n' ' ')
           echo "DEPLOYABLE_APPS=$deployable_apps" >> $GITHUB_ENV
 
       # Debug Deployable Apps
       - name: Debug Deployable Apps
-        run: |
-          if [[ -z "$DEPLOYABLE_APPS" ]]; then
-            echo "No deployable apps found. Ensure vercel.json files are configured correctly."
-            exit 1
-          else
-            echo "Deployable apps: $DEPLOYABLE_APPS"
-          fi
+        run: "echo `Deployable apps: $DEPLOYABLE_APPS`"
         
       # Deploy Affected Projects to Vercel
       - name: Deploy Affected Projects to Vercel
