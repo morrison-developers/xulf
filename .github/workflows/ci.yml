@@ -20,6 +20,14 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Set the base branch dynamically
+      - name: Set Base Branch
+        run: echo "BASE_BRANCH=${{ github.base_ref || 'main' }}" >> $GITHUB_ENV
+
+      # Debug the base branch
+      - name: Debug Base Branch
+        run: echo "Base branch is $BASE_BRANCH"
+
       # Set up Node.js environment and cache dependencies
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -35,31 +43,26 @@ jobs:
       - name: Check Nx Installation
         run: npx nx --version
 
+      # Run Affected Lint
       - name: Run Affected Lint
         run: npx nx affected --target=lint --parallel=3 --base=$BASE_BRANCH --head=HEAD
-        env:
-          BASE_BRANCH: ${{ github.base_ref || 'main' }}
-      
 
+      # Run Affected Unit Tests
       - name: Run Affected Unit Tests
         run: npx nx affected --target=test --parallel=3 --base=$BASE_BRANCH --head=HEAD
-        env:
-          BASE_BRANCH: ${{ github.base_ref || 'main' }}
-      
+
+      # Build Affected Projects
       - name: Build Affected Projects
         run: npx nx affected --target=build --parallel=3 --base=$BASE_BRANCH --head=HEAD
-        env:
-          BASE_BRANCH: ${{ github.base_ref || 'main' }}
-      
+
+      # Run Affected E2E Tests
       - name: Run Affected E2E Tests
         run: npx nx affected --target=e2e --parallel=3 --base=$BASE_BRANCH --head=HEAD
-        env:
-          BASE_BRANCH: ${{ github.base_ref || 'main' }}      
 
       # Deploy Affected Projects to Vercel
       - name: Deploy Affected Projects to Vercel
         run: |
-          affected_apps=$(npx nx affected:apps --base=main --head=HEAD)
+          affected_apps=$(npx nx affected:apps --base=$BASE_BRANCH --head=HEAD)
           for app in $affected_apps; do
             echo "Checking app: $app"
             if [[ "$app" == "sweet-sye-app" || "$app" == "nicoletta-portfolio-app" ]]; then
