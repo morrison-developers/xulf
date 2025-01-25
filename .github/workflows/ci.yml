@@ -14,33 +14,23 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the code
+      # Checkout the code with full history
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Ensure full history for git diff
+          fetch-depth: 0
 
-      # Determine the base branch
+      # Fetch the main branch explicitly if needed
+      - name: Ensure Main Branch Exists
+        run: git fetch origin main:main
+
+      # Set the base branch dynamically
       - name: Determine Base Branch
-        id: base_branch
-        run: |
-          if [ "${{ github.base_ref }}" != "" ]; then
-            echo "BASE_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
-          else
-            echo "BASE_BRANCH=main" >> $GITHUB_ENV
-          fi
-
-      # Fallback if base branch is missing
-      - name: Ensure Base Branch Exists
-        run: |
-          if ! git rev-parse --verify origin/$BASE_BRANCH; then
-            echo "Base branch not found, using HEAD~1 as fallback."
-            echo "BASE_BRANCH=HEAD~1" >> $GITHUB_ENV
-          fi
+        run: echo "BASE_BRANCH=${{ github.base_ref || 'main' }}" >> $GITHUB_ENV
 
       # Debug the base branch
       - name: Debug Base Branch
-        run: echo "Base branch is $BASE_BRANCH"
+        run: git log $BASE_BRANCH --oneline -n 1
 
       # Set up Node.js environment and cache dependencies
       - name: Set up Node.js
@@ -53,26 +43,26 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      # Verify Nx Installation
-      - name: Check Nx Installation
-        run: npx nx --version
-
       # Deploy Affected Projects to Vercel
       - name: Deploy Affected Projects to Vercel
         run: |
-          affected_apps=$(npx nx affected:apps --base=$BASE_BRANCH --head=HEAD)
+          affected_apps=$(npx nx affected:apps --base=$BASE_BRANCH --head=HEAD || echo "")
+          if [[ -z "$affected_apps" ]]; then
+            echo "No affected apps to deploy."
+            exit 0
+          fi
+
           for app in $affected_apps; do
             echo "Checking app: $app"
             if [[ "$app" == "sweet-sye-app" || "$app" == "nicoletta-portfolio-app" ]]; then
               echo "Deploying $app to Vercel..."
-              npx vercel --cwd=apps/$app --token=$VERCEL_TOKEN --prod
+              npx vercel --cwd=apps/$app --token=$VERCEL_TOKEN --prod || {
+                echo "Failed to deploy $app" >&2
+                exit 1
+              }
             else
               echo "Skipping $app as it's not a deployable app."
             fi
           done
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
-      # End Nx Cloud Distributed CI
-      - name: Stop Nx Cloud Distributed CI
-        run: npx nx-cloud stop-ci-run
