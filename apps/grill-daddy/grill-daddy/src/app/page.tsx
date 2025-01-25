@@ -126,18 +126,18 @@ export default function LandingPage() {
     },
   ];
 
+  const about = `Grillio is your ultimate BBQ assistant, designed to make grilling
+          easier and more enjoyable. Whether you're cooking burgers, steaks, or
+          veggies, this app ensures everything is cooked perfectly every time.
+          Developed with care using modern web technologies, Grillio is the
+          ideal companion for both casual and serious grillers.`;
+
   return (
     <StyledLandingPage>
       <h1>Welcome to Grillio</h1>
 
       <div className="section">
-        <p>
-          Grillio is your ultimate BBQ assistant, designed to make grilling
-          easier and more enjoyable. Whether you're cooking burgers, steaks, or
-          veggies, this app ensures everything is cooked perfectly every time.
-          Developed with care using modern web technologies, Grillio is the
-          ideal companion for both casual and serious grillers.
-        </p>
+        <p>{about}</p>
       </div>
 
       <FAQSection title="User FAQ" items={userFAQ} />

@@ -162,7 +162,7 @@ const grillReducer = (state: GrillState, action: GrillAction): GrillState => {
       return initialState;
     }
     default: {
-      console.warn('[Reducer] Unknown action type:', (action as any).type);
+      console.warn('[Reducer] Unknown action type:', (action as GrillAction).type);
       return state;
     }
   }
