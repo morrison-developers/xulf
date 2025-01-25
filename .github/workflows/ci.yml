@@ -35,21 +35,26 @@ jobs:
       - name: Check Nx Installation
         run: npx nx --version
 
-      # Run Affected Lint
       - name: Run Affected Lint
-        run: npx nx affected --target=lint --parallel=3 --base=main --head=HEAD
+        run: npx nx affected --target=lint --parallel=3 --base=$BASE_BRANCH --head=HEAD
+        env:
+          BASE_BRANCH: ${{ github.base_ref || 'main' }}
+      
 
-      # Run Affected Unit Tests
       - name: Run Affected Unit Tests
-        run: npx nx affected --target=test --parallel=3 --base=main --head=HEAD
-
-      # Build Affected Projects
+        run: npx nx affected --target=test --parallel=3 --base=$BASE_BRANCH --head=HEAD
+        env:
+          BASE_BRANCH: ${{ github.base_ref || 'main' }}
+      
       - name: Build Affected Projects
-        run: npx nx affected --target=build --parallel=3 --base=main --head=HEAD
-
-      # Run Affected E2E Tests
+        run: npx nx affected --target=build --parallel=3 --base=$BASE_BRANCH --head=HEAD
+        env:
+          BASE_BRANCH: ${{ github.base_ref || 'main' }}
+      
       - name: Run Affected E2E Tests
-        run: npx nx affected --target=e2e --parallel=3 --base=main --head=HEAD
+        run: npx nx affected --target=e2e --parallel=3 --base=$BASE_BRANCH --head=HEAD
+        env:
+          BASE_BRANCH: ${{ github.base_ref || 'main' }}      
 
       # Deploy Affected Projects to Vercel
       - name: Deploy Affected Projects to Vercel
