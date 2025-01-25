@@ -32,6 +32,10 @@ jobs:
       - name: Debug Base Branch
         run: git log $BASE_BRANCH --oneline -n 1
 
+      # Install jq
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
       # Set up Node.js environment and cache dependencies
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -43,20 +47,37 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
+      # Generate Deployable Apps List
+      - name: Generate Deployable Apps List
+        run: |
+          deployable_apps=$(find apps -type f -name vercel.json -exec jq -r '.name' {} \;)
+          echo "DEPLOYABLE_APPS=$deployable_apps" >> $GITHUB_ENV
+
+      # Debug Deployable Apps
+      - name: Debug Deployable Apps
+        run: |
+          if [[ -z "$DEPLOYABLE_APPS" ]]; then
+            echo "No deployable apps found. Ensure vercel.json files are configured correctly."
+            exit 1
+          else
+            echo "Deployable apps: $DEPLOYABLE_APPS"
+          fi
+        
       # Deploy Affected Projects to Vercel
       - name: Deploy Affected Projects to Vercel
         run: |
           affected_apps=$(npx nx affected:apps --base=$BASE_BRANCH --head=HEAD || echo "")
+
           if [[ -z "$affected_apps" ]]; then
-            echo "No affected apps to deploy."
+            echo "No affected apps detected. Skipping deployment."
             exit 0
           fi
 
           for app in $affected_apps; do
             echo "Checking app: $app"
-            if [[ "$app" == "sweet-sye-app" || "$app" == "nicoletta-portfolio-app" ]]; then
+            if echo "$DEPLOYABLE_APPS" | grep -q "^$app$"; then
               echo "Deploying $app to Vercel..."
-              npx vercel --cwd=apps/$app --token=$VERCEL_TOKEN --prod || {
+              npx vercel --cwd=apps/$app/$app-app --token=$VERCEL_TOKEN --prod || {
                 echo "Failed to deploy $app" >&2
                 exit 1
               }
