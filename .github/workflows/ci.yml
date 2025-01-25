@@ -18,11 +18,25 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Ensure full history for git diff
 
-      # Set the base branch dynamically
-      - name: Set Base Branch
-        run: echo "BASE_BRANCH=${{ github.base_ref || 'main' }}" >> $GITHUB_ENV
+      # Determine the base branch
+      - name: Determine Base Branch
+        id: base_branch
+        run: |
+          if [ "${{ github.base_ref }}" != "" ]; then
+            echo "BASE_BRANCH=${{ github.base_ref }}" >> $GITHUB_ENV
+          else
+            echo "BASE_BRANCH=main" >> $GITHUB_ENV
+          fi
+
+      # Fallback if base branch is missing
+      - name: Ensure Base Branch Exists
+        run: |
+          if ! git rev-parse --verify origin/$BASE_BRANCH; then
+            echo "Base branch not found, using HEAD~1 as fallback."
+            echo "BASE_BRANCH=HEAD~1" >> $GITHUB_ENV
+          fi
 
       # Debug the base branch
       - name: Debug Base Branch
