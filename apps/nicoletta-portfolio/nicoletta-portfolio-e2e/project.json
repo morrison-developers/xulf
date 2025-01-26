@@ -10,7 +10,7 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/nicoletta-portfolio/nicoletta-portfolio-e2e/cypress.config.ts",
-        "devServerTarget": "nicoletta-portfolio-e2e:e2e-ci"
+        "devServerTarget": "nicoletta-portfolio:serve"
       }
     }
   }

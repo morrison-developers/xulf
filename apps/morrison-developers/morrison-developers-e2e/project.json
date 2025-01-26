@@ -10,7 +10,7 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/morrison-developers/morrison-developers-e2e/cypress.config.ts",
-        "devServerTarget": "morrison-developers-e2e:e2e-ci"
+        "devServerTarget": "morrison-developers:serve"
       }
     }
   }

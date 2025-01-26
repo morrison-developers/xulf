@@ -10,7 +10,7 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/sweet-sye/sweet-sye-e2e/cypress.config.ts",
-        "devServerTarget": "sweet-sye-e2e:e2e-ci"
+        "devServerTarget": "sweet-sye:serve"
       }
     }
   }

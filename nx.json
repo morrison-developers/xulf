@@ -97,6 +97,10 @@
     "test": {
       "inputs": ["default", "^production"],
       "cache": true
+    },
+    "serve": {
+      "inputs": ["default", "^production"],
+      "cache": true
     }
   },
   "generators": {
