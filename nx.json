@@ -18,7 +18,10 @@
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/tsconfig.storybook.json"
     ],
-    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
+    "sharedGlobals": [
+      "{workspaceRoot}/.github/workflows/ci.yml",
+      "{workspaceRoot}/.github/workflows/ci.yml"
+    ]
   },
   "nxCloudId": "66f1d696bb580d02cfbff145",
   "plugins": [
@@ -82,6 +85,27 @@
   "targetDefaults": {
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
+    },
+    "e2e-ci": {
+      "inputs": ["default", "^production"],
+      "cache": true,
+      "dependsOn": ["^build"]
+    },
+    "build": {
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "lint": {
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "test": {
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "serve": {
+      "inputs": ["default", "^production"],
+      "cache": true
     }
   },
   "generators": {

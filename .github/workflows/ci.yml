@@ -1,4 +1,4 @@
-name: CI
+name: ci
 
 on:
   push:
@@ -14,70 +14,25 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the code with full history
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Fetch the main branch explicitly if needed
-      - name: Ensure Main Branch Exists
-        run: git fetch origin main:main
+      # This enables task distribution via Nx Cloud
+      # Run this command as early as possible, before dependencies are installed
+      # Learn more at https://nx.dev/ci/reference/nx-cloud-cli#npx-nxcloud-startcirun
+      - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
 
-      # Set the base branch dynamically
-      - name: Determine Base Branch
-        run: echo "BASE_BRANCH=${{ github.base_ref || 'main' }}" >> $GITHUB_ENV
-
-      # Debug the base branch
-      - name: Debug Base Branch
-        run: git log $BASE_BRANCH --oneline -n 1
-
-      # Install jq
-      - name: Install jq
-        run: sudo apt-get install -y jq
-
-      # Set up Node.js environment and cache dependencies
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      # Cache node_modules
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      # Install Dependencies
-      - name: Install Dependencies
-        run: npm install --legacy-peer-deps
+      - run: npm ci --legacy-peer-deps
+      - uses: nrwl/nx-set-shas@v4
 
-      # Generate Deployable Apps List
-      - name: Generate Deployable Apps List
-        run: |
-          deployable_apps=$(find apps -type f -name vercel.json -exec jq -r '.name' {} \; | tr '\n' ' ')
-          echo "DEPLOYABLE_APPS=$deployable_apps" >> $GITHUB_ENV
-
-      # Debug Deployable Apps
-      - name: Debug Deployable Apps
-        run: "echo `Deployable apps: $DEPLOYABLE_APPS`"
-        
-      # Deploy Affected Projects to Vercel
-      - name: Deploy Affected Projects to Vercel
-        run: |
-          affected_apps=$(npx nx affected:apps --base=$BASE_BRANCH --head=HEAD || echo "")
-
-          if [[ -z "$affected_apps" ]]; then
-            echo "No affected apps detected. Skipping deployment."
-            exit 0
-          fi
-
-          for app in $affected_apps; do
-            echo "Checking app: $app"
-            if echo "$DEPLOYABLE_APPS" | grep -q "^$app$"; then
-              echo "Deploying $app to Vercel..."
-              npx vercel --cwd=apps/$app/$app-app --token=$VERCEL_TOKEN --prod || {
-                echo "Failed to deploy $app" >&2
-                exit 1
-              }
-            else
-              echo "Skipping $app as it's not a deployable app."
-            fi
-          done
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
+      # - run: npx nx-cloud record -- echo Hello World
+      # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
+      - run: npx nx affected -t lint test build e2e-ci
