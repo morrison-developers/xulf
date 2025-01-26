@@ -5,5 +5,13 @@
   "tags": [],
   "implicitDependencies": ["sweet-sye"],
   "// targets": "to see all targets run: nx show project sweet-sye-e2e --web",
-  "targets": {}
+  "targets": {
+    "e2e-ci": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/sweet-sye/sweet-sye-e2e/cypress.config.ts",
+        "devServerTarget": "sweet-sye-e2e:e2e-ci"
+      }
+    }
+  }
 }
