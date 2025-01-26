@@ -86,6 +86,11 @@
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
     },
+    "e2e-ci": {
+      "inputs": ["default", "^production"],
+      "cache": true,
+      "dependsOn": ["^build"]
+    },
     "build": {
       "inputs": ["default", "^production"],
       "cache": true
