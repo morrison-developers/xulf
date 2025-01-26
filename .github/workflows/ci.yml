@@ -14,50 +14,45 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the code with full history
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Fetch the main branch explicitly if needed
       - name: Ensure Main Branch Exists
-        run: git fetch origin main:main
+        run: git fetch origin main
 
-      # Set the base branch dynamically
       - name: Determine Base Branch
-        run: echo "BASE_BRANCH=${{ github.base_ref || 'main' }}" >> $GITHUB_ENV
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "BASE_BRANCH=$(git rev-parse origin/main~1)" >> $GITHUB_ENV
+          else
+            echo "BASE_BRANCH=${{ github.base_ref || 'main' }}" >> $GITHUB_ENV
+          fi
 
-      # Debug the base branch
       - name: Debug Base Branch
         run: git log $BASE_BRANCH --oneline -n 1
 
-      # Install jq
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      # Set up Node.js environment and cache dependencies
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      # Install Dependencies
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
-      # Generate Deployable Apps List
       - name: Generate Deployable Apps List
         run: |
           deployable_apps=$(find apps -type f -name vercel.json -exec jq -r '.name' {} \; | tr '\n' ' ')
           echo "DEPLOYABLE_APPS=$deployable_apps" >> $GITHUB_ENV
 
-      # Debug Deployable Apps
       - name: Debug Deployable Apps
-        run: "echo `Deployable apps: $DEPLOYABLE_APPS`"
+        run: 'echo "Deployable apps: \$DEPLOYABLE_APPS"'
         
-      # Deploy Affected Projects to Vercel
       - name: Deploy Affected Projects to Vercel
         run: |
           affected_apps=$(npx nx affected:apps --base=$BASE_BRANCH --head=HEAD || echo "")
@@ -66,6 +61,8 @@ jobs:
             echo "No affected apps detected. Skipping deployment."
             exit 0
           fi
+
+          echo "Affected apps: $affected_apps"
 
           for app in $affected_apps; do
             echo "Checking app: $app"
