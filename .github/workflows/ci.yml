@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
@@ -7,34 +7,15 @@ on:
   pull_request:
 
 permissions:
-  actions: read
   contents: read
+  actions: read
 
 jobs:
-  main:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Ensure Main Branch Exists
-        run: git fetch origin main
-
-      - name: Determine Base Branch
-        run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "BASE_BRANCH=$(git rev-parse origin/main~1)" >> $GITHUB_ENV
-          else
-            echo "BASE_BRANCH=${{ github.base_ref || 'main' }}" >> $GITHUB_ENV
-          fi
-
-      - name: Debug Base Branch
-        run: git log $BASE_BRANCH --oneline -n 1
-
-      - name: Install jq
-        run: sudo apt-get install -y jq
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -45,24 +26,32 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Run Linting
+        run: npm run lint
+
+      - name: Run Unit Tests
+        run: npm run test -- --coverage
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: Generate Deployable Apps List
         run: |
           deployable_apps=$(find apps -type f -name vercel.json -exec jq -r '.name' {} \; | tr '\n' ' ')
           echo "DEPLOYABLE_APPS=$deployable_apps" >> $GITHUB_ENV
 
-      - name: Debug Deployable Apps
-        run: 'echo "Deployable apps: \$DEPLOYABLE_APPS"'
-        
       - name: Deploy Affected Projects to Vercel
         run: |
-          affected_apps=$(npx nx affected:apps --base=$BASE_BRANCH --head=HEAD || echo "")
+          affected_apps=$(npx nx affected:apps --base=main --head=HEAD || echo "")
 
           if [[ -z "$affected_apps" ]]; then
             echo "No affected apps detected. Skipping deployment."
             exit 0
           fi
-
-          echo "Affected apps: $affected_apps"
 
           for app in $affected_apps; do
             echo "Checking app: $app"
@@ -78,3 +67,12 @@ jobs:
           done
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+  post-deployment-verification:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify Deployment
+        run: |
+          echo "Checking Vercel deployment health..."
+          # Add health-check scripts or ping the deployed app's endpoint.
