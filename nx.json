@@ -31,7 +31,8 @@
         "startTargetName": "start",
         "buildTargetName": "build",
         "devTargetName": "dev",
-        "serveStaticTargetName": "serve-static"
+        "serveStaticTargetName": "serve-static",
+        "serveTargetName": "serve"
       }
     },
     {

@@ -11,7 +11,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "apps/sweet-sye/sweet-sye-app/$1"
+      "dest": "/$1"
     }
   ]
 }

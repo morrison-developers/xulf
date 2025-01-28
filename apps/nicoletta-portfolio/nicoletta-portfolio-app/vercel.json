@@ -11,7 +11,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "apps/nicoletta-portfolio/nicoletta-portfolio-app/$1"
+      "dest": "/$1"
     }
   ]
 }

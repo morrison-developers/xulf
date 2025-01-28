@@ -1,7 +1,7 @@
 {
   "name": "nicoletta-portfolio",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/nicoletta-portfolio",
+  "sourceRoot": "apps/nicoletta-portfolio/nicoletta-portfolio-app",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -11,10 +11,17 @@
       "options": {
         "outputPath": "dist/apps/nicoletta-portfolio",
         "root": "apps/nicoletta-portfolio",
-        "config": "next.config.js"
+        "nextConfig": "apps/nicoletta-portfolio/nicoletta-portfolio-app/next.config.js"
       },
       "configurations": {
         "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "nicoletta-portfolio:build",
+        "dev": true
       }
     },
     "deploy": {

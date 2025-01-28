@@ -1,7 +1,7 @@
 {
   "name": "sweet-sye",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/sweet-sye",
+  "sourceRoot": "apps/sweet-sye/sweet-sye-app",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -11,10 +11,17 @@
       "options": {
         "outputPath": "dist/apps/sweet-sye",
         "root": "apps/sweet-sye",
-        "config": "next.config.js"
+        "nextConfig": "apps/sweet-sye/sweet-sye-app/next.config.js"
       },
       "configurations": {
         "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "sweet-sye:build",
+        "dev": true
       }
     },
     "deploy": {
