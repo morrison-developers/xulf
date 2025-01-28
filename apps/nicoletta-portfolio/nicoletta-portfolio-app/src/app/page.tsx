@@ -31,7 +31,7 @@ const Container = styled.div`
   height: 100vh;
   text-align: center;
   background-color: #f7f8fc;
-  padding: 20px;
+  padding: 1rem;
   font-family: Arial, sans-serif;
 `;
 
@@ -39,13 +39,13 @@ const Heading = styled.h1`
   font-size: 2.5rem;
   font-weight: bold;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 `;
 
 const Subheading = styled.p`
   font-size: 1.2rem;
   color: #555;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 `;
 
 const Button = styled.button`
@@ -54,7 +54,7 @@ const Button = styled.button`
   color: #fff;
   background-color: #007bff;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.25rem;
   padding: 10px 20px;
   cursor: pointer;
   text-decoration: none;
