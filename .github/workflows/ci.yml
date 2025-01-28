@@ -33,12 +33,3 @@ jobs:
 
       # Run affected tasks (lint, test, build, e2e)
       - run: npx nx affected -t lint test build e2e-ci
-
-  label:
-    name: "Apply Labels"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/labeler@v4
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
