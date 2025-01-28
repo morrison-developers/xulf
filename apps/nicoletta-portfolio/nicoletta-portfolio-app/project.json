@@ -16,18 +16,6 @@
       "configurations": {
         "production": {}
       }
-    },
-    "deploy": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npx vercel --cwd=apps/nicoletta-portfolio/nicoletta-portfolio-app --token=$VERCEL_TOKEN --prod"
-      }
-    },
-    "serve": {
-      "executor": "@nrwl/next:server",
-      "options": {
-        "buildTarget": "my-app:build"
-      }
     }
   }
 }

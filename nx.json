@@ -104,7 +104,7 @@
       "cache": true
     },
     "serve": {
-      "inputs": ["default", "^production"],
+      "inputs": ["default"],
       "cache": true
     }
   },
