@@ -50,6 +50,7 @@ Xulf is a low-code (potentially no-code) platform built for creating internal we
 6. **Future Plans**:
    - Transition to a visual, drag-and-drop UI builder.
    - Add reusable backend services for authentication, file storage, and data management.
+   - Store built sites as json to generate the save file for a site.
 
 </details>
 
