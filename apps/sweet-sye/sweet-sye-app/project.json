@@ -1,7 +1,7 @@
 {
   "name": "sweet-sye",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/sweet-sye",
+  "sourceRoot": "apps/sweet-sye/sweet-sye-app",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -9,8 +9,8 @@
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/sweet-sye",
-        "root": "apps/sweet-sye",
+        "outputPath": "dist/apps/sweet-sye/sweet-sye-app",
+        "root": "apps/sweet-sye/sweet-sye-app",
         "config": "next.config.js"
       },
       "configurations": {
@@ -21,6 +21,12 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "npx vercel --cwd=apps/sweet-sye/sweet-sye-app --token=$VERCEL_TOKEN --prod"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "my-app:build"
       }
     }
   }

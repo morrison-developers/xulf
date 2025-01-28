@@ -1,7 +1,7 @@
 {
   "name": "nicoletta-portfolio",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/nicoletta-portfolio",
+  "sourceRoot": "apps/nicoletta-portfolio/nicoletta-portfolio-app",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -9,8 +9,8 @@
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/nicoletta-portfolio",
-        "root": "apps/nicoletta-portfolio",
+        "outputPath": "dist/apps/nicoletta-portfolio/nicoletta-portfolio-app",
+        "root": "apps/nicoletta-portfolio/nicoletta-portfolio-app",
         "config": "next.config.js"
       },
       "configurations": {
@@ -21,6 +21,12 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "npx vercel --cwd=apps/nicoletta-portfolio/nicoletta-portfolio-app --token=$VERCEL_TOKEN --prod"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "my-app:build"
       }
     }
   }

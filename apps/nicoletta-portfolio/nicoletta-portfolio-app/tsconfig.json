@@ -30,7 +30,8 @@
     "../../dist/apps/nicoletta-portfolio/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts",
-    "../../../dist/apps/nicoletta-portfolio/.next/types/**/*.ts"
+    "../../../dist/apps/nicoletta-portfolio/.next/types/**/*.ts",
+    "../../../dist/apps/nicoletta-portfolio/nicoletta-portfolio-app/.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

@@ -3,15 +3,9 @@
   "name": "nicoletta-portfolio",
   "builds": [
     {
-      "src": "apps/nicoletta-portfolio/nicoletta-portfolio-app/next.config.js",
+      "src": "apps/nicoletta-portfolio/nicoletta-portfolio-app",
       "use": "@vercel/next"
     }
   ],
-  "framework": "nextjs",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "apps/nicoletta-portfolio/nicoletta-portfolio-app/$1"
-    }
-  ]
+  "framework": "nextjs"
 }
