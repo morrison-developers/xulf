@@ -39,6 +39,7 @@ const MainContent = styled.div`
   @media (max-width: 768px) {
     padding-right: 0;
     height: calc(100vh - 40vh); /* Subtract Sidebar height */
+    margin-bottom: 200px;
   }
 `;
 
@@ -59,6 +60,7 @@ function Index() {
 
   // ✅ Avoid rendering until `gridSize` is set
   if (gridSize === null) return null;
+
 
   return (
     <Layout>

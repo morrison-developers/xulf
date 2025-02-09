@@ -9,6 +9,10 @@ const StyledGridContainer = styled.div`
   justify-content: center;
   width: fit-content;
 
+  @media (max-width: 768px) {
+    margin-right: -75px;
+  }
+
   grid-template-areas:
     "top top"
     "left grid"; /* ✅ Decorations are correctly positioned */
@@ -24,7 +28,11 @@ const TopDecorations = styled.div<{gridSize: number}>`
   gap: 8px;
   width: 400px;
   h3 {
-    align-self: flex-start;
+    align-self: center;
+
+    @media (max-width: 768px) {
+      align-self: flex-start;
+    }
     font-size: ${({ gridSize }) => gridSize / 12}px
   }
 `;
@@ -32,14 +40,20 @@ const TopDecorations = styled.div<{gridSize: number}>`
 const LeftDecorations = styled.div<{gridSize: number}>`
   grid-area: left;
   display: flex;
-  flex-direction: row; /* ✅ Places Side Team Name & Numbers in a Row */
+  flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   gap: 8px;
   height: 400px;
   h3 {
-    margin-top: 5rem;
-    align-self: flex-start;
+    align-self: center;
+    margin-right: -100px;
+
+    @media (max-width: 768px) {
+      align-self: flex-start;
+      margin-right: -66px;
+      margin-top: 100px
+    }
     font-size: ${({ gridSize }) => gridSize / 12}px
   }
 `;
