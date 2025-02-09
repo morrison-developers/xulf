@@ -3,13 +3,28 @@ import { UserProps } from "./User";
 import useSuperBowlOdds from "../hooks/useSuperBowlOdds"; // Import the odds hook
 
 const SidebarContainer = styled.div`
-  width: 250px;
-  padding: 16px;
   background: #f4f4f4;
   border-left: 2px solid #ddd;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 16px;
+  position: absolute;
+
+  /* ✅ Fixed width & height, scrollable when content overflows */
+  width: 30vw;
+  height: 100vh;
+  right: 0;
+  overflow-y: auto; /* ✅ Allows scrolling when content exceeds height */
+
+  /* ✅ Full bottom on mobile */
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: 40vh; /* ✅ Set fixed height so it doesn't take full screen */
+    border-left: none;
+    border-top: 2px solid #ddd;
+    bottom: 0;
+  }
 `;
 
 const Sidebar = ({ user }: { user: UserProps | null }) => {

@@ -11,7 +11,7 @@ const StyledGrid = styled.div`
   gap: 4px;
 `;
 
-export function Grid() {
+const Grid = ({ setSelectedUser }: { setSelectedUser: (user: UserProps | null) => void }) => {
   const [users, setUsers] = useState<UserProps[]>(
     Array.from({ length: 100 }, (_, index) => ({
       id: index + 1,
@@ -24,7 +24,7 @@ export function Grid() {
   return (
     <StyledGrid>
       {users.map((user) => (
-        <User key={user.id} {...user} />
+        <User key={user.id} {...user} onClick={() => setSelectedUser(user)} />
       ))}
     </StyledGrid>
   );
