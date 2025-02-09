@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from "react";
-import Grid, { GRID_SIZE } from "./components/Grid";
+import { useState, useEffect } from "react";
+import Grid from "./components/Grid";
 import GridDecorations from "./components/GridDecorations";
 import Sidebar from "./components/Sidebar";
 import { UserProps } from "./components/User";
@@ -44,6 +44,21 @@ const MainContent = styled.div`
 
 function Index() {
   const [selectedUser, setSelectedUser] = useState<UserProps | null>(null);
+  const [gridSize, setGridSize] = useState<number | null>(null); // ✅ Start with null
+
+  useEffect(() => {
+    // ✅ Ensure `window` is available
+    const updateGridSize = () => {
+      setGridSize(window.innerWidth > 768 ? 400 : 200);
+    };
+
+    updateGridSize(); // ✅ Set grid size on mount
+    window.addEventListener("resize", updateGridSize);
+    return () => window.removeEventListener("resize", updateGridSize);
+  }, []);
+
+  // ✅ Avoid rendering until `gridSize` is set
+  if (gridSize === null) return null;
 
   return (
     <Layout>
@@ -53,9 +68,9 @@ function Index() {
           rowMarkers={rowMarkers}
           topTeam={topTeam}
           sideTeam={sideTeam}
-          gridSize={GRID_SIZE} // ✅ Now all decorations match the grid size
+          gridSize={gridSize}
         >
-          <Grid setSelectedUser={setSelectedUser} />
+          <Grid setSelectedUser={setSelectedUser} gridSize={gridSize} />
         </GridDecorations>
       </MainContent>
 

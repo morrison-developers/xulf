@@ -2,16 +2,19 @@ import styled from "styled-components";
 import { useState } from "react";
 import User, { UserProps } from "./User";
 
-const GRID_SIZE = 40; // Controls the size of each cell in pixels
+interface GridProps {
+  gridSize: number;
+  setSelectedUser: (user: UserProps | null) => void;
+}
 
-const StyledGrid = styled.div`
+const StyledGrid = styled.div<{ gridSize: number }>`
   display: grid;
-  grid-template-columns: repeat(10, ${GRID_SIZE}px);
-  grid-template-rows: repeat(10, ${GRID_SIZE}px);
+  grid-template-columns: repeat(10, ${({ gridSize }) => gridSize / 10}px);
+  grid-template-rows: repeat(10, ${({ gridSize }) => gridSize / 10}px);
   gap: 4px;
 `;
 
-const Grid = ({ setSelectedUser }: { setSelectedUser: (user: UserProps | null) => void }) => {
+const Grid = ({ gridSize, setSelectedUser }: GridProps) => {
   const [users, setUsers] = useState<UserProps[]>(
     Array.from({ length: 100 }, (_, index) => ({
       id: index + 1,
@@ -22,7 +25,7 @@ const Grid = ({ setSelectedUser }: { setSelectedUser: (user: UserProps | null) =
   );
 
   return (
-    <StyledGrid>
+    <StyledGrid gridSize={gridSize}> {/* ✅ Pass gridSize */}
       {users.map((user) => (
         <User key={user.id} {...user} onClick={() => setSelectedUser(user)} />
       ))}
@@ -31,4 +34,3 @@ const Grid = ({ setSelectedUser }: { setSelectedUser: (user: UserProps | null) =
 }
 
 export default Grid;
-export { GRID_SIZE }; // Export for use in GridDecorations

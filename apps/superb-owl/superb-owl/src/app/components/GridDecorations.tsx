@@ -5,7 +5,7 @@ const StyledGridContainer = styled.div`
   grid-template-columns: auto 1fr; /* Left Decorations | Grid */
   grid-template-rows: auto 1fr; /* Top Decorations | Grid */
   gap: 4px;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   width: fit-content;
 
@@ -14,22 +14,34 @@ const StyledGridContainer = styled.div`
     "left grid"; /* ✅ Decorations are correctly positioned */
 `;
 
-const TopDecorations = styled.div`
+const TopDecorations = styled.div<{gridSize: number}>`
   grid-area: top;
+  grid-column: 2;
   display: flex;
   flex-direction: column; /* ✅ Keeps Top Decorations stacked */
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: center;
   gap: 8px;
+  width: 400px;
+  h3 {
+    align-self: flex-start;
+    font-size: ${({ gridSize }) => gridSize / 12}px
+  }
 `;
 
-const LeftDecorations = styled.div`
+const LeftDecorations = styled.div<{gridSize: number}>`
   grid-area: left;
   display: flex;
   flex-direction: row; /* ✅ Places Side Team Name & Numbers in a Row */
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 8px;
+  height: 400px;
+  h3 {
+    margin-top: 5rem;
+    align-self: flex-start;
+    font-size: ${({ gridSize }) => gridSize / 12}px
+  }
 `;
 
 const RotatedTeamName = styled.h3`
@@ -48,7 +60,7 @@ const MarkerColumn = styled.div`
   gap: 4px;
 `;
 
-const Marker = styled.div`
+const Marker = styled.div<{gridSize: number}>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,15 +68,16 @@ const Marker = styled.div`
   background: #222;
   color: white;
   border: 1px solid #fff;
-  width: 40px;
-  height: 40px;
+  width: ${({ gridSize }) => gridSize / 10}px;
+  height: ${({ gridSize }) => gridSize / 10}px;
+;
 `;
 
 const GridContainer = styled.div`
   grid-area: grid;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: flext-start;
 `;
 
 type GridDecorationsProps = {
@@ -80,21 +93,22 @@ const GridDecorations = ({ columnMarkers, rowMarkers, topTeam, sideTeam, gridSiz
   return (
     <StyledGridContainer>
       {/* ✅ Top Decorations: Team Name + Column Markers (Stacked) */}
-      <TopDecorations>
-        <h3 style={{ marginRight: '9rem' }}>{topTeam}</h3>
+      <></>
+      <TopDecorations gridSize={gridSize}>
+        <h3>{topTeam}</h3>
         <MarkerRow>
           {columnMarkers.map((col, index) => (
-            <Marker key={`col-${index}`}>{col}</Marker>
+            <Marker key={`col-${index}`} gridSize={gridSize} >{col}</Marker>
           ))}
         </MarkerRow>
       </TopDecorations>
 
       {/* ✅ Left Decorations: Side Team Name + Row Markers (In a Row) */}
-      <LeftDecorations>
+      <LeftDecorations gridSize={gridSize}>
         <RotatedTeamName>{sideTeam}</RotatedTeamName>
         <MarkerColumn>
           {rowMarkers.map((row, index) => (
-            <Marker key={`row-${index}`}>{row}</Marker>
+            <Marker key={`row-${index}`}gridSize={gridSize} >{row}</Marker>
           ))}
         </MarkerColumn>
       </LeftDecorations>
