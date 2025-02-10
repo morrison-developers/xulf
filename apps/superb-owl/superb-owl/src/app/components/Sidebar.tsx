@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { UserProps } from "./User";
-import useSuperBowlOdds from "../hooks/useSuperBowlOdds"; // Import the odds hook
+import { Owner } from "../types";
+import { useSuperBowlOdds } from "../hooks/useSuperBowlOdds";
+import { useEffect, useState } from "react";
 
 const SidebarContainer = styled.div`
   background: #f4f4f4;
@@ -10,63 +11,105 @@ const SidebarContainer = styled.div`
   gap: 12px;
   padding: 16px;
   position: absolute;
-
-  /* ✅ Fixed width & height, scrollable when content overflows */
   width: 30vw;
   height: 100vh;
   right: 0;
-  overflow-y: auto; /* ✅ Allows scrolling when content exceeds height */
+  overflow-y: auto;
 
-  /* ✅ Full bottom on mobile */
   @media (max-width: 768px) {
     width: 100vw;
-    height: 40vh; /* ✅ Set fixed height so it doesn't take full screen */
+    height: 50vh;
     border-left: none;
     border-top: 2px solid #ddd;
     bottom: 0;
+    margin-bottom: 60px;
   }
 `;
 
-const Sidebar = ({ user }: { user: UserProps | null }) => {
-  const { data: game, isLoading, error } = useSuperBowlOdds();
+const Sidebar = ({
+  user,
+}: {
+  user: Owner | null;
+  updateOwner: (id: number, updates: Partial<Owner>) => void;
+}) => {
+  const { data: gameData, isLoading, error } = useSuperBowlOdds();
+  const [previousPeriod, setPreviousPeriod] = useState<number | null>(null);
+  const [quarterEnded, setQuarterEnded] = useState(false);
+  const [firstApiCall, setFirstApiCall] = useState(false); // ✅ Track first API call completion
+
+  useEffect(() => {
+    if (!gameData) return;
+
+    // ✅ Ensure we don't show quarter-ended message on the first API response
+    if (!firstApiCall) {
+      setPreviousPeriod(gameData.period); // Set initial period after first call
+      setFirstApiCall(true);
+      return;
+    }
+
+    // ✅ Detect quarter transition **only after the first API call**
+    if (previousPeriod !== null && gameData.period > previousPeriod) {
+      console.log(`🏆 Quarter ${previousPeriod} has ended!`);
+      setQuarterEnded(true);
+      setTimeout(() => setQuarterEnded(false), 5000); // Reset flag after 5s
+    }
+
+    setPreviousPeriod(gameData.period); // Update period after API response
+  }, [gameData?.period]);
 
   return (
     <SidebarContainer>
       {/* User Details */}
-      <h3>📌 Selected User</h3>
       {user ? (
         <>
-          <p>Name: {user.name}</p>
-          <p>Status: {user.status}</p>
-          <p>ID: {user.id}</p>
+          <h3>🏆 {user.name}</h3>
+          <p>Initials: {user.initials}</p>
+          <p>Quarters Won: {user.quartersWon}</p>
         </>
       ) : (
-        <p>Select a user</p>
+        <p>Select a box to see owner details.</p>
       )}
 
-      {/* Super Bowl Game Data */}
       <h3>🏈 Super Bowl 2025</h3>
+
+      {/* Loading & Error Handling */}
       {isLoading ? (
         <p>Loading game data...</p>
       ) : error ? (
         <p>Error loading game data.</p>
-      ) : game ? (
+      ) : gameData ? (
         <>
-          <p>
-            <strong>{game.home_team}</strong> vs. <strong>{game.away_team}</strong>
-          </p>
-          <p>🕒 {new Date(game.commence_time).toLocaleString()}</p>
+          {/* Team Names */}
+          <h2>
+            <span style={{ color: "#e31837" }}>{gameData.away_team}</span> vs.{" "}
+            <span style={{ color: "#06424d" }}>{gameData.home_team}</span>
+          </h2>
 
-          <h4>📈 Live Scores</h4>
-          {game.scores && game.scores?.length > 0 ? (
-            game.scores.map((score) => (
-              <p key={score.name}>
-                {score.name}: {score.score}
-              </p>
-            ))
-          ) : (
-            <p>No live scores yet.</p>
-          )}
+          {/* Kickoff Time */}
+          <p>🕒 Kickoff: {new Date(gameData.commence_time).toLocaleString()}</p>
+
+          {/* Live Scores & Period */}
+          <h4>📊 Live Score</h4>
+          {gameData.scores.map((score) => (
+            <p key={score.name}>
+              <strong>{score.name}:</strong> {score.score} pts
+            </p>
+          ))}
+          <p>⏳ Current Quarter: Q{gameData.period > 4 ? "OT" : gameData.period}</p>
+
+          {/* ✅ Quarter-end message (Hidden on initial load) */}
+          {quarterEnded && <p>🏆 Quarter {previousPeriod} has ended!</p>}
+
+          {/* Venue & Weather */}
+          <h4>📍 Venue</h4>
+          <p>🏟️ Caesars Superdome, New Orleans</p>
+          <h4>🌦️ Weather</h4>
+          <p>🌡️ 76°F | 🌧️ 65% Chance of Rain | 💨 Wind Gusts: 13 mph</p>
+
+          {/* Game Officials */}
+          <h4>👨‍⚖️ Officials</h4>
+          <p>🛑 Referee: Ronald Torbert</p>
+          <p>⚖️ Head Linesman: Max Causey</p>
         </>
       ) : (
         <p>No Super Bowl game found.</p>

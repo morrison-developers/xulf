@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import Grid from "./components/Grid";
 import GridDecorations from "./components/GridDecorations";
 import Sidebar from "./components/Sidebar";
-import { UserProps } from "./components/User";
+import { Owner } from "./types";
 import styled from "styled-components";
+import { useSuperBowlOdds } from "./hooks/useSuperBowlOdds";
 
 const columnMarkers = [5, 2, 1, 0, 6, 9, 7, 8, 3, 4];
 const rowMarkers = [1, 6, 7, 8, 0, 3, 9, 2, 5, 4];
@@ -17,8 +18,8 @@ const Layout = styled.div`
   display: flex;
   height: 100vh;
   width: 100vw;
+  position: fixed;
 
-  /* ✅ Mobile: Stack Sidebar below Grid */
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -29,38 +30,64 @@ const MainContent = styled.div`
   align-items: center;
   justify-content: center;
   overflow: auto;
-
-  /* ✅ On Desktop: Takes full height & centers, minus Sidebar width */
   flex: 1;
   height: 100vh;
   padding-right: 30vw; /* Sidebar width offset */
 
-  /* ✅ On Mobile: Centers horizontally, positioned above the Sidebar */
   @media (max-width: 768px) {
     padding-right: 0;
-    height: calc(100vh - 40vh); /* Subtract Sidebar height */
-    margin-bottom: 200px;
+    height: calc(100vh - 40vh);
+    margin-bottom: 300px;
   }
 `;
 
 function Index() {
-  const [selectedUser, setSelectedUser] = useState<UserProps | null>(null);
-  const [gridSize, setGridSize] = useState<number | null>(null); // ✅ Start with null
+  const [selectedUser, setSelectedUser] = useState<Owner | null>(null);
+  
+  const { data: gameData, isLoading, error } = useSuperBowlOdds();
+  
+  const [owners, setOwners] = useState<Owner[]>(() => {
+    if (typeof window !== "undefined") {
+      const savedOwners = localStorage.getItem("owners");
+      return savedOwners ? JSON.parse(savedOwners) : [
+        { id: 1, initials: "KLC", name: "Mom", quartersWon: 0, ownsCurrentBox: false },
+        { id: 2, initials: "NDY", name: "Andy", quartersWon: 0, ownsCurrentBox: false },
+        { id: 3, initials: "NIC", name: "Nicoletta", quartersWon: 0, ownsCurrentBox: false },
+        { id: 4, initials: "RAM", name: "Rebecca", quartersWon: 0, ownsCurrentBox: false },
+        { id: 5, initials: "SAM", name: "Steven", quartersWon: 0, ownsCurrentBox: false },
+        { id: 6, initials: "KRM", name: "Dad", quartersWon: 0, ownsCurrentBox: false },
+      ];
+    }
+    return [];
+  });
+
+  const [gridSize, setGridSize] = useState<number | null>(null);
 
   useEffect(() => {
-    // ✅ Ensure `window` is available
-    const updateGridSize = () => {
-      setGridSize(window.innerWidth > 768 ? 400 : 200);
-    };
+    if (typeof window !== "undefined") {
+      const updateGridSize = () => {
+        setGridSize(window.innerWidth > 768 ? 400 : 200);
+      };
 
-    updateGridSize(); // ✅ Set grid size on mount
-    window.addEventListener("resize", updateGridSize);
-    return () => window.removeEventListener("resize", updateGridSize);
+      updateGridSize();
+      window.addEventListener("resize", updateGridSize);
+      return () => window.removeEventListener("resize", updateGridSize);
+    }
   }, []);
 
-  // ✅ Avoid rendering until `gridSize` is set
-  if (gridSize === null) return null;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("owners", JSON.stringify(owners));
+    }
+  }, [owners]);
 
+  const updateOwner = (id: number, updates: Partial<Owner>) => {
+    setOwners((prev) =>
+      prev.map((owner) => (owner.id === id ? { ...owner, ...updates } : owner))
+    );
+  };
+
+  if (gridSize === null) return null;
 
   return (
     <Layout>
@@ -72,11 +99,16 @@ function Index() {
           sideTeam={sideTeam}
           gridSize={gridSize}
         >
-          <Grid setSelectedUser={setSelectedUser} gridSize={gridSize} />
+          <Grid 
+            setSelectedUser={setSelectedUser} 
+            gridSize={gridSize} 
+            owners={owners}
+            gameData={gameData}
+          />
         </GridDecorations>
       </MainContent>
 
-      <Sidebar user={selectedUser} />
+      <Sidebar user={selectedUser} updateOwner={updateOwner} />
     </Layout>
   );
 }
