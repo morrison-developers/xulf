@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { Owner } from "../types";
 import { useSuperBowlOdds } from "../hooks/useSuperBowlOdds";
-import { useEffect, useState } from "react";
 
 const SidebarContainer = styled.div`
   background: #f4f4f4;
@@ -28,47 +28,92 @@ const SidebarContainer = styled.div`
 
 const Sidebar = ({
   user,
+  gridAssignments,
+  owners,
 }: {
   user: Owner | null;
+  gridAssignments: string[][];
+  owners: Owner[];
   updateOwner: (id: number, updates: Partial<Owner>) => void;
 }) => {
   const { data: gameData, isLoading, error } = useSuperBowlOdds();
   const [previousPeriod, setPreviousPeriod] = useState<number | null>(null);
   const [quarterEnded, setQuarterEnded] = useState(false);
-  const [firstApiCall, setFirstApiCall] = useState(false); // ✅ Track first API call completion
+  const [firstApiCall, setFirstApiCall] = useState(false);
+  const [winners, setWinners] = useState<{ [key: string]: Owner | null }>(() => {
+    if (typeof window !== "undefined") {
+      const storedWinners = localStorage.getItem("quarterWinners");
+      const parsedWinners = storedWinners ? JSON.parse(storedWinners) : {};
+  
+      // ✅ Ensure Q1 is always "Dad"
+      return { Q1: { id: 6, initials: "KRM", name: "Dad", quartersWon: 0, ownsCurrentBox: false }, ...parsedWinners };
+    }
+    
+    return { Q1: { id: 6, initials: "KRM", name: "Dad", quartersWon: 0, ownsCurrentBox: false } };
+  });
+  
 
   useEffect(() => {
     if (!gameData) return;
 
-    // ✅ Ensure we don't show quarter-ended message on the first API response
     if (!firstApiCall) {
-      setPreviousPeriod(gameData.period); // Set initial period after first call
+      setPreviousPeriod(gameData.period);
       setFirstApiCall(true);
       return;
     }
 
-    // ✅ Detect quarter transition **only after the first API call**
     if (previousPeriod !== null && gameData.period > previousPeriod) {
       console.log(`🏆 Quarter ${previousPeriod} has ended!`);
       setQuarterEnded(true);
-      setTimeout(() => setQuarterEnded(false), 5000); // Reset flag after 5s
+      setTimeout(() => setQuarterEnded(false), 5000);
+
+      // Determine the winner for the ended quarter
+      const winner = getCurrentWinningOwner();
+      if (winner && !winners[`Q${previousPeriod}`]) {
+        const updatedWinners = { ...winners, [`Q${previousPeriod}`]: winner };
+        setWinners(updatedWinners);
+        localStorage.setItem("quarterWinners", JSON.stringify(updatedWinners));
+      }
     }
 
-    setPreviousPeriod(gameData.period); // Update period after API response
+    setPreviousPeriod(gameData.period);
   }, [gameData?.period]);
+
+  const getCurrentWinningOwner = (): Owner | null => {
+    if (!gameData || !gridAssignments) return null;
+
+    const homeScore = gameData.scores?.find((s) => s.name === gameData.home_team)?.score ?? 0;
+    const awayScore = gameData.scores?.find((s) => s.name === gameData.away_team)?.score ?? 0;
+
+    const homeLastDigit = homeScore % 10;
+    const awayLastDigit = awayScore % 10;
+
+    const columnMarkers = [5, 2, 1, 0, 6, 9, 7, 8, 3, 4];
+    const rowMarkers = [1, 6, 7, 8, 0, 3, 9, 2, 5, 4];
+
+    const mappedHomeDigit = columnMarkers.indexOf(homeLastDigit);
+    const mappedAwayDigit = rowMarkers.indexOf(awayLastDigit);
+
+    if (mappedHomeDigit !== -1 && mappedAwayDigit !== -1) {
+      const winningInitials = gridAssignments[mappedAwayDigit][mappedHomeDigit];
+      return owners.find((owner) => owner.initials === winningInitials) || null;
+    }
+
+    return null;
+  };
 
   return (
     <SidebarContainer>
-      {/* User Details */}
-      {user ? (
-        <>
-          <h3>🏆 {user.name}</h3>
-          <p>Initials: {user.initials}</p>
-          <p>Quarters Won: {user.quartersWon}</p>
-        </>
-      ) : (
-        <p>Select a box to see owner details.</p>
-      )}
+      {/* 🏆 **Winning Quarters Section** */}
+      <h1>Winning Quarters</h1>
+        <h2>Q1: <strong>Dad</strong></h2>
+        <h2>Q2: <strong>Steven</strong></h2>
+        <h2>Q3: <strong>Andy</strong></h2>
+        <h2>Q4: <strong>Steven</strong></h2>
+
+      <h1>TRUMP vs SWIFT</h1>
+      <h2>TRUMP: <strong>1</strong></h2>
+      <h2>SWIFT: <strong>1</strong></h2>
 
       <h3>🏈 Super Bowl 2025</h3>
 

@@ -13,6 +13,19 @@ const rowMarkers = [1, 6, 7, 8, 0, 3, 9, 2, 5, 4];
 const topTeam = "Kansas City Chiefs";
 const sideTeam = "Philadelphia Eagles";
 
+const gridAssignments = [
+  ["KLC", "KRM", "KRM", "NIC", "NDY", "NIC", "SAM", "KRM", "KRM", "KLC"],
+  ["NDY", "KLC", "KRM", "KRM", "NIC", "KRM", "NDY", "KRM", "KLC", "NDY"],
+  ["NIC", "NDY", "KLC", "KRM", "SAM", "KRM", "NIC", "KLC", "NDY", "NIC"],
+  ["SAM", "NIC", "NDY", "KLC", "RAM", "RAM", "NDY", "RAM", "RAM", "SAM"],
+  ["KRM", "SAM", "NIC", "RAM", "KLC", "NDY", "RAM", "KRM", "SAM", "RAM"],
+  ["KRM", "NIC", "SAM", "RAM", "NDY", "KLC", "NIC", "SAM", "NIC", "RAM"],
+  ["KRM", "SAM", "KRM", "RAM", "NIC", "NDY", "KLC", "KRM", "SAM", "RAM"],
+  ["SAM", "NIC", "KLC", "NDY", "RAM", "SAM", "NDY", "KLC", "RAM", "SAM"],
+  ["RAM", "KLC", "NDY", "NIC", "SAM", "RAM", "SAM", "RAM", "KLC", "NIC"],
+  ["KLC", "NDY", "NIC", "SAM", "NDY", "NIC", "RAM", "SAM", "NDY", "KLC"],
+];
+
 /* ✅ New Layout to keep Grid & Sidebar separate */
 const Layout = styled.div`
   display: flex;
@@ -43,20 +56,21 @@ const MainContent = styled.div`
 
 function Index() {
   const [selectedUser, setSelectedUser] = useState<Owner | null>(null);
-  
   const { data: gameData, isLoading, error } = useSuperBowlOdds();
-  
+
   const [owners, setOwners] = useState<Owner[]>(() => {
     if (typeof window !== "undefined") {
       const savedOwners = localStorage.getItem("owners");
-      return savedOwners ? JSON.parse(savedOwners) : [
-        { id: 1, initials: "KLC", name: "Mom", quartersWon: 0, ownsCurrentBox: false },
-        { id: 2, initials: "NDY", name: "Andy", quartersWon: 0, ownsCurrentBox: false },
-        { id: 3, initials: "NIC", name: "Nicoletta", quartersWon: 0, ownsCurrentBox: false },
-        { id: 4, initials: "RAM", name: "Rebecca", quartersWon: 0, ownsCurrentBox: false },
-        { id: 5, initials: "SAM", name: "Steven", quartersWon: 0, ownsCurrentBox: false },
-        { id: 6, initials: "KRM", name: "Dad", quartersWon: 0, ownsCurrentBox: false },
-      ];
+      return savedOwners
+        ? JSON.parse(savedOwners)
+        : [
+            { id: 1, initials: "KLC", name: "Mom", quartersWon: 0, ownsCurrentBox: false },
+            { id: 2, initials: "NDY", name: "Andy", quartersWon: 0, ownsCurrentBox: false },
+            { id: 3, initials: "NIC", name: "Nicoletta", quartersWon: 0, ownsCurrentBox: false },
+            { id: 4, initials: "RAM", name: "Rebecca", quartersWon: 0, ownsCurrentBox: false },
+            { id: 5, initials: "SAM", name: "Steven", quartersWon: 0, ownsCurrentBox: false },
+            { id: 6, initials: "KRM", name: "Dad", quartersWon: 0, ownsCurrentBox: false },
+          ];
     }
     return [];
   });
@@ -99,16 +113,12 @@ function Index() {
           sideTeam={sideTeam}
           gridSize={gridSize}
         >
-          <Grid 
-            setSelectedUser={setSelectedUser} 
-            gridSize={gridSize} 
-            owners={owners}
-            gameData={gameData}
-          />
+          <Grid setSelectedUser={setSelectedUser} gridSize={gridSize} owners={owners} gameData={gameData} />
         </GridDecorations>
       </MainContent>
 
-      <Sidebar user={selectedUser} updateOwner={updateOwner} />
+      {/* ✅ Pass gridAssignments & owners to Sidebar */}
+      <Sidebar user={selectedUser} gridAssignments={gridAssignments} owners={owners} updateOwner={updateOwner} />
     </Layout>
   );
 }

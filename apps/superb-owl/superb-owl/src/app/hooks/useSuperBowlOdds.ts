@@ -60,7 +60,7 @@ export const useSuperBowlOdds = () => {
         let liveScores = null;
         try {
           console.log("🔄 Fetching live scores from alternate API...");
-          const { data: scoreData } = await axios.get("/api/superbowl/scores");
+          const { data: scoreData } = await axios.get("/api/superbowl");
           console.log("✅ Score API Response:", scoreData);
           liveScores = scoreData;
         } catch (err) {
