@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button<{ customStyles?: string }>`
   background: #0e0e0e;
+  color: #efefef;
   border-radius: 0.5rem;
   padding: 0;
   border: none;
@@ -11,16 +12,21 @@ const StyledButton = styled.button<{ customStyles?: string }>`
 
   transition: opacity ease 0.3s;
   &:hover {
-    opacity: 0.77
+    opacity: 0.77;
   }
 
-  ${props => props.customStyles || ''}
+  ${({ customStyles }) => customStyles || ''}
 `;
+
 interface ButtonOverlayProps {
   /** If provided, the button acts as a link to this URL */
   linkUrl?: string;
   /** Whether the link should open in a new tab */
   openInNewTab?: boolean;
+  /** Optional ID of a modal to open via event */
+  modalTargetId?: string;
+  /** Optional custom onClick handler */
+  onClick?: () => void;
   /** Raw CSS injected into the button */
   customStyles?: string;
   /** ARIA label for accessibility */
@@ -32,14 +38,26 @@ interface ButtonOverlayProps {
 export function ButtonOverlay({
   linkUrl,
   openInNewTab = false,
+  modalTargetId,
+  onClick,
   customStyles,
   ariaLabel,
   children,
 }: ButtonOverlayProps) {
+  const handleClick = () => {
+    if (modalTargetId) {
+      window.dispatchEvent(
+        new CustomEvent('open-modal', { detail: { id: modalTargetId } })
+      );
+    }
+    if (onClick) onClick();
+  };
+
   const button = (
     <StyledButton
       aria-label={ariaLabel || 'CTA Button'}
       customStyles={customStyles}
+      onClick={handleClick}
       role="button"
     >
       {children || 'Click me'}

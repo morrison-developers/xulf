@@ -10,7 +10,7 @@ const StyledRichText = styled.div<{ customStyles?: string }>`
 
 interface RichTextProps {
   /** Raw HTML string from CMS or dev */
-  contentMarkup: string;
+  contentMarkup?: string;
   /** Optional CSS for the wrapper */
   customStyles?: string;
   /** Optional ARIA label for accessibility */
@@ -22,7 +22,7 @@ export function RichText({ contentMarkup, customStyles, ariaLabel }: RichTextPro
     <StyledRichText
       aria-label={ariaLabel}
       customStyles={customStyles}
-      dangerouslySetInnerHTML={{ __html: contentMarkup }}
+      dangerouslySetInnerHTML={{ __html: contentMarkup || '<h2>RichText Content</h2>' }}
     />
   );
 }
