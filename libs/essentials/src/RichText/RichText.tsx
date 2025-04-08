@@ -1,14 +1,29 @@
 import styled from 'styled-components';
 
-const StyledRichText = styled.div`
-  color: pink;
+const StyledRichText = styled.div<{ customStyles?: string }>`
+  line-height: 1.6;
+  font-size: 1rem;
+  color: inherit;
+
+  ${({ customStyles }) => customStyles || ''}
 `;
 
-export function RichText() {
+interface RichTextProps {
+  /** Raw HTML string from CMS or dev */
+  contentMarkup: string;
+  /** Optional CSS for the wrapper */
+  customStyles?: string;
+  /** Optional ARIA label for accessibility */
+  ariaLabel?: string;
+}
+
+export function RichText({ contentMarkup, customStyles, ariaLabel }: RichTextProps) {
   return (
-    <StyledRichText>
-      <h1>Welcome to RichText!</h1>
-    </StyledRichText>
+    <StyledRichText
+      aria-label={ariaLabel}
+      customStyles={customStyles}
+      dangerouslySetInnerHTML={{ __html: contentMarkup }}
+    />
   );
 }
 
