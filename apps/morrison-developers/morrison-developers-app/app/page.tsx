@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import { ThemeContextProvider } from '@xulf/ui';
-import { Box } from '@xulf/essentials'
+import { Box, ButtonOverlay } from '@xulf/essentials'
 
 const StyledPage = styled.div`
   .page {
@@ -11,6 +11,7 @@ const StyledPage = styled.div`
 `;
 
 const customStyles = `
+
 `;
 
 export default function Index() {
@@ -21,9 +22,11 @@ export default function Index() {
           orientation='vertical'
           alignItems='center'
           justifyContent='center'
-          customStyles={customStyles}
         >
-          <h1>Heelo</h1>
+          <ButtonOverlay
+            linkUrl='https://www.google.com'
+          >
+          </ButtonOverlay>
         </Box>
       </StyledPage>
     </ThemeContextProvider>
