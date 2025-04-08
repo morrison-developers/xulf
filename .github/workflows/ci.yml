@@ -26,8 +26,10 @@ jobs:
           node-version: 20
           cache: 'yarn'
 
-      - name: Set up Yarn 4 (Berry)
-        run: corepack enable && yarn set version berry
+      - name: Enable Corepack and set Yarn 4
+        run: |
+          corepack enable
+          corepack prepare yarn@4.5.0 --activate
 
       - name: Install dependencies
         run: yarn install --immutable
