@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import { ThemeContextProvider } from '@xulf/ui';
-import { Box, ButtonOverlay, Embed } from '@xulf/essentials'
+import { Box, ButtonOverlay, Embed, Image } from '@xulf/essentials'
 
 const StyledPage = styled.div`
   .page {
@@ -26,6 +26,7 @@ export default function Index() {
           justifyContent='center'
         >
         <Embed embedContent={embedContent} />
+        <Image src='placeholder.png' alt='placeholder' />
         </Box>
       </StyledPage>
     </ThemeContextProvider>
