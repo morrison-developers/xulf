@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const baseConfig = require('../../eslint.base.config.js');
 
 module.exports = [
@@ -13,6 +14,7 @@ module.exports = [
       ],
     },
     languageOptions: {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       parser: require('jsonc-eslint-parser'),
     },
   },
