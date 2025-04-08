@@ -2,7 +2,6 @@
 
 import styled from 'styled-components';
 import { ThemeContextProvider } from '@xulf/ui';
-import { Box, ButtonOverlay, Embed, Image, Modal, RichText } from '@xulf/essentials'
 
 const StyledPage = styled.div`
   .page {
@@ -21,21 +20,6 @@ export default function Index() {
   return (
     <ThemeContextProvider>
       <StyledPage>
-        <Box 
-          orientation='vertical'
-          alignItems='center'
-          justifyContent='center'
-        >
-        <Embed embedContent={embedContent} />
-        <RichText />
-        <ButtonOverlay modalTargetId={`modal_1`} >
-          <h2>Modal Toggle</h2>
-        </ButtonOverlay>
-
-        <Modal id={`modal_1`} >
-          <RichText contentMarkup='<h2>Modal</h2>'/>
-        </Modal>
-        </Box>
       </StyledPage>
     </ThemeContextProvider>
   );
