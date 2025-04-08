@@ -1,8 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { FloatingNavBar, ThemeContextProvider } from '@xulf/ui';
-import { AbsolutleyPositionedContainer } from '@xulf/layouts';
+import { ThemeContextProvider } from '@xulf/ui';
 
 const StyledPage = styled.div`
   .page {
@@ -10,48 +9,17 @@ const StyledPage = styled.div`
   }
 `;
 
-const StyledBackground1a = styled.div`
-  position: absolute;
-  z-index: 2;
+const customStyles = `
+
 `;
 
-const StyledBackground1b = styled.div`
-  position: absolute;
-  z-index: 1;
-`;
+
+const embedContent = `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
 
 export default function Index() {
   return (
     <ThemeContextProvider>
       <StyledPage>
-        {/* NAV BAR */}
-        <FloatingNavBar
-          logo={<img src="/site-logo-main.svg" alt="Logo" />}
-        >
-          <h1>Home</h1>
-          <h1>About</h1>
-          <h1>Contact</h1>
-          <h1>Blog</h1>
-          <h1>Services</h1>
-          <h1>Projects</h1>
-        </FloatingNavBar>
-        {/* NAV BAR */}
-
-        {/* BACKGROUND */}
-        <StyledBackground1a>
-          <AbsolutleyPositionedContainer
-            svg={'/bg-svgs/geometric-1a.svg'}
-          />
-        </StyledBackground1a>
-        <StyledBackground1b>
-          <AbsolutleyPositionedContainer 
-            svg={'/bg-svgs/geometric-1b.svg'}
-          />
-        </StyledBackground1b>
-        {/* BACKGROUND */}
-
-        {/* FOREGROUND */}
-        {/* FOREGROUND */}
       </StyledPage>
     </ThemeContextProvider>
   );

@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@xulf/backend": ["libs/backend/src/index.ts"],
+      "@xulf/essentials": ["libs/essentials/src/index.ts"],
+      "@xulf/essentials/server": ["libs/essentials/src/server.ts"],
       "@xulf/layouts": ["libs/layouts/src/index.ts"],
       "@xulf/ui": ["libs/ui/src/index.ts"]
     }
