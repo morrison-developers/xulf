@@ -9,27 +9,33 @@ on:
 permissions:
   actions: read
   contents: read
-  pull-requests: write # Needed for labeler
+  pull-requests: write
 
 jobs:
   main:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Enable Nx Cloud for distributed task execution
-      - run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
-
-      # Setup Node.js and cache dependencies
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: 'yarn'
 
-      - run: npm ci --legacy-peer-deps
+      - name: Set up Yarn 4 (Berry)
+        run: corepack enable && yarn set version berry
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Start Nx Cloud CI
+        run: npx nx-cloud start-ci-run --distribute-on="3 linux-medium-js" --stop-agents-after="e2e-ci"
+
       - uses: nrwl/nx-set-shas@v4
 
-      # Run affected tasks (lint, test, build, e2e)
-      - run: npx nx affected -t lint test build e2e-ci
+      - name: Run affected tasks
+        run: npx nx affected -t lint test build e2e-ci
