@@ -20,7 +20,8 @@
       "@xulf/essentials/server": ["libs/essentials/src/server.ts"],
       "@xulf/layouts": ["libs/layouts/src/index.ts"],
       "@xulf/types": ["libs/types/src/index.ts"],
-      "@xulf/ui": ["libs/ui/src/index.ts"]
+      "@xulf/ui": ["libs/ui/src/index.ts"],
+      "@xulf/utils": ["libs/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
