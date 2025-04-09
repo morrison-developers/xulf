@@ -1,12 +1,12 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import NodemailerProvider from '@auth/core/providers/nodemailer';
-import { type AuthConfig } from '@auth/core/types';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import EmailProvider from 'next-auth/providers/email';
+import { type AuthOptions } from 'next-auth';
 import { prisma } from '@xulf/db';
 
-export const authConfig: AuthConfig = {
+export const authConfig: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    NodemailerProvider({
+    EmailProvider({
       server: process.env.EMAIL_SERVER,
       from: process.env.EMAIL_FROM,
     }),
@@ -16,7 +16,6 @@ export const authConfig: AuthConfig = {
   },
   callbacks: {
     async signIn({ user }) {
-      // ✅ This is the correct place for invite-only logic
       const invite = await prisma.invite.findUnique({
         where: { email: user.email! },
       });
@@ -40,7 +39,6 @@ export const authConfig: AuthConfig = {
     async createUser({ user }) {
       if (!user.email) return;
 
-      // ✅ Mark invite as used after login
       await prisma.invite.updateMany({
         where: {
           email: user.email,
@@ -54,3 +52,4 @@ export const authConfig: AuthConfig = {
   },
   secret: process.env.AUTH_SECRET,
 };
+

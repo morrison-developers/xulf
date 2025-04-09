@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Overlay = styled.div`
+const Overlay = styled.div<React.HTMLAttributes<HTMLDivElement>>`
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.9);
   z-index: 1000;
 `;
 
-const ModalWrapper = styled.div<{
-  size: ModalProps['size'];
-  isCentered?: boolean;
-  backgroundColor?: string;
-  borderRadius?: string;
-  customStyles?: string;
-}>`
+const ModalWrapper = styled.div<
+  React.HTMLAttributes<HTMLDivElement> & {
+    size: ModalProps['size'];
+    isCentered?: boolean;
+    backgroundColor?: string;
+    borderRadius?: string;
+    customStyles?: string;
+  }
+>`
   position: fixed;
   z-index: 1001;
   top: ${({ isCentered }) => (isCentered ? '50%' : '20%')};

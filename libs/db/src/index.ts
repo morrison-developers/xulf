@@ -1,2 +1,2 @@
-export * from '@prisma/client';
-export { prisma } from './lib/prisma';
+import { PrismaClient } from '@xulf/prisma';
+export const prisma = new PrismaClient();

@@ -22,7 +22,8 @@
       "@xulf/layouts": ["libs/layouts/src/index.ts"],
       "@xulf/types": ["libs/types/src/index.ts"],
       "@xulf/ui": ["libs/ui/src/index.ts"],
-      "@xulf/utils": ["libs/utils/src/index.ts"]
+      "@xulf/utils": ["libs/utils/src/index.ts"],
+      "@xulf/prisma": ["node_modules/.prisma/client"]
     }
   },
   "exclude": ["node_modules", "tmp"]

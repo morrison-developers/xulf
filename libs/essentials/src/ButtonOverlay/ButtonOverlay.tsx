@@ -1,6 +1,9 @@
+import type { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button<{ customStyles?: string }>`
+const StyledButton = styled.button<
+  { customStyles?: string } & ButtonHTMLAttributes<HTMLButtonElement>
+>`
   background: #0e0e0e;
   color: #efefef;
   border-radius: 0.5rem;
