@@ -16,15 +16,41 @@ export const authConfig: AuthConfig = {
   },
   callbacks: {
     async signIn({ user }) {
-      const allowedEmails = ['andrew@xulf.dev', 'friend@example.com'];
-      return allowedEmails.includes(user.email!); // only allow whitelisted emails
+      // ✅ This is the correct place for invite-only logic
+      const invite = await prisma.invite.findUnique({
+        where: { email: user.email! },
+      });
+
+      if (!invite || invite.used) {
+        console.warn(`Blocked login for ${user.email}`);
+        return false;
+      }
+
+      return true;
     },
+
     async session({ session, token }) {
       if (token.sub) {
         session.user.id = token.sub;
       }
       return session;
-    }
+    },
+  },
+  events: {
+    async createUser({ user }) {
+      if (!user.email) return;
+
+      // ✅ Mark invite as used after login
+      await prisma.invite.updateMany({
+        where: {
+          email: user.email,
+          used: false,
+        },
+        data: {
+          used: true,
+        },
+      });
+    },
   },
   secret: process.env.AUTH_SECRET,
 };

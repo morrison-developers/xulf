@@ -61,9 +61,11 @@ model VerificationToken {
 }
 
 model Invite {
-  id        String   @id @default(cuid())
-  email     String
-  token     String   @unique
-  used      Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id         String   @id @default(cuid())
+  email      String   @unique
+  used       Boolean  @default(false)
+  invitedBy  String?  // optional admin user ID
+  orgId      String?  // optional: for future org-level invites
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

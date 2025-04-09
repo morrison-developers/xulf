@@ -5619,25 +5619,31 @@ export namespace Prisma {
   export type InviteMinAggregateOutputType = {
     id: string | null
     email: string | null
-    token: string | null
     used: boolean | null
+    invitedBy: string | null
+    orgId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type InviteMaxAggregateOutputType = {
     id: string | null
     email: string | null
-    token: string | null
     used: boolean | null
+    invitedBy: string | null
+    orgId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type InviteCountAggregateOutputType = {
     id: number
     email: number
-    token: number
     used: number
+    invitedBy: number
+    orgId: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -5645,25 +5651,31 @@ export namespace Prisma {
   export type InviteMinAggregateInputType = {
     id?: true
     email?: true
-    token?: true
     used?: true
+    invitedBy?: true
+    orgId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type InviteMaxAggregateInputType = {
     id?: true
     email?: true
-    token?: true
     used?: true
+    invitedBy?: true
+    orgId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type InviteCountAggregateInputType = {
     id?: true
     email?: true
-    token?: true
     used?: true
+    invitedBy?: true
+    orgId?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -5742,9 +5754,11 @@ export namespace Prisma {
   export type InviteGroupByOutputType = {
     id: string
     email: string
-    token: string
     used: boolean
+    invitedBy: string | null
+    orgId: string | null
     createdAt: Date
+    updatedAt: Date
     _count: InviteCountAggregateOutputType | null
     _min: InviteMinAggregateOutputType | null
     _max: InviteMaxAggregateOutputType | null
@@ -5767,36 +5781,44 @@ export namespace Prisma {
   export type InviteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    token?: boolean
     used?: boolean
+    invitedBy?: boolean
+    orgId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["invite"]>
 
   export type InviteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    token?: boolean
     used?: boolean
+    invitedBy?: boolean
+    orgId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["invite"]>
 
   export type InviteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    token?: boolean
     used?: boolean
+    invitedBy?: boolean
+    orgId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["invite"]>
 
   export type InviteSelectScalar = {
     id?: boolean
     email?: boolean
-    token?: boolean
     used?: boolean
+    invitedBy?: boolean
+    orgId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type InviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "token" | "used" | "createdAt", ExtArgs["result"]["invite"]>
+  export type InviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "used" | "invitedBy" | "orgId" | "createdAt" | "updatedAt", ExtArgs["result"]["invite"]>
 
   export type $InvitePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Invite"
@@ -5804,9 +5826,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
-      token: string
       used: boolean
+      invitedBy: string | null
+      orgId: string | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["invite"]>
     composites: {}
   }
@@ -6232,9 +6256,11 @@ export namespace Prisma {
   interface InviteFieldRefs {
     readonly id: FieldRef<"Invite", 'String'>
     readonly email: FieldRef<"Invite", 'String'>
-    readonly token: FieldRef<"Invite", 'String'>
     readonly used: FieldRef<"Invite", 'Boolean'>
+    readonly invitedBy: FieldRef<"Invite", 'String'>
+    readonly orgId: FieldRef<"Invite", 'String'>
     readonly createdAt: FieldRef<"Invite", 'DateTime'>
+    readonly updatedAt: FieldRef<"Invite", 'DateTime'>
   }
     
 
@@ -6669,9 +6695,11 @@ export namespace Prisma {
   export const InviteScalarFieldEnum: {
     id: 'id',
     email: 'email',
-    token: 'token',
     used: 'used',
-    createdAt: 'createdAt'
+    invitedBy: 'invitedBy',
+    orgId: 'orgId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type InviteScalarFieldEnum = (typeof InviteScalarFieldEnum)[keyof typeof InviteScalarFieldEnum]
@@ -7037,36 +7065,44 @@ export namespace Prisma {
     NOT?: InviteWhereInput | InviteWhereInput[]
     id?: StringFilter<"Invite"> | string
     email?: StringFilter<"Invite"> | string
-    token?: StringFilter<"Invite"> | string
     used?: BoolFilter<"Invite"> | boolean
+    invitedBy?: StringNullableFilter<"Invite"> | string | null
+    orgId?: StringNullableFilter<"Invite"> | string | null
     createdAt?: DateTimeFilter<"Invite"> | Date | string
+    updatedAt?: DateTimeFilter<"Invite"> | Date | string
   }
 
   export type InviteOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
-    token?: SortOrder
     used?: SortOrder
+    invitedBy?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type InviteWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    token?: string
+    email?: string
     AND?: InviteWhereInput | InviteWhereInput[]
     OR?: InviteWhereInput[]
     NOT?: InviteWhereInput | InviteWhereInput[]
-    email?: StringFilter<"Invite"> | string
     used?: BoolFilter<"Invite"> | boolean
+    invitedBy?: StringNullableFilter<"Invite"> | string | null
+    orgId?: StringNullableFilter<"Invite"> | string | null
     createdAt?: DateTimeFilter<"Invite"> | Date | string
-  }, "id" | "token">
+    updatedAt?: DateTimeFilter<"Invite"> | Date | string
+  }, "id" | "email">
 
   export type InviteOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
-    token?: SortOrder
     used?: SortOrder
+    invitedBy?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: InviteCountOrderByAggregateInput
     _max?: InviteMaxOrderByAggregateInput
     _min?: InviteMinOrderByAggregateInput
@@ -7078,9 +7114,11 @@ export namespace Prisma {
     NOT?: InviteScalarWhereWithAggregatesInput | InviteScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Invite"> | string
     email?: StringWithAggregatesFilter<"Invite"> | string
-    token?: StringWithAggregatesFilter<"Invite"> | string
     used?: BoolWithAggregatesFilter<"Invite"> | boolean
+    invitedBy?: StringNullableWithAggregatesFilter<"Invite"> | string | null
+    orgId?: StringNullableWithAggregatesFilter<"Invite"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Invite"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Invite"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -7365,57 +7403,71 @@ export namespace Prisma {
   export type InviteCreateInput = {
     id?: string
     email: string
-    token: string
     used?: boolean
+    invitedBy?: string | null
+    orgId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type InviteUncheckedCreateInput = {
     id?: string
     email: string
-    token: string
     used?: boolean
+    invitedBy?: string | null
+    orgId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type InviteUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
     used?: BoolFieldUpdateOperationsInput | boolean
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InviteUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
     used?: BoolFieldUpdateOperationsInput | boolean
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InviteCreateManyInput = {
     id?: string
     email: string
-    token: string
     used?: boolean
+    invitedBy?: string | null
+    orgId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type InviteUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
     used?: BoolFieldUpdateOperationsInput | boolean
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InviteUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
     used?: BoolFieldUpdateOperationsInput | boolean
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -7734,25 +7786,31 @@ export namespace Prisma {
   export type InviteCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    token?: SortOrder
     used?: SortOrder
+    invitedBy?: SortOrder
+    orgId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type InviteMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    token?: SortOrder
     used?: SortOrder
+    invitedBy?: SortOrder
+    orgId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type InviteMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    token?: SortOrder
     used?: SortOrder
+    invitedBy?: SortOrder
+    orgId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {

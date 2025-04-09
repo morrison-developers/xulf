@@ -159,9 +159,11 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
 exports.Prisma.InviteScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  token: 'token',
   used: 'used',
-  createdAt: 'createdAt'
+  invitedBy: 'invitedBy',
+  orgId: 'orgId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
