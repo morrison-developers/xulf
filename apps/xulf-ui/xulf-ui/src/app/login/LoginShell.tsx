@@ -16,7 +16,7 @@ export default function LoginShell() {
   // If user is already authenticated, send them to /app/orgs
   useEffect(() => {
     if (status === 'authenticated') {
-      router.replace('/app/orgs');
+      router.replace('/orgs');
     }
   }, [status, router]);
 

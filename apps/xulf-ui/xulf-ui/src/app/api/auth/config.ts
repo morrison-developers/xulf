@@ -46,7 +46,7 @@ export const authConfig: AuthOptions = {
       // Customize the redirect after sign-in
       // Always redirect to '/orgs' after successful sign-in
       if (url.startsWith(baseUrl)) {
-        return '/orgs';  // Ensure it redirects to '/orgs' instead of '/app/orgs'
+        return '/orgs';  // Ensure it redirects to '/orgs'
       }
       return url;
     },
