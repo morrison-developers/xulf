@@ -13,7 +13,9 @@ interface EmbedProps {
   ariaLabel?: string;
 }
 
-const StyledEmbed = styled.div<{ customStyles?: string }>`
+const StyledEmbed = styled.div<
+  React.HTMLAttributes<HTMLDivElement> & { customStyles?: string }
+>`
   width: 100%;
   overflow: hidden;
 

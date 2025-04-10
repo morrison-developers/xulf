@@ -1,6 +1,9 @@
+import type { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-const StyledRichText = styled.div<{ customStyles?: string }>`
+const StyledRichText = styled.div<
+  HTMLAttributes<HTMLDivElement> & { customStyles?: string }
+>`
   line-height: 1.6;
   font-size: 1rem;
   color: inherit;
