@@ -9,7 +9,9 @@ interface ImageProps {
   customStyles?: string;
 }
 
-const StyledImage = styled.img<{ customStyles?: string }>`
+const StyledImage = styled.img<
+  React.ImgHTMLAttributes<HTMLImageElement> & { customStyles?: string }
+>`
   max-width: 100%;
   object-fit: contain;
   object-position: center;

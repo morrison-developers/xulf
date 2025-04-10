@@ -51,3 +51,6 @@ storybook-static
 # Ignore all environment files
 .env
 .env.*
+
+# Prisma Generations
+tools/.generated
