@@ -6,7 +6,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
 import DroppableCanvas from './DroppableCanvas';
 import { componentRegistry } from '@xulf/editor-ui';
-import { type LayoutModule } from '../../types/layout'; // Optional: define later
+import { type LayoutModule } from '../../types/layout';
 
 interface EditorShellProps {
   siteJson: {
@@ -33,6 +33,27 @@ const defaultModuleProps: Record<string, any> = {
     body: 'This is a modal body.',
     triggerLabel: 'Open Modal',
   },
+};
+
+const editableProps: Record<string, { label: string; type: 'text' | 'number' | 'boolean' }[]> = {
+  box: [
+    { label: 'children', type: 'text' },
+    { label: 'customStyles', type: 'text' },
+  ],
+  buttonOverlay: [
+    { label: 'label', type: 'text' },
+    { label: 'customStyles', type: 'text' },
+  ],
+  image: [
+    { label: 'src', type: 'text' },
+    { label: 'alt', type: 'text' },
+    { label: 'customStyles', type: 'text' },
+  ],
+  modal: [
+    { label: 'title', type: 'text' },
+    { label: 'body', type: 'text' },
+    { label: 'triggerLabel', type: 'text' },
+  ],
 };
 
 function DraggableModule({ type }: { type: string }) {
@@ -73,6 +94,22 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
         },
       ]);
     }
+  };
+
+  const handlePropChange = (id: string, key: string, value: any) => {
+    setLayout((prev) =>
+      prev.map((mod) =>
+        mod.id === id
+          ? {
+              ...mod,
+              props: {
+                ...mod.props,
+                [key]: value,
+              },
+            }
+          : mod
+      )
+    );
   };
 
   return (
@@ -124,10 +161,47 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
                 })()}
               </div>
 
-              {/* Read-only props view */}
-              <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
-                {JSON.stringify(selectedModule.props, null, 2)}
-              </pre>
+              {/* Editable props */}
+              <div className="space-y-2">
+                {(editableProps[selectedModule.type] ?? []).map(({ label, type }) => (
+                  <div key={label} className="text-sm">
+                    <label className="block font-medium text-gray-700 mb-1">{label}</label>
+
+                    {type === 'text' && (
+                      <input
+                        type="text"
+                        value={selectedModule.props[label] || ''}
+                        onChange={(e) =>
+                          handlePropChange(selectedModule.id, label, e.target.value)
+                        }
+                        className="w-full border rounded px-2 py-1 text-sm"
+                      />
+                    )}
+
+                    {type === 'number' && (
+                      <input
+                        type="number"
+                        value={selectedModule.props[label] || 0}
+                        onChange={(e) =>
+                          handlePropChange(selectedModule.id, label, Number(e.target.value))
+                        }
+                        className="w-full border rounded px-2 py-1 text-sm"
+                      />
+                    )}
+
+                    {type === 'boolean' && (
+                      <input
+                        type="checkbox"
+                        checked={!!selectedModule.props[label]}
+                        onChange={(e) =>
+                          handlePropChange(selectedModule.id, label, e.target.checked)
+                        }
+                        className="h-4 w-4"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </aside>
