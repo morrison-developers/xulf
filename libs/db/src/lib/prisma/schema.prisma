@@ -10,17 +10,18 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(cuid())
-  email          String   @unique
-  emailVerified  DateTime?
-  name           String?
-  image          String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  role           String   @default("user")
+  id                String   @id @default(cuid())
+  email             String   @unique
+  emailVerified     DateTime?
+  name              String?
+  image             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  role              String   @default("user")
 
-  accounts       Account[]
-  sessions       Session[]
+  accounts          Account[]
+  sessions          Session[]
+  userOrganizations UserOrganization[]
 }
 
 model Account {
@@ -68,4 +69,37 @@ model Invite {
   orgId      String?  // optional: for future org-level invites
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model Organization {
+  id                String   @id @default(uuid())
+  name              String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relation fields
+  sites             Site[]
+  userOrganizations UserOrganization[]
+}
+
+model Site {
+  id              String   @id @default(uuid())
+  name            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Foreign key to Organization
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id])
+}
+
+model UserOrganization {
+  userId         String
+  organizationId String
+  role           String   // or an enum in Prisma if you prefer
+
+  user           User         @relation(fields: [userId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  @@id([userId, organizationId]) // Composite primary key
 }
