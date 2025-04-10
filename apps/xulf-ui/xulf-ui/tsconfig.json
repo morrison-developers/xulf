@@ -30,7 +30,8 @@
     "../../../apps/xulf-ui/xulf-ui/.next/types/**/*.ts",
     "../../../dist/apps/xulf-ui/xulf-ui/.next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/middleware.ts"
   ],
   "exclude": [
     "node_modules",

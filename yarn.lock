@@ -8292,6 +8292,7 @@ __metadata:
     jsdom: "npm:~22.1.0"
     next: "npm:^14.2.23"
     next-auth: "npm:^4.24.11"
+    nodemailer: "npm:^6.10.0"
     nx: "npm:^20.3.3"
     postcss: "npm:^8.5.3"
     prettier: "npm:^2.6.2"
@@ -18023,6 +18024,13 @@ __metadata:
   bin:
     uuid: ./bin/uuid
   checksum: 10c0/c87d0806292d40a7aaffa457c062407c176edbfef974dde32c34cb1db1cb6a686c141c8a34ed49a4602365e92dcf6dd2d3ce476d275e679f1ac746aebd3600c1
+  languageName: node
+  linkType: hard
+
+"nodemailer@npm:^6.10.0":
+  version: 6.10.0
+  resolution: "nodemailer@npm:6.10.0"
+  checksum: 10c0/39fd35d65b021b94c968eeac82a66dd843021b6ba53c659d01b1dd4cda73b6a2f96e20facfe500efa4b8d3f1cb23df10245c6c86b2bde5f806691ed17ce87826
   languageName: node
   linkType: hard
 

@@ -7,7 +7,14 @@ export const authConfig: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
-      server: process.env.EMAIL_SERVER,
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: Number(process.env.EMAIL_SERVER_PORT),
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASS,
+        },
+      },
       from: process.env.EMAIL_FROM,
     }),
   ],
@@ -34,6 +41,15 @@ export const authConfig: AuthOptions = {
       }
       return session;
     },
+
+    async redirect({ url, baseUrl }) {
+      // Customize the redirect after sign-in
+      // Always redirect to '/orgs' after successful sign-in
+      if (url.startsWith(baseUrl)) {
+        return '/orgs';  // Ensure it redirects to '/orgs' instead of '/app/orgs'
+      }
+      return url;
+    },
   },
   events: {
     async createUser({ user }) {
@@ -50,6 +66,5 @@ export const authConfig: AuthOptions = {
       });
     },
   },
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };
-
