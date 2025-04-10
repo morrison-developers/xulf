@@ -1,4 +1,3 @@
-// EditorShell.tsx
 'use client';
 
 import { useState } from 'react';
@@ -6,6 +5,7 @@ import { DndContext } from '@dnd-kit/core';
 import { useDraggable } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
 import DroppableCanvas from './DroppableCanvas';
+import { componentRegistry } from '@xulf/editor-ui';
 import { type LayoutModule } from '../../types/layout'; // Optional: define later
 
 interface EditorShellProps {
@@ -13,6 +13,27 @@ interface EditorShellProps {
     layout: LayoutModule[];
   };
 }
+
+const defaultModuleProps: Record<string, any> = {
+  box: {
+    customStyles: 'bg-gray-100 p-4',
+    children: 'Empty Box',
+  },
+  buttonOverlay: {
+    label: 'Click Me',
+    customStyles: 'p-3 bg-blue-600 text-white rounded',
+  },
+  image: {
+    src: 'https://via.placeholder.com/400x200',
+    alt: 'Placeholder Image',
+    customStyles: 'rounded shadow',
+  },
+  modal: {
+    title: 'Modal Title',
+    body: 'This is a modal body.',
+    triggerLabel: 'Open Modal',
+  },
+};
 
 function DraggableModule({ type }: { type: string }) {
   const { attributes, listeners, setNodeRef } = useDraggable({
@@ -36,6 +57,8 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
   const [layout, setLayout] = useState(siteJson.layout);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
+  const selectedModule = layout.find((m) => m.id === selectedId);
+
   const handleDrop = (event: any) => {
     const { over, active } = event;
     const type = active.data?.current?.type;
@@ -46,10 +69,7 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
         {
           id: uuid(),
           type,
-          props: {
-            customStyles: 'p-4 bg-blue-50',
-            children: `${type} module`,
-          },
+          props: defaultModuleProps[type] ?? {},
         },
       ]);
     }
@@ -72,13 +92,44 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
         {/* Center Canvas */}
         <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Canvas</h2>
-          <DroppableCanvas layout={layout} selectedId={selectedId} onSelect={setSelectedId} />
+          <DroppableCanvas
+            layout={layout}
+            selectedId={selectedId}
+            onSelect={setSelectedId}
+          />
         </main>
 
         {/* Right Panel */}
         <aside className="w-80 border-l bg-white p-4 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Edit Props</h2>
-          <p className="text-sm text-gray-500">Select a module to edit props.</p>
+
+          {!selectedModule ? (
+            <p className="text-sm text-gray-500">Select a module to edit its props.</p>
+          ) : (
+            <div className="space-y-4">
+              {/* Type label */}
+              <div className="text-xs uppercase text-gray-400 tracking-wide">
+                {selectedModule.type}
+              </div>
+
+              {/* Live Preview */}
+              <div className="border p-2 rounded bg-gray-50">
+                {(() => {
+                  const Component = componentRegistry[selectedModule.type];
+                  return Component ? (
+                    <Component {...selectedModule.props} />
+                  ) : (
+                    <div className="text-red-500">Unknown component</div>
+                  );
+                })()}
+              </div>
+
+              {/* Read-only props view */}
+              <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
+                {JSON.stringify(selectedModule.props, null, 2)}
+              </pre>
+            </div>
+          )}
         </aside>
       </div>
     </DndContext>
