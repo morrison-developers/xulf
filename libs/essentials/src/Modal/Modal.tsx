@@ -55,7 +55,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-export function Modal({
+export default function Modal({
   id,
   size = 'large',
   isCentered,

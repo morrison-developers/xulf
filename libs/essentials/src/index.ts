@@ -1,7 +1,6 @@
-// Use this file to export React client components (e.g. those with 'use client' directive) or other non-server utilities
-export * from './Box/Box';
-export * from './ButtonOverlay/ButtonOverlay';
-export * from './Embed/Embed';
-export * from './Image/Image';
-export * from './Modal/Modal';
-export * from './RichText/RichText';
+export { default as Box } from './Box/Box';
+export { default as ButtonOverlay } from './ButtonOverlay/ButtonOverlay';
+export { default as Embed } from './Embed/Embed';
+export { default as Image } from './Image/Image';
+export { default as Modal } from './Modal/Modal';
+export { default as RichText } from './RichText/RichText';

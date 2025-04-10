@@ -1,4 +1,5 @@
 'use client';
+import { CanvasRenderer } from "./CanvasRenderer";
 
 interface EditorShellProps {
   siteJson: any; // Adjust to your layout type later
@@ -22,7 +23,8 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
       <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
         <h2 className="text-sm font-semibold mb-4">Canvas</h2>
         <div className="h-full w-full border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
-          Drop modules here
+          <CanvasRenderer layout={siteJson.layout} />
+
         </div>
       </main>
 
