@@ -1,3 +1,4 @@
+// EditorShell.tsx
 'use client';
 
 import { useState } from 'react';
@@ -33,6 +34,7 @@ function DraggableModule({ type }: { type: string }) {
 
 export default function EditorShell({ siteJson }: EditorShellProps) {
   const [layout, setLayout] = useState(siteJson.layout);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const handleDrop = (event: any) => {
     const { over, active } = event;
@@ -70,7 +72,7 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
         {/* Center Canvas */}
         <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Canvas</h2>
-          <DroppableCanvas layout={layout} />
+          <DroppableCanvas layout={layout} selectedId={selectedId} onSelect={setSelectedId} />
         </main>
 
         {/* Right Panel */}
