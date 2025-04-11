@@ -6,30 +6,42 @@ import ReactFlow, {
   addEdge,
   useEdgesState,
   useNodesState,
-  useReactFlow,
   Connection,
   Node,
   Edge,
   ReactFlowProvider,
 } from 'react-flow-renderer';
-import { useCallback, useMemo } from 'react';
+
+import { useCallback, useMemo, useState } from 'react';
 import { FunctionNodeComponent } from './function-nodes/FunctionNodeComponent';
 import { DraggableFunctionNode } from './function-nodes/DraggableFunctionNode';
+import type { FunctionConnection } from '../../types/functions';
 
 export default function FunctionEditor() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [connections, setConnections] = useState<FunctionConnection[]>([]);
 
-  const onConnect = useCallback(
-    (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
-    []
-  );
+  const onConnect = useCallback((connection: Connection) => {
+    // 1. Visual edge
+    setEdges((eds) => addEdge(connection, eds));
+
+    // 2. Logical function connection
+    const { source, target } = connection;
+
+    if (source && target) {
+      setConnections((prev: FunctionConnection[]) => [
+        ...prev,
+        { from: source, to: target, type: 'event' },
+      ]);
+    }
+  }, []);
 
   const nodeTypes = useMemo(() => ({
     functionNode: FunctionNodeComponent,
   }), []);
 
-  const onDrop = useCallback((event: any) => {
+  const onDrop = useCallback((event: React.DragEvent) => {
     const type = event.dataTransfer.getData('application/x-function-node');
     if (!type) return;
 
@@ -54,7 +66,11 @@ export default function FunctionEditor() {
         </aside>
 
         {/* Canvas */}
-        <div className="flex-1 relative h-full" onDrop={onDrop} onDragOver={(e) => e.preventDefault()}>
+        <div
+          className="flex-1 relative h-full"
+          onDrop={onDrop}
+          onDragOver={(e) => e.preventDefault()}
+        >
           <ReactFlow
             nodes={nodes}
             edges={edges}
