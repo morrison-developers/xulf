@@ -77,10 +77,10 @@ function getFunctionProps(id: string, connections: { input: string; event: strin
 }
 
 export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
-  const [editorState, setEditorState] = useState<SiteJson>({
-    modules: siteJson.modules,
-    functionGraph: siteJson.functionGraph || { nodes: [], edges: [] },
-  });
+  const [editorState, setEditorState] = useState<SiteJson>(() => ({
+    modules: siteJson?.modules ?? [],
+    functionGraph: siteJson?.functionGraph ?? { nodes: [], edges: [] },
+  }));  
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedModule = editorState.modules.find((m) => m.id === selectedId);
   const editableProps = selectedModule ? propMetaRegistry[selectedModule.type] ?? [] : [];
@@ -104,7 +104,10 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
     const fetchLayout = async () => {
       const res = await fetch(`/api/sites/${siteId}`);
       const data = await res.json();
-      setEditorState(data.layoutJson);
+      setEditorState({
+        modules: data.layoutJson?.modules ?? [],
+        functionGraph: data.layoutJson?.functionGraph ?? { nodes: [], edges: [] },
+      });
     };
     fetchLayout();
   }, [siteId]);
