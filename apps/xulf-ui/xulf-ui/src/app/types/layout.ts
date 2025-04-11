@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react';
 import { componentRegistry } from '@xulf/editor-ui';
+import { Node, Edge } from 'react-flow-renderer';
 
 export type ModuleType = keyof typeof componentRegistry;
 
@@ -11,4 +12,8 @@ export interface LayoutModule {
 
 export interface SiteJson {
   modules: LayoutModule[];
+  functionGraph: {
+    nodes: Node[];
+    edges: Edge[];
+  };
 }

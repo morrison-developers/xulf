@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { globalEventBus } from '@xulf/utils';
 
 const Overlay = styled.div<React.HTMLAttributes<HTMLDivElement>>`
   position: fixed;
@@ -46,6 +47,7 @@ const ModalWrapper = styled.div<
 `;
 
 interface ModalProps {
+  /** Unique module ID (used to receive open events) */
   id: string;
   size?: 'small' | 'large' | 'full';
   isCentered?: boolean;
@@ -67,14 +69,9 @@ export default function Modal({
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handler = (e: Event) => {
-      const { detail } = e as CustomEvent;
-      if (detail?.id === id) {
-        setIsOpen(true);
-      }
-    };
-    window.addEventListener('open-modal', handler);
-    return () => window.removeEventListener('open-modal', handler);
+    const handler = () => setIsOpen(true);
+    globalEventBus.on(`${id}:open`, handler);
+    return () => globalEventBus.off(`${id}:open`, handler);
   }, [id]);
 
   if (!isOpen) return null;
