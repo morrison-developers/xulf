@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import { DndContext } from '@dnd-kit/core';
-import { useDraggable } from '@dnd-kit/core';
+import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
 import { componentRegistry, propMetaRegistry } from '@xulf/editor-ui';
 import type { SiteJson } from '../../types/layout';
@@ -50,6 +50,21 @@ function DraggableModule({ type }: { type: string }) {
     >
       {type}
     </div>
+  );
+}
+
+function DroppableMain({ children }: { children: React.ReactNode }) {
+  const { setNodeRef } = useDroppable({
+    id: 'canvas-dropzone',
+  });
+
+  return (
+    <main
+      ref={setNodeRef}
+      className="flex-1 bg-gray-50 p-6 overflow-y-auto"
+    >
+      {children}
+    </main>
   );
 }
 
@@ -166,7 +181,7 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
           </div>
         </aside>
 
-        <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
+        <DroppableMain>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold">Canvas</h2>
             <button
@@ -200,7 +215,7 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
               );
             })}
           </div>
-        </main>
+        </DroppableMain>
 
         <aside className="w-80 border-l bg-white p-4 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Edit Props</h2>
