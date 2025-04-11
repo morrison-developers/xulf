@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import EditorShell from './EditorShell';
+import EditorShell from './EditorShell/EditorShell'
 import { FunctionShell } from '../functions/FunctionShell';
 import type { SiteJson } from '../../types/layout';
 
@@ -48,7 +48,7 @@ export default function EditorPageClient({ site, siteJson, orgId }: Props) {
 
       <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
         {tab === 'layout' ? (
-          <EditorShell siteId={site.id} siteJson={siteJson} selected={selected} />
+          <EditorShell siteId={site.id} siteJson={siteJson} />
         ) : (
           <FunctionShell
             siteId={site.id}

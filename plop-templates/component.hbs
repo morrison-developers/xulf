@@ -20,10 +20,23 @@ export interface {{pascalCase name}}Props {
   justifyContent?: 'flex-start' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'flex-end';
   /** Row/column gap sizes */
   gap?: Gap;
-  /** Raw CSS classes (e.g. Tailwind) injected into the container */
+  /** Raw CSS string applied inline to the container */
   customStyles?: string;
   /** Content inside the container */
   children?: React.ReactNode;
+}
+
+/** Parses a raw CSS string into a valid React style object */
+function parseInlineStyles(css: string): React.CSSProperties {
+  const style: React.CSSProperties = {};
+  css.split(';').forEach((decl) => {
+    const [prop, value] = decl.split(':').map((s) => s.trim());
+    if (prop && value) {
+      const jsProp = prop.replace(/-([a-z])/g, (_, c) => c.toUpperCase()); // kebab → camelCase
+      (style as any)[jsProp] = value;
+    }
+  });
+  return style;
 }
 
 export const {{pascalCase name}} = ({
@@ -41,10 +54,11 @@ export const {{pascalCase name}} = ({
     justifyContent,
     rowGap: gap?.row ?? 0,
     columnGap: gap?.column ?? 0,
+    ...parseInlineStyles(customStyles ?? ''),
   };
 
   return (
-    <div style={style} className={customStyles}>
+    <div style={style}>
       {children}
     </div>
   );

@@ -21,6 +21,7 @@
       "@xulf/essentials": ["libs/essentials/src/index.ts"],
       "@xulf/layouts": ["libs/layouts/src/index.ts"],
       "@xulf/modules": ["libs/modules/src/index.ts"],
+      "@xulf/modules/src/types": ["libs/modules/src/types.ts"],
       "@xulf/prisma": ["node_modules/.prisma/client"],
       "@xulf/types": ["libs/types/src/index.ts"],
       "@xulf/ui": ["libs/ui/src/index.ts"],

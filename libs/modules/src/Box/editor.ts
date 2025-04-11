@@ -16,7 +16,7 @@ export const editorMeta: EditorMeta = {
     alignItems: 'stretch',
     justifyContent: 'flex-start',
     gap: { row: 0, column: 0 },
-    customStyles: 'bg-gray-100 p-4',
+    customStyles: 'background-color: #f3f4f6;', // raw CSS!
     children: 'New Box',
   },
   editableProps: [
@@ -25,7 +25,7 @@ export const editorMeta: EditorMeta = {
     { name: 'justifyContent', type: 'string' },
     { name: 'gap.row', type: 'number' },
     { name: 'gap.column', type: 'number' },
-    { name: 'customStyles', type: 'string' },
+    { name: 'customStyles', type: 'string' }, // interpreted as raw inline CSS
     { name: 'children', type: 'string' },
   ],
 };
