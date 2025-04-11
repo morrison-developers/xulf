@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react';
-import { componentRegistry } from '@xulf/editor-ui';
+import { componentRegistry } from '@xulf/modules';
 import { Node, Edge } from 'react-flow-renderer';
 
 export type ModuleType = keyof typeof componentRegistry;

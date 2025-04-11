@@ -1,9 +1,11 @@
 // MODULE IMPORTS
+import { BoxDef } from './Box';
 // AUTO-IMPORT MODULES HERE
 
 import type { ModuleDef } from './types';
 
 export const allModules: ModuleDef[] = [
+  BoxDef,
 // AUTO-REGISTER MODULES HERE
 ];
 

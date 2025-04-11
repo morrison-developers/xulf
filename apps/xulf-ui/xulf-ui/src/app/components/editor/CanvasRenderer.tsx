@@ -1,5 +1,5 @@
 // CanvasRenderer.tsx
-import { componentRegistry } from '@xulf/editor-ui';
+import { componentRegistry } from '@xulf/modules';
 import clsx from 'clsx';
 
 interface CanvasRendererProps {

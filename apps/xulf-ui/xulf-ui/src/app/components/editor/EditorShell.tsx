@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
-import { componentRegistry, propMetaRegistry } from '@xulf/editor-ui';
+import { componentRegistry, propMetaRegistry } from '@xulf/modules';
 import type { SiteJson } from '../../types/layout';
 import debounce from 'lodash/debounce';
 
@@ -240,16 +240,16 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
                 })()}
               </div>
               <div className="space-y-2">
-                {editableProps.map(({ label, type }) => (
-                  <div key={label} className="text-sm">
-                    <label className="block font-medium text-gray-700 mb-1">{label}</label>
+                {editableProps.map(({ name, type }) => (
+                  <div key={name} className="text-sm">
+                    <label className="block font-medium text-gray-700 mb-1">{name}</label>
 
-                    {type === 'text' && (
+                    {type === 'string' && (
                       <input
                         type="text"
-                        value={selectedModule.props[label] || ''}
+                        value={selectedModule.props[name] || ''}
                         onChange={(e) =>
-                          handlePropChange(selectedModule.id, label, e.target.value)
+                          handlePropChange(selectedModule.id, name, e.target.value)
                         }
                         className="w-full border rounded px-2 py-1 text-sm"
                       />
@@ -258,9 +258,9 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
                     {type === 'number' && (
                       <input
                         type="number"
-                        value={selectedModule.props[label] || 0}
+                        value={selectedModule.props[name] || 0}
                         onChange={(e) =>
-                          handlePropChange(selectedModule.id, label, Number(e.target.value))
+                          handlePropChange(selectedModule.id, name, Number(e.target.value))
                         }
                         className="w-full border rounded px-2 py-1 text-sm"
                       />
@@ -269,9 +269,9 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
                     {type === 'boolean' && (
                       <input
                         type="checkbox"
-                        checked={!!selectedModule.props[label]}
+                        checked={!!selectedModule.props[name]}
                         onChange={(e) =>
-                          handlePropChange(selectedModule.id, label, e.target.checked)
+                          handlePropChange(selectedModule.id, name, e.target.checked)
                         }
                         className="h-4 w-4"
                       />
