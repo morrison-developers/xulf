@@ -13,7 +13,7 @@ export function FunctionShell({ modules }: FunctionShellProps) {
   return (
     // Outer container needs a full height for react-flow to work
     <div className="flex-1 min-h-[600px] h-[calc(100vh-100px)]">
-      <FunctionEditor modules={modules} />
+      <FunctionEditor />
     </div>
   );
 }
