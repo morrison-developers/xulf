@@ -38,7 +38,7 @@ export default async function SiteDashboard({ params }: Props) {
               Edit Site
             </button>
           </Link>
-          <Link href={`/preview/${params.siteId}`}>
+          <Link href={`/orgs/${params.orgId}/${params.siteId}/preview`}>
             <button className="px-4 py-2 rounded border border-gray-300">
               Preview
             </button>
