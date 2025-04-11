@@ -87,6 +87,7 @@ model Site {
   name            String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  layoutJson      Json?
 
   // Foreign key to Organization
   organizationId  String

@@ -1,7 +1,8 @@
 import { prisma } from '@xulf/db';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import EditorShell from '../../../../components/editor/EditorShell'; // adjust if needed
+import EditorShell from '../../../../components/editor/EditorShell';
+import type { SiteJson } from '../../../../types/layout';
 
 interface Props {
   params: {
@@ -16,21 +17,20 @@ export default async function EditorPage({ params }: Props) {
       id: params.siteId,
       organizationId: params.orgId,
     },
-    // include: { modules: true } ← if you later link to actual layout content
+    select: {
+      id: true,
+      name: true,
+      layoutJson: true,
+    },
   });
 
   if (!site) return notFound();
 
-  // Simulate layout JSON until stored in DB
-  const mockSiteJson = {
-    modules: [
-      {
-        id: '1',
-        type: 'box',
-        props: { customStyles: 'bg-yellow-100 p-4', children: 'I am a Box!' },
-      },
-    ],
-  };  
+  // Use stored siteJson from the DB or fallback to empty layout
+  const parsedSiteJson: SiteJson =
+  site.layoutJson && typeof site.layoutJson === 'object' && 'modules' in site.layoutJson
+    ? (site.layoutJson as unknown as SiteJson)
+    : { modules: [] };
 
   return (
     <div className="p-6 space-y-6">
@@ -44,7 +44,7 @@ export default async function EditorPage({ params }: Props) {
         </Link>
       </div>
 
-      <EditorShell siteJson={mockSiteJson} />
+      <EditorShell siteId={site.id} siteJson={parsedSiteJson} />
     </div>
   );
 }

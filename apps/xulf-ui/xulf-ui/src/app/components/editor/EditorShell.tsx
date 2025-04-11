@@ -1,14 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import { useDraggable } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
 import DroppableCanvas from './DroppableCanvas';
 import { componentRegistry, propMetaRegistry } from '@xulf/editor-ui';
 import type { SiteJson } from '../../types/layout';
+import debounce from 'lodash/debounce';
 
 interface EditorShellProps {
+  siteId: string;
   siteJson: SiteJson;
 }
 
@@ -51,7 +53,7 @@ function DraggableModule({ type }: { type: string }) {
   );
 }
 
-export default function EditorShell({ siteJson }: EditorShellProps) {
+export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
   const [editorState, setEditorState] = useState<SiteJson>({
     modules: siteJson.modules,
   });
@@ -59,6 +61,36 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedModule = editorState.modules.find((m) => m.id === selectedId);
   const editableProps = selectedModule ? propMetaRegistry[selectedModule.type] ?? [] : [];
+
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
+  const [isDirty, setIsDirty] = useState(false);
+
+  const saveLayout = debounce(async (newState: SiteJson) => {
+    setSaveStatus('saving');
+    await fetch(`/api/sites/${siteId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newState),
+    });
+    setSaveStatus('saved');
+    setIsDirty(false);
+    setTimeout(() => setSaveStatus('idle'), 1500);
+  }, 2000);
+
+  useEffect(() => {
+    const fetchLayout = async () => {
+      const res = await fetch(`/api/sites/${siteId}`);
+      const data = await res.json();
+      setEditorState(data.layoutJson);
+    };
+    fetchLayout();
+  }, [siteId]);
+
+  useEffect(() => {
+    if (isDirty) {
+      saveLayout(editorState);
+    }
+  }, [editorState, isDirty]);
 
   const handleDrop = (event: any) => {
     const { over, active } = event;
@@ -76,6 +108,7 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
           },
         ],
       }));
+      setIsDirty(true);
     }
   };
 
@@ -94,6 +127,7 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
           : mod
       ),
     }));
+    setIsDirty(true);
   };
 
   return (
@@ -112,15 +146,28 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
 
         {/* Center Canvas */}
         <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
-          <h2 className="text-sm font-semibold mb-4">Canvas</h2>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold">Canvas</h2>
+            <button
+              onClick={() => saveLayout(editorState)}
+              disabled={!isDirty}
+              className="text-xs px-3 py-1 border rounded bg-white shadow disabled:opacity-50"
+            >
+              {saveStatus === 'saving'
+                ? 'Saving...'
+                : saveStatus === 'saved'
+                ? 'Saved ✓'
+                : isDirty
+                ? 'Save Changes'
+                : 'No Changes'}
+            </button>
+          </div>
+
           <DroppableCanvas
             layout={editorState.modules}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
-          <pre className="text-xs bg-gray-100 p-2 rounded mt-6 overflow-x-auto">
-            {JSON.stringify(editorState, null, 2)}
-          </pre>
         </main>
 
         {/* Right Panel */}
