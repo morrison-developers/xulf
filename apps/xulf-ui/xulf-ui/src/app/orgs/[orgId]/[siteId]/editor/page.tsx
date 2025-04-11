@@ -21,15 +21,28 @@ export default async function EditorPage({ params }: Props) {
       id: true,
       name: true,
       layoutJson: true,
+      functionGraph: true,  // Add functionGraph to the selection
     },
   });
 
   if (!site) return notFound();
 
-  const parsedSiteJson: SiteJson =
-    site.layoutJson && typeof site.layoutJson === 'object' && 'modules' in site.layoutJson
-      ? (site.layoutJson as unknown as SiteJson)
-      : { modules: [] };
+  // Safely parse the layoutJson to fit the SiteJson shape
+  let parsedSiteJson: SiteJson = { modules: [], functionGraph: { nodes: [], edges: [] } };
 
-  return <EditorPageClient site={site} siteJson={parsedSiteJson} orgId={params.orgId} />;
+  if (site.layoutJson && typeof site.layoutJson === 'object' && !Array.isArray(site.layoutJson)) {
+    // If layoutJson is an object, try to cast it to SiteJson
+    parsedSiteJson = {
+      modules: (site.layoutJson as any).modules ?? [], // Fallback to an empty array if modules is missing
+      functionGraph: (site.layoutJson as any).functionGraph ?? { nodes: [], edges: [] }, // Fallback if functionGraph is missing
+    };
+  }
+
+  return (
+    <EditorPageClient
+      site={site}
+      siteJson={parsedSiteJson} // Pass the parsed SiteJson
+      orgId={params.orgId}
+    />
+  );
 }

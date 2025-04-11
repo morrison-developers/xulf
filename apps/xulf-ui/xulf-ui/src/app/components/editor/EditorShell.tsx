@@ -56,7 +56,8 @@ function DraggableModule({ type }: { type: string }) {
 
 export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
   const [editorState, setEditorState] = useState<SiteJson>({
-    modules: siteJson.modules,
+    modules: siteJson.modules,  // existing modules
+    functionGraph: siteJson.functionGraph || { nodes: [], edges: [] },  // ensure functionGraph is included
   });
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedModule = editorState.modules.find((m) => m.id === selectedId);

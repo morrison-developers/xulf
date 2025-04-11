@@ -51,6 +51,7 @@ export default function EditorPageClient({ site, siteJson, orgId }: Props) {
           <EditorShell siteId={site.id} siteJson={siteJson} selected={selected} />
         ) : (
           <FunctionShell
+            siteId={site.id}
             modules={siteJson.modules}
             selected={selected}
             onConnect={handleConnection}
