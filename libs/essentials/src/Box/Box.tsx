@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import React from 'react';
 
 interface Gap {
   /** Row gap between children, in pixels */
@@ -20,7 +20,7 @@ export interface BoxProps {
   justifyContent?: 'flex-start' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'flex-end';
   /** Row/column gap sizes */
   gap?: Gap;
-  /** Raw CSS injected into the Box */
+  /** Raw CSS classes (e.g. Tailwind) injected into the Box */
   customStyles?: string;
   /** Content inside the Box */
   children?: React.ReactNode;
@@ -34,17 +34,20 @@ export const Box = ({
   customStyles,
   children,
 }: BoxProps) => {
-  const StyledBox = styled.div`
-    display: flex;
-    flex-direction: ${orientation === 'horizontal' ? 'row' : 'column'};
-    align-items: ${alignItems};
-    justify-content: ${justifyContent};
-    row-gap: ${gap?.row ?? 0}px;
-    column-gap: ${gap?.column ?? 0}px;
-    ${customStyles || ''}
-  `;
+  const style: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: orientation === 'horizontal' ? 'row' : 'column',
+    alignItems,
+    justifyContent,
+    rowGap: gap?.row ?? 0,
+    columnGap: gap?.column ?? 0,
+  };
 
-  return <StyledBox>{children}</StyledBox>;
+  return (
+    <div style={style} className={customStyles}>
+      {children}
+    </div>
+  );
 };
 
 export default Box;

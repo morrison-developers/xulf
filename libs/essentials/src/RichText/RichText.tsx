@@ -1,20 +1,9 @@
 import type { HTMLAttributes } from 'react';
-import styled from 'styled-components';
-
-const StyledRichText = styled.div<
-  HTMLAttributes<HTMLDivElement> & { customStyles?: string }
->`
-  line-height: 1.6;
-  font-size: 1rem;
-  color: inherit;
-
-  ${({ customStyles }) => customStyles || ''}
-`;
 
 interface RichTextProps {
   /** Raw HTML string from CMS or dev */
   contentMarkup?: string;
-  /** Optional CSS for the wrapper */
+  /** Optional CSS classes for the wrapper */
   customStyles?: string;
   /** Optional ARIA label for accessibility */
   ariaLabel?: string;
@@ -22,9 +11,14 @@ interface RichTextProps {
 
 export function RichText({ contentMarkup, customStyles, ariaLabel }: RichTextProps) {
   return (
-    <StyledRichText
+    <div
       aria-label={ariaLabel}
-      customStyles={customStyles}
+      className={customStyles}
+      style={{
+        lineHeight: 1.6,
+        fontSize: '1rem',
+        color: 'inherit',
+      }}
       dangerouslySetInnerHTML={{ __html: contentMarkup || '<h2>RichText Content</h2>' }}
     />
   );
