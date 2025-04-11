@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import { useDraggable } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
-import DroppableCanvas from './DroppableCanvas';
 import { componentRegistry, propMetaRegistry } from '@xulf/editor-ui';
 import type { SiteJson } from '../../types/layout';
 import debounce from 'lodash/debounce';
@@ -54,10 +53,18 @@ function DraggableModule({ type }: { type: string }) {
   );
 }
 
+function getFunctionProps(id: string, connections: { input: string; event: string }[] = []) {
+  const props: Record<string, any> = {};
+  for (const { input, event } of connections) {
+    if (event === 'onClick') props.openTriggerId = input;
+  }
+  return props;
+}
+
 export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
   const [editorState, setEditorState] = useState<SiteJson>({
-    modules: siteJson.modules,  // existing modules
-    functionGraph: siteJson.functionGraph || { nodes: [], edges: [] },  // ensure functionGraph is included
+    modules: siteJson.modules,
+    functionGraph: siteJson.functionGraph || { nodes: [], edges: [] },
   });
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedModule = editorState.modules.find((m) => m.id === selectedId);
@@ -92,6 +99,21 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
       saveLayout(editorState);
     }
   }, [editorState, isDirty]);
+
+  const wiringMap = useMemo(() => {
+    const map: Record<string, { input: string; event: string }[]> = {};
+  
+    const edges = editorState.functionGraph?.edges ?? [];
+    for (const edge of edges) {
+      const [sourceId, sourceEvent] = edge.source.split(':');
+      const [targetId, targetHandler] = edge.target.split(':');
+  
+      if (!map[targetId]) map[targetId] = [];
+      map[targetId].push({ input: sourceId, event: sourceEvent });
+    }
+  
+    return map;
+  }, [editorState.functionGraph]);  
 
   const handleDrop = (event: any) => {
     const { over, active } = event;
@@ -134,7 +156,6 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
   return (
     <DndContext onDragEnd={handleDrop}>
       <div className="h-screen w-full overflow-hidden flex">
-        {/* Left Panel */}
         <aside className="w-64 border-r bg-white p-4 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Modules</h2>
           <div className="space-y-2">
@@ -145,7 +166,6 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
           </div>
         </aside>
 
-        {/* Center Canvas */}
         <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-sm font-semibold">Canvas</h2>
@@ -164,14 +184,24 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
             </button>
           </div>
 
-          <DroppableCanvas
-            layout={editorState.modules}
-            selectedId={selectedId}
-            onSelect={setSelectedId}
-          />
+          <div className="space-y-4">
+            {editorState.modules.map((mod) => {
+              const Component = componentRegistry[mod.type];
+              if (!Component) return <div key={mod.id}>Unknown module type: {mod.type}</div>;
+
+              return (
+                <div key={mod.id} onClick={() => setSelectedId(mod.id)}>
+                  <Component
+                    id={mod.id}
+                    {...mod.props}
+                    {...getFunctionProps(mod.id, wiringMap[mod.id])}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </main>
 
-        {/* Right Panel */}
         <aside className="w-80 border-l bg-white p-4 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Edit Props</h2>
           {!selectedModule ? (

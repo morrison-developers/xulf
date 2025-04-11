@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
+import { globalEventBus } from '@xulf/utils'
 
 const StyledButton = styled.button<
   { customStyles?: string } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -49,9 +50,7 @@ export function ButtonOverlay({
 }: ButtonOverlayProps) {
   const handleClick = () => {
     if (modalTargetId) {
-      window.dispatchEvent(
-        new CustomEvent('open-modal', { detail: { id: modalTargetId } })
-      );
+      globalEventBus.emit(`${modalTargetId}:open`);
     }
     if (onClick) onClick();
   };
