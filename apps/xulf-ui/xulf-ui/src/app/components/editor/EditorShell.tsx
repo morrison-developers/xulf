@@ -12,6 +12,7 @@ import debounce from 'lodash/debounce';
 interface EditorShellProps {
   siteId: string;
   siteJson: SiteJson;
+  selected?: string | null;
 }
 
 const defaultModuleProps: Record<string, any> = {
@@ -57,7 +58,6 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
   const [editorState, setEditorState] = useState<SiteJson>({
     modules: siteJson.modules,
   });
-
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedModule = editorState.modules.find((m) => m.id === selectedId);
   const editableProps = selectedModule ? propMetaRegistry[selectedModule.type] ?? [] : [];

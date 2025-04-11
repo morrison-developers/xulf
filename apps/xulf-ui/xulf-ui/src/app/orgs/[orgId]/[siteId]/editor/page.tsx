@@ -1,8 +1,8 @@
+// NO 'use client' here
 import { prisma } from '@xulf/db';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import EditorShell from '../../../../components/editor/EditorShell';
 import type { SiteJson } from '../../../../types/layout';
+import EditorPageClient from '../../../../components/editor/EditorPageClient';
 
 interface Props {
   params: {
@@ -26,25 +26,10 @@ export default async function EditorPage({ params }: Props) {
 
   if (!site) return notFound();
 
-  // Use stored siteJson from the DB or fallback to empty layout
   const parsedSiteJson: SiteJson =
-  site.layoutJson && typeof site.layoutJson === 'object' && 'modules' in site.layoutJson
-    ? (site.layoutJson as unknown as SiteJson)
-    : { modules: [] };
+    site.layoutJson && typeof site.layoutJson === 'object' && 'modules' in site.layoutJson
+      ? (site.layoutJson as unknown as SiteJson)
+      : { modules: [] };
 
-  return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Editor – {site.name}</h1>
-        <Link
-          href={`/orgs/${params.orgId}/${params.siteId}`}
-          className="text-sm text-blue-600 hover:underline"
-        >
-          ← Back to Site Dashboard
-        </Link>
-      </div>
-
-      <EditorShell siteId={site.id} siteJson={parsedSiteJson} />
-    </div>
-  );
+  return <EditorPageClient site={site} siteJson={parsedSiteJson} orgId={params.orgId} />;
 }
