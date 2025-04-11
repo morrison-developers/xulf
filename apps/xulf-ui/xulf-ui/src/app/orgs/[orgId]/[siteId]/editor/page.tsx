@@ -23,15 +23,14 @@ export default async function EditorPage({ params }: Props) {
 
   // Simulate layout JSON until stored in DB
   const mockSiteJson = {
-    layout: [
+    modules: [
       {
         id: '1',
         type: 'box',
         props: { customStyles: 'bg-yellow-100 p-4', children: 'I am a Box!' },
       },
     ],
-  };
-  
+  };  
 
   return (
     <div className="p-6 space-y-6">

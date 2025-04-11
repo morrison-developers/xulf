@@ -31,3 +31,9 @@ export function RichText({ contentMarkup, customStyles, ariaLabel }: RichTextPro
 }
 
 export default RichText;
+
+export const editableProps = [
+  { label: 'contentMarkup', type: 'text' },
+  { label: 'customStyles', type: 'text' },
+  { label: 'ariaLabel', type: 'text' },
+];

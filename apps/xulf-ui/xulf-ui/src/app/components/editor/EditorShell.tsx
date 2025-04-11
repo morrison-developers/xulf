@@ -5,13 +5,11 @@ import { DndContext } from '@dnd-kit/core';
 import { useDraggable } from '@dnd-kit/core';
 import { v4 as uuid } from 'uuid';
 import DroppableCanvas from './DroppableCanvas';
-import { componentRegistry } from '@xulf/editor-ui';
-import { type LayoutModule } from '../../types/layout';
+import { componentRegistry, propMetaRegistry } from '@xulf/editor-ui';
+import type { SiteJson } from '../../types/layout';
 
 interface EditorShellProps {
-  siteJson: {
-    layout: LayoutModule[];
-  };
+  siteJson: SiteJson;
 }
 
 const defaultModuleProps: Record<string, any> = {
@@ -35,27 +33,6 @@ const defaultModuleProps: Record<string, any> = {
   },
 };
 
-const editableProps: Record<string, { label: string; type: 'text' | 'number' | 'boolean' }[]> = {
-  box: [
-    { label: 'children', type: 'text' },
-    { label: 'customStyles', type: 'text' },
-  ],
-  buttonOverlay: [
-    { label: 'label', type: 'text' },
-    { label: 'customStyles', type: 'text' },
-  ],
-  image: [
-    { label: 'src', type: 'text' },
-    { label: 'alt', type: 'text' },
-    { label: 'customStyles', type: 'text' },
-  ],
-  modal: [
-    { label: 'title', type: 'text' },
-    { label: 'body', type: 'text' },
-    { label: 'triggerLabel', type: 'text' },
-  ],
-};
-
 function DraggableModule({ type }: { type: string }) {
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: `draggable-${type}`,
@@ -75,30 +52,37 @@ function DraggableModule({ type }: { type: string }) {
 }
 
 export default function EditorShell({ siteJson }: EditorShellProps) {
-  const [layout, setLayout] = useState(siteJson.layout);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [editorState, setEditorState] = useState<SiteJson>({
+    modules: siteJson.modules,
+  });
 
-  const selectedModule = layout.find((m) => m.id === selectedId);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const selectedModule = editorState.modules.find((m) => m.id === selectedId);
+  const editableProps = selectedModule ? propMetaRegistry[selectedModule.type] ?? [] : [];
 
   const handleDrop = (event: any) => {
     const { over, active } = event;
     const type = active.data?.current?.type;
 
     if (over?.id === 'canvas-dropzone' && type) {
-      setLayout((prev) => [
+      setEditorState((prev) => ({
         ...prev,
-        {
-          id: uuid(),
-          type,
-          props: defaultModuleProps[type] ?? {},
-        },
-      ]);
+        modules: [
+          ...prev.modules,
+          {
+            id: uuid(),
+            type,
+            props: defaultModuleProps[type] ?? {},
+          },
+        ],
+      }));
     }
   };
 
   const handlePropChange = (id: string, key: string, value: any) => {
-    setLayout((prev) =>
-      prev.map((mod) =>
+    setEditorState((prev) => ({
+      ...prev,
+      modules: prev.modules.map((mod) =>
         mod.id === id
           ? {
               ...mod,
@@ -108,8 +92,8 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
               },
             }
           : mod
-      )
-    );
+      ),
+    }));
   };
 
   return (
@@ -130,26 +114,25 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
         <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Canvas</h2>
           <DroppableCanvas
-            layout={layout}
+            layout={editorState.modules}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
+          <pre className="text-xs bg-gray-100 p-2 rounded mt-6 overflow-x-auto">
+            {JSON.stringify(editorState, null, 2)}
+          </pre>
         </main>
 
         {/* Right Panel */}
         <aside className="w-80 border-l bg-white p-4 overflow-y-auto">
           <h2 className="text-sm font-semibold mb-4">Edit Props</h2>
-
           {!selectedModule ? (
             <p className="text-sm text-gray-500">Select a module to edit its props.</p>
           ) : (
             <div className="space-y-4">
-              {/* Type label */}
               <div className="text-xs uppercase text-gray-400 tracking-wide">
                 {selectedModule.type}
               </div>
-
-              {/* Live Preview */}
               <div className="border p-2 rounded bg-gray-50">
                 {(() => {
                   const Component = componentRegistry[selectedModule.type];
@@ -160,10 +143,8 @@ export default function EditorShell({ siteJson }: EditorShellProps) {
                   );
                 })()}
               </div>
-
-              {/* Editable props */}
               <div className="space-y-2">
-                {(editableProps[selectedModule.type] ?? []).map(({ label, type }) => (
+                {editableProps.map(({ label, type }) => (
                   <div key={label} className="text-sm">
                     <label className="block font-medium text-gray-700 mb-1">{label}</label>
 

@@ -1,5 +1,3 @@
-// types/layout.ts
-
 import { ComponentProps } from 'react';
 import { componentRegistry } from '@xulf/editor-ui';
 
@@ -12,5 +10,5 @@ export interface LayoutModule {
 }
 
 export interface SiteJson {
-  layout: LayoutModule[];
+  modules: LayoutModule[];
 }
