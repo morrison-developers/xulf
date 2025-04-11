@@ -1,3 +1,4 @@
+// components/renderers/ClientModuleRenderer.tsx
 'use client';
 
 import { componentRegistry } from '@xulf/editor-ui';
@@ -12,7 +13,11 @@ export default function ClientModuleRenderer({ modules }: Props) {
     <>
       {modules.map((mod) => {
         const Component = componentRegistry[mod.type];
-        if (!Component) return null;
+
+        if (!Component) {
+          console.warn(`Missing component for type: ${mod.type}`);
+          return null;
+        }
 
         return (
           <Component
