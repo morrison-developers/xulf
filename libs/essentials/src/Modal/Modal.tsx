@@ -1,54 +1,5 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { globalEventBus } from '@xulf/utils';
-
-const Overlay = styled.div<React.HTMLAttributes<HTMLDivElement>>`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-`;
-
-const ModalWrapper = styled.div<
-  React.HTMLAttributes<HTMLDivElement> & {
-    size: ModalProps['size'];
-    isCentered?: boolean;
-    backgroundColor?: string;
-    borderRadius?: string;
-    customStyles?: string;
-  }
->`
-  position: fixed;
-  z-index: 1001;
-  top: ${({ isCentered }) => (isCentered ? '50%' : '20%')};
-  left: 50%;
-  transform: ${({ isCentered }) =>
-    isCentered ? 'translate(-50%, -50%)' : 'translateX(-50%)'};
-  background: ${({ backgroundColor }) => backgroundColor || '#fff'};
-  border-radius: ${({ borderRadius }) => borderRadius || '0px'};
-  padding: 2rem;
-
-  width: ${({ size }) => {
-    switch (size) {
-      case 'small':
-        return '50vw';
-      case 'large':
-        return '900px';
-      case 'full':
-        return '100vw';
-      default:
-        return '600px';
-    }
-  }};
-
-  height: ${({ size }) => (size === 'full' ? '100dvh' : 'auto')};
-
-  ${({ customStyles }) => customStyles || ''}
-`;
-
 interface ModalProps {
-  /** Unique module ID (used to receive open events) */
-  id: string;
+  isOpen: boolean;
   size?: 'small' | 'large' | 'full';
   isCentered?: boolean;
   backgroundColor?: string;
@@ -58,42 +9,39 @@ interface ModalProps {
 }
 
 export default function Modal({
-  id,
+  isOpen,
   size = 'large',
-  isCentered,
+  isCentered = true,
   backgroundColor = '#fff',
   borderRadius = '0px',
-  customStyles,
+  customStyles = '',
   children,
 }: ModalProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handler = () => setIsOpen(true);
-    globalEventBus.on(`${id}:open`, handler);
-    return () => globalEventBus.off(`${id}:open`, handler);
-  }, [id]);
-
   if (!isOpen) return null;
+
+  const sizeClass = {
+    small: 'w-[50vw]',
+    large: 'w-[900px]',
+    full: 'w-screen h-screen',
+  }[size];
 
   return (
     <>
-      <Overlay onClick={() => setIsOpen(false)} />
-      <ModalWrapper
-        size={size}
-        isCentered={isCentered}
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
-        customStyles={customStyles}
+      <div className="fixed inset-0 bg-black/90 z-50" />
+      <div
+        className={`fixed z-50 top-${isCentered ? '1/2' : '1/5'} left-1/2 transform ${
+          isCentered ? '-translate-x-1/2 -translate-y-1/2' : '-translate-x-1/2'
+        } p-8 ${sizeClass} rounded-[${borderRadius}]`}
+        style={{ backgroundColor }}
       >
-        {children}
-      </ModalWrapper>
+        <div className={customStyles}>{children}</div>
+      </div>
     </>
   );
 }
 
 export const editableProps = [
-  { label: 'id', type: 'text' },
+  { label: 'isOpen', type: 'boolean' },
   { label: 'size', type: 'text' },
   { label: 'isCentered', type: 'boolean' },
   { label: 'backgroundColor', type: 'text' },

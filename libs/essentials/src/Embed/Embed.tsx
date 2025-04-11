@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 interface EmbedProps {
   /** HTML string to embed, such as iframe or other embed code */
   embedContent: string;
@@ -7,20 +5,11 @@ interface EmbedProps {
   targetOrigin?: string;
   /** Whether to allow <script> tags in embedContent */
   allowScriptTags?: boolean;
-  /** Optional CSS string to style wrapper */
+  /** Optional CSS classes to style wrapper */
   customStyles?: string;
   /** Accessibility label */
   ariaLabel?: string;
 }
-
-const StyledEmbed = styled.div<
-  React.HTMLAttributes<HTMLDivElement> & { customStyles?: string }
->`
-  width: 100%;
-  overflow: hidden;
-
-  ${({ customStyles }) => customStyles || ''}
-`;
 
 export function Embed({
   embedContent,
@@ -35,10 +24,11 @@ export function Embed({
     : embedContent.replace(/<script.*?>.*?<\/script>/gi, '');
 
   return (
-    <StyledEmbed
+    <div
       role="region"
       aria-label={ariaLabel}
-      customStyles={customStyles}
+      className={customStyles}
+      style={{ width: '100%', overflow: 'hidden' }}
       dangerouslySetInnerHTML={{ __html: sanitizedContent }}
     />
   );

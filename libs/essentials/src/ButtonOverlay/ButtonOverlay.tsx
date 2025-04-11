@@ -1,28 +1,8 @@
 import type { ButtonHTMLAttributes } from 'react';
-import styled from 'styled-components';
-import { globalEventBus } from '@xulf/utils'
+import { globalEventBus } from '@xulf/utils';
+import clsx from 'clsx'; // optional, but nice for merging classes
 
-const StyledButton = styled.button<
-  { customStyles?: string } & ButtonHTMLAttributes<HTMLButtonElement>
->`
-  background: #0e0e0e;
-  color: #efefef;
-  border-radius: 0.5rem;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  width: clamp(12em, 12em, 25%);
-  height: clamp(4em, 4em, 8em);
-
-  transition: opacity ease 0.3s;
-  &:hover {
-    opacity: 0.77;
-  }
-
-  ${({ customStyles }) => customStyles || ''}
-`;
-
-interface ButtonOverlayProps {
+interface ButtonOverlayProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** If provided, the button acts as a link to this URL */
   linkUrl?: string;
   /** Whether the link should open in a new tab */
@@ -31,7 +11,7 @@ interface ButtonOverlayProps {
   modalTargetId?: string;
   /** Optional custom onClick handler */
   onClick?: () => void;
-  /** Raw CSS injected into the button */
+  /** Raw CSS classes injected into the button */
   customStyles?: string;
   /** ARIA label for accessibility */
   ariaLabel?: string;
@@ -44,9 +24,10 @@ export function ButtonOverlay({
   openInNewTab = false,
   modalTargetId,
   onClick,
-  customStyles,
+  customStyles = '',
   ariaLabel,
   children,
+  ...rest
 }: ButtonOverlayProps) {
   const handleClick = () => {
     if (modalTargetId) {
@@ -56,14 +37,18 @@ export function ButtonOverlay({
   };
 
   const button = (
-    <StyledButton
-      aria-label={ariaLabel || 'CTA Button'}
-      customStyles={customStyles}
+    <button
+      {...rest}
       onClick={handleClick}
+      aria-label={ariaLabel || 'CTA Button'}
       role="button"
+      className={clsx(
+        'bg-neutral-900 text-neutral-100 rounded-lg border-none p-0 w-[12em] h-[4em] hover:opacity-80 transition-opacity',
+        customStyles
+      )}
     >
       {children || 'Click me'}
-    </StyledButton>
+    </button>
   );
 
   if (linkUrl) {
