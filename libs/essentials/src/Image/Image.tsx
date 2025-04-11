@@ -24,3 +24,9 @@ export function Image({ src, alt, customStyles }: ImageProps) {
 }
 
 export default Image;
+
+export const editableProps = [
+  { label: 'src', type: 'text' },
+  { label: 'alt', type: 'text' },
+  { label: 'customStyles', type: 'text' },
+];

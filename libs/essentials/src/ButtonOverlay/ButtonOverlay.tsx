@@ -83,3 +83,12 @@ export function ButtonOverlay({
 }
 
 export default ButtonOverlay;
+
+export const editableProps = [
+  { label: 'linkUrl', type: 'text' },
+  { label: 'openInNewTab', type: 'boolean' },
+  { label: 'modalTargetId', type: 'text' },
+  { label: 'ariaLabel', type: 'text' },
+  { label: 'customStyles', type: 'text' },
+  { label: 'children', type: 'text' },
+];

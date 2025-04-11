@@ -45,3 +45,11 @@ export function Embed({
 }
 
 export default Embed;
+
+export const editableProps = [
+  { label: 'embedContent', type: 'text' },
+  { label: 'targetOrigin', type: 'text' },
+  { label: 'allowScriptTags', type: 'boolean' },
+  { label: 'customStyles', type: 'text' },
+  { label: 'ariaLabel', type: 'text' },
+];

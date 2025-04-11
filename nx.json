@@ -1,7 +1,11 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "!{projectRoot}/**/.generated/**", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "!{projectRoot}/**/.generated/**",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",

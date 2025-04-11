@@ -47,5 +47,13 @@ export const Box = ({
   return <StyledBox>{children}</StyledBox>;
 };
 
-
 export default Box;
+
+export const editableProps = [
+  { label: 'orientation', type: 'text' },
+  { label: 'alignItems', type: 'text' },
+  { label: 'justifyContent', type: 'text' },
+  { label: 'customStyles', type: 'text' },
+  { label: 'gap.row', type: 'number' },
+  { label: 'gap.column', type: 'number' },
+];

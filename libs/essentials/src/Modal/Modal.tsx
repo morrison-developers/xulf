@@ -55,7 +55,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-export function Modal({
+export default function Modal({
   id,
   size = 'large',
   isCentered,
@@ -94,3 +94,13 @@ export function Modal({
     </>
   );
 }
+
+export const editableProps = [
+  { label: 'id', type: 'text' },
+  { label: 'size', type: 'text' },
+  { label: 'isCentered', type: 'boolean' },
+  { label: 'backgroundColor', type: 'text' },
+  { label: 'borderRadius', type: 'text' },
+  { label: 'customStyles', type: 'text' },
+  { label: 'children', type: 'text' },
+];
