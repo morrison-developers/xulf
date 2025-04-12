@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import EditorShell from './EditorShell/EditorShell'
-import { FunctionShell } from '../functions/FunctionShell';
-import type { SiteJson } from '../../types/layout';
+import EditorShell from './EditorShell'
+import { FunctionShell } from '../../functions/FunctionShell';
+import type { SiteJson } from '../../../types/layout';
 
 interface Props {
   site: { id: string; name: string };

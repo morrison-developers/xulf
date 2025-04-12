@@ -1,6 +1,7 @@
 export interface EditableProp {
   name: string;
   type: 'string' | 'number' | 'boolean' | 'string[]';
+  options?: string[]; // 👈 optional enum values
 }
 
 export interface EditorMeta {

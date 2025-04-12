@@ -8,10 +8,10 @@ import { v4 as uuid } from 'uuid';
 import { componentRegistry, propMetaRegistry } from '@xulf/modules';
 import type { SiteJson } from '../../../types/layout';
 
-import { EditorSidebar } from './EditorSidebar';
-import { DroppableMain } from './DroppableMain';
-import { CanvasModule } from './CanvasModule';
-import { PropEditor } from './PropEditor';
+import { EditorSidebar } from '../EditorShell/EditorSidebar';
+import { DroppableMain } from '../EditorShell/DroppableMain';
+import { CanvasModule } from '../ui/CanvasModule';
+import { PropEditor } from '../EditorShell/PropEditor';
 
 interface EditorShellProps {
   siteId: string;

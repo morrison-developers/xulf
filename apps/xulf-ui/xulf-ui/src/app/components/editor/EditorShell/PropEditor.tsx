@@ -1,11 +1,7 @@
-'use client';
-
-import { componentRegistry } from '@xulf/modules';
 import { EditableProp } from '@xulf/modules/src/types';
-
-import type { LayoutModule } from '../../../types/layout';
-
-interface PropEditorProps {
+import { LayoutModule } from '../../../types/layout';
+import { PropWidget } from '../widgets/PropWidget'; // import the PropWidget component
+export interface PropEditorProps {
   selectedModule: LayoutModule | null;
   editableProps: EditableProp[];
   onPropChange: (key: string, value: any) => void;
@@ -16,8 +12,6 @@ export function PropEditor({ selectedModule, editableProps, onPropChange }: Prop
     return <p className="text-sm text-gray-500">Select a module to edit its props.</p>;
   }
 
-  const Component = componentRegistry[selectedModule.type];
-
   return (
     <div className="space-y-4">
       <div className="text-xs uppercase text-gray-400 tracking-wide">
@@ -25,40 +19,16 @@ export function PropEditor({ selectedModule, editableProps, onPropChange }: Prop
       </div>
 
       <div className="border p-2 rounded bg-gray-50">
-        {Component ? <Component {...selectedModule.props} /> : <div className="text-red-500">Unknown component</div>}
-      </div>
-
-      <div className="space-y-2">
-        {editableProps.map(({ name, type }) => (
+        {editableProps.map(({ name, type, options }) => (
           <div key={name} className="text-sm">
             <label className="block font-medium text-gray-700 mb-1">{name}</label>
-
-            {type === 'string' && (
-              <input
-                type="text"
-                value={selectedModule.props[name] || ''}
-                onChange={(e) => onPropChange(name, e.target.value)}
-                className="w-full border rounded px-2 py-1 text-sm"
-              />
-            )}
-
-            {type === 'number' && (
-              <input
-                type="number"
-                value={selectedModule.props[name] || 0}
-                onChange={(e) => onPropChange(name, Number(e.target.value))}
-                className="w-full border rounded px-2 py-1 text-sm"
-              />
-            )}
-
-            {type === 'boolean' && (
-              <input
-                type="checkbox"
-                checked={!!selectedModule.props[name]}
-                onChange={(e) => onPropChange(name, e.target.checked)}
-                className="h-4 w-4"
-              />
-            )}
+            <PropWidget
+              name={name}
+              type={type}
+              value={selectedModule.props[name]}
+              options={options}
+              onChange={(value) => onPropChange(name, value)}
+            />
           </div>
         ))}
       </div>

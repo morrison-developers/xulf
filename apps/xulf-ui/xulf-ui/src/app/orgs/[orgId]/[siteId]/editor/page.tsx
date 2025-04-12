@@ -2,7 +2,7 @@
 import { prisma } from '@xulf/db';
 import { notFound } from 'next/navigation';
 import type { SiteJson } from '../../../../types/layout';
-import EditorPageClient from '../../../../components/editor/EditorPageClient';
+import EditorPageClient from '../../../../components/editor/containers/EditorPageClient';
 
 interface Props {
   params: {

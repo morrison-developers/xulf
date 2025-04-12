@@ -1,31 +1,55 @@
 import type { EditorMeta } from '../types';
 
-/**
- * Editor metadata for the Box module.
- * 
- * - `defaultProps`: values shown when a module is first added to the canvas
- * - `editableProps`: props available in the right-side editor panel
- *   - `name`: key of the prop
- *   - `type`: control type ('string', 'number', 'boolean', or 'string[]')
- */
 export const editorMeta: EditorMeta = {
   displayName: 'Box',
   icon: '🧩',
   defaultProps: {
-    orientation: 'vertical',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
-    gap: { row: 0, column: 0 },
-    customStyles: 'background-color: #f3f4f6;', // raw CSS!
+    customStyles: '',
     children: 'New Box',
   },
   editableProps: [
-    { name: 'orientation', type: 'string' },
-    { name: 'alignItems', type: 'string' },
-    { name: 'justifyContent', type: 'string' },
-    { name: 'gap.row', type: 'number' },
-    { name: 'gap.column', type: 'number' },
-    { name: 'customStyles', type: 'string' }, // interpreted as raw inline CSS
-    { name: 'children', type: 'string' },
-  ],
+  {
+    "name": "orientation",
+    "type": "string",
+    "options": [
+      "horizontal",
+      "vertical"
+    ]
+  },
+  {
+    "name": "alignItems",
+    "type": "string",
+    "options": [
+      "flex-start",
+      "center",
+      "flex-end",
+      "stretch",
+      "baseline"
+    ]
+  },
+  {
+    "name": "justifyContent",
+    "type": "string",
+    "options": [
+      "flex-start",
+      "center",
+      "space-between",
+      "space-around",
+      "space-evenly",
+      "flex-end"
+    ]
+  },
+  {
+    "name": "gap",
+    "type": "string"
+  },
+  {
+    "name": "customStyles",
+    "type": "string"
+  },
+  {
+    "name": "children",
+    "type": "string"
+  }
+],
 };
