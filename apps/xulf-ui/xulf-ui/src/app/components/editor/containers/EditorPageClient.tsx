@@ -4,11 +4,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import EditorShell from './EditorShell'
 import { FunctionShell } from '../../functions/FunctionShell';
-import type { SiteJson } from '../../../types/layout';
+import type { SiteJSON } from '@xulf/types';
 
 interface Props {
   site: { id: string; name: string };
-  siteJson: SiteJson;
+  siteJson: SiteJSON;
   orgId: string;
 }
 
@@ -52,7 +52,7 @@ export default function EditorPageClient({ site, siteJson, orgId }: Props) {
         ) : (
           <FunctionShell
             siteId={site.id}
-            modules={siteJson.modules}
+            modules={Object.values(siteJson.layout.modules)}
             selected={selected}
             onConnect={handleConnection}
           />

@@ -15,7 +15,7 @@ import ReactFlow, {
 import { useCallback, useMemo, useState, useEffect } from 'react';
 import { FunctionNodeComponent } from './function-nodes/FunctionNodeComponent';
 import { DraggableFunctionNode } from './function-nodes/DraggableFunctionNode';
-import type { FunctionConnection } from '../../types/functions';
+import type { FunctionConnection } from '@xulf/types';
 
 interface FunctionEditorProps {
   siteId: string;

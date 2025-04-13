@@ -1,12 +1,5 @@
 import { EventBinding } from './events';
-
-export type ModuleType =
-  | 'Box'
-  | 'ButtonOverlay'
-  | 'Image'
-  | 'Modal'
-  | 'Embed'
-  | 'RichText';
+import { ModuleType } from './site';
 
 export type ModuleProps = Record<string, any>; // You can specialize later
 

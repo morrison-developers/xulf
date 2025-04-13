@@ -14,6 +14,7 @@ export interface EditorMeta {
 export interface ModuleDef {
   type: string;
   component: React.FC<any>;
+  editorComponent: React.FC<any>; 
   editorMeta: EditorMeta;
   functionMeta: FunctionMeta;
 }

@@ -1,6 +1,9 @@
+'use client';
+
 import { EditableProp } from '@xulf/modules/src/types';
-import { LayoutModule } from '../../../types/layout';
-import { PropWidget } from '../widgets/PropWidget'; // import the PropWidget component
+import { LayoutModule } from '@xulf/types';
+import { PropWidget } from './widgets/PropWidget';
+
 export interface PropEditorProps {
   selectedModule: LayoutModule | null;
   editableProps: EditableProp[];

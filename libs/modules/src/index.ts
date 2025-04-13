@@ -13,6 +13,11 @@ export const componentRegistry = Object.fromEntries(
   allModules.map((m) => [m.type, m.component])
 );
 
+
+export const editorComponentRegistry = Object.fromEntries(
+  allModules.map((m) => [m.type, m.editorComponent])
+);
+
 export const propMetaRegistry = Object.fromEntries(
   allModules.map((m) => [m.type, m.editorMeta.editableProps])
 );

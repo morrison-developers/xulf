@@ -15,3 +15,15 @@ export interface LogicConnection {
     action: string;
   };
 }
+
+/**
+ * Reverse mapping of logic connections.
+ * For a given target module ID, shows the source module IDs and events that affect it.
+ */
+export type WiringMap = Record<
+  string, // targetModuleId
+  {
+    input: string; // sourceModuleId
+    event: string; // event on source module (e.g. "onClick")
+  }[]
+>;

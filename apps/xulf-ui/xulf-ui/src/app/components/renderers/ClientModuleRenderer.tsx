@@ -2,7 +2,7 @@
 'use client';
 
 import { componentRegistry } from '@xulf/modules';
-import { LayoutModule } from '../../types/layout';
+import { LayoutModule } from '@xulf/types';
 
 interface Props {
   modules: LayoutModule[];

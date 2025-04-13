@@ -87,7 +87,7 @@ model Site {
   name            String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  layoutJson      Json?
+  layoutJson      Json?    @default("{}")
   functionGraph   Json?    // Add this field for storing the function graph
 
   // Foreign key to Organization

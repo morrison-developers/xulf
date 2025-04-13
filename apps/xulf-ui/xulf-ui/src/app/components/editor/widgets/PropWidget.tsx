@@ -1,6 +1,6 @@
 "use client";
-import { useState } from 'react';
-import { FullScreenEditorModal } from '../ui/CustomStylesModal'; // Import modal component
+import { useState } from "react";
+import { FullScreenEditorModal } from "../ui/CustomStylesModal"; // Import modal component
 
 interface PropWidgetProps {
   name: string;
@@ -21,27 +21,32 @@ export const PropWidget = ({ name, type, value, options, onChange }: PropWidgetP
     }
   };
 
-  switch (type) {
-    case 'string':
-      if (name === 'customStyles') {
-        return (
-          <>
-            <button
-              className="w-full border rounded px-2 py-1 text-sm"
-              onClick={handleCustomStyles}
-            >
-              Edit Custom Styles
-            </button>
-            <FullScreenEditorModal
-              isOpen={isModalOpen}
-              initialValue={value || ''}
-              onClose={() => setModalOpen(false)}
-              onSave={(css) => onChange(css)}
-            />
-          </>
-        );
-      }
-      return options ? (
+  // Render custom styles button when 'customStyles' prop is passed for string type
+  const renderStringInput = () => {
+    if (name === 'customStyles') {
+      return (
+        <>
+          <button
+            className="w-full border rounded px-2 py-1 text-sm"
+            onClick={handleCustomStyles}
+          >
+            Edit Custom Styles
+          </button>
+          <FullScreenEditorModal
+            isOpen={isModalOpen}
+            initialValue={value || ''}
+            onClose={() => setModalOpen(false)}
+            onSave={(css) => {
+              setModalOpen(false);
+              onChange(css);
+            }}
+          />
+        </>
+      );
+    }
+    // For other string fields, use input or select
+    if (options) {
+      return (
         <select
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
@@ -53,32 +58,44 @@ export const PropWidget = ({ name, type, value, options, onChange }: PropWidgetP
             </option>
           ))}
         </select>
-      ) : (
-        <input
-          type="text"
-          value={value || ''}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full border rounded px-2 py-1 text-sm"
-        />
       );
+    }
+
+    return (
+      <input
+        type="text"
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full border rounded px-2 py-1 text-sm"
+      />
+    );
+  };
+
+  const renderNumberInput = () => (
+    <input
+      type="number"
+      value={value || 0}
+      onChange={(e) => onChange(Number(e.target.value))}
+      className="w-full border rounded px-2 py-1 text-sm"
+    />
+  );
+
+  const renderBooleanInput = () => (
+    <input
+      type="checkbox"
+      checked={!!value}
+      onChange={(e) => onChange(e.target.checked)}
+      className="h-4 w-4"
+    />
+  );
+
+  switch (type) {
+    case 'string':
+      return renderStringInput();
     case 'number':
-      return (
-        <input
-          type="number"
-          value={value || 0}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="w-full border rounded px-2 py-1 text-sm"
-        />
-      );
+      return renderNumberInput();
     case 'boolean':
-      return (
-        <input
-          type="checkbox"
-          checked={!!value}
-          onChange={(e) => onChange(e.target.checked)}
-          className="h-4 w-4"
-        />
-      );
+      return renderBooleanInput();
     default:
       return null;
   }

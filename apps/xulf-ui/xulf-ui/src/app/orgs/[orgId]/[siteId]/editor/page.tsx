@@ -1,7 +1,7 @@
 // NO 'use client' here
 import { prisma } from '@xulf/db';
 import { notFound } from 'next/navigation';
-import type { SiteJson } from '../../../../types/layout';
+import { siteJsonSchema, validateSiteJsonOrDefault } from '@xulf/types';
 import EditorPageClient from '../../../../components/editor/containers/EditorPageClient';
 
 interface Props {
@@ -21,27 +21,19 @@ export default async function EditorPage({ params }: Props) {
       id: true,
       name: true,
       layoutJson: true,
-      functionGraph: true,  // Add functionGraph to the selection
+      createdAt: true,
+      updatedAt: true,
     },
   });
 
   if (!site) return notFound();
 
-  // Safely parse the layoutJson to fit the SiteJson shape
-  let parsedSiteJson: SiteJson = { modules: [], functionGraph: { nodes: [], edges: [] } };
-
-  if (site.layoutJson && typeof site.layoutJson === 'object' && !Array.isArray(site.layoutJson)) {
-    // If layoutJson is an object, try to cast it to SiteJson
-    parsedSiteJson = {
-      modules: (site.layoutJson as any).modules ?? [], // Fallback to an empty array if modules is missing
-      functionGraph: (site.layoutJson as any).functionGraph ?? { nodes: [], edges: [] }, // Fallback if functionGraph is missing
-    };
-  }
+  const parsedSiteJSON = validateSiteJsonOrDefault(site);
 
   return (
     <EditorPageClient
       site={site}
-      siteJson={parsedSiteJson} // Pass the parsed SiteJson
+      siteJson={parsedSiteJSON}
       orgId={params.orgId}
     />
   );
