@@ -2,6 +2,7 @@
 import { BoxDef } from './Box';
 // AUTO-IMPORT MODULES HERE
 
+import type { ModulePropsMap } from './generated/ModulePropsMap';
 import type { ModuleDef } from './types';
 
 export const allModules: ModuleDef[] = [
@@ -25,3 +26,5 @@ export const propMetaRegistry = Object.fromEntries(
 export const functionRegistry = Object.fromEntries(
   allModules.map((m) => [m.type, m.functionMeta])
 );
+
+export { ModulePropsMap }

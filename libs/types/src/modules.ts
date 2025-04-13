@@ -1,12 +1,11 @@
 import { EventBinding } from './events';
-import { ModuleType } from './site';
+import type { ModulePropsMap } from '@xulf/modules';
 
-export type ModuleProps = Record<string, any>; // You can specialize later
+export type ModuleProps<T extends keyof ModulePropsMap = keyof ModulePropsMap> = ModulePropsMap[T];
 
-export interface ModuleInstance {
+export interface ModuleInstance<T extends keyof ModulePropsMap = keyof ModulePropsMap> {
   id: string;
-  type: ModuleType;
-  props: ModuleProps;
-  customStyles?: string;
+  type: T;
+  props: ModuleProps<T>;
   bindings?: EventBinding[];
 }

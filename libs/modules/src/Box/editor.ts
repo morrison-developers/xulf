@@ -17,7 +17,7 @@ export const editorMeta: EditorMeta = {
     ]
   },
   {
-    "name": "alignItems",
+    "name": "align-items",
     "type": "string",
     "options": [
       "flex-start",
@@ -28,7 +28,7 @@ export const editorMeta: EditorMeta = {
     ]
   },
   {
-    "name": "justifyContent",
+    "name": "justify-content",
     "type": "string",
     "options": [
       "flex-start",
@@ -44,7 +44,7 @@ export const editorMeta: EditorMeta = {
     "type": "string"
   },
   {
-    "name": "customStyles",
+    "name": "custom-styles",
     "type": "string"
   },
   {

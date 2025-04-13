@@ -39,14 +39,16 @@ function parseInlineStyles(css: string): React.CSSProperties {
   return style;
 }
 
-export const Box = ({
-  orientation = 'vertical',
-  alignItems = 'stretch',
-  justifyContent = 'flex-start',
-  gap,
-  customStyles,
-  children,
-}: BoxProps) => {
+export const Box = (props: BoxProps) => {
+  const {
+    orientation = 'vertical',
+    alignItems = 'stretch',
+    justifyContent = 'flex-start',
+    gap,
+    customStyles,
+    children,
+  } = props;
+
   const style: React.CSSProperties = {
     display: 'flex',
     flexDirection: orientation === 'horizontal' ? 'row' : 'column',

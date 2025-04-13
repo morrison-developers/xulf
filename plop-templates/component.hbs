@@ -39,14 +39,16 @@ function parseInlineStyles(css: string): React.CSSProperties {
   return style;
 }
 
-export const {{pascalCase name}} = ({
-  orientation = 'vertical',
-  alignItems = 'stretch',
-  justifyContent = 'flex-start',
-  gap,
-  customStyles,
-  children,
-}: {{pascalCase name}}Props) => {
+export const {{pascalCase name}} = (props: {{pascalCase name}}Props) => {
+  const {
+    orientation = 'vertical',
+    alignItems = 'stretch',
+    justifyContent = 'flex-start',
+    gap,
+    customStyles,
+    children,
+  } = props;
+
   const style: React.CSSProperties = {
     display: 'flex',
     flexDirection: orientation === 'horizontal' ? 'row' : 'column',

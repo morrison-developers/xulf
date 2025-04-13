@@ -55,7 +55,7 @@ module.exports = function (plop) {
           path: 'libs/modules/src/index.ts',
           pattern: /(\/\/ AUTO-REGISTER MODULES HERE)/,
           template: '  {{pascalCase name}}Def,\n$1',
-        },
+        },          
       ];
     },
   });

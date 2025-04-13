@@ -10,11 +10,10 @@ export interface EditorMeta {
   defaultProps: Record<string, any>;
   editableProps: EditableProp[];
 }
-
-export interface ModuleDef {
-  type: string;
-  component: React.FC<any>;
-  editorComponent: React.FC<any>; 
+export interface ModuleDef<T extends string = string, P = Record<string, any>> {
+  type: T;
+  component: React.FC<P>;
+  editorComponent: React.FC<any>;
   editorMeta: EditorMeta;
   functionMeta: FunctionMeta;
 }

@@ -7,23 +7,22 @@ interface PropWidgetProps {
   type: 'string' | 'number' | 'boolean' | 'string[]';
   value: any;
   options?: string[];
-  onChange: (value: any) => void;
+  onChange: (key: string, value: any) => void;
 }
 
 export const PropWidget = ({ name, type, value, options, onChange }: PropWidgetProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const handleCustomStyles = () => {
-    if (type === 'string' && name === 'customStyles') {
+    if (type === 'string' && name === 'custom-styles') {
       setModalOpen(true);
     } else {
-      onChange(value);
+      onChange(name, value);
     }
   };
 
-  // Render custom styles button when 'customStyles' prop is passed for string type
   const renderStringInput = () => {
-    if (name === 'customStyles') {
+    if (name === 'custom-styles') {
       return (
         <>
           <button
@@ -38,18 +37,18 @@ export const PropWidget = ({ name, type, value, options, onChange }: PropWidgetP
             onClose={() => setModalOpen(false)}
             onSave={(css) => {
               setModalOpen(false);
-              onChange(css);
+              onChange(name, css);
             }}
           />
         </>
       );
     }
-    // For other string fields, use input or select
+
     if (options) {
       return (
         <select
           value={value || ''}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(name, e.target.value)}
           className="w-full border rounded px-2 py-1 text-sm"
         >
           {options.map((opt) => (
@@ -65,7 +64,7 @@ export const PropWidget = ({ name, type, value, options, onChange }: PropWidgetP
       <input
         type="text"
         value={value || ''}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(name, e.target.value)}
         className="w-full border rounded px-2 py-1 text-sm"
       />
     );
@@ -75,7 +74,7 @@ export const PropWidget = ({ name, type, value, options, onChange }: PropWidgetP
     <input
       type="number"
       value={value || 0}
-      onChange={(e) => onChange(Number(e.target.value))}
+      onChange={(e) => onChange(name, Number(e.target.value))}
       className="w-full border rounded px-2 py-1 text-sm"
     />
   );
@@ -84,7 +83,7 @@ export const PropWidget = ({ name, type, value, options, onChange }: PropWidgetP
     <input
       type="checkbox"
       checked={!!value}
-      onChange={(e) => onChange(e.target.checked)}
+      onChange={(e) => onChange(name, e.target.checked)}
       className="h-4 w-4"
     />
   );

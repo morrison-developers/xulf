@@ -6,7 +6,7 @@ import { CanvasModule } from '../ui/CanvasModule';
 import { PropEditor } from '../PropEditor';
 import { useEditorState } from '../hooks/useEditorState';
 import { DragAndDropHandler } from '../utils/DragAndDropHandler';
-import type { SiteJSON } from '@xulf/types';
+import type { ModuleInstance, SiteJSON } from '@xulf/types';
 
 
 interface EditorShellProps {
@@ -25,33 +25,34 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
     DragAndDropHandler(event, setEditorState, setIsDirty);
   };
 
-  const handlePropChange = (key: string, value: any) => {
-    if (selectedModule && selectedModule.props[key] !== value) {
-      const updatedEditorState = {
-        ...editorState,
-        modules: Object.values(editorState.layout.modules).map((mod) =>
-          mod.id === selectedModule.id
-            ? {
-                ...mod,
-                props: {
-                  ...mod.props,
-                  [key]: value, // Update the specific prop
-                },
-              }
-            : mod
-        ),
-      };
-  
-      // Deeply serialize props (if necessary) before saving
-      const serializedState = JSON.parse(JSON.stringify(updatedEditorState)); // Ensures all nested objects are deeply copied
-
-      setEditorState(serializedState);
-      setIsDirty(true);
-      saveLayout(serializedState)
+  const handlePropChange = (moduleId: string, key: string, value: any) => {
+    setEditorState((prev) => {
+      const mod = prev.layout.modules[moduleId] as ModuleInstance;
+      if (!mod) return prev;
     
-    }
+      const updatedModule = {
+        ...mod,
+        props: {
+          ...mod.props,
+          [key]: value,
+        },
+      };
+    
+      const updatedState = {
+        ...prev,
+        layout: {
+          ...prev.layout,
+          modules: {
+            ...prev.layout.modules,
+            [moduleId]: updatedModule,
+          },
+        },
+      };
+    
+      setIsDirty(true);
+      return updatedState as SiteJSON; // 👈 Add this
+    });    
   };
-  
 
   return (
     <DndContext onDragEnd={(event) => handleDrop(event)}>
@@ -87,7 +88,7 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
           <PropEditor
             selectedModule={selectedModule}
             editableProps={editableProps}
-            onPropChange={(key, value) => { if (selectedModule) handlePropChange(selectedModule.id, value); }}
+            onPropChange={(key, value) => selectedModule && handlePropChange(selectedModule.id, key, value)}
           />
         </aside>
       </div>
