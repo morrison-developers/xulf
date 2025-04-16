@@ -2,6 +2,7 @@ import { prisma } from '@xulf/db';
 import { getServerSession } from 'next-auth';
 import { authConfig } from '../api/auth/config';
 import EntityList from '../components/layouts/EntityList';
+import { OrganizationSummary } from '@xulf/types';
 
 export default async function OrgsPage() {
   const session = await getServerSession(authConfig);
@@ -15,11 +16,13 @@ export default async function OrgsPage() {
     include: { organization: true },
   });
 
-  const orgs = memberships.map(({ organization }) => ({
-    id: organization.id,
-    name: organization.name,
-    href: `/orgs/${organization.id}`,
-  }));
+  const orgs: OrganizationSummary[] = memberships.map(
+    ({ organization }: { organization: { id: string; name: string } }) => ({
+      id: organization.id,
+      name: organization.name,
+      href: `/orgs/${organization.id}`,
+    })
+  );
 
   return (
     <div className="p-6">

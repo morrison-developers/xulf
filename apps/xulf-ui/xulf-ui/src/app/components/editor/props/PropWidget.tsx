@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FullScreenEditorModal } from "../ui/CustomStylesModal"; // Import modal component
+import { FullScreenEditorModal } from "./CustomStylesModal"; // Import modal component
 
 interface PropWidgetProps {
   name: string;

@@ -1,20 +1,20 @@
 'use client';
 
-import { useDraggable } from '@dnd-kit/core';
+import { useDragItem } from './useDragItem';
 
 interface DraggableModuleProps {
   type: string;
 }
 
 export function DraggableModule({ type }: DraggableModuleProps) {
-  const { attributes, listeners, setNodeRef } = useDraggable({
+  const { dragRef, listeners, attributes } = useDragItem({
     id: `draggable-${type}`,
-    data: { type },
+    type,
   });
 
   return (
     <div
-      ref={setNodeRef}
+      ref={dragRef}
       {...listeners}
       {...attributes}
       className="p-2 border rounded bg-white shadow text-sm cursor-pointer hover:bg-gray-50"

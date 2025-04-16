@@ -1,16 +1,15 @@
-import React from 'react';
+'use client';
 
-/**
- * BoxEditor is a flexible layout container designed specifically for the editor.
- * It includes extra visual cues for editing like selection borders and drag handles.
- */
+import { ResolvedModuleInstance } from '@xulf/types';
+import { CanvasModule } from '../../../../apps/xulf-ui/xulf-ui/src/app/components/editor/layout/CanvasModule';
+
 export interface BoxEditorProps {
   orientation?: 'horizontal' | 'vertical';
   alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
   justifyContent?: 'flex-start' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | 'flex-end';
   gap?: { row?: number; column?: number };
   customStyles?: string;
-  children?: React.ReactNode;
+  children?: ResolvedModuleInstance[]; // Resolved module instances for editor
 }
 
 /** Parses a raw CSS string into a valid React style object */
@@ -45,11 +44,11 @@ export const BoxEditor = ({
   };
 
   return (
-    <div
-      style={style}
-      className="editor-box" // Specific editor styling
-    >
-      {children}
+    <div style={style} className="editor-box">
+      {/* Render resolved children (layout modules) */}
+      {children?.map((child) => (
+        <CanvasModule key={child.id} mod={child} isSelected={false} onSelect={() => {}} connections={[]} editableProps={[]} onDrop={() => {}} />
+      ))}
     </div>
   );
 };
