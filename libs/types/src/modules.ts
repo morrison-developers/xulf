@@ -1,18 +1,23 @@
 import { EventBinding } from './events';
 import type { ModulePropsMap } from '@xulf/modules';
 
-export type ModuleProps<T extends keyof ModulePropsMap = keyof ModulePropsMap> = ModulePropsMap[T];
+export const MODULE_TYPES = ['box', 'box2', 'box3'] as const;
+export type ModuleType = typeof MODULE_TYPES[number];
 
-export interface ModuleInstance<T extends keyof ModulePropsMap = keyof ModulePropsMap> {
+export type ModuleProps = ModulePropsMap[ModuleType];
+
+export interface ModuleInstance {
   id: string;
-  type: T;
-  props: ModuleProps<T>;
+  type: ModuleType;
+  props: ModuleProps;
   bindings?: EventBinding[];
   children?: string[];
 }
 
-export type ResolvedModuleInstance<T extends keyof ModulePropsMap = keyof ModulePropsMap> = {
+export type ResolvedModuleInstance = {
   id: string;
-  type: T;
-  props: ModuleProps<T> & { children?: ResolvedModuleInstance[] }; // Add children as resolved module instances
+  type: ModuleType;
+  props: ModuleProps & {
+    children?: ResolvedModuleInstance[];
+  };
 };

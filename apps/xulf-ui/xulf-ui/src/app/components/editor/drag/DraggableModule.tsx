@@ -8,7 +8,7 @@ interface DraggableModuleProps {
 
 export function DraggableModule({ type }: DraggableModuleProps) {
   const { dragRef, listeners, attributes } = useDragItem({
-    id: `draggable-${type}`,
+    id: type,
     type,
   });
 

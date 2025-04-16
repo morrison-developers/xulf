@@ -1,4 +1,3 @@
-// Function to resolve a ModuleInstance to a ResolvedModuleInstance
 import type {
   ModuleInstance,
   ModuleProps,
@@ -7,10 +6,10 @@ import type {
 
 import { ModulePropsMap } from '@xulf/modules';
 
-export function ModuleInstanceToResolvedModuleInstance<T extends keyof ModulePropsMap>(
-  mod: ModuleInstance<T>,
+export function ModuleInstanceToResolvedModuleInstance(
+  mod: ModuleInstance,
   allModules: Record<string, ModuleInstance>
-): ResolvedModuleInstance<T> {
+): ResolvedModuleInstance {
   const resolvedChildren: ResolvedModuleInstance[] =
     (mod.props.children as string[] | undefined)?.map((childId: string) =>
       ModuleInstanceToResolvedModuleInstance(allModules[childId], allModules)
@@ -21,7 +20,7 @@ export function ModuleInstanceToResolvedModuleInstance<T extends keyof ModulePro
     type: mod.type,
     props: {
       ...mod.props,
-      children: resolvedChildren, // Resolved to be the correct type based on the module
-    } as ModuleProps<T> & { children?: ResolvedModuleInstance<T>[] },
+      children: resolvedChildren,
+    } as ModuleProps & { children?: ResolvedModuleInstance[] },
   };
 }

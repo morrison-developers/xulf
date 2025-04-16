@@ -1,7 +1,7 @@
 // NO 'use client' here
 import { prisma } from '@xulf/db';
 import { notFound } from 'next/navigation';
-import { siteJsonSchema, validateSiteJsonOrDefault } from '@xulf/types';
+import { SiteJSON, validateSiteJsonOrDefault } from '@xulf/types';
 import EditorPageClient from '../../../../components/editor/containers/EditorPageClient';
 
 interface Props {
@@ -33,7 +33,7 @@ export default async function EditorPage({ params }: Props) {
   return (
     <EditorPageClient
       site={site}
-      siteJson={parsedSiteJSON}
+      siteJson={parsedSiteJSON as SiteJSON}
       orgId={params.orgId}
     />
   );

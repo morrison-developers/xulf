@@ -14,13 +14,9 @@ export function DropZone({ targetId, position, onDrop }: DropZoneProps) {
   return (
     <div
       ref={dropRef}
-      className={`w-full h-12 transition-all border ${
-        isOver ? 'border-blue-500 bg-blue-100' : 'border-gray-300'
-      }`}
+      className={`h-6 w-full transition-all border-2 rounded 
+        ${isOver ? 'border-blue-500 bg-blue-100' : 'border-transparent'}`}
       style={{ position: 'relative', zIndex: 50 }}
-      onClick={() =>
-        isOver && targetId && onDrop(targetId, 'module')
-      }
     />
   );
 }

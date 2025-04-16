@@ -4,8 +4,8 @@ import { EditableProp } from '@xulf/modules/src/types';
 import { ModuleInstance } from '@xulf/types';
 import { PropWidget } from './PropWidget';
 
-export interface PropEditorProps<T extends ModuleInstance> {
-  selectedModule: T | null; // Ensure it's the correct type of module
+export interface PropEditorProps {
+  selectedModule: ModuleInstance | null;
   editableProps: EditableProp[];
   onPropChange: (key: string, value: any) => void;
 }
@@ -14,11 +14,11 @@ function toKebabCase(str: string): string {
   return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
-export function PropEditor<T extends ModuleInstance>({
+export function PropEditor({
   selectedModule,
   editableProps,
   onPropChange,
-}: PropEditorProps<T>) {
+}: PropEditorProps) {
   if (!selectedModule) {
     return <p className="text-sm text-gray-500">Select a module to edit its props.</p>;
   }
@@ -32,8 +32,7 @@ export function PropEditor<T extends ModuleInstance>({
       <div className="border p-2 rounded bg-gray-50">
         {editableProps.map(({ name, type, options }) => {
           const kebabName = toKebabCase(name);
-          // Since selectedModule is now a generic type, TypeScript knows its shape
-          const value = selectedModule.props[kebabName as keyof typeof selectedModule.props]; // Safe access
+          const value = selectedModule.props[kebabName as keyof typeof selectedModule.props];
 
           return (
             <div key={kebabName} className="text-sm">

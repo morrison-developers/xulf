@@ -1,5 +1,4 @@
-import {  ModuleProps } from './modules';
-import { ModuleType } from './site';
+import {  ModuleProps, ModuleType } from './modules';
 
 export interface ModuleMetadata {
   type: ModuleType;

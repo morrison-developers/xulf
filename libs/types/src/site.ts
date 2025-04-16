@@ -1,4 +1,4 @@
-import { ModuleInstance } from './modules';
+import { ModuleInstance, ModuleType } from './modules';
 import { LogicConnection } from './events';
 import { ComponentProps } from 'react';
 import { componentRegistry } from '@xulf/modules';
@@ -15,8 +15,6 @@ export interface SiteJSON {
   createdAt: string;
   updatedAt: string;
 }
-
-export type ModuleType = keyof typeof componentRegistry;
 
 export interface LayoutModule {
   id: string;

@@ -2,9 +2,7 @@ import { z } from 'zod';
 
 // ---------- Schemas ----------
 
-export const moduleTypeSchema = z.enum([
-  'box',
-]);
+export const moduleTypeSchema = z.string();
 
 export const eventBindingSchema = z.object({
   event: z.string(),
