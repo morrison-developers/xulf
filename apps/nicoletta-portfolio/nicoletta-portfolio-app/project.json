@@ -10,11 +10,20 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/nicoletta-portfolio",
-        "root": "apps/nicoletta-portfolio",
-        "nextConfig": "apps/nicoletta-portfolio/nicoletta-portfolio-app/next.config.js"
+        "root": "apps/nicoletta-portfolio/nicoletta-portfolio-app",
+        "nextConfig": "apps/nicoletta-portfolio/nicoletta-portfolio-app/next.config.js",
+        "buildLibsFromSource": false
       },
       "configurations": {
-        "production": {}
+        "production": {
+          "outputPath": "dist/apps/nicoletta-portfolio"
+        }
+      }
+    },
+    "postbuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/postbuild-copy.js"
       }
     },
     "serve": {
@@ -27,7 +36,9 @@
     "deploy": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx vercel --cwd=apps/nicoletta-portfolio/nicoletta-portfolio-app --token=$VERCEL_TOKEN --prod"
+        "commands": [
+          "npx vercel deploy --cwd=dist/apps/nicoletta-portfolio --token=$VERCEL_TOKEN --prod --yes"
+        ]
       }
     }
   }
