@@ -1,17 +1,14 @@
 {
-  "version": 2,
-  "name": "nicoletta-portfolio",
   "builds": [
     {
-      "src": "apps/nicoletta-portfolio/nicoletta-portfolio-app/next.config.js",
-      "use": "@vercel/next"
+      "src": "apps/xulf/package.json",
+      "use": "@vercel/node"
     }
   ],
-  "framework": "nextjs",
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/apps/xulf/$1"
     }
   ]
 }
