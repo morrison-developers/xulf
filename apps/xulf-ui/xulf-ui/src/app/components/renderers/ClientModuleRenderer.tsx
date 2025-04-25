@@ -1,8 +1,8 @@
 // components/renderers/ClientModuleRenderer.tsx
 'use client';
 
-import { componentRegistry } from '@xulf/editor-ui';
-import { LayoutModule } from '../../types/layout';
+import { componentRegistry } from '@xulf/modules';
+import { LayoutModule } from '@xulf/types';
 
 interface Props {
   modules: LayoutModule[];

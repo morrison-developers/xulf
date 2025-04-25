@@ -3,6 +3,11 @@
 import { Analytics } from "@vercel/analytics/react";
 import styled from 'styled-components';
 
+interface ButtonProps {
+  onClick?: () => void;
+  children: React.ReactNode;
+}
+
 export default function Index() {
 
   const message = `We're working hard to bring this page to life. In the meantime, if you
@@ -48,7 +53,7 @@ const Subheading = styled.p`
   margin-bottom: 2rem;
 `;
 
-const Button = styled.button`
+const Button = styled.button<ButtonProps>`
   font-size: 1rem;
   font-weight: bold;
   color: #fff;

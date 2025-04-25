@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import EditorShell from './EditorShell';
-import { FunctionShell } from '../functions/FunctionShell';
-import type { SiteJson } from '../../types/layout';
+import EditorShell from './EditorShell'
+import { FunctionShell } from '../../functions/FunctionShell';
+import type { LayoutModule, SiteJSON } from '@xulf/types';
+import { DndProvider } from '../drag/DndProvider';
 
 interface Props {
   site: { id: string; name: string };
-  siteJson: SiteJson;
+  siteJson: SiteJSON;
   orgId: string;
 }
 
@@ -48,11 +49,13 @@ export default function EditorPageClient({ site, siteJson, orgId }: Props) {
 
       <main className="flex-1 bg-gray-50 p-6 overflow-y-auto">
         {tab === 'layout' ? (
-          <EditorShell siteId={site.id} siteJson={siteJson} selected={selected} />
+          <DndProvider>
+            <EditorShell siteId={site.id} siteJson={siteJson} />
+          </DndProvider>
         ) : (
           <FunctionShell
             siteId={site.id}
-            modules={siteJson.modules}
+            modules={Object.values(siteJson.layout.modules) as LayoutModule[]}
             selected={selected}
             onConnect={handleConnection}
           />

@@ -1,6 +1,7 @@
 import './global.css';
 import { StyledComponentsRegistry } from './registry';
 import { SessionWrapper } from './session-wrapper';
+import { DndProvider } from './components/editor/drag/DndProvider';
 
 export const metadata = {
   title: 'Welcome to demo2',
@@ -16,7 +17,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <StyledComponentsRegistry>
-          <SessionWrapper>{children}</SessionWrapper>
+          <SessionWrapper>
+            {/* <DndProvider> */}
+              {children}
+            {/* </DndProvider> */}
+          </SessionWrapper>
         </StyledComponentsRegistry>
       </body>
     </html>

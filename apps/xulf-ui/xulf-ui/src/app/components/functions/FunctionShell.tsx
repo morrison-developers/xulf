@@ -1,7 +1,7 @@
 'use client';
 
 import FunctionEditor from './FunctionEditor';
-import { LayoutModule } from '../../types/layout';
+import { LayoutModule } from '@xulf/types';
 
 interface FunctionShellProps {
   modules: LayoutModule[];
