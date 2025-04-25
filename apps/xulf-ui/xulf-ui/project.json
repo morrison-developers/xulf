@@ -24,13 +24,6 @@
       "options": {
         "outputPath": "dist/apps/xulf-ui"
       }
-    },
-    "get-clean-seed": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "npx ts-node libs/db/scripts/cleanSeed.ts",
-        "cwd": "."
-      }
     }
   }
 }

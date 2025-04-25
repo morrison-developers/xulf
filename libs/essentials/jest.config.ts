@@ -1,6 +1,6 @@
 export default {
   displayName: 'essentials',
-//   preset: '../../jest.preset.cjs',
+  preset: '../../jest.preset.cjs',
   transform: {
     '^.+\\.[tj]sx?$': [
       '@swc/jest',
