@@ -1,10 +1,12 @@
-export default {
-  displayName: 'xulf-ui',
-//   preset: '../../../jest.preset.cjs',
+const config = {
+  displayName: 'morrison-developers',
+  preset: '../../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/apps/xulf-ui/xulf-ui',
+  coverageDirectory: '../../coverage/apps/morrison-developers',
 };
+
+export default config;
