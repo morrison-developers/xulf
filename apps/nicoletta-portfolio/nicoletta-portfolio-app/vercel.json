@@ -1,14 +1,9 @@
 {
-  "builds": [
-    {
-      "src": "apps/xulf/package.json",
-      "use": "@nrwl/next:build"
-    }
-  ],
+  "version": 2,
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/apps/xulf/$1"
+      "dest": "/$1"
     }
   ]
 }
