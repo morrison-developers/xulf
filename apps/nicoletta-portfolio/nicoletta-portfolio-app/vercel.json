@@ -2,7 +2,10 @@
   "builds": [
     {
       "src": "apps/xulf/package.json",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "npx nx build xulf --prod"
+      }
     }
   ],
   "routes": [
