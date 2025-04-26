@@ -1,17 +1,15 @@
 'use client';
 
 import { Fragment, useEffect, useCallback } from 'react';
-import { DropZone } from '../drag/DropZone';
+import { DropZone, useDnd } from '@xulf/drag';
 import { CanvasModule } from '../layout/CanvasModule';
 import { PropEditor } from '../props/PropEditor';
 import { EditorSidebar } from '../sidebar/EditorSidebar';
 import { useEditorState } from '../hooks/useEditorState';
-import type { ModuleInstance, SiteJSON, ModuleType } from '@xulf/types';
-import { ModuleInstanceToResolvedModuleInstance } from '@xulf/utils';
-import { useDnd } from '../drag/DndProvider';
 import { v4 as uuid } from 'uuid';
-import { editorComponentRegistry } from '@xulf/modules';
+// import { editorComponentRegistry } from '@xulf/modules';
 import type { ModulePropsMap } from '@xulf/modules';
+import { ModuleInstance, SiteJSON, ModuleType, ModuleInstanceToResolvedModuleInstance } from '@xulf/module-props'
 
 interface EditorShellProps {
   siteId: string;
@@ -35,7 +33,7 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
   const { setOnDropHandler } = useDnd();
 
   const handlePropChange = (moduleId: string, key: string, value: any) => {
-    setEditorState((prev) => {
+    setEditorState((prev: SiteJSON) => {
       const mod = ModuleInstanceToResolvedModuleInstance(
         editorState.layout.modules[moduleId],
         editorState.layout.modules
@@ -66,7 +64,7 @@ export default function EditorShell({ siteId, siteJson }: EditorShellProps) {
   };
 
   const handleDropToRoot = useCallback((draggedId: string, type: string, index: number) => {
-    setEditorState((prev) => {
+    setEditorState((prev: SiteJSON) => {
       const layout = { ...prev.layout };
 
       if (!layout.modules[draggedId]) {

@@ -1,7 +1,7 @@
 import './global.css';
 import { StyledComponentsRegistry } from './registry';
 import { SessionWrapper } from './session-wrapper';
-import { DndProvider } from './components/editor/drag/DndProvider';
+import { DndProvider } from '../../../../../libs/drag/src/drag/DndProvider';
 
 export const metadata = {
   title: 'Welcome to demo2',

@@ -8,11 +8,10 @@
     "strict": true
   },
   "files": [],
-  "include": [],
+  "include": ["libs/module-props/src/**/*"],
   "references": [
-    {
-      "path": "./tsconfig.lib.json"
-    }
+    { "path": "./tsconfig.lib.json" },
+    { "path": "../module-props" }
   ],
   "extends": "../../tsconfig.base.json"
 }

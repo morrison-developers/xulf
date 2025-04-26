@@ -1,7 +1,7 @@
 'use client';
 
-import { EditableProp } from '@xulf/modules/src/types';
-import { ModuleInstance } from '@xulf/types';
+import { EditableProp } from '@xulf/types';
+import { ModuleInstance } from '@xulf/module-props';
 import { PropWidget } from './PropWidget';
 
 export interface PropEditorProps {

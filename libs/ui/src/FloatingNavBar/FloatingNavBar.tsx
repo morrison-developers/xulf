@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState, ReactNode } from 'react';
+import { useContext, useState, ReactNode, JSX } from 'react';
 import styled from '@emotion/styled';
 import Switch from '@mui/joy/Switch';
 import { ThemeContext } from '../theme/ThemeContext';

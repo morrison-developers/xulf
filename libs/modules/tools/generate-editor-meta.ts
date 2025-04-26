@@ -3,9 +3,11 @@ import * as fs from 'fs';
 import * as fg from 'fast-glob';
 import { Project } from 'ts-morph';
 
-const MODULES_DIR = path.resolve(__dirname, '../src');
-const GENERATED_DIR = path.resolve(MODULES_DIR, 'generated');
+const MODULE_PROPS_DIR = path.resolve(__dirname, '../../module-props/src');
+const GENERATED_DIR = path.resolve(MODULE_PROPS_DIR, './generated');  // 🟢 CHANGE: output into module-props/src/generated
 const PROPS_MAP_OUTFILE = path.join(GENERATED_DIR, 'ModulePropsMap.ts');
+
+const propFiles = fg.sync(`${MODULE_PROPS_DIR}/*/props.ts`, { absolute: true });
 
 const project = new Project({
   tsConfigFilePath: path.resolve(__dirname, '../tsconfig.lib.json'),
@@ -24,7 +26,7 @@ function extractEditableProps(interfaceName: string, filePath: string) {
 
   const propsInterface = sourceFile.getInterface(interfaceName);
   if (!propsInterface) {
-    console.warn(`⚠️  Interface ${interfaceName} not found in ${filePath}`);
+    console.warn(`⚠️ Interface ${interfaceName} not found in ${filePath}`);
     return [];
   }
 
@@ -51,7 +53,7 @@ function extractEditableProps(interfaceName: string, filePath: string) {
 }
 
 function generateEditorMeta(moduleName: string, props: any[]) {
-  return `import type { EditorMeta } from '../types';
+  return `import type { EditorMeta } from '@xulf/types';
 
 export const editorMeta: EditorMeta = {
   displayName: '${moduleName}',
@@ -81,29 +83,21 @@ ${entries.map(({ moduleName }) => `  ${moduleName.toLowerCase()}: ${moduleName}P
 }
 
 function run() {
-  const tsxFiles = fg.sync(`${MODULES_DIR}/*/*.tsx`, { absolute: true });
   const propsMapEntries: { moduleName: string; importPath: string }[] = [];
 
-  tsxFiles.forEach((filePath) => {
-    const fileName = path.basename(filePath, '.tsx');
+  propFiles.forEach((filePath) => {
     const dirName = path.basename(path.dirname(filePath));
-    if (fileName.toLowerCase().includes('editor')) return;
-
-    const interfaceName = `${fileName}Props`;
+    const interfaceName = `${dirName}Props`;
     const editableProps = extractEditableProps(interfaceName, filePath);
     if (editableProps.length === 0) return;
 
-    const editorPath = path.join(MODULES_DIR, dirName, 'editor.ts');
-    const metaContents = generateEditorMeta(fileName, editableProps);
+    const editorPath = path.join(MODULE_PROPS_DIR, dirName, 'editor.ts');
+    const metaContents = generateEditorMeta(dirName, editableProps);
     fs.writeFileSync(editorPath, metaContents, 'utf-8');
-    console.log(`✅ Wrote editor.ts for ${fileName}`);
+    console.log(`✅ Wrote editor meta for ${dirName}`);
 
-    const relativeImportPath = path
-      .relative(GENERATED_DIR, filePath)
-      .replace(/\.tsx$/, '')
-      .replace(/\\/g, '/');
-
-    propsMapEntries.push({ moduleName: fileName, importPath: `${relativeImportPath}` });
+    const relativeImportPath = `../${dirName}/props`;  // 🟢 FIXED: Use relative path within module-props
+    propsMapEntries.push({ moduleName: dirName, importPath: relativeImportPath });
   });
 
   if (propsMapEntries.length === 0) {

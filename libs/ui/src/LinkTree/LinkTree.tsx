@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import styled from 'styled-components';
 
 // Define the type for each link
@@ -22,7 +22,7 @@ const StyledLinkTree = styled.div`
 `;
 
 // Styled individual link container
-const StyledLink = styled.a`
+const StyledLink = styled('a')<React.AnchorHTMLAttributes<HTMLAnchorElement>>`
   display: flex;
   align-items: center;
   margin: 0.5rem 0;

@@ -11,7 +11,7 @@ interface CheckpointsProps {
   };
 }
 
-const StyledCheckpoints = styled.ul`
+const StyledCheckpoints = styled('ul')<{ children?: React.ReactNode }>`
   height: 150px; /* Fixed height */
   overflow-y: auto; /* Allow scrolling if necessary */
   margin: 0;
@@ -23,7 +23,7 @@ const StyledCheckpoints = styled.ul`
   align-items: center; /* Center align content */
 `;
 
-const StyledCheckpointItem = styled.li`
+const StyledCheckpointItem = styled('li')<{ children?: React.ReactNode }>`
   display: flex;
   justify-content: space-between; /* Align text and time */
   width: 80%; /* Adjust width for consistent alignment */

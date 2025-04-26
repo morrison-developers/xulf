@@ -1,13 +1,10 @@
 'use client';
 
 import { editorComponentRegistry } from '@xulf/modules';
-import { getFunctionProps } from '@xulf/utils';
-import { useDragItem } from '../drag/useDragItem';
+import { getFunctionProps, ResolvedModuleInstance } from '@xulf/module-props';
+import { useDragItem, DropZone } from '@xulf/drag';
+import type { EditableProp } from '@xulf/types';
 
-import type { ResolvedModuleInstance } from '@xulf/types';
-import { EditableProp } from '@xulf/modules/src/types';
-
-import { DropZone } from '../drag/DropZone';
 import { DropTargetOverlay } from './DropTargetOverlay';
 
 interface CanvasModuleProps {
@@ -89,7 +86,7 @@ export function CanvasModule({
         />
       )}
 
-      {children.map((child, index) => (
+      {children.map((child: ResolvedModuleInstance, index: number) => (
         <div key={child.id}>
           <DropZone
             targetId={child.id}

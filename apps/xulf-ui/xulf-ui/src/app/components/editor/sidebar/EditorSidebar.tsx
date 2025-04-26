@@ -1,7 +1,7 @@
 'use client';
 
 import { componentRegistry } from '@xulf/modules';
-import { DraggableModule } from '../drag/DraggableModule';
+import { DraggableModule } from '@xulf/drag';
 
 export function EditorSidebar() {
   return (

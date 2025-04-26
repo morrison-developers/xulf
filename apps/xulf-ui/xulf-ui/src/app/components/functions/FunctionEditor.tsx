@@ -8,14 +8,13 @@ import ReactFlow, {
   useNodesState,
   Connection,
   Node,
-  Edge,
   ReactFlowProvider,
 } from 'react-flow-renderer';
 
 import { useCallback, useMemo, useState, useEffect } from 'react';
 import { FunctionNodeComponent } from './function-nodes/FunctionNodeComponent';
 import { DraggableFunctionNode } from './function-nodes/DraggableFunctionNode';
-import type { FunctionConnection } from '@xulf/types';
+import type { FunctionConnection } from '@xulf/module-props';
 
 interface FunctionEditorProps {
   siteId: string;

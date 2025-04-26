@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "NodeNext",
+    "allowJs": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "composite": true,
+    "declaration": true
+  },
+  "files": [],
+  "include": ["libs/modules/src/**/*"],
+  "references": [
+    { "path": "./tsconfig.lib.json" },
+    { "path": "../modules" }
+  ],
+  "extends": "../../tsconfig.base.json"
+}

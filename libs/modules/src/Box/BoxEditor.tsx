@@ -1,6 +1,6 @@
 'use client';
 
-import { ResolvedModuleInstance } from '@xulf/types';
+import { ResolvedModuleInstance } from '@xulf/module-props';
 import { CanvasModule } from '../../../../apps/xulf-ui/xulf-ui/src/app/components/editor/layout/CanvasModule';
 
 export interface BoxEditorProps {

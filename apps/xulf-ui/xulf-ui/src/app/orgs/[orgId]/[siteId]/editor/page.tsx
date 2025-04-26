@@ -1,7 +1,8 @@
 // NO 'use client' here
 import { prisma } from '@xulf/db';
 import { notFound } from 'next/navigation';
-import { SiteJSON, validateSiteJsonOrDefault } from '@xulf/types';
+import { validateSiteJsonOrDefault } from '@xulf/types';
+import { SiteJSON } from '@xulf/module-props';
 import EditorPageClient from '../../../../components/editor/containers/EditorPageClient';
 
 interface Props {

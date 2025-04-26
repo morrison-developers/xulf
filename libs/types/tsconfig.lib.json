@@ -2,9 +2,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "module": "NodeNext",
+    "jsx": "react-jsx",
     "outDir": "../../dist/out-tsc",
     "declaration": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts", "../../apps/xulf-ui/xulf-ui/next-auth.d.ts"]
+  "references": [
+    { "path": "../drag" },
+    { "path": "../utils" }
+  ],
+  "include": ["src/**/*.ts", "../../apps/xulf-ui/xulf-ui/next-auth.d.ts" ]
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useDnd } from '../drag/DndProvider';
+import { useDnd } from '@xulf/drag';
 
 interface DropTargetOverlayProps {
   id: string;

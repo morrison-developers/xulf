@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { propMetaRegistry } from '@xulf/modules';
 import debounce from 'lodash/debounce';
-import { WiringMap, SiteJSON } from '@xulf/types';
+import { SiteJSON } from '@xulf/module-props';
 
 const DEFAULT_FUNCTION_GRAPH = { nodes: [], edges: [] };
 

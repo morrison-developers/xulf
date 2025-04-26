@@ -1,10 +1,10 @@
 'use client';
 
 import { Fragment } from 'react';
-import type { ResolvedModuleInstance } from '@xulf/types';
+import type { ResolvedModuleInstance } from '@xulf/module-props';
 import { CanvasModule } from './CanvasModule';
-import { DropZone } from '../drag/DropZone';
-import { EditableProp } from '@xulf/modules/src/types';
+import { DropZone } from '@xulf/drag';
+import { EditableProp } from '@xulf/types';
 
 interface ModuleTreeProps {
   modules: ResolvedModuleInstance[];

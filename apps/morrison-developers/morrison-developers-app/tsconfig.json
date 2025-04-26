@@ -2,6 +2,8 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
+    "lib": ["DOM", "ESNext"],
+    "module": "NodeNext",
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

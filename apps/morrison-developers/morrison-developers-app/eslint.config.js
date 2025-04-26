@@ -1,4 +1,4 @@
-const baseConfig = require('../../../eslint.base.config.js');
+const baseConfig = require('../../../eslint.base.config.cjs');
 const { FlatCompat } = require('@eslint/eslintrc');
 const { fixupConfigRules } = require('@eslint/compat');
 const js = require('@eslint/js');
@@ -13,7 +13,5 @@ module.exports = [
   ...baseConfig,
   ...fixupConfigRules(compat.extends('next')),
   ...fixupConfigRules(compat.extends('next/core-web-vitals')),
-  ...baseConfig,
-  ...nx.configs['flat/react-typescript'],
   { ignores: ['.next/**/*'] },
 ];

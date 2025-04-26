@@ -14,12 +14,6 @@
     },
     "build": {
       "executor": "@nx/next:build",
-      "dependsOn": [
-        {
-          "target": "generate-editor-meta",
-          "projects": "self"
-        }
-      ],
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/xulf-ui"

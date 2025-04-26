@@ -1,9 +1,7 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@xulf/db';
 import ClientModuleRenderer from '../../../../components/renderers/ClientModuleRenderer';
-import type { SiteJSON } from '@xulf/types';
-import { ModuleInstanceToResolvedModuleInstance } from '@xulf/utils';  // Function to resolve ModuleInstance
-import { ResolvedModuleInstanceToLayoutModule } from '@xulf/utils'; // Function to convert to LayoutModule
+import { ResolvedModuleInstanceToLayoutModule, ModuleInstanceToResolvedModuleInstance, SiteJSON } from '@xulf/module-props'
 
 interface PreviewPageProps {
   params: { orgId: string; siteId: string };

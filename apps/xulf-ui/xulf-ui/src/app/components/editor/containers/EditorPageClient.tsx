@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import EditorShell from './EditorShell'
 import { FunctionShell } from '../../functions/FunctionShell';
-import type { LayoutModule, SiteJSON } from '@xulf/types';
-import { DndProvider } from '../drag/DndProvider';
+import type { LayoutModule, SiteJSON } from '@xulf/module-props';
+import { DndProvider } from '@xulf/drag';
 
 interface Props {
   site: { id: string; name: string };
