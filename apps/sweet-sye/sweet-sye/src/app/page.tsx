@@ -8,10 +8,10 @@ export default function Index() {
   return (
     <>
       <UnderConstruction
-        heading="Morrison Developers is Under Construction"
-        message="We are working on building cool stuff. Check back soon"
-        buttonText="Email Andy"
-        contactEmail="andy@morrisondevelopers.com"
+        heading="Sweet Sye is Under Construction"
+        message="Something sweet is coming your way. Check back soon."
+        buttonText="Contact Us"
+        contactEmail="contact@sweetsye.com"
       />
       <Analytics />
     </>

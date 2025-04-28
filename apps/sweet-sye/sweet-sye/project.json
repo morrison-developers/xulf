@@ -1,7 +1,7 @@
 {
-  "name": "morrison-developers",
+  "name": "sweet-sye",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/morrison-developers/morrison-developers-app",
+  "sourceRoot": "apps/sweet-sye/sweet-sye",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -9,14 +9,14 @@
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/morrison-developers",
-        "root": "apps/morrison-developers/morrison-developers-app",
-        "nextConfig": "apps/morrison-developers/morrison-developers-app/next.config.js",
+        "outputPath": "dist/apps/sweet-sye",
+        "root": "apps/sweet-sye/sweet-sye",
+        "nextConfig": "apps/sweet-sye/sweet-sye/next.config.js",
         "buildLibsFromSource": false
       },
       "configurations": {
         "production": {
-          "outputPath": "dist/apps/morrison-developers"
+          "outputPath": "dist/apps/sweet-sye"
         }
       }
     }

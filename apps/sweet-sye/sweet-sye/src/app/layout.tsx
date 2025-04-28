@@ -3,7 +3,7 @@ import { StyledComponentsRegistry } from './registry';
 
 export const metadata = {
   title: 'Under Construction',
-  description: 'Morrison Developers Coming Soon',
+  description: 'Sweet Sye Coming Soon',
 };
 
 export default function RootLayout({
