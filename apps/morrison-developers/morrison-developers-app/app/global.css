@@ -67,13 +67,12 @@
 body {
   background: var(--background-light);
   position: relative;  /* Needed for absolutely positioned elements inside the body */
-  overflow-x: hidden;  /* Hide horizontal overflow if the content is too wide */
+  overflow: hidden;  /* Hide horizontal overflow if the content is too wide */
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  height: 700dvh;  /* Set the body height to 700% of the dynamic viewport height */
 }
 
 h1 {

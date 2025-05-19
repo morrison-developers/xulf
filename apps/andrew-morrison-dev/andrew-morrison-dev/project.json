@@ -1,0 +1,9 @@
+{
+  "name": "andrew-morrison-dev",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/andrew-morrison-dev/andrew-morrison-dev",
+  "projectType": "application",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project andrew-morrison-dev --web",
+  "targets": {}
+}

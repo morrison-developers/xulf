@@ -2,10 +2,6 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
     "module": "NodeNext",
     "allowJs": true,
     "esModuleInterop": true,
@@ -31,11 +27,10 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    ".next/types/**/*.ts",
-    "../../dist/apps/morrison-developers/.next/types/**/*.ts",
+    "../../../apps/andrew-morrison-dev/andrew-morrison-dev/.next/types/**/*.ts",
+    "../../../dist/apps/andrew-morrison-dev/andrew-morrison-dev/.next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "../../../dist/apps/morrison-developers/.next/types/**/*.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
