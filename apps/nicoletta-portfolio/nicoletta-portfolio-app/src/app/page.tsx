@@ -12,6 +12,7 @@ export default function Index() {
         message="Thank you for your interest. I'm currently building out my online presence. Feel free to reach out with any inquiries!"
         buttonText="Email Nicoletta"
         contactEmail="nicolettaberrysoprano@gmail.com"
+        buttonColor="#f21f1e"
       />
       <Analytics />
     </>
