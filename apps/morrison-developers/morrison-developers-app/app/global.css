@@ -1,78 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pathway+Extreme:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root {
-  /* Dark Theme Background Colors */
-  --dark-background-lighter: #313a36;
-  --dark-background-light: #252b28;
-  --dark-background: #191d1b;
-  --dark-background-dark: #161a18;
-  --dark-background-darker: #131614;
-  --dark-background-darkest: #0e100f;
-
-  /* Light Theme Background Colors */
-  --light-background-lighter: #f4fbf8;
-  --light-background-light: #e4f3ec;
-  --light-background: #daebe4;
-  --light-background-dark: #cfe2da;
-  --light-background-darker: #bbd6cc;
-  --light-background-darkest: #abc3bb;
-
-  /* Text Colors */
-  --light-text: #212725;
-  --dark-text: #daebe3;
-
-  /* Primary Accent Colors */
-  --light-primary-accent-color: #0d624d;
-  --light-primary-accent-color-darker: #033b2d;
-  --light-primary-accent-color-lighter: #2aa184;
-
-  --dark-primary-accent-color: #0d624d;
-  --dark-primary-accent-color-darker: #033b2d;
-  --dark-primary-accent-color-lighter: #2aa184;
 
   /* Fonts */
   --font-main: "Inter";
   --font-heading: "Pathway Extreme";
+  --font-mono: "Roboto Mono";
 
-  /* Default (Light Mode) Variables */
-  --background-lightest: var(--light-background-lightest);
-  --background-light: var(--light-background-light);
-  --background: var(--light-background);
-  --background-dark: var(--light-background-dark);
-  --background-darker: var(--light-background-darker);
-  --background-darkest: var(--light-background-darkest);
-  
-  --text: var(--light-text);
+  /* Main Colors */
+  --background-body: radial-gradient(90.66% 60.05% at 61.35% 31.15%, #0E2029 3.05%, #181A1B 100%);
 
-  --primary-accent-color-lighter: var(--light-primary-accent-color-lighter);
-  --primary-accent-color: var(--light-primary-accent-color);
-  --primary-accent-color-darker: var(--light-primary-accent-color-darker);
+  --nav-width: 18.5625rem;
+
 }
 
 .dark-theme {
-  --background-lighter: var(--dark-background-lighter);
-  --background-light: var(--dark-background-light);
-  --background: var(--dark-background);
-  --background-dark: var(--dark-background-dark);
-  --background-darker: var(--dark-background-darker);
-  --background-darkest: var(--dark-background-darkest);
-  
-  --text: var(--dark-text);
+}
 
-  --primary-accent-color: var(--dark-primary-accent-color);
-  --primary-accent-color-darker: var(--dark-primary-accent-color-darker);
-  --primary-accent-color-lighter: var(--dark-primary-accent-color-lighter);
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background-light);
   position: relative;  /* Needed for absolutely positioned elements inside the body */
   overflow: hidden;  /* Hide horizontal overflow if the content is too wide */
+  background: var(--background-body);
 }
 
 html, body {
   margin: 0;
   padding: 0;
+  min-height: 100dvh;
 }
 
 h1 {
@@ -80,4 +39,11 @@ h1 {
   font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 700;
+}
+
+.shared-card {
+  flex-shrink: 0;
+  border-radius: 0.25rem;
+  border: 2px solid rgba(48, 130, 137, 0.50);
+  background: rgba(0, 0, 0, 0.02);
 }
