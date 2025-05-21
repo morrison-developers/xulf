@@ -1,0 +1,12 @@
+.service-card {
+  display: flex;
+  gap: 1rem;
+}
+
+.service-icon {
+  display: flex;
+}
+
+.service-icon img {
+  max-width: 4rem;
+}

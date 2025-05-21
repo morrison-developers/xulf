@@ -1,46 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pathway+Extreme:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+/* ─────────── IMPORTS ────────── */
+@import './variables.css';
+@import './reset.css';
 
-:root {
-
-  /* Fonts */
-  --font-main: "Inter";
-  --font-heading: "Pathway Extreme";
-  --font-mono: "Roboto Mono";
-
-  /* Main Colors */
-  --background-body: radial-gradient(90.66% 60.05% at 61.35% 31.15%, #0E2029 3.05%, #181A1B 100%);
-
-  --nav-width: 18.5625rem;
-
-}
-
+/* ─────────── THEMES ─────────── */
 .dark-theme {
+  /* Define dark overrides here if needed */
 }
 
+/* ─────────── RESET ─────────── */
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
-  position: relative;  /* Needed for absolutely positioned elements inside the body */
-  overflow: hidden;  /* Hide horizontal overflow if the content is too wide */
-  background: var(--background-body);
-}
-
-html, body {
   margin: 0;
   padding: 0;
   min-height: 100dvh;
+  overflow-x: hidden;
+  position: relative; /* Needed for absolutely positioned children */
 }
 
+/* ─────────── TYPOGRAPHY ─────────── */
 h1 {
-  color: var(--text);
+  color: var(--color-text-primary);
   font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 700;
 }
 
+/* ─────────── COMPONENTS ─────────── */
 .shared-card {
   flex-shrink: 0;
   border-radius: 0.25rem;

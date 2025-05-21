@@ -1,14 +1,14 @@
 .scrollnav-container {
   display: flex;
-  padding: 1rem;
+  padding: var(--scrollnav-padding);
   overflow: hidden;
 }
 
 .scrollnav-bar {
   position: relative;
-  width: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 0.25rem;
+  width: var(--scrollnav-track-width);
+  background: var(--scrollnav-track-bg);
+  border-radius: var(--scrollnav-track-radius);
   margin-right: 1rem;
   flex-shrink: 0;
 }
@@ -17,25 +17,25 @@
   position: absolute;
   left: 0;
   right: 0;
-  background: #0cafbf;
-  border-radius: 1rem;
-  transition: top 0.15s ease-out;
+  background: var(--scrollnav-indicator-bg);
+  border-radius: var(--scrollnav-indicator-radius);
+  transition: var(--scrollnav-indicator-transition);
 }
 
 .scrollnav-items {
   display: flex;
   flex-direction: column;
-  justify-content: space-around
+  justify-content: space-around;
 }
 
 .scrollnav-item {
-  color: #6ecbd2;
-  font-family: var(--font-main);
-  font-size: 1rem;
+  color: var(--scrollnav-item-color);
+  font-family: var(--scrollnav-font);
+  font-size: var(--scrollnav-font-size);
   cursor: pointer;
-  transition: color 0.2s;
+  transition: var(--scrollnav-item-transition);
 }
 
 .scrollnav-item.active {
-  color: #ffffff;
+  color: var(--scrollnav-item-active-color);
 }

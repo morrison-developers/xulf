@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import './NavBar.css';
+import './nav-bar.css';
 import ScrollNav from './ScrollNav/ScrollNav';
 
 function MobileNavBar() {

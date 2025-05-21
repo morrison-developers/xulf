@@ -1,0 +1,86 @@
+/* ─────────── FONTS ─────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pathway+Extreme:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+  /* ──────────────── FONTS ──────────────── */
+  --font-main: "Inter";
+  --font-heading: "Pathway Extreme";
+  --font-mono: "Roboto Mono";
+
+  /* ─────────────── COLORS ─────────────── */
+  --color-text-primary: #FFF;
+  --primary-accent-color: #3FA5AE;
+  --color-shadow-accent: var(--accent-teal, #3FA5AE);
+
+  --nav-footer-text: rgba(255, 255, 255, 0.65);
+  --nav-footer-strong: rgba(255, 255, 255, 0.90);
+  --button-bg: #D9E5E6;
+  --button-text: #3FA5AE;
+
+  --scrollnav-track-bg: rgba(255, 255, 255, 0.05);
+  --scrollnav-indicator-bg: #0cafbf;
+  --scrollnav-item-color: #6ecbd2;
+  --scrollnav-item-active-color: #ffffff;
+
+  /* ───────────── BACKGROUND ───────────── */
+  --background-body: radial-gradient(
+    90.66% 60.05% at 61.35% 31.15%,
+    #0E2029 3.05%,
+    #181A1B 100%
+  );
+
+  /* ────────────── TYPOGRAPHY ───────────── */
+  --font-size-title: clamp(1rem, 10vw, 4rem);
+  --font-size-subtitle: clamp(0.75rem, 4vw, 2.5rem);
+
+  --letter-spacing-title: -0.2475rem;
+  --line-height-title: 4.375rem;
+
+  --font-weight-title: 800;
+  --font-weight-title-mobile: 700;
+  --font-weight-subtitle: 200;
+
+  --footer-font: var(--font-mono);
+  --footer-font-size: 0.625rem;
+  --footer-font-weight: 300;
+  --footer-line-height: 130%;
+
+  --button-font: var(--font-heading);
+  --button-font-size: 1.5rem;
+  --button-font-weight: 800;
+  --button-line-height: 104.2%;
+
+  --scrollnav-font: var(--font-main);
+  --scrollnav-font-size: 1rem;
+
+  --text-align: right;
+
+  /* ───────────── LAYOUT ───────────── */
+  --nav-width: 18.5625rem;
+  --nav-gap: 1rem;
+  --nav-offset-top: 2rem;
+  --nav-offset-left: 1rem;
+
+  --button-height: 3.0625rem;
+  --button-radius: 0.25rem;
+
+  --mobile-nav-width: 8rem;
+
+  --scrollnav-padding: 1rem;
+  --scrollnav-track-width: 0.5rem;
+  --scrollnav-track-radius: 0.25rem;
+  --scrollnav-indicator-radius: 1rem;
+
+  --homebody-padding: 2rem;
+  --homebody-gap: 4rem;
+  --homebody-min-height: 200vh;
+  --homebody-height: 100vh;
+
+  /* ──────────── TRANSITIONS ──────────── */
+  --scrollnav-indicator-transition: top 0.15s ease-out;
+  --scrollnav-item-transition: color 0.2s;
+
+  /* ───────────── SCROLLING ───────────── */
+  --homebody-scroll-behavior: smooth;
+}
