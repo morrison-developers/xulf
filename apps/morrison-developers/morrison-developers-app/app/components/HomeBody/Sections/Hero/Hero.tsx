@@ -1,12 +1,8 @@
 'use client';
 
 import React from 'react';
-import '../sections.css';
+import Logo3D from './Logo3D.client';
 
 export default function Hero() {
-  return (
-    <div className="homebody-component">
-      {/* Custom content for About section */}
-    </div>
-  );
+  return <Logo3D />;
 }

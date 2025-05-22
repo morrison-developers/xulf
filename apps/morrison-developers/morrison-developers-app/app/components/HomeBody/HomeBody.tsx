@@ -1,13 +1,15 @@
 'use client';
 
 import React, { forwardRef } from 'react';
+import dynamic from 'next/dynamic';
+
 import './HomeBody.css';
 
-interface Section {
+export interface Section {
   id: string;
   label: string;
   description?: string;
-  component: React.ElementType;
+  component: React.ComponentType;
 }
 
 interface HomeBodyProps {
@@ -17,15 +19,19 @@ interface HomeBodyProps {
 const HomeBody = forwardRef<HTMLDivElement, HomeBodyProps>(({ sections }, ref) => {
   return (
     <div className="homebody-container" ref={ref}>
-      {sections.map(({ id, label, description, component: Component }) => (
-        <section id={id} className="homebody-section" key={id}>
-          <div className="homebody-text">
-            <h1 className="title-text">{label}</h1>
-            {description && <p className="subtitle-text">{description}</p>}
-          </div>
-          <Component />
-        </section>
-      ))}
+      {sections.map(({ id, label, description, component }) => {
+        const Component = dynamic(() => Promise.resolve(component), { ssr: false });
+
+        return (
+          <section id={id} className="homebody-section" key={id}>
+            <div className="homebody-text">
+              <h1 className="title-text">{label}</h1>
+              {description && <p className="subtitle-text">{description}</p>}
+            </div>
+            <Component />
+          </section>
+        );
+      })}
     </div>
   );
 });

@@ -2,22 +2,8 @@
 export const dynamic = 'force-dynamic';
 
 import { Analytics } from "@vercel/analytics/react";
-import NavBar from "./components/NavBar/NavBar";
-import HomeBody from "./components/HomeBody/HomeBody";
-import Hero from "./components/HomeBody/Sections/Hero/Hero";
-import Services from "./components/HomeBody/Sections/Services/Services";
-import Process from "./components/HomeBody/Sections/Process/Process";
-import Portfolio from "./components/HomeBody/Sections/Portfolio/Portfolio";
-import About from "./components/HomeBody/Sections/About/About";
-import ParticleLayer from "./components/Particles/Particles";
-import Background from "./components/Background/Background";
-
-interface Section {
-  id: string;
-  label: string;
-  description?: string;
-  component: React.ElementType;
-}
+import { NavBar, Background, ParticleLayer, HomeBody, Hero, Services, Process, Portfolio, About } from "./components";
+import type { Section } from "./components/HomeBody/HomeBody";
 
 export default function Index() {
   const sections: Section[] = [
@@ -30,9 +16,9 @@ export default function Index() {
 
   return (
     <>
-      <ParticleLayer />
       <NavBar sections={sections} />
       <HomeBody sections={sections} />
+      <ParticleLayer />
       <Background />
       <Analytics />
     </>

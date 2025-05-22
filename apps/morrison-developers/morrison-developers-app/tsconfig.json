@@ -1,6 +1,7 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "jsx": "preserve",
     "lib": [
       "DOM",
@@ -36,7 +37,7 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "../../../dist/apps/morrison-developers/.next/types/**/*.ts"
-  ],
+, "app/components/HomeBody/Sections/Hero/Logo3D.client.mjs"  ],
   "exclude": [
     "node_modules",
     "jest.config.ts",
