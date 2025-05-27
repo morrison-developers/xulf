@@ -29,13 +29,13 @@
 }
 
 .homebody-component {
-  border: 4px solid white; /* Also likely debug */
+  /* border: 4px solid white; Also likely debug */
   min-height: 4rem;
   padding: var(--homebody-padding);
 }
 
 .homebody-section {
-  border: 4px solid red; /* Assuming this is for debug, not themed */
+  /* border: 4px solid red; Assuming this is for debug, not themed */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +45,7 @@
 }
 
 .homebody-text {
-  border: 4px solid white; /* Also likely debug */
+  /* border: 4px solid white; Also likely debug */
 }
 
 @media (max-width: 64em) {

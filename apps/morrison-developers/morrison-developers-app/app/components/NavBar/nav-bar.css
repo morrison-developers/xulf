@@ -45,6 +45,13 @@
   font-style: normal;
   font-weight: var(--button-font-weight);
   line-height: var(--button-line-height);
+
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  background: var(--button-text);
+  color: var(--button-bg);
 }
 
 .mobile-nav {

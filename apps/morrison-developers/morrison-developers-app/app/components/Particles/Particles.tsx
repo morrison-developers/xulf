@@ -98,7 +98,7 @@ export default function ParticleLayer() {
         move: {
           enable: true,
           direction: "top",
-          speed: 1,
+          speed: 0.4,
           outModes: {
             default: "out",
           },

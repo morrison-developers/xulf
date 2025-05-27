@@ -57,9 +57,12 @@
   --text-align: right;
 
   /* ───────────── LAYOUT ───────────── */
+  --standard-padding: 2rem;
+  --standard-gap: 2rem;
+
   --nav-width: 18.5625rem;
   --nav-gap: 1rem;
-  --nav-offset-top: 2rem;
+  --nav-offset-top: var(--standard-padding);
   --nav-offset-left: 1rem;
 
   --button-height: 3.0625rem;
@@ -72,7 +75,7 @@
   --scrollnav-track-radius: 0.25rem;
   --scrollnav-indicator-radius: 1rem;
 
-  --homebody-padding: 2rem;
+  --homebody-padding: var(--standard-padding);
   --homebody-gap: 4rem;
   --homebody-min-height: 200vh;
   --homebody-height: 100vh;

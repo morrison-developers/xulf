@@ -38,7 +38,9 @@ function useMediaQuery(query: string) {
 export default function NavBar({ sections }: { sections: { id: string; label: string }[] }) {
   const isLargeScreen = useMediaQuery('(min-width: 64em)');
 
-  if (!isLargeScreen) return <MobileNavBar />;
+  if (!isLargeScreen) {
+    return <MobileNavBar />;
+  }
 
   return (
     <div className="nav-wrapper">
@@ -51,9 +53,11 @@ export default function NavBar({ sections }: { sections: { id: string; label: st
           style={{ width: '100%', height: 'auto', padding: '1rem' }}
         />
       </div>
-      <div className="shared-card nav-section">
-        <ScrollNav sections={sections} />
-      </div>
+      {sections.length > 1 &&
+        <div className="shared-card nav-section">
+          <ScrollNav sections={sections} />
+        </div>
+      }
       <div className="footer">
         <button className="button">Let's Talk</button>
         <h4>

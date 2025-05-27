@@ -37,7 +37,7 @@
     "bl": "^6.0.18",
     "clsx": "^2.1.1",
     "emailjs-com": "^3.2.0",
-    "framer-motion": "^11.11.9",
+    "framer-motion": "^12.12.2",
     "hawk": "^9.0.2",
     "lodash": "^4.17.21",
     "next": "^14.2.23",

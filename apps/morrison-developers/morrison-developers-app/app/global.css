@@ -10,6 +10,8 @@
 /* ─────────── RESET ─────────── */
 * {
   box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none; /* Safari */
 }
 
 html,
@@ -29,10 +31,80 @@ h1 {
   font-weight: 700;
 }
 
+/* ─────────── BASE TYPOGRAPHY STYLES ─────────── */
+
+body {
+  font-family: var(--font-main);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-title);
+  color: var(--color-text-primary);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: var(--font-size-title);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--letter-spacing-title);
+}
+
+h2 {
+  font-size: calc(var(--font-size-title) * 0.75);
+  font-weight: var(--font-weight-subtitle);
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4, h5, h6 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+p {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+}
+
+a {
+  color: var(--scrollnav-item-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--scrollnav-item-active-color);
+}
+
+ul, ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+small {
+  font-size: 0.875rem;
+  opacity: 0.75;
+  font-family: var(--footer-font);
+}
+
 /* ─────────── COMPONENTS ─────────── */
 .shared-card {
   flex-shrink: 0;
   border-radius: 0.25rem;
   border: 2px solid rgba(48, 130, 137, 0.50);
   background: rgba(0, 0, 0, 0.02);
+}
+
+img {
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
 }

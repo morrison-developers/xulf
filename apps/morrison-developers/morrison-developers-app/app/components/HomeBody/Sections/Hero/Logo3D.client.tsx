@@ -15,7 +15,7 @@ const MODEL_CONFIG = {
   cameraFar: 1000,
   rotationAxis: 'z' as keyof THREE.Euler,
   initialRotation: [1.5, 0, 0],
-  rotationSpeed: 0.001,
+  rotationSpeed: -0.001,
   enableZoom: false,
   enablePan: false,
   rotateModel: true,
@@ -53,6 +53,13 @@ const Logo3D: React.FC = () => {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = MODEL_CONFIG.enableZoom;
     controls.enablePan = MODEL_CONFIG.enablePan;
+
+    // Teal light that follows the camera
+    const cameraLight = new THREE.DirectionalLight(0x00ffff, 1);
+    cameraLight.position.copy(camera.position);
+    cameraLight.target.position.set(0, 0, 0);
+    scene.add(cameraLight);
+    scene.add(cameraLight.target);
 
     // Lighting setup
     const ambientLight = new THREE.AmbientLight(MODEL_CONFIG.ambientLightColor, MODEL_CONFIG.ambientLightIntensity);
@@ -101,6 +108,8 @@ const Logo3D: React.FC = () => {
       type RotationAxis = 'x' | 'y' | 'z';
       requestAnimationFrame(animate);
       controls.update();
+      // Update cameraLight to follow camera
+      cameraLight.position.copy(camera.position);
       if (modelRef.current && MODEL_CONFIG.rotateModel) {
         const axis = MODEL_CONFIG.rotationAxis;
         modelRef.current.rotation[axis as RotationAxis] += MODEL_CONFIG.rotationSpeed;

@@ -7,7 +7,7 @@ import Service from './Service/Service';
 
 const STARTUPS_SERVICES: { label: string; description?: string }[] = [
   {
-    label: 'Custom Web Apps',
+    label: 'Custom Web Farts',
     description: 'Bespoke solutions built to scale',
   },
   {

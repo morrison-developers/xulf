@@ -8,15 +8,15 @@ import './HomeBody.css';
 export interface Section {
   id: string;
   label: string;
-  description?: string;
   component: React.ComponentType;
+  description?: string;
 }
 
 interface HomeBodyProps {
   sections: Section[];
 }
 
-const HomeBody = forwardRef<HTMLDivElement, HomeBodyProps>(({ sections }, ref) => {
+export const HomeBody = forwardRef<HTMLDivElement, HomeBodyProps>(({ sections }, ref) => {
   return (
     <div className="homebody-container" ref={ref}>
       {sections.map(({ id, label, description, component }) => {
@@ -37,5 +37,3 @@ const HomeBody = forwardRef<HTMLDivElement, HomeBodyProps>(({ sections }, ref) =
 });
 
 HomeBody.displayName = 'HomeBody';
-
-export default HomeBody;
