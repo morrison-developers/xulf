@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { morDevPrisma } from "@xulf/mor-dev-db";
+import { morDevPrisma } from '@xulf/mor-dev-db';
 
 export async function GET() {
   const users = await morDevPrisma.user.findMany({
@@ -10,8 +10,30 @@ export async function GET() {
       path: true,
       image: true,
       createdAt: true,
+      stripeCustomerId: true,
+      subscriptions: {
+        select: {
+          id: true,
+          stripeSubId: true,
+          priceCents: true,
+          interval: true,
+          status: true,
+          createdAt: true,
+        },
+      },
+      paymentMethods: {
+        select: {
+          id: true,
+          stripePmId: true,
+          bankName: true,
+          last4: true,
+          verified: true,
+          createdAt: true,
+        },
+      },
     },
   });
+
   return NextResponse.json({ users });
 }
 

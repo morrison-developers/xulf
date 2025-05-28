@@ -130,14 +130,23 @@ exports.Prisma.UserScalarFieldEnum = {
   stripeCustomerId: 'stripeCustomerId'
 };
 
-exports.Prisma.PaymentEntryScalarFieldEnum = {
+exports.Prisma.SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  label: 'label',
-  amount: 'amount',
-  paymentType: 'paymentType',
-  startDate: 'startDate',
-  dueDate: 'dueDate',
+  stripeSubId: 'stripeSubId',
+  priceCents: 'priceCents',
+  interval: 'interval',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PaymentMethodScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  stripePmId: 'stripePmId',
+  bankName: 'bankName',
+  last4: 'last4',
+  verified: 'verified',
   createdAt: 'createdAt'
 };
 
@@ -155,14 +164,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.PaymentType = exports.$Enums.PaymentType = {
-  ONE_TIME: 'ONE_TIME',
-  MONTHLY: 'MONTHLY'
-};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
-  PaymentEntry: 'PaymentEntry'
+  Subscription: 'Subscription',
+  PaymentMethod: 'PaymentMethod'
 };
 
 /**

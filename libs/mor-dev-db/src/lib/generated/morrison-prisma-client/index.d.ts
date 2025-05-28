@@ -19,27 +19,15 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model PaymentEntry
+ * Model Subscription
  * 
  */
-export type PaymentEntry = $Result.DefaultSelection<Prisma.$PaymentEntryPayload>
-
+export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
 /**
- * Enums
+ * Model PaymentMethod
+ * 
  */
-export namespace $Enums {
-  export const PaymentType: {
-  ONE_TIME: 'ONE_TIME',
-  MONTHLY: 'MONTHLY'
-};
-
-export type PaymentType = (typeof PaymentType)[keyof typeof PaymentType]
-
-}
-
-export type PaymentType = $Enums.PaymentType
-
-export const PaymentType: typeof $Enums.PaymentType
+export type PaymentMethod = $Result.DefaultSelection<Prisma.$PaymentMethodPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -177,14 +165,24 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.paymentEntry`: Exposes CRUD operations for the **PaymentEntry** model.
+   * `prisma.subscription`: Exposes CRUD operations for the **Subscription** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more PaymentEntries
-    * const paymentEntries = await prisma.paymentEntry.findMany()
+    * // Fetch zero or more Subscriptions
+    * const subscriptions = await prisma.subscription.findMany()
     * ```
     */
-  get paymentEntry(): Prisma.PaymentEntryDelegate<ExtArgs, ClientOptions>;
+  get subscription(): Prisma.SubscriptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paymentMethod`: Exposes CRUD operations for the **PaymentMethod** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PaymentMethods
+    * const paymentMethods = await prisma.paymentMethod.findMany()
+    * ```
+    */
+  get paymentMethod(): Prisma.PaymentMethodDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -626,7 +624,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    PaymentEntry: 'PaymentEntry'
+    Subscription: 'Subscription',
+    PaymentMethod: 'PaymentMethod'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -645,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "paymentEntry"
+      modelProps: "user" | "subscription" | "paymentMethod"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -723,77 +722,151 @@ export namespace Prisma {
           }
         }
       }
-      PaymentEntry: {
-        payload: Prisma.$PaymentEntryPayload<ExtArgs>
-        fields: Prisma.PaymentEntryFieldRefs
+      Subscription: {
+        payload: Prisma.$SubscriptionPayload<ExtArgs>
+        fields: Prisma.SubscriptionFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.PaymentEntryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload> | null
+            args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.PaymentEntryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>
+            args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           findFirst: {
-            args: Prisma.PaymentEntryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload> | null
+            args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.PaymentEntryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>
+            args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           findMany: {
-            args: Prisma.PaymentEntryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>[]
+            args: Prisma.SubscriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
           }
           create: {
-            args: Prisma.PaymentEntryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>
+            args: Prisma.SubscriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           createMany: {
-            args: Prisma.PaymentEntryCreateManyArgs<ExtArgs>
+            args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.PaymentEntryCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>[]
+            args: Prisma.SubscriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
           }
           delete: {
-            args: Prisma.PaymentEntryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>
+            args: Prisma.SubscriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           update: {
-            args: Prisma.PaymentEntryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>
+            args: Prisma.SubscriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           deleteMany: {
-            args: Prisma.PaymentEntryDeleteManyArgs<ExtArgs>
+            args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.PaymentEntryUpdateManyArgs<ExtArgs>
+            args: Prisma.SubscriptionUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.PaymentEntryUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>[]
+            args: Prisma.SubscriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
           }
           upsert: {
-            args: Prisma.PaymentEntryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PaymentEntryPayload>
+            args: Prisma.SubscriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubscriptionPayload>
           }
           aggregate: {
-            args: Prisma.PaymentEntryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePaymentEntry>
+            args: Prisma.SubscriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubscription>
           }
           groupBy: {
-            args: Prisma.PaymentEntryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PaymentEntryGroupByOutputType>[]
+            args: Prisma.SubscriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionGroupByOutputType>[]
           }
           count: {
-            args: Prisma.PaymentEntryCountArgs<ExtArgs>
-            result: $Utils.Optional<PaymentEntryCountAggregateOutputType> | number
+            args: Prisma.SubscriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<SubscriptionCountAggregateOutputType> | number
+          }
+        }
+      }
+      PaymentMethod: {
+        payload: Prisma.$PaymentMethodPayload<ExtArgs>
+        fields: Prisma.PaymentMethodFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaymentMethodFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaymentMethodFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>
+          }
+          findFirst: {
+            args: Prisma.PaymentMethodFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaymentMethodFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>
+          }
+          findMany: {
+            args: Prisma.PaymentMethodFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>[]
+          }
+          create: {
+            args: Prisma.PaymentMethodCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>
+          }
+          createMany: {
+            args: Prisma.PaymentMethodCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaymentMethodCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>[]
+          }
+          delete: {
+            args: Prisma.PaymentMethodDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>
+          }
+          update: {
+            args: Prisma.PaymentMethodUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaymentMethodDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaymentMethodUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaymentMethodUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaymentMethodUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentMethodPayload>
+          }
+          aggregate: {
+            args: Prisma.PaymentMethodAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaymentMethod>
+          }
+          groupBy: {
+            args: Prisma.PaymentMethodGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaymentMethodGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaymentMethodCountArgs<ExtArgs>
+            result: $Utils.Optional<PaymentMethodCountAggregateOutputType> | number
           }
         }
       }
@@ -882,7 +955,8 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
-    paymentEntry?: PaymentEntryOmit
+    subscription?: SubscriptionOmit
+    paymentMethod?: PaymentMethodOmit
   }
 
   /* Types for Logging */
@@ -977,11 +1051,13 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    paymentEntries: number
+    subscriptions: number
+    paymentMethods: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    paymentEntries?: boolean | UserCountOutputTypeCountPaymentEntriesArgs
+    subscriptions?: boolean | UserCountOutputTypeCountSubscriptionsArgs
+    paymentMethods?: boolean | UserCountOutputTypeCountPaymentMethodsArgs
   }
 
   // Custom InputTypes
@@ -998,8 +1074,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountPaymentEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PaymentEntryWhereInput
+  export type UserCountOutputTypeCountSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPaymentMethodsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentMethodWhereInput
   }
 
 
@@ -1187,7 +1270,8 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     stripeCustomerId?: boolean
-    paymentEntries?: boolean | User$paymentEntriesArgs<ExtArgs>
+    subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
+    paymentMethods?: boolean | User$paymentMethodsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1223,7 +1307,8 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "path" | "name" | "image" | "createdAt" | "stripeCustomerId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    paymentEntries?: boolean | User$paymentEntriesArgs<ExtArgs>
+    subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
+    paymentMethods?: boolean | User$paymentMethodsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1232,7 +1317,8 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      paymentEntries: Prisma.$PaymentEntryPayload<ExtArgs>[]
+      subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
+      paymentMethods: Prisma.$PaymentMethodPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1636,7 +1722,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    paymentEntries<T extends User$paymentEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subscriptions<T extends User$subscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    paymentMethods<T extends User$paymentMethodsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentMethodsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2061,27 +2148,51 @@ export namespace Prisma {
   }
 
   /**
-   * User.paymentEntries
+   * User.subscriptions
    */
-  export type User$paymentEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$subscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
-    where?: PaymentEntryWhereInput
-    orderBy?: PaymentEntryOrderByWithRelationInput | PaymentEntryOrderByWithRelationInput[]
-    cursor?: PaymentEntryWhereUniqueInput
+    include?: SubscriptionInclude<ExtArgs> | null
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
+    cursor?: SubscriptionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PaymentEntryScalarFieldEnum | PaymentEntryScalarFieldEnum[]
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * User.paymentMethods
+   */
+  export type User$paymentMethodsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    where?: PaymentMethodWhereInput
+    orderBy?: PaymentMethodOrderByWithRelationInput | PaymentMethodOrderByWithRelationInput[]
+    cursor?: PaymentMethodWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentMethodScalarFieldEnum | PaymentMethodScalarFieldEnum[]
   }
 
   /**
@@ -2104,420 +2215,408 @@ export namespace Prisma {
 
 
   /**
-   * Model PaymentEntry
+   * Model Subscription
    */
 
-  export type AggregatePaymentEntry = {
-    _count: PaymentEntryCountAggregateOutputType | null
-    _avg: PaymentEntryAvgAggregateOutputType | null
-    _sum: PaymentEntrySumAggregateOutputType | null
-    _min: PaymentEntryMinAggregateOutputType | null
-    _max: PaymentEntryMaxAggregateOutputType | null
+  export type AggregateSubscription = {
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
   }
 
-  export type PaymentEntryAvgAggregateOutputType = {
-    amount: number | null
+  export type SubscriptionAvgAggregateOutputType = {
+    priceCents: number | null
   }
 
-  export type PaymentEntrySumAggregateOutputType = {
-    amount: number | null
+  export type SubscriptionSumAggregateOutputType = {
+    priceCents: number | null
   }
 
-  export type PaymentEntryMinAggregateOutputType = {
+  export type SubscriptionMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    label: string | null
-    amount: number | null
-    paymentType: $Enums.PaymentType | null
-    startDate: Date | null
-    dueDate: Date | null
+    stripeSubId: string | null
+    priceCents: number | null
+    interval: string | null
+    status: string | null
     createdAt: Date | null
   }
 
-  export type PaymentEntryMaxAggregateOutputType = {
+  export type SubscriptionMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    label: string | null
-    amount: number | null
-    paymentType: $Enums.PaymentType | null
-    startDate: Date | null
-    dueDate: Date | null
+    stripeSubId: string | null
+    priceCents: number | null
+    interval: string | null
+    status: string | null
     createdAt: Date | null
   }
 
-  export type PaymentEntryCountAggregateOutputType = {
+  export type SubscriptionCountAggregateOutputType = {
     id: number
     userId: number
-    label: number
-    amount: number
-    paymentType: number
-    startDate: number
-    dueDate: number
+    stripeSubId: number
+    priceCents: number
+    interval: number
+    status: number
     createdAt: number
     _all: number
   }
 
 
-  export type PaymentEntryAvgAggregateInputType = {
-    amount?: true
+  export type SubscriptionAvgAggregateInputType = {
+    priceCents?: true
   }
 
-  export type PaymentEntrySumAggregateInputType = {
-    amount?: true
+  export type SubscriptionSumAggregateInputType = {
+    priceCents?: true
   }
 
-  export type PaymentEntryMinAggregateInputType = {
+  export type SubscriptionMinAggregateInputType = {
     id?: true
     userId?: true
-    label?: true
-    amount?: true
-    paymentType?: true
-    startDate?: true
-    dueDate?: true
+    stripeSubId?: true
+    priceCents?: true
+    interval?: true
+    status?: true
     createdAt?: true
   }
 
-  export type PaymentEntryMaxAggregateInputType = {
+  export type SubscriptionMaxAggregateInputType = {
     id?: true
     userId?: true
-    label?: true
-    amount?: true
-    paymentType?: true
-    startDate?: true
-    dueDate?: true
+    stripeSubId?: true
+    priceCents?: true
+    interval?: true
+    status?: true
     createdAt?: true
   }
 
-  export type PaymentEntryCountAggregateInputType = {
+  export type SubscriptionCountAggregateInputType = {
     id?: true
     userId?: true
-    label?: true
-    amount?: true
-    paymentType?: true
-    startDate?: true
-    dueDate?: true
+    stripeSubId?: true
+    priceCents?: true
+    interval?: true
+    status?: true
     createdAt?: true
     _all?: true
   }
 
-  export type PaymentEntryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which PaymentEntry to aggregate.
+     * Filter which Subscription to aggregate.
      */
-    where?: PaymentEntryWhereInput
+    where?: SubscriptionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of PaymentEntries to fetch.
+     * Determine the order of Subscriptions to fetch.
      */
-    orderBy?: PaymentEntryOrderByWithRelationInput | PaymentEntryOrderByWithRelationInput[]
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: PaymentEntryWhereUniqueInput
+    cursor?: SubscriptionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` PaymentEntries from the position of the cursor.
+     * Take `±n` Subscriptions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` PaymentEntries.
+     * Skip the first `n` Subscriptions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned PaymentEntries
+     * Count returned Subscriptions
     **/
-    _count?: true | PaymentEntryCountAggregateInputType
+    _count?: true | SubscriptionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: PaymentEntryAvgAggregateInputType
+    _avg?: SubscriptionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: PaymentEntrySumAggregateInputType
+    _sum?: SubscriptionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: PaymentEntryMinAggregateInputType
+    _min?: SubscriptionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: PaymentEntryMaxAggregateInputType
+    _max?: SubscriptionMaxAggregateInputType
   }
 
-  export type GetPaymentEntryAggregateType<T extends PaymentEntryAggregateArgs> = {
-        [P in keyof T & keyof AggregatePaymentEntry]: P extends '_count' | 'count'
+  export type GetSubscriptionAggregateType<T extends SubscriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubscription]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregatePaymentEntry[P]>
-      : GetScalarType<T[P], AggregatePaymentEntry[P]>
+        : GetScalarType<T[P], AggregateSubscription[P]>
+      : GetScalarType<T[P], AggregateSubscription[P]>
   }
 
 
 
 
-  export type PaymentEntryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PaymentEntryWhereInput
-    orderBy?: PaymentEntryOrderByWithAggregationInput | PaymentEntryOrderByWithAggregationInput[]
-    by: PaymentEntryScalarFieldEnum[] | PaymentEntryScalarFieldEnum
-    having?: PaymentEntryScalarWhereWithAggregatesInput
+  export type SubscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubscriptionWhereInput
+    orderBy?: SubscriptionOrderByWithAggregationInput | SubscriptionOrderByWithAggregationInput[]
+    by: SubscriptionScalarFieldEnum[] | SubscriptionScalarFieldEnum
+    having?: SubscriptionScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: PaymentEntryCountAggregateInputType | true
-    _avg?: PaymentEntryAvgAggregateInputType
-    _sum?: PaymentEntrySumAggregateInputType
-    _min?: PaymentEntryMinAggregateInputType
-    _max?: PaymentEntryMaxAggregateInputType
+    _count?: SubscriptionCountAggregateInputType | true
+    _avg?: SubscriptionAvgAggregateInputType
+    _sum?: SubscriptionSumAggregateInputType
+    _min?: SubscriptionMinAggregateInputType
+    _max?: SubscriptionMaxAggregateInputType
   }
 
-  export type PaymentEntryGroupByOutputType = {
+  export type SubscriptionGroupByOutputType = {
     id: string
     userId: string
-    label: string
-    amount: number
-    paymentType: $Enums.PaymentType
-    startDate: Date
-    dueDate: Date
+    stripeSubId: string
+    priceCents: number
+    interval: string
+    status: string
     createdAt: Date
-    _count: PaymentEntryCountAggregateOutputType | null
-    _avg: PaymentEntryAvgAggregateOutputType | null
-    _sum: PaymentEntrySumAggregateOutputType | null
-    _min: PaymentEntryMinAggregateOutputType | null
-    _max: PaymentEntryMaxAggregateOutputType | null
+    _count: SubscriptionCountAggregateOutputType | null
+    _avg: SubscriptionAvgAggregateOutputType | null
+    _sum: SubscriptionSumAggregateOutputType | null
+    _min: SubscriptionMinAggregateOutputType | null
+    _max: SubscriptionMaxAggregateOutputType | null
   }
 
-  type GetPaymentEntryGroupByPayload<T extends PaymentEntryGroupByArgs> = Prisma.PrismaPromise<
+  type GetSubscriptionGroupByPayload<T extends SubscriptionGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<PaymentEntryGroupByOutputType, T['by']> &
+      PickEnumerable<SubscriptionGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PaymentEntryGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof SubscriptionGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], PaymentEntryGroupByOutputType[P]>
-            : GetScalarType<T[P], PaymentEntryGroupByOutputType[P]>
+              : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], SubscriptionGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type PaymentEntrySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type SubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    label?: boolean
-    amount?: boolean
-    paymentType?: boolean
-    startDate?: boolean
-    dueDate?: boolean
+    stripeSubId?: boolean
+    priceCents?: boolean
+    interval?: boolean
+    status?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["paymentEntry"]>
+  }, ExtArgs["result"]["subscription"]>
 
-  export type PaymentEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type SubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    label?: boolean
-    amount?: boolean
-    paymentType?: boolean
-    startDate?: boolean
-    dueDate?: boolean
+    stripeSubId?: boolean
+    priceCents?: boolean
+    interval?: boolean
+    status?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["paymentEntry"]>
+  }, ExtArgs["result"]["subscription"]>
 
-  export type PaymentEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type SubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    label?: boolean
-    amount?: boolean
-    paymentType?: boolean
-    startDate?: boolean
-    dueDate?: boolean
+    stripeSubId?: boolean
+    priceCents?: boolean
+    interval?: boolean
+    status?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["paymentEntry"]>
+  }, ExtArgs["result"]["subscription"]>
 
-  export type PaymentEntrySelectScalar = {
+  export type SubscriptionSelectScalar = {
     id?: boolean
     userId?: boolean
-    label?: boolean
-    amount?: boolean
-    paymentType?: boolean
-    startDate?: boolean
-    dueDate?: boolean
+    stripeSubId?: boolean
+    priceCents?: boolean
+    interval?: boolean
+    status?: boolean
     createdAt?: boolean
   }
 
-  export type PaymentEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "label" | "amount" | "paymentType" | "startDate" | "dueDate" | "createdAt", ExtArgs["result"]["paymentEntry"]>
-  export type PaymentEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeSubId" | "priceCents" | "interval" | "status" | "createdAt", ExtArgs["result"]["subscription"]>
+  export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type PaymentEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type PaymentEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $PaymentEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "PaymentEntry"
+  export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Subscription"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      label: string
-      amount: number
-      paymentType: $Enums.PaymentType
-      startDate: Date
-      dueDate: Date
+      stripeSubId: string
+      priceCents: number
+      interval: string
+      status: string
       createdAt: Date
-    }, ExtArgs["result"]["paymentEntry"]>
+    }, ExtArgs["result"]["subscription"]>
     composites: {}
   }
 
-  type PaymentEntryGetPayload<S extends boolean | null | undefined | PaymentEntryDefaultArgs> = $Result.GetResult<Prisma.$PaymentEntryPayload, S>
+  type SubscriptionGetPayload<S extends boolean | null | undefined | SubscriptionDefaultArgs> = $Result.GetResult<Prisma.$SubscriptionPayload, S>
 
-  type PaymentEntryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PaymentEntryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PaymentEntryCountAggregateInputType | true
+  type SubscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SubscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubscriptionCountAggregateInputType | true
     }
 
-  export interface PaymentEntryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaymentEntry'], meta: { name: 'PaymentEntry' } }
+  export interface SubscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Subscription'], meta: { name: 'Subscription' } }
     /**
-     * Find zero or one PaymentEntry that matches the filter.
-     * @param {PaymentEntryFindUniqueArgs} args - Arguments to find a PaymentEntry
+     * Find zero or one Subscription that matches the filter.
+     * @param {SubscriptionFindUniqueArgs} args - Arguments to find a Subscription
      * @example
-     * // Get one PaymentEntry
-     * const paymentEntry = await prisma.paymentEntry.findUnique({
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends PaymentEntryFindUniqueArgs>(args: SelectSubset<T, PaymentEntryFindUniqueArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends SubscriptionFindUniqueArgs>(args: SelectSubset<T, SubscriptionFindUniqueArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one PaymentEntry that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Subscription that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {PaymentEntryFindUniqueOrThrowArgs} args - Arguments to find a PaymentEntry
+     * @param {SubscriptionFindUniqueOrThrowArgs} args - Arguments to find a Subscription
      * @example
-     * // Get one PaymentEntry
-     * const paymentEntry = await prisma.paymentEntry.findUniqueOrThrow({
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends PaymentEntryFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentEntryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends SubscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, SubscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first PaymentEntry that matches the filter.
+     * Find the first Subscription that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PaymentEntryFindFirstArgs} args - Arguments to find a PaymentEntry
+     * @param {SubscriptionFindFirstArgs} args - Arguments to find a Subscription
      * @example
-     * // Get one PaymentEntry
-     * const paymentEntry = await prisma.paymentEntry.findFirst({
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends PaymentEntryFindFirstArgs>(args?: SelectSubset<T, PaymentEntryFindFirstArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends SubscriptionFindFirstArgs>(args?: SelectSubset<T, SubscriptionFindFirstArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first PaymentEntry that matches the filter or
+     * Find the first Subscription that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PaymentEntryFindFirstOrThrowArgs} args - Arguments to find a PaymentEntry
+     * @param {SubscriptionFindFirstOrThrowArgs} args - Arguments to find a Subscription
      * @example
-     * // Get one PaymentEntry
-     * const paymentEntry = await prisma.paymentEntry.findFirstOrThrow({
+     * // Get one Subscription
+     * const subscription = await prisma.subscription.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends PaymentEntryFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentEntryFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends SubscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, SubscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more PaymentEntries that matches the filter.
+     * Find zero or more Subscriptions that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PaymentEntryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {SubscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all PaymentEntries
-     * const paymentEntries = await prisma.paymentEntry.findMany()
+     * // Get all Subscriptions
+     * const subscriptions = await prisma.subscription.findMany()
      * 
-     * // Get first 10 PaymentEntries
-     * const paymentEntries = await prisma.paymentEntry.findMany({ take: 10 })
+     * // Get first 10 Subscriptions
+     * const subscriptions = await prisma.subscription.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const paymentEntryWithIdOnly = await prisma.paymentEntry.findMany({ select: { id: true } })
+     * const subscriptionWithIdOnly = await prisma.subscription.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends PaymentEntryFindManyArgs>(args?: SelectSubset<T, PaymentEntryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends SubscriptionFindManyArgs>(args?: SelectSubset<T, SubscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a PaymentEntry.
-     * @param {PaymentEntryCreateArgs} args - Arguments to create a PaymentEntry.
+     * Create a Subscription.
+     * @param {SubscriptionCreateArgs} args - Arguments to create a Subscription.
      * @example
-     * // Create one PaymentEntry
-     * const PaymentEntry = await prisma.paymentEntry.create({
+     * // Create one Subscription
+     * const Subscription = await prisma.subscription.create({
      *   data: {
-     *     // ... data to create a PaymentEntry
+     *     // ... data to create a Subscription
      *   }
      * })
      * 
      */
-    create<T extends PaymentEntryCreateArgs>(args: SelectSubset<T, PaymentEntryCreateArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends SubscriptionCreateArgs>(args: SelectSubset<T, SubscriptionCreateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many PaymentEntries.
-     * @param {PaymentEntryCreateManyArgs} args - Arguments to create many PaymentEntries.
+     * Create many Subscriptions.
+     * @param {SubscriptionCreateManyArgs} args - Arguments to create many Subscriptions.
      * @example
-     * // Create many PaymentEntries
-     * const paymentEntry = await prisma.paymentEntry.createMany({
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends PaymentEntryCreateManyArgs>(args?: SelectSubset<T, PaymentEntryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends SubscriptionCreateManyArgs>(args?: SelectSubset<T, SubscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many PaymentEntries and returns the data saved in the database.
-     * @param {PaymentEntryCreateManyAndReturnArgs} args - Arguments to create many PaymentEntries.
+     * Create many Subscriptions and returns the data saved in the database.
+     * @param {SubscriptionCreateManyAndReturnArgs} args - Arguments to create many Subscriptions.
      * @example
-     * // Create many PaymentEntries
-     * const paymentEntry = await prisma.paymentEntry.createManyAndReturn({
+     * // Create many Subscriptions
+     * const subscription = await prisma.subscription.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many PaymentEntries and only return the `id`
-     * const paymentEntryWithIdOnly = await prisma.paymentEntry.createManyAndReturn({
+     * // Create many Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2527,28 +2626,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends PaymentEntryCreateManyAndReturnArgs>(args?: SelectSubset<T, PaymentEntryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends SubscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, SubscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a PaymentEntry.
-     * @param {PaymentEntryDeleteArgs} args - Arguments to delete one PaymentEntry.
+     * Delete a Subscription.
+     * @param {SubscriptionDeleteArgs} args - Arguments to delete one Subscription.
      * @example
-     * // Delete one PaymentEntry
-     * const PaymentEntry = await prisma.paymentEntry.delete({
+     * // Delete one Subscription
+     * const Subscription = await prisma.subscription.delete({
      *   where: {
-     *     // ... filter to delete one PaymentEntry
+     *     // ... filter to delete one Subscription
      *   }
      * })
      * 
      */
-    delete<T extends PaymentEntryDeleteArgs>(args: SelectSubset<T, PaymentEntryDeleteArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends SubscriptionDeleteArgs>(args: SelectSubset<T, SubscriptionDeleteArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one PaymentEntry.
-     * @param {PaymentEntryUpdateArgs} args - Arguments to update one PaymentEntry.
+     * Update one Subscription.
+     * @param {SubscriptionUpdateArgs} args - Arguments to update one Subscription.
      * @example
-     * // Update one PaymentEntry
-     * const paymentEntry = await prisma.paymentEntry.update({
+     * // Update one Subscription
+     * const subscription = await prisma.subscription.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2558,30 +2657,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends PaymentEntryUpdateArgs>(args: SelectSubset<T, PaymentEntryUpdateArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends SubscriptionUpdateArgs>(args: SelectSubset<T, SubscriptionUpdateArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more PaymentEntries.
-     * @param {PaymentEntryDeleteManyArgs} args - Arguments to filter PaymentEntries to delete.
+     * Delete zero or more Subscriptions.
+     * @param {SubscriptionDeleteManyArgs} args - Arguments to filter Subscriptions to delete.
      * @example
-     * // Delete a few PaymentEntries
-     * const { count } = await prisma.paymentEntry.deleteMany({
+     * // Delete a few Subscriptions
+     * const { count } = await prisma.subscription.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends PaymentEntryDeleteManyArgs>(args?: SelectSubset<T, PaymentEntryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends SubscriptionDeleteManyArgs>(args?: SelectSubset<T, SubscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more PaymentEntries.
+     * Update zero or more Subscriptions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PaymentEntryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {SubscriptionUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many PaymentEntries
-     * const paymentEntry = await prisma.paymentEntry.updateMany({
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2591,14 +2690,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends PaymentEntryUpdateManyArgs>(args: SelectSubset<T, PaymentEntryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends SubscriptionUpdateManyArgs>(args: SelectSubset<T, SubscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more PaymentEntries and returns the data updated in the database.
-     * @param {PaymentEntryUpdateManyAndReturnArgs} args - Arguments to update many PaymentEntries.
+     * Update zero or more Subscriptions and returns the data updated in the database.
+     * @param {SubscriptionUpdateManyAndReturnArgs} args - Arguments to update many Subscriptions.
      * @example
-     * // Update many PaymentEntries
-     * const paymentEntry = await prisma.paymentEntry.updateManyAndReturn({
+     * // Update many Subscriptions
+     * const subscription = await prisma.subscription.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2607,8 +2706,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more PaymentEntries and only return the `id`
-     * const paymentEntryWithIdOnly = await prisma.paymentEntry.updateManyAndReturn({
+     * // Update zero or more Subscriptions and only return the `id`
+     * const subscriptionWithIdOnly = await prisma.subscription.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2621,56 +2720,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends PaymentEntryUpdateManyAndReturnArgs>(args: SelectSubset<T, PaymentEntryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends SubscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, SubscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one PaymentEntry.
-     * @param {PaymentEntryUpsertArgs} args - Arguments to update or create a PaymentEntry.
+     * Create or update one Subscription.
+     * @param {SubscriptionUpsertArgs} args - Arguments to update or create a Subscription.
      * @example
-     * // Update or create a PaymentEntry
-     * const paymentEntry = await prisma.paymentEntry.upsert({
+     * // Update or create a Subscription
+     * const subscription = await prisma.subscription.upsert({
      *   create: {
-     *     // ... data to create a PaymentEntry
+     *     // ... data to create a Subscription
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the PaymentEntry we want to update
+     *     // ... the filter for the Subscription we want to update
      *   }
      * })
      */
-    upsert<T extends PaymentEntryUpsertArgs>(args: SelectSubset<T, PaymentEntryUpsertArgs<ExtArgs>>): Prisma__PaymentEntryClient<$Result.GetResult<Prisma.$PaymentEntryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends SubscriptionUpsertArgs>(args: SelectSubset<T, SubscriptionUpsertArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of PaymentEntries.
+     * Count the number of Subscriptions.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PaymentEntryCountArgs} args - Arguments to filter PaymentEntries to count.
+     * @param {SubscriptionCountArgs} args - Arguments to filter Subscriptions to count.
      * @example
-     * // Count the number of PaymentEntries
-     * const count = await prisma.paymentEntry.count({
+     * // Count the number of Subscriptions
+     * const count = await prisma.subscription.count({
      *   where: {
-     *     // ... the filter for the PaymentEntries we want to count
+     *     // ... the filter for the Subscriptions we want to count
      *   }
      * })
     **/
-    count<T extends PaymentEntryCountArgs>(
-      args?: Subset<T, PaymentEntryCountArgs>,
+    count<T extends SubscriptionCountArgs>(
+      args?: Subset<T, SubscriptionCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], PaymentEntryCountAggregateOutputType>
+          : GetScalarType<T['select'], SubscriptionCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a PaymentEntry.
+     * Allows you to perform aggregations operations on a Subscription.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PaymentEntryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {SubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2690,13 +2789,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PaymentEntryAggregateArgs>(args: Subset<T, PaymentEntryAggregateArgs>): Prisma.PrismaPromise<GetPaymentEntryAggregateType<T>>
+    aggregate<T extends SubscriptionAggregateArgs>(args: Subset<T, SubscriptionAggregateArgs>): Prisma.PrismaPromise<GetSubscriptionAggregateType<T>>
 
     /**
-     * Group by PaymentEntry.
+     * Group by Subscription.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PaymentEntryGroupByArgs} args - Group by arguments.
+     * @param {SubscriptionGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2711,14 +2810,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends PaymentEntryGroupByArgs,
+      T extends SubscriptionGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PaymentEntryGroupByArgs['orderBy'] }
-        : { orderBy?: PaymentEntryGroupByArgs['orderBy'] },
+        ? { orderBy: SubscriptionGroupByArgs['orderBy'] }
+        : { orderBy?: SubscriptionGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2767,20 +2866,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PaymentEntryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentEntryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, SubscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the PaymentEntry model
+   * Fields of the Subscription model
    */
-  readonly fields: PaymentEntryFieldRefs;
+  readonly fields: SubscriptionFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for PaymentEntry.
+   * The delegate class that acts as a "Promise-like" for Subscription.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__PaymentEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -2809,428 +2908,1511 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the PaymentEntry model
+   * Fields of the Subscription model
    */
-  interface PaymentEntryFieldRefs {
-    readonly id: FieldRef<"PaymentEntry", 'String'>
-    readonly userId: FieldRef<"PaymentEntry", 'String'>
-    readonly label: FieldRef<"PaymentEntry", 'String'>
-    readonly amount: FieldRef<"PaymentEntry", 'Int'>
-    readonly paymentType: FieldRef<"PaymentEntry", 'PaymentType'>
-    readonly startDate: FieldRef<"PaymentEntry", 'DateTime'>
-    readonly dueDate: FieldRef<"PaymentEntry", 'DateTime'>
-    readonly createdAt: FieldRef<"PaymentEntry", 'DateTime'>
+  interface SubscriptionFieldRefs {
+    readonly id: FieldRef<"Subscription", 'String'>
+    readonly userId: FieldRef<"Subscription", 'String'>
+    readonly stripeSubId: FieldRef<"Subscription", 'String'>
+    readonly priceCents: FieldRef<"Subscription", 'Int'>
+    readonly interval: FieldRef<"Subscription", 'String'>
+    readonly status: FieldRef<"Subscription", 'String'>
+    readonly createdAt: FieldRef<"Subscription", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * PaymentEntry findUnique
+   * Subscription findUnique
    */
-  export type PaymentEntryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * Filter, which PaymentEntry to fetch.
+     * Filter, which Subscription to fetch.
      */
-    where: PaymentEntryWhereUniqueInput
+    where: SubscriptionWhereUniqueInput
   }
 
   /**
-   * PaymentEntry findUniqueOrThrow
+   * Subscription findUniqueOrThrow
    */
-  export type PaymentEntryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * Filter, which PaymentEntry to fetch.
+     * Filter, which Subscription to fetch.
      */
-    where: PaymentEntryWhereUniqueInput
+    where: SubscriptionWhereUniqueInput
   }
 
   /**
-   * PaymentEntry findFirst
+   * Subscription findFirst
    */
-  export type PaymentEntryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * Filter, which PaymentEntry to fetch.
+     * Filter, which Subscription to fetch.
      */
-    where?: PaymentEntryWhereInput
+    where?: SubscriptionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of PaymentEntries to fetch.
+     * Determine the order of Subscriptions to fetch.
      */
-    orderBy?: PaymentEntryOrderByWithRelationInput | PaymentEntryOrderByWithRelationInput[]
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for PaymentEntries.
+     * Sets the position for searching for Subscriptions.
      */
-    cursor?: PaymentEntryWhereUniqueInput
+    cursor?: SubscriptionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` PaymentEntries from the position of the cursor.
+     * Take `±n` Subscriptions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` PaymentEntries.
+     * Skip the first `n` Subscriptions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of PaymentEntries.
+     * Filter by unique combinations of Subscriptions.
      */
-    distinct?: PaymentEntryScalarFieldEnum | PaymentEntryScalarFieldEnum[]
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
   }
 
   /**
-   * PaymentEntry findFirstOrThrow
+   * Subscription findFirstOrThrow
    */
-  export type PaymentEntryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * Filter, which PaymentEntry to fetch.
+     * Filter, which Subscription to fetch.
      */
-    where?: PaymentEntryWhereInput
+    where?: SubscriptionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of PaymentEntries to fetch.
+     * Determine the order of Subscriptions to fetch.
      */
-    orderBy?: PaymentEntryOrderByWithRelationInput | PaymentEntryOrderByWithRelationInput[]
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for PaymentEntries.
+     * Sets the position for searching for Subscriptions.
      */
-    cursor?: PaymentEntryWhereUniqueInput
+    cursor?: SubscriptionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` PaymentEntries from the position of the cursor.
+     * Take `±n` Subscriptions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` PaymentEntries.
+     * Skip the first `n` Subscriptions.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of PaymentEntries.
+     * Filter by unique combinations of Subscriptions.
      */
-    distinct?: PaymentEntryScalarFieldEnum | PaymentEntryScalarFieldEnum[]
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
   }
 
   /**
-   * PaymentEntry findMany
+   * Subscription findMany
    */
-  export type PaymentEntryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * Filter, which PaymentEntries to fetch.
+     * Filter, which Subscriptions to fetch.
      */
-    where?: PaymentEntryWhereInput
+    where?: SubscriptionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of PaymentEntries to fetch.
+     * Determine the order of Subscriptions to fetch.
      */
-    orderBy?: PaymentEntryOrderByWithRelationInput | PaymentEntryOrderByWithRelationInput[]
+    orderBy?: SubscriptionOrderByWithRelationInput | SubscriptionOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing PaymentEntries.
+     * Sets the position for listing Subscriptions.
      */
-    cursor?: PaymentEntryWhereUniqueInput
+    cursor?: SubscriptionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` PaymentEntries from the position of the cursor.
+     * Take `±n` Subscriptions from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` PaymentEntries.
+     * Skip the first `n` Subscriptions.
      */
     skip?: number
-    distinct?: PaymentEntryScalarFieldEnum | PaymentEntryScalarFieldEnum[]
+    distinct?: SubscriptionScalarFieldEnum | SubscriptionScalarFieldEnum[]
   }
 
   /**
-   * PaymentEntry create
+   * Subscription create
    */
-  export type PaymentEntryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * The data needed to create a PaymentEntry.
+     * The data needed to create a Subscription.
      */
-    data: XOR<PaymentEntryCreateInput, PaymentEntryUncheckedCreateInput>
+    data: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
   }
 
   /**
-   * PaymentEntry createMany
+   * Subscription createMany
    */
-  export type PaymentEntryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many PaymentEntries.
+     * The data used to create many Subscriptions.
      */
-    data: PaymentEntryCreateManyInput | PaymentEntryCreateManyInput[]
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * PaymentEntry createManyAndReturn
+   * Subscription createManyAndReturn
    */
-  export type PaymentEntryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelectCreateManyAndReturn<ExtArgs> | null
+    select?: SubscriptionSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
-     * The data used to create many PaymentEntries.
+     * The data used to create many Subscriptions.
      */
-    data: PaymentEntryCreateManyInput | PaymentEntryCreateManyInput[]
+    data: SubscriptionCreateManyInput | SubscriptionCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: SubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * PaymentEntry update
+   * Subscription update
    */
-  export type PaymentEntryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * The data needed to update a PaymentEntry.
+     * The data needed to update a Subscription.
      */
-    data: XOR<PaymentEntryUpdateInput, PaymentEntryUncheckedUpdateInput>
+    data: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
     /**
-     * Choose, which PaymentEntry to update.
+     * Choose, which Subscription to update.
      */
-    where: PaymentEntryWhereUniqueInput
+    where: SubscriptionWhereUniqueInput
   }
 
   /**
-   * PaymentEntry updateMany
+   * Subscription updateMany
    */
-  export type PaymentEntryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update PaymentEntries.
+     * The data used to update Subscriptions.
      */
-    data: XOR<PaymentEntryUpdateManyMutationInput, PaymentEntryUncheckedUpdateManyInput>
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
     /**
-     * Filter which PaymentEntries to update
+     * Filter which Subscriptions to update
      */
-    where?: PaymentEntryWhereInput
+    where?: SubscriptionWhereInput
     /**
-     * Limit how many PaymentEntries to update.
+     * Limit how many Subscriptions to update.
      */
     limit?: number
   }
 
   /**
-   * PaymentEntry updateManyAndReturn
+   * Subscription updateManyAndReturn
    */
-  export type PaymentEntryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelectUpdateManyAndReturn<ExtArgs> | null
+    select?: SubscriptionSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
-     * The data used to update PaymentEntries.
+     * The data used to update Subscriptions.
      */
-    data: XOR<PaymentEntryUpdateManyMutationInput, PaymentEntryUncheckedUpdateManyInput>
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyInput>
     /**
-     * Filter which PaymentEntries to update
+     * Filter which Subscriptions to update
      */
-    where?: PaymentEntryWhereInput
+    where?: SubscriptionWhereInput
     /**
-     * Limit how many PaymentEntries to update.
+     * Limit how many Subscriptions to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: SubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * PaymentEntry upsert
+   * Subscription upsert
    */
-  export type PaymentEntryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * The filter to search for the PaymentEntry to update in case it exists.
+     * The filter to search for the Subscription to update in case it exists.
      */
-    where: PaymentEntryWhereUniqueInput
+    where: SubscriptionWhereUniqueInput
     /**
-     * In case the PaymentEntry found by the `where` argument doesn't exist, create a new PaymentEntry with this data.
+     * In case the Subscription found by the `where` argument doesn't exist, create a new Subscription with this data.
      */
-    create: XOR<PaymentEntryCreateInput, PaymentEntryUncheckedCreateInput>
+    create: XOR<SubscriptionCreateInput, SubscriptionUncheckedCreateInput>
     /**
-     * In case the PaymentEntry was found with the provided `where` argument, update it with this data.
+     * In case the Subscription was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<PaymentEntryUpdateInput, PaymentEntryUncheckedUpdateInput>
+    update: XOR<SubscriptionUpdateInput, SubscriptionUncheckedUpdateInput>
   }
 
   /**
-   * PaymentEntry delete
+   * Subscription delete
    */
-  export type PaymentEntryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
     /**
-     * Filter which PaymentEntry to delete.
+     * Filter which Subscription to delete.
      */
-    where: PaymentEntryWhereUniqueInput
+    where: SubscriptionWhereUniqueInput
   }
 
   /**
-   * PaymentEntry deleteMany
+   * Subscription deleteMany
    */
-  export type PaymentEntryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which PaymentEntries to delete
+     * Filter which Subscriptions to delete
      */
-    where?: PaymentEntryWhereInput
+    where?: SubscriptionWhereInput
     /**
-     * Limit how many PaymentEntries to delete.
+     * Limit how many Subscriptions to delete.
      */
     limit?: number
   }
 
   /**
-   * PaymentEntry without action
+   * Subscription without action
    */
-  export type PaymentEntryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentEntry
+     * Select specific fields to fetch from the Subscription
      */
-    select?: PaymentEntrySelect<ExtArgs> | null
+    select?: SubscriptionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentEntry
+     * Omit specific fields from the Subscription
      */
-    omit?: PaymentEntryOmit<ExtArgs> | null
+    omit?: SubscriptionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentEntryInclude<ExtArgs> | null
+    include?: SubscriptionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PaymentMethod
+   */
+
+  export type AggregatePaymentMethod = {
+    _count: PaymentMethodCountAggregateOutputType | null
+    _min: PaymentMethodMinAggregateOutputType | null
+    _max: PaymentMethodMaxAggregateOutputType | null
+  }
+
+  export type PaymentMethodMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    stripePmId: string | null
+    bankName: string | null
+    last4: string | null
+    verified: boolean | null
+    createdAt: Date | null
+  }
+
+  export type PaymentMethodMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    stripePmId: string | null
+    bankName: string | null
+    last4: string | null
+    verified: boolean | null
+    createdAt: Date | null
+  }
+
+  export type PaymentMethodCountAggregateOutputType = {
+    id: number
+    userId: number
+    stripePmId: number
+    bankName: number
+    last4: number
+    verified: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PaymentMethodMinAggregateInputType = {
+    id?: true
+    userId?: true
+    stripePmId?: true
+    bankName?: true
+    last4?: true
+    verified?: true
+    createdAt?: true
+  }
+
+  export type PaymentMethodMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    stripePmId?: true
+    bankName?: true
+    last4?: true
+    verified?: true
+    createdAt?: true
+  }
+
+  export type PaymentMethodCountAggregateInputType = {
+    id?: true
+    userId?: true
+    stripePmId?: true
+    bankName?: true
+    last4?: true
+    verified?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PaymentMethodAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentMethod to aggregate.
+     */
+    where?: PaymentMethodWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentMethods to fetch.
+     */
+    orderBy?: PaymentMethodOrderByWithRelationInput | PaymentMethodOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaymentMethodWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentMethods from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentMethods.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PaymentMethods
+    **/
+    _count?: true | PaymentMethodCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaymentMethodMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaymentMethodMaxAggregateInputType
+  }
+
+  export type GetPaymentMethodAggregateType<T extends PaymentMethodAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaymentMethod]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaymentMethod[P]>
+      : GetScalarType<T[P], AggregatePaymentMethod[P]>
+  }
+
+
+
+
+  export type PaymentMethodGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentMethodWhereInput
+    orderBy?: PaymentMethodOrderByWithAggregationInput | PaymentMethodOrderByWithAggregationInput[]
+    by: PaymentMethodScalarFieldEnum[] | PaymentMethodScalarFieldEnum
+    having?: PaymentMethodScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaymentMethodCountAggregateInputType | true
+    _min?: PaymentMethodMinAggregateInputType
+    _max?: PaymentMethodMaxAggregateInputType
+  }
+
+  export type PaymentMethodGroupByOutputType = {
+    id: string
+    userId: string
+    stripePmId: string
+    bankName: string | null
+    last4: string | null
+    verified: boolean
+    createdAt: Date
+    _count: PaymentMethodCountAggregateOutputType | null
+    _min: PaymentMethodMinAggregateOutputType | null
+    _max: PaymentMethodMaxAggregateOutputType | null
+  }
+
+  type GetPaymentMethodGroupByPayload<T extends PaymentMethodGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentMethodGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaymentMethodGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaymentMethodGroupByOutputType[P]>
+            : GetScalarType<T[P], PaymentMethodGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaymentMethodSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripePmId?: boolean
+    bankName?: boolean
+    last4?: boolean
+    verified?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentMethod"]>
+
+  export type PaymentMethodSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripePmId?: boolean
+    bankName?: boolean
+    last4?: boolean
+    verified?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentMethod"]>
+
+  export type PaymentMethodSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    stripePmId?: boolean
+    bankName?: boolean
+    last4?: boolean
+    verified?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentMethod"]>
+
+  export type PaymentMethodSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    stripePmId?: boolean
+    bankName?: boolean
+    last4?: boolean
+    verified?: boolean
+    createdAt?: boolean
+  }
+
+  export type PaymentMethodOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripePmId" | "bankName" | "last4" | "verified" | "createdAt", ExtArgs["result"]["paymentMethod"]>
+  export type PaymentMethodInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PaymentMethodIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PaymentMethodIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PaymentMethodPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PaymentMethod"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      stripePmId: string
+      bankName: string | null
+      last4: string | null
+      verified: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["paymentMethod"]>
+    composites: {}
+  }
+
+  type PaymentMethodGetPayload<S extends boolean | null | undefined | PaymentMethodDefaultArgs> = $Result.GetResult<Prisma.$PaymentMethodPayload, S>
+
+  type PaymentMethodCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaymentMethodFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaymentMethodCountAggregateInputType | true
+    }
+
+  export interface PaymentMethodDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaymentMethod'], meta: { name: 'PaymentMethod' } }
+    /**
+     * Find zero or one PaymentMethod that matches the filter.
+     * @param {PaymentMethodFindUniqueArgs} args - Arguments to find a PaymentMethod
+     * @example
+     * // Get one PaymentMethod
+     * const paymentMethod = await prisma.paymentMethod.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaymentMethodFindUniqueArgs>(args: SelectSubset<T, PaymentMethodFindUniqueArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PaymentMethod that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaymentMethodFindUniqueOrThrowArgs} args - Arguments to find a PaymentMethod
+     * @example
+     * // Get one PaymentMethod
+     * const paymentMethod = await prisma.paymentMethod.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaymentMethodFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentMethodFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentMethod that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentMethodFindFirstArgs} args - Arguments to find a PaymentMethod
+     * @example
+     * // Get one PaymentMethod
+     * const paymentMethod = await prisma.paymentMethod.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaymentMethodFindFirstArgs>(args?: SelectSubset<T, PaymentMethodFindFirstArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentMethod that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentMethodFindFirstOrThrowArgs} args - Arguments to find a PaymentMethod
+     * @example
+     * // Get one PaymentMethod
+     * const paymentMethod = await prisma.paymentMethod.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaymentMethodFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentMethodFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PaymentMethods that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentMethodFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PaymentMethods
+     * const paymentMethods = await prisma.paymentMethod.findMany()
+     * 
+     * // Get first 10 PaymentMethods
+     * const paymentMethods = await prisma.paymentMethod.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paymentMethodWithIdOnly = await prisma.paymentMethod.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaymentMethodFindManyArgs>(args?: SelectSubset<T, PaymentMethodFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PaymentMethod.
+     * @param {PaymentMethodCreateArgs} args - Arguments to create a PaymentMethod.
+     * @example
+     * // Create one PaymentMethod
+     * const PaymentMethod = await prisma.paymentMethod.create({
+     *   data: {
+     *     // ... data to create a PaymentMethod
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaymentMethodCreateArgs>(args: SelectSubset<T, PaymentMethodCreateArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PaymentMethods.
+     * @param {PaymentMethodCreateManyArgs} args - Arguments to create many PaymentMethods.
+     * @example
+     * // Create many PaymentMethods
+     * const paymentMethod = await prisma.paymentMethod.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaymentMethodCreateManyArgs>(args?: SelectSubset<T, PaymentMethodCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PaymentMethods and returns the data saved in the database.
+     * @param {PaymentMethodCreateManyAndReturnArgs} args - Arguments to create many PaymentMethods.
+     * @example
+     * // Create many PaymentMethods
+     * const paymentMethod = await prisma.paymentMethod.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PaymentMethods and only return the `id`
+     * const paymentMethodWithIdOnly = await prisma.paymentMethod.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaymentMethodCreateManyAndReturnArgs>(args?: SelectSubset<T, PaymentMethodCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PaymentMethod.
+     * @param {PaymentMethodDeleteArgs} args - Arguments to delete one PaymentMethod.
+     * @example
+     * // Delete one PaymentMethod
+     * const PaymentMethod = await prisma.paymentMethod.delete({
+     *   where: {
+     *     // ... filter to delete one PaymentMethod
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaymentMethodDeleteArgs>(args: SelectSubset<T, PaymentMethodDeleteArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PaymentMethod.
+     * @param {PaymentMethodUpdateArgs} args - Arguments to update one PaymentMethod.
+     * @example
+     * // Update one PaymentMethod
+     * const paymentMethod = await prisma.paymentMethod.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaymentMethodUpdateArgs>(args: SelectSubset<T, PaymentMethodUpdateArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PaymentMethods.
+     * @param {PaymentMethodDeleteManyArgs} args - Arguments to filter PaymentMethods to delete.
+     * @example
+     * // Delete a few PaymentMethods
+     * const { count } = await prisma.paymentMethod.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaymentMethodDeleteManyArgs>(args?: SelectSubset<T, PaymentMethodDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentMethods.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentMethodUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PaymentMethods
+     * const paymentMethod = await prisma.paymentMethod.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaymentMethodUpdateManyArgs>(args: SelectSubset<T, PaymentMethodUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentMethods and returns the data updated in the database.
+     * @param {PaymentMethodUpdateManyAndReturnArgs} args - Arguments to update many PaymentMethods.
+     * @example
+     * // Update many PaymentMethods
+     * const paymentMethod = await prisma.paymentMethod.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PaymentMethods and only return the `id`
+     * const paymentMethodWithIdOnly = await prisma.paymentMethod.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaymentMethodUpdateManyAndReturnArgs>(args: SelectSubset<T, PaymentMethodUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PaymentMethod.
+     * @param {PaymentMethodUpsertArgs} args - Arguments to update or create a PaymentMethod.
+     * @example
+     * // Update or create a PaymentMethod
+     * const paymentMethod = await prisma.paymentMethod.upsert({
+     *   create: {
+     *     // ... data to create a PaymentMethod
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PaymentMethod we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaymentMethodUpsertArgs>(args: SelectSubset<T, PaymentMethodUpsertArgs<ExtArgs>>): Prisma__PaymentMethodClient<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PaymentMethods.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentMethodCountArgs} args - Arguments to filter PaymentMethods to count.
+     * @example
+     * // Count the number of PaymentMethods
+     * const count = await prisma.paymentMethod.count({
+     *   where: {
+     *     // ... the filter for the PaymentMethods we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaymentMethodCountArgs>(
+      args?: Subset<T, PaymentMethodCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaymentMethodCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PaymentMethod.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentMethodAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaymentMethodAggregateArgs>(args: Subset<T, PaymentMethodAggregateArgs>): Prisma.PrismaPromise<GetPaymentMethodAggregateType<T>>
+
+    /**
+     * Group by PaymentMethod.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentMethodGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaymentMethodGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaymentMethodGroupByArgs['orderBy'] }
+        : { orderBy?: PaymentMethodGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaymentMethodGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentMethodGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PaymentMethod model
+   */
+  readonly fields: PaymentMethodFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PaymentMethod.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaymentMethodClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PaymentMethod model
+   */
+  interface PaymentMethodFieldRefs {
+    readonly id: FieldRef<"PaymentMethod", 'String'>
+    readonly userId: FieldRef<"PaymentMethod", 'String'>
+    readonly stripePmId: FieldRef<"PaymentMethod", 'String'>
+    readonly bankName: FieldRef<"PaymentMethod", 'String'>
+    readonly last4: FieldRef<"PaymentMethod", 'String'>
+    readonly verified: FieldRef<"PaymentMethod", 'Boolean'>
+    readonly createdAt: FieldRef<"PaymentMethod", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PaymentMethod findUnique
+   */
+  export type PaymentMethodFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentMethod to fetch.
+     */
+    where: PaymentMethodWhereUniqueInput
+  }
+
+  /**
+   * PaymentMethod findUniqueOrThrow
+   */
+  export type PaymentMethodFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentMethod to fetch.
+     */
+    where: PaymentMethodWhereUniqueInput
+  }
+
+  /**
+   * PaymentMethod findFirst
+   */
+  export type PaymentMethodFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentMethod to fetch.
+     */
+    where?: PaymentMethodWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentMethods to fetch.
+     */
+    orderBy?: PaymentMethodOrderByWithRelationInput | PaymentMethodOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentMethods.
+     */
+    cursor?: PaymentMethodWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentMethods from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentMethods.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentMethods.
+     */
+    distinct?: PaymentMethodScalarFieldEnum | PaymentMethodScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentMethod findFirstOrThrow
+   */
+  export type PaymentMethodFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentMethod to fetch.
+     */
+    where?: PaymentMethodWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentMethods to fetch.
+     */
+    orderBy?: PaymentMethodOrderByWithRelationInput | PaymentMethodOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentMethods.
+     */
+    cursor?: PaymentMethodWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentMethods from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentMethods.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentMethods.
+     */
+    distinct?: PaymentMethodScalarFieldEnum | PaymentMethodScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentMethod findMany
+   */
+  export type PaymentMethodFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentMethods to fetch.
+     */
+    where?: PaymentMethodWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentMethods to fetch.
+     */
+    orderBy?: PaymentMethodOrderByWithRelationInput | PaymentMethodOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PaymentMethods.
+     */
+    cursor?: PaymentMethodWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentMethods from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentMethods.
+     */
+    skip?: number
+    distinct?: PaymentMethodScalarFieldEnum | PaymentMethodScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentMethod create
+   */
+  export type PaymentMethodCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PaymentMethod.
+     */
+    data: XOR<PaymentMethodCreateInput, PaymentMethodUncheckedCreateInput>
+  }
+
+  /**
+   * PaymentMethod createMany
+   */
+  export type PaymentMethodCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PaymentMethods.
+     */
+    data: PaymentMethodCreateManyInput | PaymentMethodCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaymentMethod createManyAndReturn
+   */
+  export type PaymentMethodCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * The data used to create many PaymentMethods.
+     */
+    data: PaymentMethodCreateManyInput | PaymentMethodCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentMethod update
+   */
+  export type PaymentMethodUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PaymentMethod.
+     */
+    data: XOR<PaymentMethodUpdateInput, PaymentMethodUncheckedUpdateInput>
+    /**
+     * Choose, which PaymentMethod to update.
+     */
+    where: PaymentMethodWhereUniqueInput
+  }
+
+  /**
+   * PaymentMethod updateMany
+   */
+  export type PaymentMethodUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PaymentMethods.
+     */
+    data: XOR<PaymentMethodUpdateManyMutationInput, PaymentMethodUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentMethods to update
+     */
+    where?: PaymentMethodWhereInput
+    /**
+     * Limit how many PaymentMethods to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentMethod updateManyAndReturn
+   */
+  export type PaymentMethodUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * The data used to update PaymentMethods.
+     */
+    data: XOR<PaymentMethodUpdateManyMutationInput, PaymentMethodUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentMethods to update
+     */
+    where?: PaymentMethodWhereInput
+    /**
+     * Limit how many PaymentMethods to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentMethod upsert
+   */
+  export type PaymentMethodUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PaymentMethod to update in case it exists.
+     */
+    where: PaymentMethodWhereUniqueInput
+    /**
+     * In case the PaymentMethod found by the `where` argument doesn't exist, create a new PaymentMethod with this data.
+     */
+    create: XOR<PaymentMethodCreateInput, PaymentMethodUncheckedCreateInput>
+    /**
+     * In case the PaymentMethod was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaymentMethodUpdateInput, PaymentMethodUncheckedUpdateInput>
+  }
+
+  /**
+   * PaymentMethod delete
+   */
+  export type PaymentMethodDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
+    /**
+     * Filter which PaymentMethod to delete.
+     */
+    where: PaymentMethodWhereUniqueInput
+  }
+
+  /**
+   * PaymentMethod deleteMany
+   */
+  export type PaymentMethodDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentMethods to delete
+     */
+    where?: PaymentMethodWhereInput
+    /**
+     * Limit how many PaymentMethods to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentMethod without action
+   */
+  export type PaymentMethodDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentMethod
+     */
+    select?: PaymentMethodSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentMethod
+     */
+    omit?: PaymentMethodOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentMethodInclude<ExtArgs> | null
   }
 
 
@@ -3261,18 +4443,30 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const PaymentEntryScalarFieldEnum: {
+  export const SubscriptionScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    label: 'label',
-    amount: 'amount',
-    paymentType: 'paymentType',
-    startDate: 'startDate',
-    dueDate: 'dueDate',
+    stripeSubId: 'stripeSubId',
+    priceCents: 'priceCents',
+    interval: 'interval',
+    status: 'status',
     createdAt: 'createdAt'
   };
 
-  export type PaymentEntryScalarFieldEnum = (typeof PaymentEntryScalarFieldEnum)[keyof typeof PaymentEntryScalarFieldEnum]
+  export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+  export const PaymentMethodScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    stripePmId: 'stripePmId',
+    bankName: 'bankName',
+    last4: 'last4',
+    verified: 'verified',
+    createdAt: 'createdAt'
+  };
+
+  export type PaymentMethodScalarFieldEnum = (typeof PaymentMethodScalarFieldEnum)[keyof typeof PaymentMethodScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3347,16 +4541,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'PaymentType'
+   * Reference to a field of type 'Boolean'
    */
-  export type EnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType'>
-    
-
-
-  /**
-   * Reference to a field of type 'PaymentType[]'
-   */
-  export type ListEnumPaymentTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentType[]'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3388,7 +4575,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
-    paymentEntries?: PaymentEntryListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
+    paymentMethods?: PaymentMethodListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3399,7 +4587,8 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     stripeCustomerId?: SortOrderInput | SortOrder
-    paymentEntries?: PaymentEntryOrderByRelationAggregateInput
+    subscriptions?: SubscriptionOrderByRelationAggregateInput
+    paymentMethods?: PaymentMethodOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3413,7 +4602,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
-    paymentEntries?: PaymentEntryListRelationFilter
+    subscriptions?: SubscriptionListRelationFilter
+    paymentMethods?: PaymentMethodListRelationFilter
   }, "id" | "email" | "path">
 
   export type UserOrderByWithAggregationInput = {
@@ -3442,76 +4632,136 @@ export namespace Prisma {
     stripeCustomerId?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
-  export type PaymentEntryWhereInput = {
-    AND?: PaymentEntryWhereInput | PaymentEntryWhereInput[]
-    OR?: PaymentEntryWhereInput[]
-    NOT?: PaymentEntryWhereInput | PaymentEntryWhereInput[]
-    id?: StringFilter<"PaymentEntry"> | string
-    userId?: StringFilter<"PaymentEntry"> | string
-    label?: StringFilter<"PaymentEntry"> | string
-    amount?: IntFilter<"PaymentEntry"> | number
-    paymentType?: EnumPaymentTypeFilter<"PaymentEntry"> | $Enums.PaymentType
-    startDate?: DateTimeFilter<"PaymentEntry"> | Date | string
-    dueDate?: DateTimeFilter<"PaymentEntry"> | Date | string
-    createdAt?: DateTimeFilter<"PaymentEntry"> | Date | string
+  export type SubscriptionWhereInput = {
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    id?: StringFilter<"Subscription"> | string
+    userId?: StringFilter<"Subscription"> | string
+    stripeSubId?: StringFilter<"Subscription"> | string
+    priceCents?: IntFilter<"Subscription"> | number
+    interval?: StringFilter<"Subscription"> | string
+    status?: StringFilter<"Subscription"> | string
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type PaymentEntryOrderByWithRelationInput = {
+  export type SubscriptionOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    label?: SortOrder
-    amount?: SortOrder
-    paymentType?: SortOrder
-    startDate?: SortOrder
-    dueDate?: SortOrder
+    stripeSubId?: SortOrder
+    priceCents?: SortOrder
+    interval?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type PaymentEntryWhereUniqueInput = Prisma.AtLeast<{
+  export type SubscriptionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: PaymentEntryWhereInput | PaymentEntryWhereInput[]
-    OR?: PaymentEntryWhereInput[]
-    NOT?: PaymentEntryWhereInput | PaymentEntryWhereInput[]
-    userId?: StringFilter<"PaymentEntry"> | string
-    label?: StringFilter<"PaymentEntry"> | string
-    amount?: IntFilter<"PaymentEntry"> | number
-    paymentType?: EnumPaymentTypeFilter<"PaymentEntry"> | $Enums.PaymentType
-    startDate?: DateTimeFilter<"PaymentEntry"> | Date | string
-    dueDate?: DateTimeFilter<"PaymentEntry"> | Date | string
-    createdAt?: DateTimeFilter<"PaymentEntry"> | Date | string
+    stripeSubId?: string
+    AND?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    OR?: SubscriptionWhereInput[]
+    NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
+    userId?: StringFilter<"Subscription"> | string
+    priceCents?: IntFilter<"Subscription"> | number
+    interval?: StringFilter<"Subscription"> | string
+    status?: StringFilter<"Subscription"> | string
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "stripeSubId">
 
-  export type PaymentEntryOrderByWithAggregationInput = {
+  export type SubscriptionOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    label?: SortOrder
-    amount?: SortOrder
-    paymentType?: SortOrder
-    startDate?: SortOrder
-    dueDate?: SortOrder
+    stripeSubId?: SortOrder
+    priceCents?: SortOrder
+    interval?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
-    _count?: PaymentEntryCountOrderByAggregateInput
-    _avg?: PaymentEntryAvgOrderByAggregateInput
-    _max?: PaymentEntryMaxOrderByAggregateInput
-    _min?: PaymentEntryMinOrderByAggregateInput
-    _sum?: PaymentEntrySumOrderByAggregateInput
+    _count?: SubscriptionCountOrderByAggregateInput
+    _avg?: SubscriptionAvgOrderByAggregateInput
+    _max?: SubscriptionMaxOrderByAggregateInput
+    _min?: SubscriptionMinOrderByAggregateInput
+    _sum?: SubscriptionSumOrderByAggregateInput
   }
 
-  export type PaymentEntryScalarWhereWithAggregatesInput = {
-    AND?: PaymentEntryScalarWhereWithAggregatesInput | PaymentEntryScalarWhereWithAggregatesInput[]
-    OR?: PaymentEntryScalarWhereWithAggregatesInput[]
-    NOT?: PaymentEntryScalarWhereWithAggregatesInput | PaymentEntryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"PaymentEntry"> | string
-    userId?: StringWithAggregatesFilter<"PaymentEntry"> | string
-    label?: StringWithAggregatesFilter<"PaymentEntry"> | string
-    amount?: IntWithAggregatesFilter<"PaymentEntry"> | number
-    paymentType?: EnumPaymentTypeWithAggregatesFilter<"PaymentEntry"> | $Enums.PaymentType
-    startDate?: DateTimeWithAggregatesFilter<"PaymentEntry"> | Date | string
-    dueDate?: DateTimeWithAggregatesFilter<"PaymentEntry"> | Date | string
-    createdAt?: DateTimeWithAggregatesFilter<"PaymentEntry"> | Date | string
+  export type SubscriptionScalarWhereWithAggregatesInput = {
+    AND?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    OR?: SubscriptionScalarWhereWithAggregatesInput[]
+    NOT?: SubscriptionScalarWhereWithAggregatesInput | SubscriptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Subscription"> | string
+    userId?: StringWithAggregatesFilter<"Subscription"> | string
+    stripeSubId?: StringWithAggregatesFilter<"Subscription"> | string
+    priceCents?: IntWithAggregatesFilter<"Subscription"> | number
+    interval?: StringWithAggregatesFilter<"Subscription"> | string
+    status?: StringWithAggregatesFilter<"Subscription"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+  }
+
+  export type PaymentMethodWhereInput = {
+    AND?: PaymentMethodWhereInput | PaymentMethodWhereInput[]
+    OR?: PaymentMethodWhereInput[]
+    NOT?: PaymentMethodWhereInput | PaymentMethodWhereInput[]
+    id?: StringFilter<"PaymentMethod"> | string
+    userId?: StringFilter<"PaymentMethod"> | string
+    stripePmId?: StringFilter<"PaymentMethod"> | string
+    bankName?: StringNullableFilter<"PaymentMethod"> | string | null
+    last4?: StringNullableFilter<"PaymentMethod"> | string | null
+    verified?: BoolFilter<"PaymentMethod"> | boolean
+    createdAt?: DateTimeFilter<"PaymentMethod"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PaymentMethodOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripePmId?: SortOrder
+    bankName?: SortOrderInput | SortOrder
+    last4?: SortOrderInput | SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PaymentMethodWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    stripePmId?: string
+    AND?: PaymentMethodWhereInput | PaymentMethodWhereInput[]
+    OR?: PaymentMethodWhereInput[]
+    NOT?: PaymentMethodWhereInput | PaymentMethodWhereInput[]
+    userId?: StringFilter<"PaymentMethod"> | string
+    bankName?: StringNullableFilter<"PaymentMethod"> | string | null
+    last4?: StringNullableFilter<"PaymentMethod"> | string | null
+    verified?: BoolFilter<"PaymentMethod"> | boolean
+    createdAt?: DateTimeFilter<"PaymentMethod"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "stripePmId">
+
+  export type PaymentMethodOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripePmId?: SortOrder
+    bankName?: SortOrderInput | SortOrder
+    last4?: SortOrderInput | SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+    _count?: PaymentMethodCountOrderByAggregateInput
+    _max?: PaymentMethodMaxOrderByAggregateInput
+    _min?: PaymentMethodMinOrderByAggregateInput
+  }
+
+  export type PaymentMethodScalarWhereWithAggregatesInput = {
+    AND?: PaymentMethodScalarWhereWithAggregatesInput | PaymentMethodScalarWhereWithAggregatesInput[]
+    OR?: PaymentMethodScalarWhereWithAggregatesInput[]
+    NOT?: PaymentMethodScalarWhereWithAggregatesInput | PaymentMethodScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PaymentMethod"> | string
+    userId?: StringWithAggregatesFilter<"PaymentMethod"> | string
+    stripePmId?: StringWithAggregatesFilter<"PaymentMethod"> | string
+    bankName?: StringNullableWithAggregatesFilter<"PaymentMethod"> | string | null
+    last4?: StringNullableWithAggregatesFilter<"PaymentMethod"> | string | null
+    verified?: BoolWithAggregatesFilter<"PaymentMethod"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"PaymentMethod"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -3522,7 +4772,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
-    paymentEntries?: PaymentEntryCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+    paymentMethods?: PaymentMethodCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -3533,7 +4784,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
-    paymentEntries?: PaymentEntryUncheckedCreateNestedManyWithoutUserInput
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+    paymentMethods?: PaymentMethodUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -3544,7 +4796,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    paymentEntries?: PaymentEntryUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+    paymentMethods?: PaymentMethodUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -3555,7 +4808,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
-    paymentEntries?: PaymentEntryUncheckedUpdateManyWithoutUserNestedInput
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+    paymentMethods?: PaymentMethodUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -3588,79 +4842,141 @@ export namespace Prisma {
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type PaymentEntryCreateInput = {
+  export type SubscriptionCreateInput = {
     id?: string
-    label: string
-    amount: number
-    paymentType?: $Enums.PaymentType
-    startDate: Date | string
-    dueDate: Date | string
+    stripeSubId: string
+    priceCents: number
+    interval: string
+    status: string
     createdAt?: Date | string
-    user: UserCreateNestedOneWithoutPaymentEntriesInput
+    user: UserCreateNestedOneWithoutSubscriptionsInput
   }
 
-  export type PaymentEntryUncheckedCreateInput = {
-    id?: string
-    userId: string
-    label: string
-    amount: number
-    paymentType?: $Enums.PaymentType
-    startDate: Date | string
-    dueDate: Date | string
-    createdAt?: Date | string
-  }
-
-  export type PaymentEntryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPaymentEntriesNestedInput
-  }
-
-  export type PaymentEntryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PaymentEntryCreateManyInput = {
+  export type SubscriptionUncheckedCreateInput = {
     id?: string
     userId: string
-    label: string
-    amount: number
-    paymentType?: $Enums.PaymentType
-    startDate: Date | string
-    dueDate: Date | string
+    stripeSubId: string
+    priceCents: number
+    interval: string
+    status: string
     createdAt?: Date | string
   }
 
-  export type PaymentEntryUpdateManyMutationInput = {
+  export type SubscriptionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    stripeSubId?: StringFieldUpdateOperationsInput | string
+    priceCents?: IntFieldUpdateOperationsInput | number
+    interval?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSubscriptionsNestedInput
+  }
+
+  export type SubscriptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    stripeSubId?: StringFieldUpdateOperationsInput | string
+    priceCents?: IntFieldUpdateOperationsInput | number
+    interval?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PaymentEntryUncheckedUpdateManyInput = {
+  export type SubscriptionCreateManyInput = {
+    id?: string
+    userId: string
+    stripeSubId: string
+    priceCents: number
+    interval: string
+    status: string
+    createdAt?: Date | string
+  }
+
+  export type SubscriptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripeSubId?: StringFieldUpdateOperationsInput | string
+    priceCents?: IntFieldUpdateOperationsInput | number
+    interval?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubscriptionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    stripeSubId?: StringFieldUpdateOperationsInput | string
+    priceCents?: IntFieldUpdateOperationsInput | number
+    interval?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentMethodCreateInput = {
+    id?: string
+    stripePmId: string
+    bankName?: string | null
+    last4?: string | null
+    verified?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutPaymentMethodsInput
+  }
+
+  export type PaymentMethodUncheckedCreateInput = {
+    id?: string
+    userId: string
+    stripePmId: string
+    bankName?: string | null
+    last4?: string | null
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type PaymentMethodUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripePmId?: StringFieldUpdateOperationsInput | string
+    bankName?: NullableStringFieldUpdateOperationsInput | string | null
+    last4?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPaymentMethodsNestedInput
+  }
+
+  export type PaymentMethodUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    stripePmId?: StringFieldUpdateOperationsInput | string
+    bankName?: NullableStringFieldUpdateOperationsInput | string | null
+    last4?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentMethodCreateManyInput = {
+    id?: string
+    userId: string
+    stripePmId: string
+    bankName?: string | null
+    last4?: string | null
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type PaymentMethodUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripePmId?: StringFieldUpdateOperationsInput | string
+    bankName?: NullableStringFieldUpdateOperationsInput | string | null
+    last4?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentMethodUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    stripePmId?: StringFieldUpdateOperationsInput | string
+    bankName?: NullableStringFieldUpdateOperationsInput | string | null
+    last4?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -3705,10 +5021,16 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type PaymentEntryListRelationFilter = {
-    every?: PaymentEntryWhereInput
-    some?: PaymentEntryWhereInput
-    none?: PaymentEntryWhereInput
+  export type SubscriptionListRelationFilter = {
+    every?: SubscriptionWhereInput
+    some?: SubscriptionWhereInput
+    none?: SubscriptionWhereInput
+  }
+
+  export type PaymentMethodListRelationFilter = {
+    every?: PaymentMethodWhereInput
+    some?: PaymentMethodWhereInput
+    none?: PaymentMethodWhereInput
   }
 
   export type SortOrderInput = {
@@ -3716,7 +5038,11 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type PaymentEntryOrderByRelationAggregateInput = {
+  export type SubscriptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PaymentMethodOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -3811,57 +5137,47 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type EnumPaymentTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPaymentTypeFilter<$PrismaModel> | $Enums.PaymentType
-  }
-
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
 
-  export type PaymentEntryCountOrderByAggregateInput = {
+  export type SubscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    label?: SortOrder
-    amount?: SortOrder
-    paymentType?: SortOrder
-    startDate?: SortOrder
-    dueDate?: SortOrder
+    stripeSubId?: SortOrder
+    priceCents?: SortOrder
+    interval?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type PaymentEntryAvgOrderByAggregateInput = {
-    amount?: SortOrder
+  export type SubscriptionAvgOrderByAggregateInput = {
+    priceCents?: SortOrder
   }
 
-  export type PaymentEntryMaxOrderByAggregateInput = {
+  export type SubscriptionMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    label?: SortOrder
-    amount?: SortOrder
-    paymentType?: SortOrder
-    startDate?: SortOrder
-    dueDate?: SortOrder
+    stripeSubId?: SortOrder
+    priceCents?: SortOrder
+    interval?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type PaymentEntryMinOrderByAggregateInput = {
+  export type SubscriptionMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    label?: SortOrder
-    amount?: SortOrder
-    paymentType?: SortOrder
-    startDate?: SortOrder
-    dueDate?: SortOrder
+    stripeSubId?: SortOrder
+    priceCents?: SortOrder
+    interval?: SortOrder
+    status?: SortOrder
     createdAt?: SortOrder
   }
 
-  export type PaymentEntrySumOrderByAggregateInput = {
-    amount?: SortOrder
+  export type SubscriptionSumOrderByAggregateInput = {
+    priceCents?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -3880,28 +5196,75 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type EnumPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentType
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type PaymentMethodCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripePmId?: SortOrder
+    bankName?: SortOrder
+    last4?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaymentMethodMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripePmId?: SortOrder
+    bankName?: SortOrder
+    last4?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaymentMethodMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    stripePmId?: SortOrder
+    bankName?: SortOrder
+    last4?: SortOrder
+    verified?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPaymentTypeFilter<$PrismaModel>
-    _max?: NestedEnumPaymentTypeFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type PaymentEntryCreateNestedManyWithoutUserInput = {
-    create?: XOR<PaymentEntryCreateWithoutUserInput, PaymentEntryUncheckedCreateWithoutUserInput> | PaymentEntryCreateWithoutUserInput[] | PaymentEntryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentEntryCreateOrConnectWithoutUserInput | PaymentEntryCreateOrConnectWithoutUserInput[]
-    createMany?: PaymentEntryCreateManyUserInputEnvelope
-    connect?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
+  export type SubscriptionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
   }
 
-  export type PaymentEntryUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<PaymentEntryCreateWithoutUserInput, PaymentEntryUncheckedCreateWithoutUserInput> | PaymentEntryCreateWithoutUserInput[] | PaymentEntryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentEntryCreateOrConnectWithoutUserInput | PaymentEntryCreateOrConnectWithoutUserInput[]
-    createMany?: PaymentEntryCreateManyUserInputEnvelope
-    connect?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
+  export type PaymentMethodCreateNestedManyWithoutUserInput = {
+    create?: XOR<PaymentMethodCreateWithoutUserInput, PaymentMethodUncheckedCreateWithoutUserInput> | PaymentMethodCreateWithoutUserInput[] | PaymentMethodUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentMethodCreateOrConnectWithoutUserInput | PaymentMethodCreateOrConnectWithoutUserInput[]
+    createMany?: PaymentMethodCreateManyUserInputEnvelope
+    connect?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+  }
+
+  export type SubscriptionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+  }
+
+  export type PaymentMethodUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PaymentMethodCreateWithoutUserInput, PaymentMethodUncheckedCreateWithoutUserInput> | PaymentMethodCreateWithoutUserInput[] | PaymentMethodUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentMethodCreateOrConnectWithoutUserInput | PaymentMethodCreateOrConnectWithoutUserInput[]
+    createMany?: PaymentMethodCreateManyUserInputEnvelope
+    connect?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -3916,37 +5279,65 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type PaymentEntryUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PaymentEntryCreateWithoutUserInput, PaymentEntryUncheckedCreateWithoutUserInput> | PaymentEntryCreateWithoutUserInput[] | PaymentEntryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentEntryCreateOrConnectWithoutUserInput | PaymentEntryCreateOrConnectWithoutUserInput[]
-    upsert?: PaymentEntryUpsertWithWhereUniqueWithoutUserInput | PaymentEntryUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PaymentEntryCreateManyUserInputEnvelope
-    set?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    disconnect?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    delete?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    connect?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    update?: PaymentEntryUpdateWithWhereUniqueWithoutUserInput | PaymentEntryUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PaymentEntryUpdateManyWithWhereWithoutUserInput | PaymentEntryUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PaymentEntryScalarWhereInput | PaymentEntryScalarWhereInput[]
+  export type SubscriptionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutUserInput | SubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutUserInput | SubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutUserInput | SubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
   }
 
-  export type PaymentEntryUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PaymentEntryCreateWithoutUserInput, PaymentEntryUncheckedCreateWithoutUserInput> | PaymentEntryCreateWithoutUserInput[] | PaymentEntryUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PaymentEntryCreateOrConnectWithoutUserInput | PaymentEntryCreateOrConnectWithoutUserInput[]
-    upsert?: PaymentEntryUpsertWithWhereUniqueWithoutUserInput | PaymentEntryUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PaymentEntryCreateManyUserInputEnvelope
-    set?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    disconnect?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    delete?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    connect?: PaymentEntryWhereUniqueInput | PaymentEntryWhereUniqueInput[]
-    update?: PaymentEntryUpdateWithWhereUniqueWithoutUserInput | PaymentEntryUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PaymentEntryUpdateManyWithWhereWithoutUserInput | PaymentEntryUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PaymentEntryScalarWhereInput | PaymentEntryScalarWhereInput[]
+  export type PaymentMethodUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PaymentMethodCreateWithoutUserInput, PaymentMethodUncheckedCreateWithoutUserInput> | PaymentMethodCreateWithoutUserInput[] | PaymentMethodUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentMethodCreateOrConnectWithoutUserInput | PaymentMethodCreateOrConnectWithoutUserInput[]
+    upsert?: PaymentMethodUpsertWithWhereUniqueWithoutUserInput | PaymentMethodUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PaymentMethodCreateManyUserInputEnvelope
+    set?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    disconnect?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    delete?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    connect?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    update?: PaymentMethodUpdateWithWhereUniqueWithoutUserInput | PaymentMethodUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PaymentMethodUpdateManyWithWhereWithoutUserInput | PaymentMethodUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PaymentMethodScalarWhereInput | PaymentMethodScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutPaymentEntriesInput = {
-    create?: XOR<UserCreateWithoutPaymentEntriesInput, UserUncheckedCreateWithoutPaymentEntriesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPaymentEntriesInput
+  export type SubscriptionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput> | SubscriptionCreateWithoutUserInput[] | SubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput | SubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: SubscriptionUpsertWithWhereUniqueWithoutUserInput | SubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SubscriptionCreateManyUserInputEnvelope
+    set?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    disconnect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    delete?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
+    update?: SubscriptionUpdateWithWhereUniqueWithoutUserInput | SubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SubscriptionUpdateManyWithWhereWithoutUserInput | SubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+  }
+
+  export type PaymentMethodUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PaymentMethodCreateWithoutUserInput, PaymentMethodUncheckedCreateWithoutUserInput> | PaymentMethodCreateWithoutUserInput[] | PaymentMethodUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PaymentMethodCreateOrConnectWithoutUserInput | PaymentMethodCreateOrConnectWithoutUserInput[]
+    upsert?: PaymentMethodUpsertWithWhereUniqueWithoutUserInput | PaymentMethodUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PaymentMethodCreateManyUserInputEnvelope
+    set?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    disconnect?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    delete?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    connect?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
+    update?: PaymentMethodUpdateWithWhereUniqueWithoutUserInput | PaymentMethodUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PaymentMethodUpdateManyWithWhereWithoutUserInput | PaymentMethodUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PaymentMethodScalarWhereInput | PaymentMethodScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSubscriptionsInput = {
+    create?: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionsInput
     connect?: UserWhereUniqueInput
   }
 
@@ -3958,16 +5349,30 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type EnumPaymentTypeFieldUpdateOperationsInput = {
-    set?: $Enums.PaymentType
+  export type UserUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+    create?: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSubscriptionsInput
+    upsert?: UserUpsertWithoutSubscriptionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubscriptionsInput, UserUpdateWithoutSubscriptionsInput>, UserUncheckedUpdateWithoutSubscriptionsInput>
   }
 
-  export type UserUpdateOneRequiredWithoutPaymentEntriesNestedInput = {
-    create?: XOR<UserCreateWithoutPaymentEntriesInput, UserUncheckedCreateWithoutPaymentEntriesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPaymentEntriesInput
-    upsert?: UserUpsertWithoutPaymentEntriesInput
+  export type UserCreateNestedOneWithoutPaymentMethodsInput = {
+    create?: XOR<UserCreateWithoutPaymentMethodsInput, UserUncheckedCreateWithoutPaymentMethodsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPaymentMethodsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentEntriesInput, UserUpdateWithoutPaymentEntriesInput>, UserUncheckedUpdateWithoutPaymentEntriesInput>
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneRequiredWithoutPaymentMethodsNestedInput = {
+    create?: XOR<UserCreateWithoutPaymentMethodsInput, UserUncheckedCreateWithoutPaymentMethodsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPaymentMethodsInput
+    upsert?: UserUpsertWithoutPaymentMethodsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentMethodsInput, UserUpdateWithoutPaymentMethodsInput>, UserUncheckedUpdateWithoutPaymentMethodsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -4079,13 +5484,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedEnumPaymentTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPaymentTypeFilter<$PrismaModel> | $Enums.PaymentType
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -4113,77 +5511,134 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PaymentType | EnumPaymentTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PaymentType[] | ListEnumPaymentTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumPaymentTypeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentType
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPaymentTypeFilter<$PrismaModel>
-    _max?: NestedEnumPaymentTypeFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type PaymentEntryCreateWithoutUserInput = {
+  export type SubscriptionCreateWithoutUserInput = {
     id?: string
-    label: string
-    amount: number
-    paymentType?: $Enums.PaymentType
-    startDate: Date | string
-    dueDate: Date | string
+    stripeSubId: string
+    priceCents: number
+    interval: string
+    status: string
     createdAt?: Date | string
   }
 
-  export type PaymentEntryUncheckedCreateWithoutUserInput = {
+  export type SubscriptionUncheckedCreateWithoutUserInput = {
     id?: string
-    label: string
-    amount: number
-    paymentType?: $Enums.PaymentType
-    startDate: Date | string
-    dueDate: Date | string
+    stripeSubId: string
+    priceCents: number
+    interval: string
+    status: string
     createdAt?: Date | string
   }
 
-  export type PaymentEntryCreateOrConnectWithoutUserInput = {
-    where: PaymentEntryWhereUniqueInput
-    create: XOR<PaymentEntryCreateWithoutUserInput, PaymentEntryUncheckedCreateWithoutUserInput>
+  export type SubscriptionCreateOrConnectWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
   }
 
-  export type PaymentEntryCreateManyUserInputEnvelope = {
-    data: PaymentEntryCreateManyUserInput | PaymentEntryCreateManyUserInput[]
+  export type SubscriptionCreateManyUserInputEnvelope = {
+    data: SubscriptionCreateManyUserInput | SubscriptionCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type PaymentEntryUpsertWithWhereUniqueWithoutUserInput = {
-    where: PaymentEntryWhereUniqueInput
-    update: XOR<PaymentEntryUpdateWithoutUserInput, PaymentEntryUncheckedUpdateWithoutUserInput>
-    create: XOR<PaymentEntryCreateWithoutUserInput, PaymentEntryUncheckedCreateWithoutUserInput>
+  export type PaymentMethodCreateWithoutUserInput = {
+    id?: string
+    stripePmId: string
+    bankName?: string | null
+    last4?: string | null
+    verified?: boolean
+    createdAt?: Date | string
   }
 
-  export type PaymentEntryUpdateWithWhereUniqueWithoutUserInput = {
-    where: PaymentEntryWhereUniqueInput
-    data: XOR<PaymentEntryUpdateWithoutUserInput, PaymentEntryUncheckedUpdateWithoutUserInput>
+  export type PaymentMethodUncheckedCreateWithoutUserInput = {
+    id?: string
+    stripePmId: string
+    bankName?: string | null
+    last4?: string | null
+    verified?: boolean
+    createdAt?: Date | string
   }
 
-  export type PaymentEntryUpdateManyWithWhereWithoutUserInput = {
-    where: PaymentEntryScalarWhereInput
-    data: XOR<PaymentEntryUpdateManyMutationInput, PaymentEntryUncheckedUpdateManyWithoutUserInput>
+  export type PaymentMethodCreateOrConnectWithoutUserInput = {
+    where: PaymentMethodWhereUniqueInput
+    create: XOR<PaymentMethodCreateWithoutUserInput, PaymentMethodUncheckedCreateWithoutUserInput>
   }
 
-  export type PaymentEntryScalarWhereInput = {
-    AND?: PaymentEntryScalarWhereInput | PaymentEntryScalarWhereInput[]
-    OR?: PaymentEntryScalarWhereInput[]
-    NOT?: PaymentEntryScalarWhereInput | PaymentEntryScalarWhereInput[]
-    id?: StringFilter<"PaymentEntry"> | string
-    userId?: StringFilter<"PaymentEntry"> | string
-    label?: StringFilter<"PaymentEntry"> | string
-    amount?: IntFilter<"PaymentEntry"> | number
-    paymentType?: EnumPaymentTypeFilter<"PaymentEntry"> | $Enums.PaymentType
-    startDate?: DateTimeFilter<"PaymentEntry"> | Date | string
-    dueDate?: DateTimeFilter<"PaymentEntry"> | Date | string
-    createdAt?: DateTimeFilter<"PaymentEntry"> | Date | string
+  export type PaymentMethodCreateManyUserInputEnvelope = {
+    data: PaymentMethodCreateManyUserInput | PaymentMethodCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
-  export type UserCreateWithoutPaymentEntriesInput = {
+  export type SubscriptionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    update: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+    create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SubscriptionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SubscriptionWhereUniqueInput
+    data: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SubscriptionUpdateManyWithWhereWithoutUserInput = {
+    where: SubscriptionScalarWhereInput
+    data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SubscriptionScalarWhereInput = {
+    AND?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    OR?: SubscriptionScalarWhereInput[]
+    NOT?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
+    id?: StringFilter<"Subscription"> | string
+    userId?: StringFilter<"Subscription"> | string
+    stripeSubId?: StringFilter<"Subscription"> | string
+    priceCents?: IntFilter<"Subscription"> | number
+    interval?: StringFilter<"Subscription"> | string
+    status?: StringFilter<"Subscription"> | string
+    createdAt?: DateTimeFilter<"Subscription"> | Date | string
+  }
+
+  export type PaymentMethodUpsertWithWhereUniqueWithoutUserInput = {
+    where: PaymentMethodWhereUniqueInput
+    update: XOR<PaymentMethodUpdateWithoutUserInput, PaymentMethodUncheckedUpdateWithoutUserInput>
+    create: XOR<PaymentMethodCreateWithoutUserInput, PaymentMethodUncheckedCreateWithoutUserInput>
+  }
+
+  export type PaymentMethodUpdateWithWhereUniqueWithoutUserInput = {
+    where: PaymentMethodWhereUniqueInput
+    data: XOR<PaymentMethodUpdateWithoutUserInput, PaymentMethodUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PaymentMethodUpdateManyWithWhereWithoutUserInput = {
+    where: PaymentMethodScalarWhereInput
+    data: XOR<PaymentMethodUpdateManyMutationInput, PaymentMethodUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PaymentMethodScalarWhereInput = {
+    AND?: PaymentMethodScalarWhereInput | PaymentMethodScalarWhereInput[]
+    OR?: PaymentMethodScalarWhereInput[]
+    NOT?: PaymentMethodScalarWhereInput | PaymentMethodScalarWhereInput[]
+    id?: StringFilter<"PaymentMethod"> | string
+    userId?: StringFilter<"PaymentMethod"> | string
+    stripePmId?: StringFilter<"PaymentMethod"> | string
+    bankName?: StringNullableFilter<"PaymentMethod"> | string | null
+    last4?: StringNullableFilter<"PaymentMethod"> | string | null
+    verified?: BoolFilter<"PaymentMethod"> | boolean
+    createdAt?: DateTimeFilter<"PaymentMethod"> | Date | string
+  }
+
+  export type UserCreateWithoutSubscriptionsInput = {
     id?: string
     email: string
     path: string
@@ -4191,9 +5646,10 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    paymentMethods?: PaymentMethodCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutPaymentEntriesInput = {
+  export type UserUncheckedCreateWithoutSubscriptionsInput = {
     id?: string
     email: string
     path: string
@@ -4201,25 +5657,26 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    paymentMethods?: PaymentMethodUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutPaymentEntriesInput = {
+  export type UserCreateOrConnectWithoutSubscriptionsInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPaymentEntriesInput, UserUncheckedCreateWithoutPaymentEntriesInput>
+    create: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
   }
 
-  export type UserUpsertWithoutPaymentEntriesInput = {
-    update: XOR<UserUpdateWithoutPaymentEntriesInput, UserUncheckedUpdateWithoutPaymentEntriesInput>
-    create: XOR<UserCreateWithoutPaymentEntriesInput, UserUncheckedCreateWithoutPaymentEntriesInput>
+  export type UserUpsertWithoutSubscriptionsInput = {
+    update: XOR<UserUpdateWithoutSubscriptionsInput, UserUncheckedUpdateWithoutSubscriptionsInput>
+    create: XOR<UserCreateWithoutSubscriptionsInput, UserUncheckedCreateWithoutSubscriptionsInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutPaymentEntriesInput = {
+  export type UserUpdateToOneWithWhereWithoutSubscriptionsInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPaymentEntriesInput, UserUncheckedUpdateWithoutPaymentEntriesInput>
+    data: XOR<UserUpdateWithoutSubscriptionsInput, UserUncheckedUpdateWithoutSubscriptionsInput>
   }
 
-  export type UserUpdateWithoutPaymentEntriesInput = {
+  export type UserUpdateWithoutSubscriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
@@ -4227,9 +5684,10 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethods?: PaymentMethodUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutPaymentEntriesInput = {
+  export type UserUncheckedUpdateWithoutSubscriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     path?: StringFieldUpdateOperationsInput | string
@@ -4237,45 +5695,138 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentMethods?: PaymentMethodUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type PaymentEntryCreateManyUserInput = {
+  export type UserCreateWithoutPaymentMethodsInput = {
     id?: string
-    label: string
-    amount: number
-    paymentType?: $Enums.PaymentType
-    startDate: Date | string
-    dueDate: Date | string
+    email: string
+    path: string
+    name: string
+    image?: string | null
+    createdAt?: Date | string
+    stripeCustomerId?: string | null
+    subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPaymentMethodsInput = {
+    id?: string
+    email: string
+    path: string
+    name: string
+    image?: string | null
+    createdAt?: Date | string
+    stripeCustomerId?: string | null
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPaymentMethodsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPaymentMethodsInput, UserUncheckedCreateWithoutPaymentMethodsInput>
+  }
+
+  export type UserUpsertWithoutPaymentMethodsInput = {
+    update: XOR<UserUpdateWithoutPaymentMethodsInput, UserUncheckedUpdateWithoutPaymentMethodsInput>
+    create: XOR<UserCreateWithoutPaymentMethodsInput, UserUncheckedCreateWithoutPaymentMethodsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPaymentMethodsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPaymentMethodsInput, UserUncheckedUpdateWithoutPaymentMethodsInput>
+  }
+
+  export type UserUpdateWithoutPaymentMethodsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    path?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPaymentMethodsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    path?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type SubscriptionCreateManyUserInput = {
+    id?: string
+    stripeSubId: string
+    priceCents: number
+    interval: string
+    status: string
     createdAt?: Date | string
   }
 
-  export type PaymentEntryUpdateWithoutUserInput = {
+  export type PaymentMethodCreateManyUserInput = {
+    id?: string
+    stripePmId: string
+    bankName?: string | null
+    last4?: string | null
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type SubscriptionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    stripeSubId?: StringFieldUpdateOperationsInput | string
+    priceCents?: IntFieldUpdateOperationsInput | number
+    interval?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PaymentEntryUncheckedUpdateWithoutUserInput = {
+  export type SubscriptionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    stripeSubId?: StringFieldUpdateOperationsInput | string
+    priceCents?: IntFieldUpdateOperationsInput | number
+    interval?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PaymentEntryUncheckedUpdateManyWithoutUserInput = {
+  export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    paymentType?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    stripeSubId?: StringFieldUpdateOperationsInput | string
+    priceCents?: IntFieldUpdateOperationsInput | number
+    interval?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentMethodUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripePmId?: StringFieldUpdateOperationsInput | string
+    bankName?: NullableStringFieldUpdateOperationsInput | string | null
+    last4?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentMethodUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripePmId?: StringFieldUpdateOperationsInput | string
+    bankName?: NullableStringFieldUpdateOperationsInput | string | null
+    last4?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentMethodUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    stripePmId?: StringFieldUpdateOperationsInput | string
+    bankName?: NullableStringFieldUpdateOperationsInput | string | null
+    last4?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

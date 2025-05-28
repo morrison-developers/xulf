@@ -1,7 +1,5 @@
-import 'dotenv/config'; // make sure this is first
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { morDevPrisma } from '@xulf/mor-dev-prisma';
+const prisma = new morDevPrisma();
 
 async function main() {
   await prisma.user.upsert({
@@ -11,7 +9,7 @@ async function main() {
       email: 'andy@morrisondevelopers.com',
       path: 'morrison-developers',
       name: 'Andy Morrison',
-    } as any,
+    }
   });
   console.log('Seeded client: andy@morrisondevelopers.com');
 
@@ -22,7 +20,7 @@ async function main() {
       email: 'morrison.andrew422@gmail.com',
       path: 'andrew-morrison',
       name: 'Andrew (user)',
-    } as any,
+    }
   });
   console.log('Seeded user: morrison.andrew422@gmail.com');
 }

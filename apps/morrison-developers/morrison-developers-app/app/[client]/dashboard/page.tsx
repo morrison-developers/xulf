@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Profile from './Profile/Profile';
+import PaymentManager from './PaymentManager/PaymentManager';
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -162,7 +163,7 @@ export default function DashboardPage() {
         {view === 'analytics' && <p>Analytics dashboard goes here.</p>}
         {view === 'cms' && <p>CMS editor goes here.</p>}
         {view === 'payments' && <p>Payment Manager goes here.</p>}
-        {view === 'client-manager' && <p>cllient manager goes here.</p>}
+        {view === 'client-manager' && <PaymentManager />}
       </main>
     </>
   );
