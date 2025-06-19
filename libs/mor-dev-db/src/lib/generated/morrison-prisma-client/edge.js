@@ -169,6 +169,10 @@ const config = {
         "fromEnvVar": null,
         "value": "darwin-arm64",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -194,8 +198,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// db/prisma/schema.prisma\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/morrison-prisma-client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"MD_DATABASE_URL\")\n}\n\nmodel User {\n  id               String          @id @default(cuid())\n  email            String          @unique\n  path             String          @unique\n  name             String\n  image            String?\n  createdAt        DateTime        @default(now())\n  stripeCustomerId String?         @unique\n  subscriptions    Subscription[]\n  paymentMethods   PaymentMethod[]\n  role             String          @default(\"user\")\n}\n\nmodel Subscription {\n  id          String   @id @default(cuid())\n  userId      String\n  user        User     @relation(fields: [userId], references: [id])\n  stripeSubId String   @unique\n  label       String\n  priceCents  Int\n  interval    String\n  startDate   DateTime\n  dueDate     DateTime\n  status      String\n  createdAt   DateTime @default(now())\n}\n\nmodel PaymentMethod {\n  id         String   @id @default(cuid())\n  user       User     @relation(fields: [userId], references: [id])\n  userId     String\n  stripePmId String   @unique\n  bankName   String?\n  last4      String?\n  verified   Boolean  @default(false)\n  createdAt  DateTime @default(now())\n}\n",
-  "inlineSchemaHash": "3f840faeeb6a680aa57c2bb59e8cc355e44c5c141479a998365da909a254be49",
+  "inlineSchema": "// db/prisma/schema.prisma\ngenerator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n  output        = \"../generated/morrison-prisma-client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"MD_DATABASE_URL\")\n}\n\nmodel User {\n  id               String          @id @default(cuid())\n  email            String          @unique\n  path             String          @unique\n  name             String\n  image            String?\n  createdAt        DateTime        @default(now())\n  stripeCustomerId String?         @unique\n  subscriptions    Subscription[]\n  paymentMethods   PaymentMethod[]\n  role             String          @default(\"user\")\n}\n\nmodel Subscription {\n  id          String   @id @default(cuid())\n  userId      String\n  user        User     @relation(fields: [userId], references: [id])\n  stripeSubId String   @unique\n  label       String\n  priceCents  Int\n  interval    String\n  startDate   DateTime\n  dueDate     DateTime\n  status      String\n  createdAt   DateTime @default(now())\n}\n\nmodel PaymentMethod {\n  id         String   @id @default(cuid())\n  user       User     @relation(fields: [userId], references: [id])\n  userId     String\n  stripePmId String   @unique\n  bankName   String?\n  last4      String?\n  verified   Boolean  @default(false)\n  createdAt  DateTime @default(now())\n}\n",
+  "inlineSchemaHash": "396a50d506d47dd1d10bedc8d14c0db7116414da290010a6620b09e791b3bef6",
   "copyEngine": true
 }
 config.dirname = '/'
