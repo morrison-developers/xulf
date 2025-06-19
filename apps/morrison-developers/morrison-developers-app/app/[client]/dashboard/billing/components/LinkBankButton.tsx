@@ -32,7 +32,7 @@ export default function LinkBankButton({ user, setLocalUser, setError }: Props) 
       if (!data.clientSecret) throw new Error('Missing clientSecret from Stripe');
 
       console.log('[LinkBankButton] Step 2: Loading Stripe.js...');
-      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+      const stripe = await loadStripe(process.env.STRIPE_PUBLISHABLE_KEY!);
       if (!stripe) throw new Error('Stripe.js failed to load');
 
       console.log('[LinkBankButton] Step 3: Calling collectBankAccountForSetup...');
