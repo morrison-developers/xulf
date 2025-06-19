@@ -19,6 +19,12 @@
           "outputPath": "dist/apps/morrison-developers"
         }
       }
+    },
+    "postinstall": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma generate --schema=libs/mor-dev-db/src/lib/prisma/schema.prisma"
+      }
     }
   }
 }
