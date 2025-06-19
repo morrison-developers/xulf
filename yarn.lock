@@ -8408,6 +8408,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/stripe@npm:^8.0.417":
+  version: 8.0.417
+  resolution: "@types/stripe@npm:8.0.417"
+  dependencies:
+    stripe: "npm:*"
+  checksum: 10c0/97e3a5ad6948a94366d6749328b721a3c9004ba68795e7675efaa74e4b4c51d57c1dfc785747f4221192dabd7a13fb41778e88e080bafd5d3938a50df7f4ef98
+  languageName: node
+  linkType: hard
+
 "@types/styled-components@npm:5.1.26":
   version: 5.1.26
   resolution: "@types/styled-components@npm:5.1.26"
@@ -9304,6 +9313,7 @@ __metadata:
     "@types/react": "npm:^19.1.0"
     "@types/react-dom": "npm:^19.1.1"
     "@types/react-is": "npm:18.3.0"
+    "@types/stripe": "npm:^8.0.417"
     "@types/styled-components": "npm:5.1.26"
     "@types/three": "npm:^0.176.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.29.1"
@@ -9353,7 +9363,7 @@ __metadata:
     reflect-metadata: "npm:^0.1.13"
     rxjs: "npm:^7.8.0"
     storybook: "npm:^8.2.8"
-    stripe: "npm:^18.1.1"
+    stripe: "npm:^18.2.1"
     styled-components: "npm:5.3.6"
     tailwindcss: "npm:^3.4"
     three: "npm:^0.176.0"
@@ -24216,9 +24226,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stripe@npm:^18.1.1":
-  version: 18.1.1
-  resolution: "stripe@npm:18.1.1"
+"stripe@npm:*, stripe@npm:^18.2.1":
+  version: 18.2.1
+  resolution: "stripe@npm:18.2.1"
   dependencies:
     qs: "npm:^6.11.0"
   peerDependencies:
@@ -24226,7 +24236,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/node":
       optional: true
-  checksum: 10c0/6e68894121f9ab6cbf9bac0578e8791845098dfd7a7ab39169fe5cab3e879eb5fb2b59bfdbf13e6260e655ec85d378d55874edf3b41deb09a4c646913b17874f
+  checksum: 10c0/7edef67ca27bd4e84ac24eae4e10fa1d712392c08eec62aa6748c78241ebccc2a057651716a619fcaac1b70c5f08ba5fc5adf255d67462d5a441e3a96c0dc6c5
   languageName: node
   linkType: hard
 
