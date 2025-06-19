@@ -1,0 +1,48 @@
+// db/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/morrison-prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("MD_DATABASE_URL")
+}
+
+model User {
+  id               String          @id @default(cuid())
+  email            String          @unique
+  path             String          @unique
+  name             String
+  image            String?
+  createdAt        DateTime        @default(now())
+  stripeCustomerId String?         @unique
+  subscriptions    Subscription[]
+  paymentMethods   PaymentMethod[]
+  role             String          @default("user")
+}
+
+model Subscription {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  stripeSubId String   @unique
+  label       String
+  priceCents  Int
+  interval    String
+  startDate   DateTime
+  dueDate     DateTime
+  status      String
+  createdAt   DateTime @default(now())
+}
+
+model PaymentMethod {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  stripePmId String   @unique
+  bankName   String?
+  last4      String?
+  verified   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}

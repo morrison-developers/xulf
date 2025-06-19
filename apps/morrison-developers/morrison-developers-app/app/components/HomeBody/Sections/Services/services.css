@@ -1,0 +1,67 @@
+.homebody-component {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.services-toggle {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-text-primary);
+  width: fit-content;
+  align-self: center;
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+}
+
+.toggle-label {
+  padding: 1rem;
+  width: 15rem;
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.toggle-slider {
+  width: 15rem;
+  height: 3.5rem;
+  position: absolute;
+  border: 2px solid var(--primary-accent-color);
+  transition: transform 0.3s ease;
+}
+
+.services-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (min-width: 80em) {
+ .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  } 
+}
+
+.service-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+}
+
+.service-title {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.service-description {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.75;
+}
