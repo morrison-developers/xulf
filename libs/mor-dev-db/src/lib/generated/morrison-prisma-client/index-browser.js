@@ -127,15 +127,19 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   image: 'image',
   createdAt: 'createdAt',
-  stripeCustomerId: 'stripeCustomerId'
+  stripeCustomerId: 'stripeCustomerId',
+  role: 'role'
 };
 
 exports.Prisma.SubscriptionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   stripeSubId: 'stripeSubId',
+  label: 'label',
   priceCents: 'priceCents',
   interval: 'interval',
+  startDate: 'startDate',
+  dueDate: 'dueDate',
   status: 'status',
   createdAt: 'createdAt'
 };

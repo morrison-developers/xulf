@@ -16,19 +16,23 @@ model User {
   name             String
   image            String?
   createdAt        DateTime        @default(now())
-  stripeCustomerId String?
+  stripeCustomerId String?         @unique
   subscriptions    Subscription[]
   paymentMethods   PaymentMethod[]
+  role             String          @default("user")
 }
 
 model Subscription {
   id          String   @id @default(cuid())
-  user        User     @relation(fields: [userId], references: [id])
   userId      String
+  user        User     @relation(fields: [userId], references: [id])
   stripeSubId String   @unique
+  label       String
   priceCents  Int
-  interval    String // 'month', 'year', etc.
-  status      String // 'active', 'past_due', 'canceled'
+  interval    String
+  startDate   DateTime
+  dueDate     DateTime
+  status      String
   createdAt   DateTime @default(now())
 }
 

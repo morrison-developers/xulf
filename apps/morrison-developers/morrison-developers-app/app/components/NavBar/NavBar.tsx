@@ -59,7 +59,7 @@ export default function NavBar({ sections }: { sections: { id: string; label: st
         </div>
       }
       <div className="footer">
-        <button className="button">Let's Talk</button>
+        <button onClick={() => window.location.href = 'mailto:andy@morrisondevelopers.com'} className="button">Let's Talk</button>
         <h4>
           made by humans at <strong>Morrison Developers</strong>
         </h4>

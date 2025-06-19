@@ -14,19 +14,18 @@ const handler = NextAuth({
     signIn: "/auth/login", // optional custom sign-in page
   },
   callbacks: {
-    async session({ session }) {
+    async session({ session, user }) {
       if (session.user?.email) {
-        const user = await morDevPrisma.user.findUnique({
+        const dbUser = await morDevPrisma.user.findUnique({
           where: { email: session.user.email.toLowerCase() },
         });
-        if (user) {
-          session.user = {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            image: user.image,
-            path: user.path,
-          };
+        if (dbUser) {
+          session.user.id = dbUser.id;
+          session.user.name = dbUser.name;
+          session.user.email = dbUser.email;
+          session.user.image = dbUser.image;
+          session.user.path = dbUser.path;
+          session.user.role = dbUser.role;
         }
       }
       return session;

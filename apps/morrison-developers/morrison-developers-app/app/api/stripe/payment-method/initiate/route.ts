@@ -7,13 +7,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 export async function POST(req: Request) {
-  // This assumes use of Stripe's hosted bank account setup (Financial Connections)
   const { stripeCustomerId } = await req.json();
 
-  const stripeSession = await stripe.financialConnections.sessions.create({
-    account_holder: { type: 'customer', customer: stripeCustomerId },
-    permissions: ['payment_method'],
+  const intent = await stripe.setupIntents.create({
+    customer: stripeCustomerId,
+    payment_method_types: ['us_bank_account'],
   });
 
-  return NextResponse.json({ sessionSecret: stripeSession.client_secret });
+  return NextResponse.json({ clientSecret: intent.client_secret });
 }

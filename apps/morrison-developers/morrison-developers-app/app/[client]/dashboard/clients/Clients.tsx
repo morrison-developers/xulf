@@ -1,20 +1,20 @@
-// components/PaymentManager.tsx
+
+
+// components/SubscriptionsManager.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { Prisma } from '@xulf/mor-dev-db';
+import UserSubscriptionPanel from './UserSubscriptionPanel';
 
-type UserWithSubscription = {
-  id: string;
-  name: string;
-  email: string;
-  subscriptions?: {
-    id: string;
-    stripeSubId: string;
-    status: string;
-  }[];
-};
+type UserWithSubscription = Prisma.UserGetPayload<{
+  include: {
+    subscriptions: true;
+    paymentMethods: true;
+  };
+}>;
 
-export default function PaymentManager() {
+export default function ClientManager({ user }: { user: UserWithSubscription }) {
   const [users, setUsers] = useState<UserWithSubscription[]>([]);
   const [selectedUser, setSelectedUser] = useState<UserWithSubscription | null>(null);
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ export default function PaymentManager() {
       <div style={{ flex: 1 }}>
         <h2>Clients</h2>
         <ul style={{ listStyle: 'none', padding: 0 }}>
-          {users.map((user: any) => (
+          {users.map((user) => (
             <li key={user.id}>
               <button
                 onClick={() => setSelectedUser(user)}
@@ -61,32 +61,7 @@ export default function PaymentManager() {
 
       <div style={{ flex: 2 }}>
         {selectedUser ? (
-          <div>
-            <h2>Manage {selectedUser.name}'s Subscription</h2>
-            <p>Email: {selectedUser.email}</p>
-            <p>Status: {(selectedUser.subscriptions?.[0]?.status || 'none')}</p>
-
-            {/* Add conditionally rendered UI here for:
-              - Add subscription
-              - Link bank account
-              - Cancel / update subscription */}
-
-            <button
-              style={{ marginTop: '1rem', padding: '0.5rem 1rem' }}
-              onClick={() => alert('TODO: implement bank link + create sub')}
-            >
-              Setup Bank + Create Subscription
-            </button>
-
-            {selectedUser.subscriptions?.[0] && (
-              <button
-                style={{ marginTop: '1rem', marginLeft: '1rem', padding: '0.5rem 1rem', background: 'crimson', color: 'white' }}
-                onClick={() => alert('TODO: cancel subscription')}
-              >
-                Cancel Subscription
-              </button>
-            )}
-          </div>
+          <UserSubscriptionPanel user={selectedUser} />
         ) : (
           <p>Select a user to manage subscriptions.</p>
         )}

@@ -3,21 +3,46 @@
 import { useSession } from 'next-auth/react';
 import { useRouter, useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Profile from './Profile/Profile';
-import PaymentManager from './PaymentManager/PaymentManager';
+import Profile from './profiles/Profile';
+import ClientManager from './clients/Clients';
+import type { Prisma } from '@xulf/mor-dev-db';
+
+type UserWithSubscription = Prisma.UserGetPayload<{
+  include: {
+    subscriptions: true;
+    paymentMethods: true;
+  };
+}>;
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const params = useParams();
-  const isAdminDashboard = params?.client === 'morrison-developers';
   const [view, setView] = useState('profile');
+
 
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/login');
     }
   }, [status, router]);
+
+  const [fetchedUser, setFetchedUser] = useState<UserWithSubscription | null>(null);
+
+  useEffect(() => {
+    if (!session?.user?.email) return;
+
+    fetch(`/api/users/by-email/${encodeURIComponent(session.user.email)}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('User fetch failed');
+        return res.json();
+      })
+      .then((data) => {
+        setFetchedUser(data.user);
+      })
+      .catch((err) => {
+        console.error('[dashboard] error fetching user:', err);
+      });
+  }, [session]);
 
   if (status === 'loading') return <p>Loading...</p>;
 
@@ -54,7 +79,7 @@ export default function DashboardPage() {
           </h2>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          {isAdminDashboard && (
+          {session?.user?.role === 'admin' && (
             <button
               className="dashboard-button"
               style={{
@@ -110,23 +135,6 @@ export default function DashboardPage() {
           <button
             className="dashboard-button"
             style={{
-              backgroundColor: view === 'payments' ? 'var(--primary-accent-color)' : 'var(--button-bg)',
-              color: view === 'payments' ? 'var(--color-text-primary)' : 'var(--button-text)',
-              fontFamily: 'var(--button-font)',
-              fontSize: '1rem',
-              fontWeight: 600,
-              padding: '0.5rem 1rem',
-              border: 'none',
-              borderRadius: 'var(--button-radius)',
-              cursor: 'pointer'
-            }}
-            onClick={() => setView('payments')}
-          >
-            Payment Portal
-          </button>
-          <button
-            className="dashboard-button"
-            style={{
               backgroundColor: view === 'profile' ? 'var(--primary-accent-color)' : 'var(--button-bg)',
               border: 'none',
               borderRadius: '50%',
@@ -159,11 +167,10 @@ export default function DashboardPage() {
         minHeight: '100vh',
         fontFamily: 'var(--font-main)'
       }}>
-        {view === 'profile' && <Profile />}
+        {view === 'profile' && fetchedUser && <Profile user={fetchedUser} />}
         {view === 'analytics' && <p>Analytics dashboard goes here.</p>}
         {view === 'cms' && <p>CMS editor goes here.</p>}
-        {view === 'payments' && <p>Payment Manager goes here.</p>}
-        {view === 'client-manager' && <PaymentManager />}
+        {view === 'client-manager' && session?.user?.role === 'admin' && fetchedUser && <ClientManager user={fetchedUser} />}
       </main>
     </>
   );

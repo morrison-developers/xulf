@@ -6,8 +6,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-04-30.basil',
 });
 
-export const config = { api: { bodyParser: false } };
-
 export async function POST(req: Request) {
   const rawBody = await req.text();
   const sig = req.headers.get('stripe-signature');
@@ -56,6 +54,35 @@ export async function POST(req: Request) {
         where: { stripeSubId: subscription.id },
         data: { status: 'canceled' },
       });
+      break;
+    }
+    case 'setup_intent.succeeded': {
+      const setupIntent = event.data.object as Stripe.SetupIntent;
+      const customerId = setupIntent.customer as string;
+      const paymentMethodId = setupIntent.payment_method as string;
+
+      if (!customerId || !paymentMethodId) break;
+
+      const pm = await stripe.paymentMethods.retrieve(paymentMethodId) as Stripe.PaymentMethod;
+
+      if (pm.us_bank_account) {
+        await morDevPrisma.paymentMethod.upsert({
+          where: { stripePmId: pm.id },
+          update: {
+            verified: true,
+            bankName: pm.us_bank_account.bank_name ?? null,
+            last4: pm.us_bank_account.last4 ?? null,
+          },
+          create: {
+            user: { connect: { stripeCustomerId: customerId } },
+            stripePmId: pm.id,
+            verified: true,
+            bankName: pm.us_bank_account.bank_name ?? null,
+            last4: pm.us_bank_account.last4 ?? null,
+          },
+        });
+      }
+
       break;
     }
 

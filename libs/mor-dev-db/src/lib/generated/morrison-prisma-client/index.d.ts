@@ -1108,6 +1108,7 @@ export namespace Prisma {
     image: string | null
     createdAt: Date | null
     stripeCustomerId: string | null
+    role: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1118,6 +1119,7 @@ export namespace Prisma {
     image: string | null
     createdAt: Date | null
     stripeCustomerId: string | null
+    role: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1128,6 +1130,7 @@ export namespace Prisma {
     image: number
     createdAt: number
     stripeCustomerId: number
+    role: number
     _all: number
   }
 
@@ -1140,6 +1143,7 @@ export namespace Prisma {
     image?: true
     createdAt?: true
     stripeCustomerId?: true
+    role?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1150,6 +1154,7 @@ export namespace Prisma {
     image?: true
     createdAt?: true
     stripeCustomerId?: true
+    role?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1160,6 +1165,7 @@ export namespace Prisma {
     image?: true
     createdAt?: true
     stripeCustomerId?: true
+    role?: true
     _all?: true
   }
 
@@ -1243,6 +1249,7 @@ export namespace Prisma {
     image: string | null
     createdAt: Date
     stripeCustomerId: string | null
+    role: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1270,6 +1277,7 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     stripeCustomerId?: boolean
+    role?: boolean
     subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
     paymentMethods?: boolean | User$paymentMethodsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1283,6 +1291,7 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     stripeCustomerId?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1293,6 +1302,7 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     stripeCustomerId?: boolean
+    role?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1303,9 +1313,10 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     stripeCustomerId?: boolean
+    role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "path" | "name" | "image" | "createdAt" | "stripeCustomerId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "path" | "name" | "image" | "createdAt" | "stripeCustomerId" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subscriptions?: boolean | User$subscriptionsArgs<ExtArgs>
     paymentMethods?: boolean | User$paymentMethodsArgs<ExtArgs>
@@ -1328,6 +1339,7 @@ export namespace Prisma {
       image: string | null
       createdAt: Date
       stripeCustomerId: string | null
+      role: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1760,6 +1772,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly stripeCustomerId: FieldRef<"User", 'String'>
+    readonly role: FieldRef<"User", 'String'>
   }
     
 
@@ -2238,8 +2251,11 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     stripeSubId: string | null
+    label: string | null
     priceCents: number | null
     interval: string | null
+    startDate: Date | null
+    dueDate: Date | null
     status: string | null
     createdAt: Date | null
   }
@@ -2248,8 +2264,11 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     stripeSubId: string | null
+    label: string | null
     priceCents: number | null
     interval: string | null
+    startDate: Date | null
+    dueDate: Date | null
     status: string | null
     createdAt: Date | null
   }
@@ -2258,8 +2277,11 @@ export namespace Prisma {
     id: number
     userId: number
     stripeSubId: number
+    label: number
     priceCents: number
     interval: number
+    startDate: number
+    dueDate: number
     status: number
     createdAt: number
     _all: number
@@ -2278,8 +2300,11 @@ export namespace Prisma {
     id?: true
     userId?: true
     stripeSubId?: true
+    label?: true
     priceCents?: true
     interval?: true
+    startDate?: true
+    dueDate?: true
     status?: true
     createdAt?: true
   }
@@ -2288,8 +2313,11 @@ export namespace Prisma {
     id?: true
     userId?: true
     stripeSubId?: true
+    label?: true
     priceCents?: true
     interval?: true
+    startDate?: true
+    dueDate?: true
     status?: true
     createdAt?: true
   }
@@ -2298,8 +2326,11 @@ export namespace Prisma {
     id?: true
     userId?: true
     stripeSubId?: true
+    label?: true
     priceCents?: true
     interval?: true
+    startDate?: true
+    dueDate?: true
     status?: true
     createdAt?: true
     _all?: true
@@ -2395,8 +2426,11 @@ export namespace Prisma {
     id: string
     userId: string
     stripeSubId: string
+    label: string
     priceCents: number
     interval: string
+    startDate: Date
+    dueDate: Date
     status: string
     createdAt: Date
     _count: SubscriptionCountAggregateOutputType | null
@@ -2424,8 +2458,11 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     stripeSubId?: boolean
+    label?: boolean
     priceCents?: boolean
     interval?: boolean
+    startDate?: boolean
+    dueDate?: boolean
     status?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2435,8 +2472,11 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     stripeSubId?: boolean
+    label?: boolean
     priceCents?: boolean
     interval?: boolean
+    startDate?: boolean
+    dueDate?: boolean
     status?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2446,8 +2486,11 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     stripeSubId?: boolean
+    label?: boolean
     priceCents?: boolean
     interval?: boolean
+    startDate?: boolean
+    dueDate?: boolean
     status?: boolean
     createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2457,13 +2500,16 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     stripeSubId?: boolean
+    label?: boolean
     priceCents?: boolean
     interval?: boolean
+    startDate?: boolean
+    dueDate?: boolean
     status?: boolean
     createdAt?: boolean
   }
 
-  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeSubId" | "priceCents" | "interval" | "status" | "createdAt", ExtArgs["result"]["subscription"]>
+  export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "stripeSubId" | "label" | "priceCents" | "interval" | "startDate" | "dueDate" | "status" | "createdAt", ExtArgs["result"]["subscription"]>
   export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2483,8 +2529,11 @@ export namespace Prisma {
       id: string
       userId: string
       stripeSubId: string
+      label: string
       priceCents: number
       interval: string
+      startDate: Date
+      dueDate: Date
       status: string
       createdAt: Date
     }, ExtArgs["result"]["subscription"]>
@@ -2914,8 +2963,11 @@ export namespace Prisma {
     readonly id: FieldRef<"Subscription", 'String'>
     readonly userId: FieldRef<"Subscription", 'String'>
     readonly stripeSubId: FieldRef<"Subscription", 'String'>
+    readonly label: FieldRef<"Subscription", 'String'>
     readonly priceCents: FieldRef<"Subscription", 'Int'>
     readonly interval: FieldRef<"Subscription", 'String'>
+    readonly startDate: FieldRef<"Subscription", 'DateTime'>
+    readonly dueDate: FieldRef<"Subscription", 'DateTime'>
     readonly status: FieldRef<"Subscription", 'String'>
     readonly createdAt: FieldRef<"Subscription", 'DateTime'>
   }
@@ -4437,7 +4489,8 @@ export namespace Prisma {
     name: 'name',
     image: 'image',
     createdAt: 'createdAt',
-    stripeCustomerId: 'stripeCustomerId'
+    stripeCustomerId: 'stripeCustomerId',
+    role: 'role'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4447,8 +4500,11 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     stripeSubId: 'stripeSubId',
+    label: 'label',
     priceCents: 'priceCents',
     interval: 'interval',
+    startDate: 'startDate',
+    dueDate: 'dueDate',
     status: 'status',
     createdAt: 'createdAt'
   };
@@ -4575,6 +4631,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     stripeCustomerId?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
     subscriptions?: SubscriptionListRelationFilter
     paymentMethods?: PaymentMethodListRelationFilter
   }
@@ -4587,6 +4644,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     stripeCustomerId?: SortOrderInput | SortOrder
+    role?: SortOrder
     subscriptions?: SubscriptionOrderByRelationAggregateInput
     paymentMethods?: PaymentMethodOrderByRelationAggregateInput
   }
@@ -4595,16 +4653,17 @@ export namespace Prisma {
     id?: string
     email?: string
     path?: string
+    stripeCustomerId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
-    stripeCustomerId?: StringNullableFilter<"User"> | string | null
+    role?: StringFilter<"User"> | string
     subscriptions?: SubscriptionListRelationFilter
     paymentMethods?: PaymentMethodListRelationFilter
-  }, "id" | "email" | "path">
+  }, "id" | "email" | "path" | "stripeCustomerId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -4614,6 +4673,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     stripeCustomerId?: SortOrderInput | SortOrder
+    role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -4630,6 +4690,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     stripeCustomerId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type SubscriptionWhereInput = {
@@ -4639,8 +4700,11 @@ export namespace Prisma {
     id?: StringFilter<"Subscription"> | string
     userId?: StringFilter<"Subscription"> | string
     stripeSubId?: StringFilter<"Subscription"> | string
+    label?: StringFilter<"Subscription"> | string
     priceCents?: IntFilter<"Subscription"> | number
     interval?: StringFilter<"Subscription"> | string
+    startDate?: DateTimeFilter<"Subscription"> | Date | string
+    dueDate?: DateTimeFilter<"Subscription"> | Date | string
     status?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -4650,8 +4714,11 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     stripeSubId?: SortOrder
+    label?: SortOrder
     priceCents?: SortOrder
     interval?: SortOrder
+    startDate?: SortOrder
+    dueDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -4664,8 +4731,11 @@ export namespace Prisma {
     OR?: SubscriptionWhereInput[]
     NOT?: SubscriptionWhereInput | SubscriptionWhereInput[]
     userId?: StringFilter<"Subscription"> | string
+    label?: StringFilter<"Subscription"> | string
     priceCents?: IntFilter<"Subscription"> | number
     interval?: StringFilter<"Subscription"> | string
+    startDate?: DateTimeFilter<"Subscription"> | Date | string
+    dueDate?: DateTimeFilter<"Subscription"> | Date | string
     status?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -4675,8 +4745,11 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     stripeSubId?: SortOrder
+    label?: SortOrder
     priceCents?: SortOrder
     interval?: SortOrder
+    startDate?: SortOrder
+    dueDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     _count?: SubscriptionCountOrderByAggregateInput
@@ -4693,8 +4766,11 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Subscription"> | string
     userId?: StringWithAggregatesFilter<"Subscription"> | string
     stripeSubId?: StringWithAggregatesFilter<"Subscription"> | string
+    label?: StringWithAggregatesFilter<"Subscription"> | string
     priceCents?: IntWithAggregatesFilter<"Subscription"> | number
     interval?: StringWithAggregatesFilter<"Subscription"> | string
+    startDate?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
+    dueDate?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
     status?: StringWithAggregatesFilter<"Subscription"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Subscription"> | Date | string
   }
@@ -4772,6 +4848,7 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    role?: string
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
     paymentMethods?: PaymentMethodCreateNestedManyWithoutUserInput
   }
@@ -4784,6 +4861,7 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    role?: string
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
     paymentMethods?: PaymentMethodUncheckedCreateNestedManyWithoutUserInput
   }
@@ -4796,6 +4874,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
     paymentMethods?: PaymentMethodUpdateManyWithoutUserNestedInput
   }
@@ -4808,6 +4887,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
     paymentMethods?: PaymentMethodUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -4820,6 +4900,7 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    role?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -4830,6 +4911,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -4840,13 +4922,17 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubscriptionCreateInput = {
     id?: string
     stripeSubId: string
+    label: string
     priceCents: number
     interval: string
+    startDate: Date | string
+    dueDate: Date | string
     status: string
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutSubscriptionsInput
@@ -4856,8 +4942,11 @@ export namespace Prisma {
     id?: string
     userId: string
     stripeSubId: string
+    label: string
     priceCents: number
     interval: string
+    startDate: Date | string
+    dueDate: Date | string
     status: string
     createdAt?: Date | string
   }
@@ -4865,8 +4954,11 @@ export namespace Prisma {
   export type SubscriptionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     stripeSubId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     priceCents?: IntFieldUpdateOperationsInput | number
     interval?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutSubscriptionsNestedInput
@@ -4876,8 +4968,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     stripeSubId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     priceCents?: IntFieldUpdateOperationsInput | number
     interval?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4886,8 +4981,11 @@ export namespace Prisma {
     id?: string
     userId: string
     stripeSubId: string
+    label: string
     priceCents: number
     interval: string
+    startDate: Date | string
+    dueDate: Date | string
     status: string
     createdAt?: Date | string
   }
@@ -4895,8 +4993,11 @@ export namespace Prisma {
   export type SubscriptionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     stripeSubId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     priceCents?: IntFieldUpdateOperationsInput | number
     interval?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4905,8 +5006,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     stripeSubId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     priceCents?: IntFieldUpdateOperationsInput | number
     interval?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5054,6 +5158,7 @@ export namespace Prisma {
     image?: SortOrder
     createdAt?: SortOrder
     stripeCustomerId?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5064,6 +5169,7 @@ export namespace Prisma {
     image?: SortOrder
     createdAt?: SortOrder
     stripeCustomerId?: SortOrder
+    role?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -5074,6 +5180,7 @@ export namespace Prisma {
     image?: SortOrder
     createdAt?: SortOrder
     stripeCustomerId?: SortOrder
+    role?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5146,8 +5253,11 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     stripeSubId?: SortOrder
+    label?: SortOrder
     priceCents?: SortOrder
     interval?: SortOrder
+    startDate?: SortOrder
+    dueDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
   }
@@ -5160,8 +5270,11 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     stripeSubId?: SortOrder
+    label?: SortOrder
     priceCents?: SortOrder
     interval?: SortOrder
+    startDate?: SortOrder
+    dueDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
   }
@@ -5170,8 +5283,11 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     stripeSubId?: SortOrder
+    label?: SortOrder
     priceCents?: SortOrder
     interval?: SortOrder
+    startDate?: SortOrder
+    dueDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
   }
@@ -5527,8 +5643,11 @@ export namespace Prisma {
   export type SubscriptionCreateWithoutUserInput = {
     id?: string
     stripeSubId: string
+    label: string
     priceCents: number
     interval: string
+    startDate: Date | string
+    dueDate: Date | string
     status: string
     createdAt?: Date | string
   }
@@ -5536,8 +5655,11 @@ export namespace Prisma {
   export type SubscriptionUncheckedCreateWithoutUserInput = {
     id?: string
     stripeSubId: string
+    label: string
     priceCents: number
     interval: string
+    startDate: Date | string
+    dueDate: Date | string
     status: string
     createdAt?: Date | string
   }
@@ -5603,8 +5725,11 @@ export namespace Prisma {
     id?: StringFilter<"Subscription"> | string
     userId?: StringFilter<"Subscription"> | string
     stripeSubId?: StringFilter<"Subscription"> | string
+    label?: StringFilter<"Subscription"> | string
     priceCents?: IntFilter<"Subscription"> | number
     interval?: StringFilter<"Subscription"> | string
+    startDate?: DateTimeFilter<"Subscription"> | Date | string
+    dueDate?: DateTimeFilter<"Subscription"> | Date | string
     status?: StringFilter<"Subscription"> | string
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
   }
@@ -5646,6 +5771,7 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    role?: string
     paymentMethods?: PaymentMethodCreateNestedManyWithoutUserInput
   }
 
@@ -5657,6 +5783,7 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    role?: string
     paymentMethods?: PaymentMethodUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5684,6 +5811,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     paymentMethods?: PaymentMethodUpdateManyWithoutUserNestedInput
   }
 
@@ -5695,6 +5823,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     paymentMethods?: PaymentMethodUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -5706,6 +5835,7 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    role?: string
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
   }
 
@@ -5717,6 +5847,7 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     stripeCustomerId?: string | null
+    role?: string
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5744,6 +5875,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
   }
 
@@ -5755,14 +5887,18 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     stripeCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     subscriptions?: SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SubscriptionCreateManyUserInput = {
     id?: string
     stripeSubId: string
+    label: string
     priceCents: number
     interval: string
+    startDate: Date | string
+    dueDate: Date | string
     status: string
     createdAt?: Date | string
   }
@@ -5779,8 +5915,11 @@ export namespace Prisma {
   export type SubscriptionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     stripeSubId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     priceCents?: IntFieldUpdateOperationsInput | number
     interval?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5788,8 +5927,11 @@ export namespace Prisma {
   export type SubscriptionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     stripeSubId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     priceCents?: IntFieldUpdateOperationsInput | number
     interval?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5797,8 +5939,11 @@ export namespace Prisma {
   export type SubscriptionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     stripeSubId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     priceCents?: IntFieldUpdateOperationsInput | number
     interval?: StringFieldUpdateOperationsInput | string
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
