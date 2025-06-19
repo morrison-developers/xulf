@@ -1,11 +1,7 @@
 {
   "functions": {
     "apps/morrison-developers/morrison-developers-app/app/api/**.ts": {
-      "includeFiles": [
-        "libs/mor-dev-db/src/lib/generated/morrison-prisma-client",
-        "node_modules/.prisma/client",
-        "node_modules/@prisma/client"
-      ]
+      "includeFiles": "libs/mor-dev-db/src/lib/generated/morrison-prisma-client/**"
     }
   }
 }
