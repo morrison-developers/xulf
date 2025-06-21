@@ -1,3 +1,10 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/**/*.ts": {
+      "includeFiles": [
+        "libs/mor-dev-db/src/lib/generated/morrison-prisma-client/**"
+      ]
+    }
+  }
 }
