@@ -18,6 +18,14 @@ const nextConfig = {
   },
   experimental: {
     serverActions: {},
+    outputFileTracingIncludes: {
+      '/app/api/': [
+        'node_modules/@prisma/client/**/*',
+        'node_modules/.prisma/client/**/*',
+        'libs/mor-dev-db/src/lib/generated/morrison-prisma-client/**/*',
+      ],
+    },
+    outputFileTracingRoot: require('path').join(__dirname, '../../../'),
   },
 };
 
