@@ -1,6 +1,8 @@
 import './global.css';
 import Script from 'next/script';
 import NavBar from './components/NavBar/NavBar';
+import { SettingsProvider } from './(shared)/settings/SettingsContext';
+import SettingsTab from './components/SettingsTab/SettingsTab';
 
 export const metadata = {
   title: 'Welcome to shavon-lloyd',
@@ -26,8 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NavBar />
-        {children}
+        <SettingsProvider>
+          <NavBar />
+          {children}
+          <SettingsTab />
+        </SettingsProvider>
         <Script id="ld-website" type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ldWebsite) }} />
       </body>
