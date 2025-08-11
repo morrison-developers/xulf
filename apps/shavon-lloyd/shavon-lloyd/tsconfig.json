@@ -2,8 +2,7 @@
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "jsxImportSource": "@emotion/react",
-    "module": "NodeNext",
+    "module": "nodenext",
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -28,8 +27,8 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "../../../apps/shavon-lloyd/shavon-lloyd-app/.next/types/**/*.ts",
-    "../../../dist/apps/shavon-lloyd/shavon-lloyd-app/.next/types/**/*.ts",
+    "../../../apps/shavon-lloyd/shavon-lloyd/.next/types/**/*.ts",
+    "../../../dist/apps/shavon-lloyd/shavon-lloyd/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],

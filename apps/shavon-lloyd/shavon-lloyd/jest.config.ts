@@ -6,5 +6,5 @@ export default {
     '^.+\\.[tj]sx?$': ['babel-jest', { presets: ['@nx/next/babel'] }],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/apps/shavon-lloyd/shavon-lloyd-app',
+  coverageDirectory: '../../../coverage/apps/shavon-lloyd/shavon-lloyd',
 };
