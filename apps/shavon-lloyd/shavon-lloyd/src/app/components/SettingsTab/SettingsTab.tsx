@@ -1,22 +1,31 @@
 // src/app/components/SettingsTab/SettingsTab.tsx
 'use client';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useSettings } from '../../(shared)/settings/SettingsContext';
+import { usePanel } from '../../(shared)/panel/PanelController';
 import styles from './SettingsTab.module.css';
 
 export default function SettingsTab() {
-  const [open, setOpen] = useState(false);
+  const { open, toggle, close } = usePanel();
+  const isOpen = open === 'settings';
+
   const { theme, setTheme, lang, setLang, region, setRegion } = useSettings();
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [close]);
 
   return (
     <>
       {/* The tab "handle" on the right edge */}
       <button
-        aria-expanded={open}
+        aria-expanded={isOpen}
         aria-controls="settings-panel"
-        className={`${styles.tab} ${open ? styles.tabOpen : ''}`}
-        onClick={() => setOpen((o) => !o)}
+        className={`${styles.tab} ${isOpen ? styles.tabOpen : ''}`}
+        onClick={() => toggle('settings')}
         title="Settings"
       >
         {/* simple gear glyph placeholder */}
@@ -38,7 +47,7 @@ export default function SettingsTab() {
         id="settings-panel"
         role="dialog"
         aria-label="Site settings"
-        className={`${styles.panel} ${open ? styles.panelOpen : ''}`}
+        className={`${styles.panel} ${isOpen ? styles.panelOpen : ''}`}
       >
         <div className={styles.group}>
           <label className={styles.label} htmlFor="lang">Language</label>

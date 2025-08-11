@@ -27,7 +27,7 @@
   background: rgba(76,110,167,0.95);
   backdrop-filter: saturate(120%) blur(4px);
   transition: right 200ms ease;
-  z-index: 49;
+  z-index: 51;
   overflow-y: auto;
   display: grid;
   gap: 16px;

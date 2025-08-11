@@ -3,6 +3,8 @@ import Script from 'next/script';
 import NavBar from './components/NavBar/NavBar';
 import { SettingsProvider } from './(shared)/settings/SettingsContext';
 import SettingsTab from './components/SettingsTab/SettingsTab';
+import MusicTab from './components/MusicTab/MusicTab';
+import { PanelProvider } from './(shared)/panel/PanelController';
 
 export const metadata = {
   title: 'Welcome to shavon-lloyd',
@@ -29,9 +31,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <SettingsProvider>
-          <NavBar />
-          {children}
-          <SettingsTab />
+          <PanelProvider>
+            <NavBar />
+            {children}
+            <SettingsTab />
+            <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
+          </PanelProvider>
         </SettingsProvider>
         <Script id="ld-website" type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ldWebsite) }} />
