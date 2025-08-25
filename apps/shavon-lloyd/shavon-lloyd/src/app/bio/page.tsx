@@ -27,20 +27,20 @@ export default function Page() {
           imgClassName={styles.heroImg}
         />
         <section className={styles.textBlock}>
-          <h2 className={styles.h2}>About Shavon</h2>
+          <h2 className={'h2'}>About Shavon</h2>
           {content.bio.split('\n\n').map((p, i) => (
-            <p key={i} className={styles.p}>{p}</p>
+            <p key={i} className={'p'}>{p}</p>
           ))}
         </section>
 
         <section className={styles.textBlock}>
-          <h3 className={styles.h3}>Condensed Biography</h3>
+          <h3 className={'h3'}>Condensed Biography</h3>
           {content.condensed.split('\n\n').map((p, i) => (
-            <p key={i} className={styles.p}>{p}</p>
+            <p key={i}  className={'p'}>{p}</p>
           ))}
         </section>
         <div className={styles.downloadWrap}>
-          <h2 className={styles.h2}>Download Full Resolution Headshot</h2>
+          <h2 className={'h2'}>Download Full Resolution Headshot</h2>
           <button
             className={styles.button}
             onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}

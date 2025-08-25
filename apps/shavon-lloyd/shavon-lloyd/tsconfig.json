@@ -1,6 +1,7 @@
 {
   "extends": "../../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": "src",
     "jsx": "preserve",
     "module": "nodenext",
     "allowJs": true,
@@ -12,6 +13,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
+    "paths": {
+      "@components/*": ["app/components/*"],
+      "@shared/*": ["app/(shared)/*"]
+    },
     "plugins": [
       {
         "name": "next"
