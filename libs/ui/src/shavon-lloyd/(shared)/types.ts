@@ -8,3 +8,13 @@ export type Work = {
   youtubeId: string;
   category: 'Choral' | 'Instrumental';
 };
+
+export type CalEvent = {
+  id: string;
+  title: string;
+  start: string; // ISO
+  end?: string;
+  location?: string;
+  notes?: string;
+  href?: string; // optional permalink
+};

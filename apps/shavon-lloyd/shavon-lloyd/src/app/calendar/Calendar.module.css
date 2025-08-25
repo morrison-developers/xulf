@@ -1,0 +1,21 @@
+/* app/calendar/Calendar.module.css */
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.heroWrap { width: 100%; }
+.heroImg { width: 100%; height: auto; display: block; object-fit: cover; }
+
+.section { display: flex; flex-direction: column; gap: 1rem; }
+
+.card {
+  border-radius: 12px;
+  background: #fff;
+  padding: 1rem;
+}

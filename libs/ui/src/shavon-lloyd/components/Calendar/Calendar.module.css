@@ -1,0 +1,269 @@
+/* ---------- Page layout ---------- */
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+}
+
+.calendarCard {
+  border: 4px solid #5b79a4;          /* outer blue frame */
+  border-radius: 14px;
+  background: #fff;
+  padding: 14px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.02);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;   /* ≈ 62.5% / 37.5% */
+  gap: 18px;
+  align-items: start;
+}
+
+.left {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.right {
+  background: #f6f7fa;
+  border-radius: 12px;
+  padding: 14px;
+  height: 42em;
+  overflow: auto;
+  border: 1px solid #e7ebf2;
+}
+
+/* sidebar title (top right small line of text) */
+.sidebarTitle {
+  margin: 0 0 10px;
+  font-size: 13px;
+  letter-spacing: .02em;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+/* event cards in the right column */
+.eventList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.eventItem {
+  background: #fff;
+  border: 1px solid #e6e9f1;
+  border-radius: 14px;                 /* rounded “pill” */
+  padding: 14px 16px;
+  box-shadow: 0 2px 0 rgba(0,0,0,.02);
+}
+.eventTitle {
+  font-family: ui-serif, Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: .02em;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #111827;
+}
+.eventMeta {
+  font-size: 13px;
+  color: #111827;
+  opacity: .9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.eventNotes {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #374151;
+}
+.empty {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ---------- FullCalendar overrides (scoped) ---------- */
+.wrap :global(.fc) {
+  --fc-border-color: #e7ebf2;
+  --fc-page-bg-color: #fff;
+  --fc-today-bg-color: rgba(37, 99, 235, 0.12);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: #111827;
+}
+
+/* toolbar */
+.wrap :global(.fc .fc-toolbar) {
+  padding: 8px 10px 12px;
+}
+.wrap :global(.fc .fc-toolbar-title) {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: .01em;
+}
+.wrap :global(.fc .fc-toolbar-chunk) { gap: 6px; }
+.wrap :global(.fc .fc-button) {
+  background: transparent;
+  color: #111827;
+  border: 1px solid #dfe3ec;
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+.wrap :global(.fc .fc-button:hover) {
+  background: #eef2f7;
+  border-color: #d9deea;
+}
+
+/* grid chrome */
+.wrap :global(.fc .fc-scrollgrid) {
+  border: 1px solid var(--fc-border-color);
+  border-radius: 10px;
+}
+.wrap :global(.fc .fc-col-header) {
+  background: #f9fafb;
+}
+.wrap :global(.fc .fc-col-header-cell) {
+  padding: 8px 0;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+.wrap :global(.fc .fc-daygrid-day-frame) {
+  padding: 8px;
+}
+.wrap :global(.fc .fc-daygrid-day-number) {
+  font-size: 12px;
+  color: #374151;
+}
+
+/* today + other month states */
+.wrap :global(.fc .fc-day-today) {
+  background: var(--fc-today-bg-color);
+}
+.wrap :global(.fc .fc-day-other) {
+  background: #f9fafb;
+}
+.wrap :global(.fc .fc-day-other .fc-daygrid-day-number) {
+  color: #a1a1aa;
+}
+
+/* events inside month cells */
+.wrap :global(.fc .fc-daygrid-event) {
+  background: #e9effa;
+  border: 1px solid #d6e1fb;
+  color: #1f3a8a;
+  border-radius: 8px;
+  padding: 0 6px;
+  font-size: 12px;
+}
+.wrap :global(.fc .fc-daygrid-event:hover) { filter: brightness(.96); }
+
+/* “+ more” link */
+.wrap :global(.fc .fc-daygrid-more-link) {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* popover for “+ more” */
+.wrap :global(.fc .fc-popover) {
+  border: 1px solid #e7ebf2;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0,0,0,.1);
+}
+.wrap :global(.fc .fc-popover-header) {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .right { max-height: none; }
+}
+
+.wrap :global(.fc .fc-daygrid-event) {
+  height: 1rem;
+  width: 1rem;
+
+  margin: 0 auto;
+}
+
+.wrap :global(.fc .fc-event-title-container) {
+  display: none;
+}
+
+/* ---------- Interactivity / Hover Effects ---------- */
+
+/* day cells (the clickable squares) */
+.wrap :global(.fc .fc-daygrid-day) {
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.wrap :global(.fc .fc-daygrid-day:hover) {
+  background: rgba(37, 99, 235, 0.06); /* subtle blue wash */
+  box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* events inside cells */
+.wrap :global(.fc .fc-daygrid-event) {
+  background: #e9effa;
+  border: 1px solid #d6e1fb;
+  color: #1f3a8a;
+  border-radius: 8px;
+  padding: 0 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.wrap :global(.fc .fc-daygrid-event:hover) {
+  background: #dbe7fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* “+ more” link */
+.wrap :global(.fc .fc-daygrid-more-link) {
+  color: #6b7280;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.wrap :global(.fc .fc-daygrid-more-link:hover) {
+  color: #1f3a8a;
+  text-decoration: underline;
+}
+
+/* toolbar buttons */
+.wrap :global(.fc .fc-button) {
+  background: transparent;
+  color: #111827;
+  border: 1px solid #dfe3ec;
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.wrap :global(.fc .fc-button:hover) {
+  background: #eef2f7;
+  border-color: #cfd6e5;
+}
+.wrap :global(.fc .fc-button:active) {
+  background: #e2e8f5;
+  border-color: #b5c2db;
+  transform: translateY(1px);
+}
+
+/* popover events (when you click "+ more") */
+.wrap :global(.fc .fc-popover .fc-daygrid-event) {
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.wrap :global(.fc .fc-popover .fc-daygrid-event:hover) {
+  background: #dbe7fd;
+  transform: translateX(2px);
+}

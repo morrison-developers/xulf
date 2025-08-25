@@ -7,6 +7,7 @@ import MusicTab from './MusicTab/MusicTab';
 import NavBar from './NavBar/NavBar';
 import SettingsTab from './SettingsTab/SettingsTab';
 import VideoCard from './VideoCard/VideoCard';
+import { Calendar } from './Calendar/Calendar';
 
 // Type for consistency if you want to map by key
 export const componentRegistry = {
@@ -17,6 +18,7 @@ export const componentRegistry = {
   NavBar,
   SettingsTab,
   VideoCard,
+  Calendar,
 };
 
 // Optional: export individually too
@@ -28,4 +30,5 @@ export {
   NavBar,
   SettingsTab,
   VideoCard,
+  Calendar,
 };
