@@ -1,4 +1,5 @@
 /* src/app/components/SettingsTab/SettingsTab.module.css */
+
 .tab {
   position: fixed;
   right: 0;
@@ -36,7 +37,7 @@
 }
 .panelOpen { right: 0; }
 
-.group { display: grid; gap: 8px; }
+.group { display: grid; gap: 8px;}
 .label { 
   color: var(--white, #D7E2EB);
   text-align: left;
@@ -62,3 +63,16 @@
 .choice.active { background: rgba(255,255,255,0.15); }
 
 .sr-only { position: absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+/*~~~~~~~~debugging outlines~~~~~~~~*/
+/* .panel :global(*) {
+  outline: 1px solid red !important;
+} */
+/*~~~~~~~~debugging outlines~~~~~~~~*/
