@@ -3,8 +3,9 @@
 
 import Script from 'next/script';
 import styles from './Works.module.css';
-import { HeroImage, VideoCard } from '@components/registry';
-import { Work } from '@shared/types';
+
+import { Carousel } from '@xulf/ui';
+import { Work, HeroImage, VideoCard } from '@xulf/ui/shavon-lloyd';
 
 const WORKS: Work[] = [
   {

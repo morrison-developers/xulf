@@ -1,12 +1,15 @@
 import './global.css';
 import Script from 'next/script';
-import NavBar from './components/NavBar/NavBar';
-import { SettingsProvider } from './(shared)/settings/SettingsContext';
-import SettingsTab from './components/SettingsTab/SettingsTab';
-import MusicTab from './components/MusicTab/MusicTab';
-import { PanelProvider } from './(shared)/panel/PanelController';
-import Footer from './components/Footer/Footer';
-import Body from './components/Body/Body';
+import { SettingsProvider } from '../../../../../libs/ui/src/shavon-lloyd/(shared)/settings/SettingsContext';
+import { PanelProvider } from '../../../../../libs/ui/src/shavon-lloyd/(shared)/panel/PanelController';
+
+import {
+  NavBar,
+  SettingsTab,
+  MusicTab,
+  Footer,
+  Body,
+} from '@xulf/ui/shavon-lloyd';
 
 export const metadata = {
   title: 'Welcome to shavon-lloyd',

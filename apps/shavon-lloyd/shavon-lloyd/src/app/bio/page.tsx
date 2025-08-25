@@ -5,7 +5,7 @@ import content from './content/content.json';
 import Script from 'next/script';
 import styles from './Bio.module.css';
 
-import HeroImage from '../components/HeroImage/HeroImage';
+import { HeroImage } from '@xulf/ui/shavon-lloyd';
 
 export default function Page() {
   const ld = {
