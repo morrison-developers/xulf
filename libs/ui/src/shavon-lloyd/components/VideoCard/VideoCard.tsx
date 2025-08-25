@@ -1,5 +1,5 @@
-import styles from './VideoCard.module.css'
-import { Work } from '@shared/types';
+import styles from './VideoCard.module.css';
+import { Work } from '@xulf/ui/shavon-lloyd';
 
 export default function VideoCard({ w }: { w: Work }) {
   return (

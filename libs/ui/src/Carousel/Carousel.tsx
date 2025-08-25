@@ -19,7 +19,10 @@ export function Carousel({
   className,
   showDots = true,
 }: CarouselProps) {
-  const [emblaRef, embla] = useEmblaCarousel(options);
+  const [emblaRef, embla] = useEmblaCarousel({
+    ...options,
+    watchDrag: false,
+  });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
@@ -47,8 +50,8 @@ export function Carousel({
     <div className={`${styles.root} ${className ?? ''}`}>
       <div className={styles.viewport} ref={emblaRef}>
         <div className={styles.container}>
-          {React.Children.map(children, (child, i) => (
-            <div className={styles.slide} key={i}>
+          {React.Children.toArray(children).map((child, i) => (
+            <div className={styles.slide} key={`slide-${i}`}>
               {child}
             </div>
           ))}

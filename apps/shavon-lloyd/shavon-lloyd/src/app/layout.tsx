@@ -38,9 +38,10 @@ export default function RootLayout({
         <SettingsProvider>
           <PanelProvider>
             <NavBar />
-              <Body>
-                {children}
-              </Body>
+            <div className="navBarSpacer"></div>
+            <Body>
+              {children}
+            </Body>
             <SettingsTab />
             <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
             <Footer />

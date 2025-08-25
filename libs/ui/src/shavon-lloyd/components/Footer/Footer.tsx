@@ -29,59 +29,64 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.follow}>
-        <h2 className={styles.followTitle}>Follow Me</h2>
-        <div className={styles.social}>
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="YouTube">YT</a>
-          <a href="#" aria-label="Twitter / X">X</a>
-        </div>
+    <>
+      <div className={styles.footerImgWrapper}>
+        <img src={'/footer-placeholder.jpg'} alt={'footer-placeholder'} className={styles.footerImg} />
       </div>
-
-      <hr className={styles.divider} />
-
-      <div className={styles.selectRow}>
-        <div className={styles.selectGroup}>
-          <label htmlFor="footer-region">Country/region</label>
-          <select
-            id="footer-region"
-            name="region"
-            value={region}
-            onChange={(e) => setRegion(e.target.value as any)}
-          >
-            {regionOptions.map(o => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
+      <footer className={styles.footer}>
+        <div className={styles.follow}>
+          <h2 className={styles.followTitle}>Follow Me</h2>
+          <div className={styles.social}>
+            <a href="#" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="YouTube">YT</a>
+            <a href="#" aria-label="Twitter / X">X</a>
+          </div>
         </div>
 
-        <div className={styles.selectGroup}>
-          <label htmlFor="footer-language">Language</label>
-          <select
-            id="footer-language"
-            name="language"
-            value={lang}
-            onChange={(e) => setLang(e.target.value as any)}
-          >
-            {languageOptions.map(o => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
-        </div>
-      </div>
+        <hr className={styles.divider} />
 
-      <div className={styles.bottomRow}>
-        <p className={styles.legal}>
-          ©{year}, Shavon Lloyd • <a href="#">Privacy policy</a> •{' '}
-          <a href="#">Refund policy</a> • <a href="#">Terms of service</a> •{' '}
-          <a href="#">Contact information</a>
-        </p>
-        <p className={styles.credit}>
-          made by humans at{' '}
-          <a href="https://morrisondevelopers.com">Morrison Developers</a>
-        </p>
-      </div>
-    </footer>
+        <div className={styles.selectRow}>
+          <div className={styles.selectGroup}>
+            <label htmlFor="footer-region">Country/region</label>
+            <select
+              id="footer-region"
+              name="region"
+              value={region}
+              onChange={(e) => setRegion(e.target.value as any)}
+            >
+              {regionOptions.map(o => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className={styles.selectGroup}>
+            <label htmlFor="footer-language">Language</label>
+            <select
+              id="footer-language"
+              name="language"
+              value={lang}
+              onChange={(e) => setLang(e.target.value as any)}
+            >
+              {languageOptions.map(o => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className={styles.bottomRow}>
+          <p className={styles.legal}>
+            ©{year}, Shavon Lloyd • <a href="#">Privacy policy</a> •{' '}
+            <a href="#">Refund policy</a> • <a href="#">Terms of service</a> •{' '}
+            <a href="#">Contact information</a>
+          </p>
+          <p className={styles.credit}>
+            made by humans at{' '}
+            <a href="https://morrisondevelopers.com">Morrison Developers</a>
+          </p>
+        </div>
+      </footer>
+    </>
   );
 }

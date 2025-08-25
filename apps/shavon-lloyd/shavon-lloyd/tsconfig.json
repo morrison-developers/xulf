@@ -30,7 +30,8 @@
     "../../../apps/shavon-lloyd/shavon-lloyd/.next/types/**/*.ts",
     "../../../dist/apps/shavon-lloyd/shavon-lloyd/.next/types/**/*.ts",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../../dist/apps/shavon-lloyd/.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

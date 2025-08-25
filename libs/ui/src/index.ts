@@ -4,7 +4,7 @@ export * from './theme/theme';
 export * from './LinkTree/LinkTree'
 export * from './UnderConstruction/UnderConstruction'
 export * from './Carousel/Carousel';
-// export * from './shavon-lloyd/components/registry';
+export * from './shavon-lloyd/components/registry';
 
 // surface shavon-lloyd specific exports
 export * as ShavonLloyd from './shavon-lloyd';
