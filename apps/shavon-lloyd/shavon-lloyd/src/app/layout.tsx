@@ -6,6 +6,7 @@ import SettingsTab from './components/SettingsTab/SettingsTab';
 import MusicTab from './components/MusicTab/MusicTab';
 import { PanelProvider } from './(shared)/panel/PanelController';
 import Footer from './components/Footer/Footer';
+import Body from './components/Body/Body';
 
 export const metadata = {
   title: 'Welcome to shavon-lloyd',
@@ -34,7 +35,9 @@ export default function RootLayout({
         <SettingsProvider>
           <PanelProvider>
             <NavBar />
-            {children}
+              <Body>
+                {children}
+              </Body>
             <SettingsTab />
             <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
             <Footer />
