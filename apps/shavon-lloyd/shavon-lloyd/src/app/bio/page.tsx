@@ -5,6 +5,8 @@ import content from './content/content.json';
 import Script from 'next/script';
 import styles from './Bio.module.css';
 
+import HeroImage from '../components/HeroImage/HeroImage';
+
 export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
@@ -18,9 +20,12 @@ export default function Page() {
   return (
     <>
       <main className={styles.main}>
-        <div className={styles.heroWrap}>
-          <img src="/hero.png" alt="shavon" className={styles.heroImg}/>
-        </div>
+        <HeroImage
+          src="/bio-hero.png"
+          alt="shavon"
+          wrapperClassName={styles.heroWrap}
+          imgClassName={styles.heroImg}
+        />
         <section className={styles.textBlock}>
           <h2 className={styles.h2}>About Shavon</h2>
           {content.bio.split('\n\n').map((p, i) => (
