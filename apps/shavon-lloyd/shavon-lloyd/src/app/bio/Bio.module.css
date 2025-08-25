@@ -52,3 +52,38 @@
   width: 100%;
   max-height: 70dvh;
 }
+
+.downloadWrap {
+  padding: 2.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.button {
+  border-radius: var(--border-radius-btn, 0.375rem);
+  background: linear-gradient(0deg, var(--primary-accent-color, #50709A) 0%, var(--primary-accent-color, #50709A) 100%);
+
+  color: var(--white, #D7E2EB);
+  text-align: center;
+  font-family: Inter;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.25rem; /* 83.333% */
+  letter-spacing: 0.195rem;
+
+  padding: 1rem 1.5rem;
+
+  max-width: 16rem;
+  align-self: center;
+
+  user-select: none;
+  transition: opacity 0.2s ease;
+}
+
+.button:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
