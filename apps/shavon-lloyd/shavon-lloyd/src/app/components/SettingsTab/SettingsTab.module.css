@@ -37,7 +37,7 @@
 }
 .panelOpen { right: 0; }
 
-.group { display: grid; gap: 8px;}
+.group { display: grid; gap: 0.5rem;}
 .label { 
   color: var(--white, #D7E2EB);
   text-align: left;
