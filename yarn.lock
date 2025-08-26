@@ -2410,7 +2410,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fullcalendar/core@npm:^6.1.19":
+"@fullcalendar/core@npm:6.1.19":
   version: 6.1.19
   resolution: "@fullcalendar/core@npm:6.1.19"
   dependencies:
@@ -2419,7 +2419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fullcalendar/daygrid@npm:^6.1.19":
+"@fullcalendar/daygrid@npm:6.1.19":
   version: 6.1.19
   resolution: "@fullcalendar/daygrid@npm:6.1.19"
   peerDependencies:
@@ -2428,7 +2428,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fullcalendar/interaction@npm:^6.1.19":
+"@fullcalendar/interaction@npm:6.1.19":
   version: 6.1.19
   resolution: "@fullcalendar/interaction@npm:6.1.19"
   peerDependencies:
@@ -2446,7 +2446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fullcalendar/react@npm:^6.1.19":
+"@fullcalendar/react@npm:6.1.19":
   version: 6.1.19
   resolution: "@fullcalendar/react@npm:6.1.19"
   peerDependencies:
@@ -9300,11 +9300,11 @@ __metadata:
     "@emotion/styled": "npm:^11.11.0"
     "@eslint/compat": "npm:^1.1.1"
     "@eslint/js": "npm:^9.8.0"
-    "@fullcalendar/core": "npm:^6.1.19"
-    "@fullcalendar/daygrid": "npm:^6.1.19"
-    "@fullcalendar/interaction": "npm:^6.1.19"
+    "@fullcalendar/core": "npm:6.1.19"
+    "@fullcalendar/daygrid": "npm:6.1.19"
+    "@fullcalendar/interaction": "npm:6.1.19"
     "@fullcalendar/list": "npm:^6.1.19"
-    "@fullcalendar/react": "npm:^6.1.19"
+    "@fullcalendar/react": "npm:6.1.19"
     "@mantine/core": "npm:^7.12.2"
     "@mantine/hooks": "npm:^7.12.2"
     "@mantine/next": "npm:^6.0.22"
