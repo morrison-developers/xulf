@@ -45,6 +45,7 @@ export function Calendar({ events }: CalendarProps) {
           <EventList
             events={dayEvents}
             selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
           />
         </div>
       </div>
