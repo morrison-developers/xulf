@@ -1,0 +1,61 @@
+.main {
+  background: var(--pure-white, #FFF);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4rem;
+  max-width: 100vw;
+  margin-bottom: 4rem;
+}
+
+.heroImg {
+  aspect-ratio: 2 / 1;
+  width: 100%;
+  max-height: 70dvh;
+}
+
+.titleSection, .worksSection, .choralSection, .instrumentalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 70rem;
+  width: 100%;
+}
+
+.titleSection {
+  padding: 0 4wrem;
+}
+
+.choralNotes, .instrumentalNotes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 4.25rem;
+}
+
+.workList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.workList li {
+  margin-bottom: 0.25rem;
+}
+
+.bannerWrap {
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.bannerImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
