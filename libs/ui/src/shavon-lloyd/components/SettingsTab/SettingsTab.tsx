@@ -50,30 +50,43 @@ export default function SettingsTab() {
         className={`${styles.panel} ${isOpen ? styles.panelOpen : ''}`}
       >
         <div className={styles.topContainer}>
-          <div className={styles.group}>
-            <label className={styles.label} htmlFor="lang">Language</label>
-            <select
-              id="lang"
-              className={styles.input}
-              value={lang}
-              onChange={(e) => setLang(e.target.value as any)}
-            >
-              <option value="en">English</option>
-              <option value="es">Español</option>
-            </select>
+          <div className={`${styles.group} ${styles.langGroup}`}>
+           <div className={styles.language}>
+              <label className={styles.label} htmlFor="lang">Language</label>
+              <select
+                id="lang"
+                className={styles.input}
+                value={lang}
+                onChange={(e) => setLang(e.target.value as any)}
+              >
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+           </div>
           </div>
 
           <div className={styles.group}>
             <span className={styles.label}>Mode</span>
             <div className={styles.row}>
+              
               <button
                 className={`${styles.choice} ${theme === 'light' ? styles.active : ''}`}
                 onClick={() => setTheme('light')}
-              >Light</button>
+                >☀️)
+              </button>
+
+              {/* <button
+                className={`${styles.choice} ${theme === 'light' ? styles.active : ''}`}
+                onClick={() => setTheme('light')}
+                >Light
+              </button>
+              
               <button
                 className={`${styles.choice} ${theme === 'dark' ? styles.active : ''}`}
                 onClick={() => setTheme('dark')}
-              >Dark</button>
+                >Dark
+              </button> */}
+
             </div>
           </div>
         </div>
