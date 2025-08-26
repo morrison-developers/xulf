@@ -27,6 +27,7 @@
       "@xulf/prisma": ["node_modules/.prisma/client"],
       "@xulf/types": ["libs/types/src/index.ts"],
       "@xulf/ui": ["libs/ui/src/index.ts"],
+      "@xulf/ui/*": ["libs/ui/src/*"],
       "@xulf/utils": ["libs/utils/src/index.ts"]
     }
   },
