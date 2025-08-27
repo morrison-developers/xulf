@@ -20,6 +20,8 @@
       "@xulf/drag": ["libs/drag/src/index.ts"],
       "@xulf/editor-ui": ["libs/editor-ui/src/index.ts"],
       "@xulf/essentials": ["libs/essentials/src/index.ts"],
+      "@xulf/hooks": ["libs/hooks/src/index.ts"],
+      "@xulf/hooks/server": ["libs/hooks/src/server.ts"],
       "@xulf/layouts": ["libs/layouts/src/index.ts"],
       "@xulf/module-props": ["libs/module-props/src/index.ts"],
       "@xulf/modules": ["libs/modules/src/index.ts"],
