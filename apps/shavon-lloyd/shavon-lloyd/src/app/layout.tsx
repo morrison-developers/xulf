@@ -42,6 +42,7 @@ export default function RootLayout({
             <NavWrapper 
               desktop={<NavBar />}
               mobile={<NavBarMobile />}
+              breakpoint={1024} // in pixels
             />
             <Body>
               {children}

@@ -10,6 +10,7 @@ import NavWrapper from './NavBar/NavWrapper';
 import SettingsTab from './SettingsTab/SettingsTab';
 import VideoCard from './VideoCard/VideoCard';
 import { Calendar } from './Calendar/Calendar';
+import ContactForm from './ContactForm/ContactForm';
 
 // Type for consistency if you want to map by key
 export const componentRegistry = {
@@ -23,6 +24,7 @@ export const componentRegistry = {
   SettingsTab,
   VideoCard,
   Calendar,
+  ContactForm,
 };
 
 // Optional: export individually too
@@ -37,4 +39,5 @@ export {
   SettingsTab,
   VideoCard,
   Calendar,
+  ContactForm,
 };
