@@ -17,6 +17,7 @@ export default function NavBar() {
   ];
 
   return (
+    <>
     <nav className={styles.nav}>
       <div className={styles.logo}>
         <svg xmlns="http://www.w3.org/2000/svg" width="93" height="101" viewBox="0 0 93 101" fill="none">
@@ -47,5 +48,7 @@ export default function NavBar() {
         ))}
       </ul>
     </nav>
+    <div className="navBarSpacer"></div>
+    </>
   );
 }

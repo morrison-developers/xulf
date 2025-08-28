@@ -1,10 +1,12 @@
 import './global.css';
 import Script from 'next/script';
-import { SettingsProvider } from '../../../../../libs/ui/src/shavon-lloyd/(shared)/settings/SettingsContext';
-import { PanelProvider } from '../../../../../libs/ui/src/shavon-lloyd/(shared)/panel/PanelController';
+import { SettingsProvider } from '@xulf/ui/shavon-lloyd';
+import { PanelProvider } from '@xulf/ui/shavon-lloyd';
 
 import {
   NavBar,
+  NavBarMobile,
+  NavWrapper,
   SettingsTab,
   MusicTab,
   Footer,
@@ -37,8 +39,10 @@ export default function RootLayout({
       <body>
         <SettingsProvider>
           <PanelProvider>
-            <NavBar />
-            <div className="navBarSpacer"></div>
+            <NavWrapper 
+              desktop={<NavBar />}
+              mobile={<NavBarMobile />}
+            />
             <Body>
               {children}
             </Body>

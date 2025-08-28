@@ -5,6 +5,8 @@ import Footer from './Footer/Footer';
 import HeroImage from './HeroImage/HeroImage';
 import MusicTab from './MusicTab/MusicTab';
 import NavBar from './NavBar/NavBar';
+import NavBarMobile from './NavBar/NavBarMobile';
+import NavWrapper from './NavBar/NavWrapper';
 import SettingsTab from './SettingsTab/SettingsTab';
 import VideoCard from './VideoCard/VideoCard';
 import { Calendar } from './Calendar/Calendar';
@@ -16,6 +18,8 @@ export const componentRegistry = {
   HeroImage,
   MusicTab,
   NavBar,
+  NavBarMobile,
+  NavWrapper,
   SettingsTab,
   VideoCard,
   Calendar,
@@ -28,6 +32,8 @@ export {
   HeroImage,
   MusicTab,
   NavBar,
+  NavBarMobile,
+  NavWrapper,
   SettingsTab,
   VideoCard,
   Calendar,
