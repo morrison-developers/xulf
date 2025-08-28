@@ -16,6 +16,7 @@
   justify-content: flex-end;
 
   background: linear-gradient(270deg, var(--primary-accent-color, #50709A) 45.87%, var(--primary-color, #1D2C40) 100%);
+  transition: transform 0.3s ease;
 }
 
 .list {
@@ -31,6 +32,18 @@
   gap: 1rem;
 }
 
+.mobileList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.mobileLi {
+  line-height: 1;
+}
+
 .link {
   all: unset;
   cursor: pointer;
@@ -43,7 +56,7 @@
   font-size: 1.1875rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 3.75rem; /* 315.789% */
+  line-height: 1;
   letter-spacing: 0.15438rem;
 }
 
@@ -70,4 +83,39 @@
 .wordmark {
   position: absolute;
   left: 7rem;
+}
+
+.nav.hidden {
+  transform: translateY(-120%);
+}
+
+.menu {
+  position: fixed;
+  top: 86px;
+  left: 0;
+  right: 0;
+  max-height: 0;
+  overflow: hidden;
+  background: var(--primary-color, #1D2C40);
+  display: flex;
+  flex-direction: column;
+  transition: max-height 0.3s ease;
+  z-index: 999;
+}
+
+.menu.open {
+  max-height: 400px;
+}
+
+.link:hover {
+  color: #555;
+}
+
+.navButton {
+  margin-right: 2rem;
+}
+
+.navBarSpacer {
+  background: linear-gradient(270deg, var(--primary-accent-color, #50709A) 45.87%, var(--primary-color, #1D2C40) 100%);
+  height: 5.375rem;
 }
