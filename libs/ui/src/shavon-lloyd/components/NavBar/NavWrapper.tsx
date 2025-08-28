@@ -17,7 +17,7 @@ interface NavWrapperProps {
  * Client-side wrapper that chooses between mobile and desktop nav.
  * Safe to include inside a Server Component since this file is `use client`.
  */
-export default function NavWrapper({ mobile, desktop, breakpoint = 768 }: NavWrapperProps) {
+export default function NavWrapper({ mobile, desktop, breakpoint = 1024 }: NavWrapperProps) {
   // Avoid hydration mismatch by deferring render until mounted
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
