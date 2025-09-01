@@ -1,2 +1,17 @@
-.page {
+.main {
+  background: var(--pure-white, #FFF);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4rem;
+}
+
+.titleSection, .worksSection, .choralSection, .instrumentalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 70rem;
+  width: 100%;
 }

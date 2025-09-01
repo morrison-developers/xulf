@@ -13,7 +13,8 @@ import { Calendar } from './Calendar/Calendar';
 import ContactForm from './ContactForm/ContactForm';
 import Tabs from './Tabs/Tabs';
 import Gallery from './Gallery/Gallery';
-
+import Button from './Button/Button';
+import BioPreview from './Preview/BioPreview/BioPreview';
 // Type for consistency if you want to map by key
 export const componentRegistry = {
   Body,
@@ -29,6 +30,8 @@ export const componentRegistry = {
   ContactForm,
   Tabs,
   Gallery,
+  Button,
+  BioPreview,
 };
 
 // Optional: export individually too
@@ -46,4 +49,6 @@ export {
   ContactForm,
   Tabs,
   Gallery,
+  Button,
+  BioPreview,
 };
