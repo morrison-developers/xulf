@@ -39,3 +39,13 @@
   line-height: 1.5;
   letter-spacing: 0.17875rem;
 }
+
+.mono {
+  color: var(--primary-color-3, #0B121B);
+  font-family: Roboto Mono;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1875rem; /* 135.714% */
+  letter-spacing: 0.11375rem;
+}

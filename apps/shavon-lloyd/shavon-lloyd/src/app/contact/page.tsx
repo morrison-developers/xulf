@@ -29,20 +29,20 @@ export default function Page() {
               Whether you're planning a performance, commissioning new music, or simply want to connect,
               I’d love to hear from you. I respond personally to all inquiries.
             </p>
-            <p className='p'>Email: shavonlloydmusic@gmail.com</p>
+            <p className='mono'>Email: shavonlloydmusic@gmail.com</p>
           </section>
 
           <section className={styles.rightCol}>
             <ContactForm
               action="https://usebasin.com/f/57a74747dbca" // replace with your Basin form endpoint
-              className="contact-form"
+              className={styles.contactForm}
               fieldClassName={{
-                row: "form-row",
-                label: "form-label",
-                input: "form-input",
-                textarea: "form-textarea",
-                button: "form-button",
-                status: "form-status",
+                row: styles.formRow,
+                label: styles.formLabel,
+                input: styles.formInput,
+                textarea: styles.formTextarea,
+                button: styles.formButton,
+                status: styles.formStatus,
               }}
               labels={{
                 name: "Name",
