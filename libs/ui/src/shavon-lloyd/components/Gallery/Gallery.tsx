@@ -66,7 +66,7 @@ export default function Gallery() {
   if (loading) {
     return (
       <section aria-busy="true" aria-live="polite" className="gallery gallery--loading">
-        <h2>Loading gallery...</h2>
+        <h2 className={'h2'}>Loading gallery...</h2>
       </section>
     );
   }
@@ -84,7 +84,7 @@ export default function Gallery() {
 
   return (
     <section className={styles.gallery}>
-      <h2>{folderName}</h2>
+      <h2 className={`h2`}>{folderName}</h2>
       <MasonryPhotoAlbum
         photos={photos}
         onClick={({ index }) => setLightboxIndex(index)}
