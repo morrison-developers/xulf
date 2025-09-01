@@ -6,7 +6,7 @@ import styles from './Calendar.module.css';
 import overrides from './CalendarOverrides.module.css';
 import { HeroImage, Calendar } from '@xulf/ui/shavon-lloyd';
 
-import { EVENTS } from './content.ts'
+import { EVENTS } from '../bio/content/calendar.ts'
 
 export default function Page() {
   const ld = {

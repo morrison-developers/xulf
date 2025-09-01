@@ -2,9 +2,11 @@
 'use client';
 import Script from 'next/script';
 import styles from './page.module.css';
-import { BioPreview, Carousel, VideoCard } from '@xulf/ui';
+import overrides from './calendar/CalendarOverrides.module.css';
+import { BioPreview, Calendar, Carousel, VideoCard } from '@xulf/ui';
 import bioPreviewData from './bio/content/bio-preview.json';
 import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './bio/content/works';
+import { EVENTS } from './bio/content/calendar';
 
 export default function Index() {
   const ld = {
@@ -29,6 +31,15 @@ export default function Index() {
               <VideoCard key={w.id} w={w} />
             ))}
           </Carousel>
+        </section>
+
+        <section className={styles.calendar}>
+          <h2 className="h2">Calendar</h2>
+          <div className={styles.card}>
+            <div className={overrides.myCalendarWrap}>
+              <Calendar events={EVENTS} />
+            </div>
+          </div>
         </section>
 
       </main>
