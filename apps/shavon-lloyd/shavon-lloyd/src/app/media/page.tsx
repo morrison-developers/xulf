@@ -16,14 +16,14 @@ export default function Page() {
 
   return (
     <>
-      <main>
-      <HeroImage
-        src="/calendar-hero.jpg"
-        alt="Performance still"
-        wrapperClassName={styles.heroWrap}
-        imgClassName={styles.heroImg}
-      />
-      <Gallery />
+      <main className={styles.main} >
+        <HeroImage
+          src="/calendar-hero.jpg"
+          alt="Performance still"
+          wrapperClassName={styles.heroWrap}
+          imgClassName={styles.heroImg}
+        />
+        <Gallery />
       </main>
       <Script id="ld-media" type="application/ld+json" strategy="beforeInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />

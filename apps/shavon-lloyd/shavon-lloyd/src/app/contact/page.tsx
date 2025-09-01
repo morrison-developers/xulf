@@ -21,6 +21,8 @@ export default function Page() {
         <HeroImage
           src={'/contact-hero.jpg'}
           alt={'Contact Page Hero'}
+          wrapperClassName={styles.heroWrap}
+          imgClassName={styles.heroImg}
         />
         <div className={styles.body}>
           <section className={styles.leftCol}>

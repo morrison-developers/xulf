@@ -20,18 +20,16 @@ export default function Page() {
 
   return (
     <>
-      <HeroImage
-        src="/calendar-hero.jpg"
-        alt="Performance still"
-        wrapperClassName={styles.heroWrap}
-        imgClassName={styles.heroImg}
-      />
       <main className={styles.main}>
-
+        <HeroImage
+          src="/calendar-hero.jpg"
+          alt="Performance still"
+          wrapperClassName={styles.heroWrap}
+          imgClassName={styles.heroImg}
+        />
         <section className={styles.section}>
           <h2 className="h2">Calendar</h2>
           <div className={styles.card}>
-            {/* Your shared calendar component */}
             <div className={overrides.myCalendarWrap}>
               <Calendar events={EVENTS} />
             </div>
