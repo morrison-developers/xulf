@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.heading {
+  font-size: 2rem;
+  font-family: serif;
+  margin-bottom: 1rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.imageWrap {
+  flex-shrink: 0;
+}
+
+.image {
+  border-radius: 1rem;
+  object-fit: cover;
+  height: 100%;
+}
+
+.textBox {
+  background: #f0f4f9;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  max-width: 600px;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+}

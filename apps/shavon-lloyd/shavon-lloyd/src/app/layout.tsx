@@ -51,8 +51,8 @@ export default function RootLayout({
             <Tabs
               gap={1}
             >
-              <SettingsTab />
               <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
+              <SettingsTab />
             </Tabs>
           </PanelProvider>
         </SettingsProvider>

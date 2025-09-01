@@ -6,7 +6,7 @@ import styles from './Calendar.module.css';
 import overrides from './CalendarOverrides.module.css';
 import { HeroImage, Calendar } from '@xulf/ui/shavon-lloyd';
 
-import { EVENTS } from './content.ts'
+import { EVENTS } from '../bio/content/calendar.ts'
 
 export default function Page() {
   const ld = {
@@ -20,18 +20,16 @@ export default function Page() {
 
   return (
     <>
-      <HeroImage
-        src="/calendar-hero.jpg"
-        alt="Performance still"
-        wrapperClassName={styles.heroWrap}
-        imgClassName={styles.heroImg}
-      />
       <main className={styles.main}>
-
+        <HeroImage
+          src="/calendar-hero.jpg"
+          alt="Performance still"
+          wrapperClassName={styles.heroWrap}
+          imgClassName={styles.heroImg}
+        />
         <section className={styles.section}>
           <h2 className="h2">Calendar</h2>
           <div className={styles.card}>
-            {/* Your shared calendar component */}
             <div className={overrides.myCalendarWrap}>
               <Calendar events={EVENTS} />
             </div>

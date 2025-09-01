@@ -1,9 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
-import PhotoAlbum, { type Photo } from 'react-photo-album';
+import { MasonryPhotoAlbum, type Photo } from 'react-photo-album';
 import Lightbox from 'yet-another-react-lightbox';
 import styles from './Gallery.module.css';
 import 'yet-another-react-lightbox/styles.css';
+import "react-photo-album/masonry.css";
 
 export default function Gallery() {
   const [folderName, setFolderName] = useState('');
@@ -84,18 +85,8 @@ export default function Gallery() {
   return (
     <section className={styles.gallery}>
       <h2>{folderName}</h2>
-      <PhotoAlbum
-        layout="rows"
+      <MasonryPhotoAlbum
         photos={photos}
-        spacing={16}
-        sizes={{
-          size: '20vw',
-          sizes: [
-            { viewport: '(max-width: 500px)', size: '100vw' },
-            { viewport: '(max-width: 900px)', size: '50vw' },
-            { viewport: '(max-width: 1200px)', size: '33vw' },
-          ],
-        }}
         onClick={({ index }) => setLightboxIndex(index)}
       />
 
