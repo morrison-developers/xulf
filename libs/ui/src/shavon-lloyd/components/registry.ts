@@ -11,6 +11,7 @@ import SettingsTab from './SettingsTab/SettingsTab';
 import VideoCard from './VideoCard/VideoCard';
 import { Calendar } from './Calendar/Calendar';
 import ContactForm from './ContactForm/ContactForm';
+import Tabs from './Tabs/Tabs';
 
 // Type for consistency if you want to map by key
 export const componentRegistry = {
@@ -25,6 +26,7 @@ export const componentRegistry = {
   VideoCard,
   Calendar,
   ContactForm,
+  Tabs,
 };
 
 // Optional: export individually too
@@ -40,4 +42,5 @@ export {
   VideoCard,
   Calendar,
   ContactForm,
+  Tabs,
 };

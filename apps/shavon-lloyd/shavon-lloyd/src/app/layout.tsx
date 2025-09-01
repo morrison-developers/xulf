@@ -1,7 +1,6 @@
 import './global.css';
 import Script from 'next/script';
-import { SettingsProvider } from '@xulf/ui/shavon-lloyd';
-import { PanelProvider } from '@xulf/ui/shavon-lloyd';
+import { SettingsProvider, PanelProvider } from '@xulf/ui/shavon-lloyd';
 
 import {
   NavBar,
@@ -11,6 +10,7 @@ import {
   MusicTab,
   Footer,
   Body,
+  Tabs,
 } from '@xulf/ui/shavon-lloyd';
 
 export const metadata = {
@@ -47,9 +47,13 @@ export default function RootLayout({
             <Body>
               {children}
             </Body>
-            <SettingsTab />
-            <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
             <Footer />
+            <Tabs
+              gap={1}
+            >
+              <SettingsTab />
+              <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
+            </Tabs>
           </PanelProvider>
         </SettingsProvider>
         <Script id="ld-website" type="application/ld+json"

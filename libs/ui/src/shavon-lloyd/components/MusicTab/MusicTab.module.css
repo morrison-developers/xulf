@@ -1,25 +1,33 @@
 /* src/app/components/MusicTab/MusicTab.module.css */
 .tab {
-  position: fixed;
+  /* position: fixed;
   right: 0;
-  bottom: 16%;
+  bottom: 2.1rem; */
   transform: translateX(0);
   border: 0;
-  padding: 12px;
-  border-radius: 12px 0 0 12px;
+  padding: 0.75rem;
+  border-radius: 0.75rem 0 0 0.75rem;
   cursor: pointer;
-  background: #4c6ea7;
+  background: #3d58869a;
+  backdrop-filter: blur(1rem);
   color: white;
-  transition: transform 200ms ease;
   z-index: 50;
+  transition: transform 200ms ease,
+              background 300ms ease,
+              backdrop-filter 300ms ease;
 }
-.tabOpen { transform: translateX(-22rem); } /* sync with panel width */
+
+.tab:hover {
+  background: #455d8647;
+  backdrop-filter: blur(0.5rem);
+}
+.tabOpen { transform: translateX(calc(-22rem + 1px)); } /* sync with panel width */
 
 /* The sliding embed panel itself */
 .embedWrap {
   position: fixed;
-  right: -22rem;              /* hidden off-screen */
-  bottom: 6rem;
+  right: -22rem;
+  bottom: 0.5rem;
   width: 22rem;
   height: 22rem;
   border-radius: 12px 0 0 12px;
