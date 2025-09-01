@@ -12,6 +12,7 @@ import VideoCard from './VideoCard/VideoCard';
 import { Calendar } from './Calendar/Calendar';
 import ContactForm from './ContactForm/ContactForm';
 import Tabs from './Tabs/Tabs';
+import Gallery from './Gallery/Gallery';
 
 // Type for consistency if you want to map by key
 export const componentRegistry = {
@@ -27,6 +28,7 @@ export const componentRegistry = {
   Calendar,
   ContactForm,
   Tabs,
+  Gallery,
 };
 
 // Optional: export individually too
@@ -43,4 +45,5 @@ export {
   Calendar,
   ContactForm,
   Tabs,
+  Gallery,
 };

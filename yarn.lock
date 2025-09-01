@@ -9377,6 +9377,7 @@ __metadata:
     babel-jest: "npm:^29.7.0"
     babel-plugin-styled-components: "npm:1.10.7"
     bl: "npm:^6.0.18"
+    cloudinary: "npm:^2.7.0"
     clsx: "npm:^2.1.1"
     cypress: "npm:^13.13.0"
     emailjs-com: "npm:^3.2.0"
@@ -9411,6 +9412,7 @@ __metadata:
     react-dom: "npm:18.3.1"
     react-flow-renderer: "npm:^10.3.17"
     react-is: "npm:18.3.1"
+    react-photo-album: "npm:^3.1.0"
     react-tsparticles: "npm:^2.12.2"
     react-use-precision-timer: "npm:^3.5.5"
     reflect-metadata: "npm:^0.1.13"
@@ -9430,6 +9432,7 @@ __metadata:
     vite: "npm:^5.4.14"
     vite-plugin-dts: "npm:^4.5.0"
     vitest: "npm:^1.3.1"
+    yet-another-react-lightbox: "npm:^3.25.0"
     zod: "npm:^3.24.2"
   languageName: unknown
   linkType: soft
@@ -11365,6 +11368,16 @@ __metadata:
   version: 1.0.4
   resolution: "clone@npm:1.0.4"
   checksum: 10c0/2176952b3649293473999a95d7bebfc9dc96410f6cbd3d2595cf12fd401f63a4bf41a7adbfd3ab2ff09ed60cb9870c58c6acdd18b87767366fabfc163700f13b
+  languageName: node
+  linkType: hard
+
+"cloudinary@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "cloudinary@npm:2.7.0"
+  dependencies:
+    lodash: "npm:^4.17.21"
+    q: "npm:^1.5.1"
+  checksum: 10c0/8c6d262d057d5c56f3b0b3666fd520ff11d3cabde23fddfa54d96c50b6634592a7aca18849347d0f03b035e09ef2faf0cdfbba3c71d2697acdd0e857e9cd9ed8
   languageName: node
   linkType: hard
 
@@ -22060,6 +22073,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"q@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "q@npm:1.5.1"
+  checksum: 10c0/7855fbdba126cb7e92ef3a16b47ba998c0786ec7fface236e3eb0135b65df36429d91a86b1fff3ab0927b4ac4ee88a2c44527c7c3b8e2a37efbec9fe34803df4
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.13.0":
   version: 6.13.0
   resolution: "qs@npm:6.13.0"
@@ -22252,6 +22272,19 @@ __metadata:
     react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   checksum: 10c0/e55cd16d9f7379a717e77d519db06ed455cc2df9842cd23499b60bc2ba1179df580742e27867a4ae84e0d308b18c0773b7e8943f9162e853f97bd194d15b0de7
+  languageName: node
+  linkType: hard
+
+"react-photo-album@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "react-photo-album@npm:3.1.0"
+  peerDependencies:
+    "@types/react": ^18 || ^19
+    react: ^18 || ^19
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: 10c0/dffa039c66401aa0031608242cbeefca76d9ebdaf4be8e43d00821fd470ac51bb48d417f7ff375a7bc3b189a1393d8dc331b2316c55ea2e27fd95cb99d147d40
   languageName: node
   linkType: hard
 
@@ -26886,6 +26919,23 @@ __metadata:
     buffer-crc32: "npm:~0.2.3"
     fd-slicer: "npm:~1.1.0"
   checksum: 10c0/f265002af7541b9ec3589a27f5fb8f11cf348b53cc15e2751272e3c062cd73f3e715bc72d43257de71bbaecae446c3f1b14af7559e8ab0261625375541816422
+  languageName: node
+  linkType: hard
+
+"yet-another-react-lightbox@npm:^3.25.0":
+  version: 3.25.0
+  resolution: "yet-another-react-lightbox@npm:3.25.0"
+  peerDependencies:
+    "@types/react": ^16 || ^17 || ^18 || ^19
+    "@types/react-dom": ^16 || ^17 || ^18 || ^19
+    react: ^16.8.0 || ^17 || ^18 || ^19
+    react-dom: ^16.8.0 || ^17 || ^18 || ^19
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/c2e41c19e4cf3bd1d762c8f135e2f72fc0e6355628e6e2604d11f19286c03f44bac44fee3fc9fd42ff7105f464b28c147979bb5e9cd445999bf7417f6d55d39d
   languageName: node
   linkType: hard
 

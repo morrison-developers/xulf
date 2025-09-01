@@ -93,9 +93,9 @@ export default function ContactForm({
 
       {/* Row: Name + Email */}
       <div className={fieldClassName?.row}>
-        <label htmlFor={nameId} className={fieldClassName?.label}>
+        {/* <label htmlFor={nameId} className={fieldClassName?.label}>
           {labels?.name ?? 'Name'}
-        </label>
+        </label> */}
         <input
           id={nameId}
           name="name"
@@ -105,12 +105,6 @@ export default function ContactForm({
           placeholder={labels?.name ?? 'Name'}
           className={fieldClassName?.input}
         />
-      </div>
-
-      <div className={fieldClassName?.row}>
-        <label htmlFor={emailId} className={fieldClassName?.label}>
-          {labels?.email ?? 'Email'}
-        </label>
         <input
           id={emailId}
           name="email"
@@ -124,9 +118,9 @@ export default function ContactForm({
 
       {/* Row: Message */}
       <div className={fieldClassName?.row}>
-        <label htmlFor={msgId} className={fieldClassName?.label}>
+        {/* <label htmlFor={msgId} className={fieldClassName?.label}>
           {labels?.message ?? 'Message'}
-        </label>
+        </label> */}
         <textarea
           id={msgId}
           name="message"
