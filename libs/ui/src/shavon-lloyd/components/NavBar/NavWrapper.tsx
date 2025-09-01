@@ -2,7 +2,7 @@
 'use client';
 
 import { ReactNode, useEffect, useState } from 'react';
-import useScreenSize from './useScreenSize';
+import useScreenSize from '../../(shared)/hooks/useScreenSize';
 
 interface NavWrapperProps {
   /** Rendered when width <= breakpoint */
