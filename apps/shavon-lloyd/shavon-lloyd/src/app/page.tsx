@@ -21,7 +21,11 @@ export default function Index() {
     <>
       <main className={styles.main}>
         <section className={styles.bioPreview}>
-          <BioPreview data={bioPreviewData} />
+          <div className={styles.bioPreviewWrapper}>
+            <BioPreview data={bioPreviewData} />
+          </div>
+          <img src="/top-staff.png" alt="top staff" className={styles.topStaff} />
+          <img src="/btm-staff.png" alt="btm staff" className={styles.btmStaff} />
         </section>
 
         <section className={styles.worksSection}>
