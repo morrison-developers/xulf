@@ -15,6 +15,9 @@ import Tabs from './Tabs/Tabs';
 import Gallery from './Gallery/Gallery';
 import Button from './Button/Button';
 import BioPreview from './Preview/BioPreview/BioPreview';
+import LandingHero from './LandingHero/LandingHero';
+import MagicText from './MagicText/MagicText';
+
 // Type for consistency if you want to map by key
 export const componentRegistry = {
   Body,
@@ -32,6 +35,8 @@ export const componentRegistry = {
   Gallery,
   Button,
   BioPreview,
+  LandingHero,
+  MagicText,
 };
 
 // Optional: export individually too
@@ -51,4 +56,6 @@ export {
   Gallery,
   Button,
   BioPreview,
+  LandingHero,
+  MagicText,
 };

@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import styles from './page.module.css';
 import overrides from './calendar/CalendarOverrides.module.css';
-import { BioPreview, Calendar, Carousel, VideoCard } from '@xulf/ui';
+import { BioPreview, Calendar, Carousel, ContactForm, LandingHero, VideoCard } from '@xulf/ui';
 import bioPreviewData from './bio/content/bio-preview.json';
 import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './bio/content/works';
 import { EVENTS } from './bio/content/calendar';
@@ -19,13 +19,29 @@ export default function Index() {
 
   return (
     <>
-      <main className={styles.main}>
+      <LandingHero
+        background="/hero-bg.jpg"
+        logo="/logo.png"
+        name="ShavonLloyd"
+        tagline="Baritone | Music Educator | Composer | Conductor"
+        socials={{
+          instagram: "https://instagram.com/...",
+          youtube: "https://youtube.com/...",
+          twitter: "https://twitter.com/..."
+        }}
+      />
+      <main className={styles.landing}>
+
         <section className={styles.bioPreview}>
-          <BioPreview data={bioPreviewData} />
+          <div className={styles.bioPreviewWrapper}>
+            <BioPreview data={bioPreviewData} />
+          </div>
+          <img src="/top-staff.png" alt="top staff" className={styles.topStaff} />
+          <img src="/btm-staff.png" alt="btm staff" className={styles.btmStaff} />
         </section>
 
         <section className={styles.worksSection}>
-          {/* carousel with details below */}
+          <h2 className="h2">Calendar</h2>
           <Carousel className={styles.carousel} options={{ loop: true }}>
             {CHORAL_WORKS.map(w => (
               <VideoCard key={w.id} w={w} />
@@ -41,6 +57,46 @@ export default function Index() {
             </div>
           </div>
         </section>
+
+        <section className={styles.worksSection}>
+          <Carousel className={styles.carousel} options={{ loop: true }}>
+            {INSTRUMENTAL_WORKS.map(w => (
+              <VideoCard key={w.id} w={w} />
+            ))}
+          </Carousel>
+        </section>
+
+        <div className={styles.calSection}>
+          <section className={styles.leftCol}>
+            <h2 className='h2'>Contact Me</h2>
+            <p className='p'>
+              Whether you're planning a performance, commissioning new music, or simply want to connect,
+              I’d love to hear from you. I respond personally to all inquiries.
+            </p>
+            <p className='mono'>Email: shavonlloydmusic@gmail.com</p>
+          </section>
+
+          <section className={styles.rightCol}>
+            <ContactForm
+              action="https://usebasin.com/f/57a74747dbca" // replace with your Basin form endpoint
+              className={styles.contactForm}
+              fieldClassName={{
+                row: styles.formRow,
+                label: styles.formLabel,
+                input: styles.formInput,
+                textarea: styles.formTextarea,
+                button: styles.formButton,
+                status: styles.formStatus,
+              }}
+              labels={{
+                name: "Name",
+                email: "Email",
+                message: "Message",
+                submit: "SEND",
+              }}
+            />
+          </section>
+        </div>
 
       </main>
       <Script id="ld-home" type="application/ld+json" strategy="beforeInteractive"

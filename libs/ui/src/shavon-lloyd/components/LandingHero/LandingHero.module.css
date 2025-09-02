@@ -1,0 +1,96 @@
+.hero {
+  position: relative;
+  width: 100%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bg {
+  object-fit: cover;
+  z-index: 1;
+  position: relative !important;
+  height: 100%;
+  align-items: flex-end;
+}
+
+/* .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+  z-index: 2;
+} */
+
+.content {
+  z-index: 5;
+}
+
+.brand {
+  position: absolute;
+  bottom: clamp(1rem, 4vw, 4rem);
+  left: clamp(2rem, 8vw, 8rem);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.logo {
+  height: clamp(8rem, 30vw, 18rem);
+  width: auto;
+}
+
+.titleText {
+  height: clamp(2rem, 10vw, 6rem);
+  width: auto;
+}
+
+.tagline {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.landingHeroWrapper {
+  display: flex;
+  justify-content: flex-end;
+
+  width: 100%;
+  height: calc(100dvh - 68px);
+}
+
+.landingHero {
+  display: flex;
+  height: 100%;
+}
+
+.overlayOne {
+  /* background: linear-gradient(90deg, var(--primary-color-3, #0B121B) 20%, rgba(11, 18, 27, 0.00) 50%); */
+  background: linear-gradient(
+    90deg,
+    var(--primary-color-3, #0B121B) clamp(20%, 34vw, 75%),
+    rgba(11, 18, 27, 0) clamp(50%, 25vw, 60%)
+);
+}
+
+.overlayTwo {
+  background: linear-gradient(180deg, rgba(11, 9, 27, 0.00) 11.54%, var(--primary-color-3, #0B121B) 82.21%);
+}
+
+.overlayOne,
+.overlayTwo {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: calc(100dvh - 68px);
+  z-index: 3;
+}
