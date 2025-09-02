@@ -9,29 +9,6 @@
   overflow-x: hidden;
 }
 
-.bioPreview {
-  height: 100dvh;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
-}
-
-.bioPreviewWrapper {
-  position: relative;
-  z-index: 1;
-}
-
-.topStaff {
-  position: absolute;
-  top: calc(-0rem - 100dvh);
-  right: 0;
-  z-index: 0;
-}
-
-.btmStaff {
-  position: absolute;
-  bottom: calc(-30rem - 100dvh);
-  left: 0;
-  z-index: 0;
-}
 .calSection {
   display: flex;
   justify-content: space-around;

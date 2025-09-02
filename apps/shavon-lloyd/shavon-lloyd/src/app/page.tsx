@@ -32,13 +32,7 @@ export default function Index() {
       />
       <main className={styles.landing}>
 
-        <section className={styles.bioPreview}>
-          <div className={styles.bioPreviewWrapper}>
-            <BioPreview data={bioPreviewData} />
-          </div>
-          <img src="/top-staff.png" alt="top staff" className={styles.topStaff} />
-          <img src="/btm-staff.png" alt="btm staff" className={styles.btmStaff} />
-        </section>
+        <BioPreview data={bioPreviewData} />
 
         <section className={styles.worksSection}>
           <h2 className="h2">Calendar</h2>
