@@ -1,11 +1,12 @@
-.main {
+.landing {
   background: var(--pure-white, #FFF);
 
   display: flex;
   flex-direction: column;
   align-items: center;
-
   gap: 4rem;
+
+  overflow-x: hidden;
 }
 
 .bioPreview {
@@ -20,14 +21,14 @@
 
 .topStaff {
   position: absolute;
-  top: 0;
+  top: calc(-0rem - 100dvh);
   right: 0;
   z-index: 0;
 }
 
 .btmStaff {
   position: absolute;
-  bottom: calc(-30rem);
+  bottom: calc(-30rem - 100dvh);
   left: 0;
   z-index: 0;
 }

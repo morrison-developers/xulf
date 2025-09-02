@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import styles from './page.module.css';
 import overrides from './calendar/CalendarOverrides.module.css';
-import { BioPreview, Calendar, Carousel, ContactForm, VideoCard } from '@xulf/ui';
+import { BioPreview, Calendar, Carousel, ContactForm, LandingHero, VideoCard } from '@xulf/ui';
 import bioPreviewData from './bio/content/bio-preview.json';
 import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './bio/content/works';
 import { EVENTS } from './bio/content/calendar';
@@ -19,7 +19,19 @@ export default function Index() {
 
   return (
     <>
-      <main className={styles.main}>
+      <LandingHero
+        background="/hero-bg.jpg"
+        logo="/logo.png"
+        name="ShavonLloyd"
+        tagline="Baritone | Music Educator | Composer | Conductor"
+        socials={{
+          instagram: "https://instagram.com/...",
+          youtube: "https://youtube.com/...",
+          twitter: "https://twitter.com/..."
+        }}
+      />
+      <main className={styles.landing}>
+
         <section className={styles.bioPreview}>
           <div className={styles.bioPreviewWrapper}>
             <BioPreview data={bioPreviewData} />
