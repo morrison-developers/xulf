@@ -34,7 +34,6 @@ export default function Index() {
         <BioPreview data={bioPreviewData} />
 
         <section className={styles.worksSection}>
-          <h2 className="h2">Calendar</h2>
           <Carousel className={styles.carousel} options={{ loop: true }}>
             {CHORAL_WORKS.map(w => (
               <VideoCard key={w.id} w={w} />
@@ -43,7 +42,6 @@ export default function Index() {
         </section>
 
         <section className={styles.calendar}>
-          <h2 className="h2">Calendar</h2>
           <div className={styles.card}>
             <div className={styles.myCalendarWrap}>
               <Calendar events={EVENTS} />

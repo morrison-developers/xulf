@@ -67,7 +67,8 @@
 
 .topStaff {
   position: absolute;
-  top: calc(-0rem - 100dvh);
+  z-index:   1;
+  top: 100dvh;
   right: 0;
   z-index: 0;
 }

@@ -5,7 +5,7 @@ import content from './content/content.json';
 import Script from 'next/script';
 import styles from './Bio.module.css';
 
-import { HeroImage } from '@xulf/ui/shavon-lloyd';
+import { Button, HeroImage } from '@xulf/ui/shavon-lloyd';
 
 export default function Page() {
   const ld = {
@@ -41,12 +41,11 @@ export default function Page() {
         </section>
         <div className={styles.downloadWrap}>
           <h2 className={'h2'}>Download Full Resolution Headshot</h2>
-          <button
-            className={styles.button}
+          <Button
             onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
           >
             DOWNLOAD
-          </button>
+          </Button>
         </div>
 
       </main>

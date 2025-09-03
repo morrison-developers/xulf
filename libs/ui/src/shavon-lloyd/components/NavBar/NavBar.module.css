@@ -15,7 +15,8 @@
   align-items: center;
   justify-content: flex-end;
 
-  background: linear-gradient(270deg, var(--primary-accent-color, #50709A) 45.87%, var(--primary-color, #1D2C40) 100%);
+  background: linear-gradient(270deg, var(--primary-accent-color, #50709A9a) 45.87%, var(--primary-color, #1D2C409a) 100%);
+  backdrop-filter: blur(1rem);
   transition: transform 0.3s ease;
 }
 
@@ -58,6 +59,7 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.15438rem;
+  transition: opacity 0.3s ease;
 }
 
 .active {
@@ -114,7 +116,7 @@
 }
 
 .link:hover {
-  color: #555;
+  opacity: 0.7;
 }
 
 .navButton {

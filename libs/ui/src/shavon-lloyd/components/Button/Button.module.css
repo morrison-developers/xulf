@@ -1,4 +1,4 @@
-.button {
+.button, .a {
   display: inline-block;
   padding: 0.75rem 1.5rem;
   background: #3d5886;
@@ -12,12 +12,13 @@
   transition: background 0.2s ease;
 }
 
-.button:hover {
+.button:hover, .a:hover {
   background: #2b4063;
 }
 
 @media (max-width: 768x) {
-  .button {
+  .button, .a {
     margin: 0 0.5rem;
+    border-radius: 0;
   }
 }

@@ -7,8 +7,8 @@ import type { EmblaOptionsType } from 'embla-carousel';
 import styles from './Carousel.module.css';
 
 type CarouselProps = {
-  children: React.ReactNode;           // pass <VideoCard /> items as children
-  options?: EmblaOptionsType;          // optional, e.g. { loop: true }
+  children: React.ReactNode;
+  options?: EmblaOptionsType;
   className?: string;
   showDots?: boolean;
 };
@@ -58,8 +58,8 @@ export function Carousel({
         </div>
       </div>
 
-      <button className={styles.prev} onClick={scrollPrev} aria-label="Previous">‹</button>
-      <button className={styles.next} onClick={scrollNext} aria-label="Next">›</button>
+      <img src="/chev-left.png" alt="previous" aria-label="Previous" className={styles.prev} onClick={scrollPrev} />
+      <img src="/chev-right.png" alt="next" aria-label="Next"className={styles.next}onClick={scrollNext} />
 
       {showDots && (
         <div className={styles.dots}>
