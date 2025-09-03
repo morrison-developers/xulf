@@ -14,8 +14,8 @@ import {
 } from '@xulf/ui/shavon-lloyd';
 
 export const metadata = {
-  title: 'Welcome to shavon-lloyd',
-  description: '-',
+  title: 'Shavon Lloyd',
+  description: 'Baritone, Music Educator, Composer, Conductor',
 };
 
 export default function RootLayout({

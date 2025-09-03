@@ -86,3 +86,10 @@
 .dotActive {
   background: #333;
 }
+
+
+@media (max-width: 1024px) {
+  .prev, .next {
+    display: none;
+  }
+}

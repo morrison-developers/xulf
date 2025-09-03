@@ -85,6 +85,12 @@
   left: 7rem;
 }
 
+.tinyWordmark {
+  position: absolute;
+  left: 6.5rem;
+  width: 7rem;
+}
+
 .nav.hidden {
   transform: translateY(-120%);
 }

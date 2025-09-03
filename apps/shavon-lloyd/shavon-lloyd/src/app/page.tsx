@@ -2,7 +2,6 @@
 'use client';
 import Script from 'next/script';
 import styles from './page.module.css';
-import overrides from './calendar/CalendarOverrides.module.css';
 import { BioPreview, Calendar, Carousel, ContactForm, LandingHero, VideoCard } from '@xulf/ui';
 import bioPreviewData from './bio/content/bio-preview.json';
 import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './bio/content/works';
@@ -46,7 +45,7 @@ export default function Index() {
         <section className={styles.calendar}>
           <h2 className="h2">Calendar</h2>
           <div className={styles.card}>
-            <div className={overrides.myCalendarWrap}>
+            <div className={styles.myCalendarWrap}>
               <Calendar events={EVENTS} />
             </div>
           </div>
@@ -60,7 +59,7 @@ export default function Index() {
           </Carousel>
         </section>
 
-        <div className={styles.calSection}>
+        <div className={styles.contactSection}>
           <section className={styles.leftCol}>
             <h2 className='h2'>Contact Me</h2>
             <p className='p'>
