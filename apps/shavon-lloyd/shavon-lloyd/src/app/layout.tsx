@@ -48,12 +48,12 @@ export default function RootLayout({
               {children}
             </Body>
             <Footer />
-            <Tabs
+            {/* <Tabs
               gap={1}
             >
               <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
               <SettingsTab />
-            </Tabs>
+            </Tabs> */}
           </PanelProvider>
         </SettingsProvider>
         <Script id="ld-website" type="application/ld+json"
