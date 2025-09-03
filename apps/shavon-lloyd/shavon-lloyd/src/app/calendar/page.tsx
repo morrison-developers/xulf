@@ -3,7 +3,6 @@
 
 import Script from 'next/script';
 import styles from './Calendar.module.css';
-import overrides from './CalendarOverrides.module.css';
 import { HeroImage, Calendar } from '@xulf/ui/shavon-lloyd';
 
 import { EVENTS } from '../bio/content/calendar.ts'
@@ -30,7 +29,7 @@ export default function Page() {
         <section className={styles.section}>
           <h2 className="h2">Calendar</h2>
           <div className={styles.card}>
-            <div className={overrides.myCalendarWrap}>
+            <div className={styles.myCalendarWrap}>
               <Calendar events={EVENTS} />
             </div>
           </div>

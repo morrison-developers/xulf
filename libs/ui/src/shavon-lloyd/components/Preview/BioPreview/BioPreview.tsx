@@ -18,25 +18,28 @@ interface BioPreviewProps {
 
 export default function BioPreview({ data }: BioPreviewProps) {
   return (
-    <section className={styles.wrapper}>
-      <h2 className='h2'>{data.heading}</h2>
-      <div className={styles.content}>
-        <div className={styles.imageWrap}>
-          <Image
-            src={data.image}
-            alt={data.alt}
-            width={400}
-            height={500}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.right}>
-          <div className={styles.textBox}>
-            <p className='p'>{data.text}</p>
+    <section className={styles.bioPreview}>
+      <div className={styles.bioPreviewWrapper}>
+        <div className={styles.content}>
+          <div className={styles.imageWrap}>
+            <Image
+              src={data.image}
+              alt={data.alt}
+              width={400}
+              height={500}
+              className={styles.image}
+            />
           </div>
-          <Button href={data.buttonHref}>{data.buttonLabel}</Button>
+          <div className={styles.right}>
+            <div className={styles.textBox}>
+              <p className='p'>{data.text}</p>
+            </div>
+            <Button href={data.buttonHref}>{data.buttonLabel}</Button>
+          </div>
         </div>
       </div>
+      <img src="/top-staff.png" alt="top staff" className={styles.topStaff} />
+      <img src="/btm-staff.png" alt="btm staff" className={styles.btmStaff} />
     </section>
   );
 }

@@ -2,7 +2,6 @@
 'use client';
 import Script from 'next/script';
 import styles from './page.module.css';
-import overrides from './calendar/CalendarOverrides.module.css';
 import { BioPreview, Calendar, Carousel, ContactForm, LandingHero, VideoCard } from '@xulf/ui';
 import bioPreviewData from './bio/content/bio-preview.json';
 import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './bio/content/works';
@@ -32,16 +31,9 @@ export default function Index() {
       />
       <main className={styles.landing}>
 
-        <section className={styles.bioPreview}>
-          <div className={styles.bioPreviewWrapper}>
-            <BioPreview data={bioPreviewData} />
-          </div>
-          <img src="/top-staff.png" alt="top staff" className={styles.topStaff} />
-          <img src="/btm-staff.png" alt="btm staff" className={styles.btmStaff} />
-        </section>
+        <BioPreview data={bioPreviewData} />
 
         <section className={styles.worksSection}>
-          <h2 className="h2">Calendar</h2>
           <Carousel className={styles.carousel} options={{ loop: true }}>
             {CHORAL_WORKS.map(w => (
               <VideoCard key={w.id} w={w} />
@@ -50,9 +42,8 @@ export default function Index() {
         </section>
 
         <section className={styles.calendar}>
-          <h2 className="h2">Calendar</h2>
           <div className={styles.card}>
-            <div className={overrides.myCalendarWrap}>
+            <div className={styles.myCalendarWrap}>
               <Calendar events={EVENTS} />
             </div>
           </div>
@@ -66,7 +57,7 @@ export default function Index() {
           </Carousel>
         </section>
 
-        <div className={styles.calSection}>
+        <div className={styles.contactSection}>
           <section className={styles.leftCol}>
             <h2 className='h2'>Contact Me</h2>
             <p className='p'>

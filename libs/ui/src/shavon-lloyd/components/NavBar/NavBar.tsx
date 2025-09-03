@@ -48,7 +48,7 @@ export default function NavBar() {
         ))}
       </ul>
     </nav>
-    <div className="navBarSpacer"></div>
+    <div className={styles.navBarSpacer}></div>
     </>
   );
 }

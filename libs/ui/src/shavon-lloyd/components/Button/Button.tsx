@@ -13,7 +13,7 @@ interface ButtonProps {
 export default function Button({ href, onClick, children }: ButtonProps) {
   if (href) {
     return (
-      <Link href={href} className={styles.button}>
+      <Link href={href} className={styles.a}>
         {children}
       </Link>
     );
