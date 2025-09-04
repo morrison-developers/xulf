@@ -28,7 +28,7 @@ export default function Page() {
           imgClassName={styles.heroImg}
         />
         <section className={styles.titleSection}>
-          <h2 className="h2">My Compositions</h2>
+          <h2 className="h2">Compositions</h2>
         </section>
 
         {/* Choral Section */}

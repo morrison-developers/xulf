@@ -38,7 +38,7 @@ export default function LandingHero({ className, background, logo, name, tagline
             <img src={logo} alt={`${name} logo`} className={styles.logo} />
             <img src={'/title-text.svg'} alt={`${name} title-text`} className={styles.titleText} />
             <MagicText
-              interval={4200}
+              interval={2500}
               content={[
                 { text: "Baritone" },
                 { text: "Music Educator" },

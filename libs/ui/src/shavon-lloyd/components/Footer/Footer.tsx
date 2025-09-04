@@ -101,11 +101,11 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottomRow}>
-          <p className={styles.legal}>
+          {/* <p className={styles.legal}>
             ©{year}, Shavon Lloyd • <a href="#">Privacy policy</a> •{' '}
             <a href="#">Refund policy</a> • <a href="#">Terms of service</a> •{' '}
             <a href="#">Contact information</a>
-          </p>
+          </p> */}
           <p className={styles.credit}>
             made by humans at{' '}
             <a href="https://morrisondevelopers.com">Morrison Developers</a>
