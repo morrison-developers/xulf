@@ -19,12 +19,22 @@ export function Carousel({
   className,
   showDots = true,
 }: CarouselProps) {
-  const [emblaRef, embla] = useEmblaCarousel({
-    ...options,
-    watchDrag: false,
-  });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Track window width
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const [emblaRef, embla] = useEmblaCarousel({
+    ...options,
+    watchDrag: isMobile, // ✅ allow dragging only on mobile
+  });
 
   const onSelect = useCallback(() => {
     if (!embla) return;
