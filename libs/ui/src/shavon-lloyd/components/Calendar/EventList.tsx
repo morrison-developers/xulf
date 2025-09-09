@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import styles from './Calendar.module.css';
 import EventItem from './EventItem';
 import type { CalEvent } from '@xulf/ui/shavon-lloyd';
+import { formatLocalDate } from './dateUtils';
 
 export default function EventList({
   events,
@@ -20,7 +21,7 @@ export default function EventList({
     <aside className={styles.right}>
       <h4 className={styles.sidebarTitle}>
         {selectedDate
-          ? new Date(selectedDate).toLocaleDateString(undefined, { dateStyle: 'long' })
+          ? formatLocalDate(selectedDate).toLocaleDateString(undefined, { dateStyle: 'long' })
           : 'Upcoming'}
       </h4>
 

@@ -2,6 +2,7 @@
 'use client';
 import styles from './Calendar.module.css';
 import type { CalEvent } from '@xulf/ui/shavon-lloyd';
+import { formatLocalDate } from './dateUtils';
 
 // Simple React-friendly inline icons (no external lib required)
 const IconCalendar = () => (
@@ -97,7 +98,7 @@ export default function EventItem({ event }: { event: CalEvent }) {
       {event.notes && <div className={styles.eventNotes}>{event.notes}</div>}
 
       <div className={styles.eventMeta}>
-        {new Date(event.start).toLocaleDateString(undefined, { dateStyle: 'long' })}
+        {formatLocalDate(event.start).toLocaleDateString(undefined, { dateStyle: 'long' })}
         {event.location ? ` • ${event.location}` : ''}
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px' }}>
           <button
