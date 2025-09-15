@@ -3,9 +3,9 @@
 import Script from 'next/script';
 import styles from './page.module.css';
 import { BioPreview, Calendar, Carousel, ContactForm, LandingHero, VideoCard } from '@xulf/ui';
-import bioPreviewData from './bio/content/bio-preview.json';
-import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './bio/content/works';
-import { EVENTS } from './bio/content/calendar';
+import bioPreviewData from './content/bio-preview-content.json';
+import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './content/works';
+import { EVENTS } from './content/calendar';
 
 export default function Index() {
   const ld = {

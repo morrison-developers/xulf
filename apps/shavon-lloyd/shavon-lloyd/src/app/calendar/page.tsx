@@ -5,7 +5,7 @@ import Script from 'next/script';
 import styles from './Calendar.module.css';
 import { HeroImage, Calendar } from '@xulf/ui/shavon-lloyd';
 
-import { EVENTS } from '../bio/content/calendar.ts'
+import { EVENTS } from '../content/calendar.ts'
 
 export default function Page() {
   const ld = {

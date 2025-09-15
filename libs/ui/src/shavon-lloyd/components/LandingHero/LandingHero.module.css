@@ -66,6 +66,8 @@
 
   width: 100%;
   height: calc(100vh - 68px);
+
+  background: #16232f;
 }
 
 .landingHero {
