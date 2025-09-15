@@ -6,7 +6,7 @@ import styles from './Works.module.css';
 
 import { Carousel } from '@xulf/ui';
 import { Work, HeroImage, VideoCard } from '@xulf/ui/shavon-lloyd';
-import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from '../bio/content/works';
+import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from '../content/works';
 
 export default function Page() {
   const ld = {
@@ -27,9 +27,6 @@ export default function Page() {
           wrapperClassName={styles.heroWrap}
           imgClassName={styles.heroImg}
         />
-        <section className={styles.titleSection}>
-          <h2 className="h2">Compositions</h2>
-        </section>
 
         {/* Choral Section */}
         <section className={styles.choralSection}>

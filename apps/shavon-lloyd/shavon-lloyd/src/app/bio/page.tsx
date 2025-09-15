@@ -1,7 +1,7 @@
 // app/bio/page.tsx
 'use client';
 
-import content from './content/content.json';
+import content from '../content/bio-content.json';
 import Script from 'next/script';
 import styles from './Bio.module.css';
 
