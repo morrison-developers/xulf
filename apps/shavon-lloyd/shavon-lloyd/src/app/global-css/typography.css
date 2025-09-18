@@ -1,0 +1,54 @@
+.h2 {
+  color: var(--primary-color-3, #0B121B);
+  text-align: left;
+  font-family: Joan;
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.39rem;
+}
+
+.h3 {
+  color: var(--primary-color-3, #0B121B);
+  text-align: left;
+  font-family: Joan;
+  font-size: clamp(1.5rem, 6vw, 2.25rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.2925rem;
+}
+
+.p {
+  color: var(--primary-color-3, #0B121B);
+  font-family: Inter;
+  /* font-size: 1.4375rem; */
+  font-size: clamp(1rem, 4.3vw, 1.4375rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  /* letter-spacing: 0.18688rem; */
+  letter-spacing: 0.03em;
+  text-wrap: pretty;
+}
+
+.li {
+  color: var(--primary-color-3, #0B121B);
+  font-family: Joan;
+  font-size: clamp(1rem, 4vw, 1.375rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.17875rem;
+}
+
+.mono {
+  color: var(--primary-color-3, #0B121B);
+  font-family: Roboto Mono;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1875rem; /* 135.714% */
+  letter-spacing: 0.11375rem;
+}

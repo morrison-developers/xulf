@@ -1,0 +1,15 @@
+.magicText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: Joan;
+  font-size: clamp(1.25rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  height: 4rem; /* ensures consistent height while text changes */
+  color: var(--white);
+  opacity: 0.9;
+}
