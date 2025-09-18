@@ -18,6 +18,7 @@ export default function Index() {
 
   return (
     <>
+      {/* test */}
       <LandingHero
         background="/hero-bg.jpg"
         logo="/logo.png"
