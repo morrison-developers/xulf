@@ -24,7 +24,7 @@ export default function Index() {
         name="ShavonLloyd"
         tagline="Baritone | Music Educator | Composer | Conductor"
         socials={{
-          instagram: "https://instagram.com/...",
+          instagram: "https://instagram.com/shavon-lloyd",
           youtube: "https://youtube.com/...",
           twitter: "https://twitter.com/..."
         }}
