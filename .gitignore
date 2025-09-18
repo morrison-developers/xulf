@@ -54,3 +54,7 @@ storybook-static
 
 # Prisma Generations
 tools/.generated
+
+# Prisma Migrations
+libs/mor-dev-db/src/lib/generated
+libs/mor-dev-db/src/lib/prisma/migrations

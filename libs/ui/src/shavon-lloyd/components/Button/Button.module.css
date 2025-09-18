@@ -1,0 +1,24 @@
+.button, .a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #3d5886;
+  color: white;
+  font-family: Inter;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+  transition: background 0.2s ease;
+}
+
+.button:hover, .a:hover {
+  background: #2b4063;
+}
+
+@media (max-width: 768x) {
+  .button, .a {
+    margin: 0 0.5rem;
+    border-radius: 0;
+  }
+}

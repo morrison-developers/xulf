@@ -1,0 +1,31 @@
+{
+  "name": "shavon-lloyd",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/shavon-lloyd/shavon-lloyd",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/shavon-lloyd",
+        "root": "apps/shavon-lloyd/shavon-lloyd",
+        "nextConfig": "apps/shavon-lloyd/shavon-lloyd/next.config.js",
+        "buildLibsFromSource": false
+      },
+      "configurations": {
+        "production": {
+          "outputPath": "dist/apps/shavon-lloyd"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "shavon-lloyd:build",
+        "dev": true
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+.nav-wrapper {
+  position: absolute;
+  top: var(--nav-offset-top);
+  left: var(--nav-offset-left);
+  gap: var(--nav-gap);
+  display: flex;
+  flex-direction: column;
+  max-width: var(--nav-width);
+  width: 100%;
+  z-index: 1;
+}
+
+.header, .footer {
+  position: relative;
+}
+
+.header h4,
+.footer h4 {
+  color: var(--nav-footer-text);
+  text-align: right;
+  font-family: var(--footer-font);
+  font-size: var(--footer-font-size);
+  font-style: normal;
+  font-weight: var(--footer-font-weight);
+  line-height: var(--footer-line-height);
+}
+
+.header strong,
+.footer strong {
+  color: var(--nav-footer-strong);
+}
+
+.button {
+  width: 100%;
+  max-width: var(--nav-width);
+  height: var(--button-height);
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: var(--button-radius);
+  background: var(--button-bg);
+  color: var(--button-text);
+  text-align: center;
+  font-family: var(--button-font);
+  font-size: var(--button-font-size);
+  font-style: normal;
+  font-weight: var(--button-font-weight);
+  line-height: var(--button-line-height);
+
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  background: var(--button-text);
+  color: var(--button-bg);
+}
+
+.mobile-nav {
+  position: absolute;
+  width: var(--mobile-nav-width);
+  bottom: 0;
+  right: 0;
+}

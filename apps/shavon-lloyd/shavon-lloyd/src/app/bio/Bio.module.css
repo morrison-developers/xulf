@@ -1,0 +1,38 @@
+.main {
+  background: var(--pure-white, #FFF);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4rem;
+}
+
+.textBlock {
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 70rem;
+  padding: 4rem;
+}
+
+.heroImg {
+  aspect-ratio: 2 / 1;
+  width: 100%;
+  max-height: 70dvh;
+}
+
+.downloadWrap {
+  padding: 2.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .textBlock,
+  .downloadWrap {
+    padding: 0.5rem;
+  }
+}

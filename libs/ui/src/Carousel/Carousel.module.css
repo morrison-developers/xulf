@@ -1,0 +1,91 @@
+.root {
+  position: relative;
+  width: 90%;
+  align-self: center;
+}
+
+.viewport {
+  overflow: hidden;
+  width: 100%;
+  height: auto; /* ensure it grows with content */
+}
+
+.container {
+  display: flex;
+  align-items: center; /* vertically center content inside slides */
+  will-change: transform;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;   /* one slide = 100% of viewport width */
+  min-width: 0;     /* prevents content overflow */
+  max-width: 100%;
+  display: flex;    /* center the card inside */
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;    /* spacing around each card */
+}
+
+.slide > * {
+  max-width: 100%;
+}
+
+/* arrows */
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+
+  height: 3rem;
+  width: 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.prev:hover,
+.next:hover {
+  opacity: 0.7;
+}
+
+.prev { 
+  left: -0.25rem;
+}
+
+.next { 
+  right: -0.25rem;
+}
+
+/* dots */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+}
+
+.dotActive {
+  background: #333;
+}
+
+
+@media (max-width: 1024px) {
+  .prev, .next {
+    display: none;
+  }
+}

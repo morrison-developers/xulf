@@ -1,0 +1,108 @@
+/* src/app/components/Footer/Footer.module.css */
+.footer {
+  background: #4c6d97; /* match your blue */
+  color: white;
+  padding: 2rem;
+}
+
+.follow {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.followTitle {
+  color: #FFF;
+  text-align: center;
+  font-family: Joan;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem; /* 83.333% */
+  letter-spacing: 0.195rem;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: .75rem 0 0 0;
+}
+
+.youTube {
+  height: 100%;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.4);
+  margin: 1.5rem 0;
+}
+
+.selectRow {
+  display: flex;
+  gap: 1rem;
+  justify-content: left;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.selectGroup label {
+  display: block;
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0.25rem;
+}
+
+.selectBox {
+  padding: .75rem;
+  border-radius: .45rem !important;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.selectGroup select {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0);  
+  color: white;
+  cursor: pointer;
+}
+
+.languageOptions {
+  padding: .5rem;
+}
+
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  opacity: 0.8;
+  color: #FFF;
+  font-family: "Roboto Mono";
+  font-size: 0.4875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem; /* 256.41% */
+  letter-spacing: 0.06338rem;
+}
+
+.bottomRow a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.bottomRow p {
+  color: inherit;
+  color: #FFF;
+  font-family: "Roboto Mono";
+  font-size: 0.4875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0.06338rem;
+}
+
+/*~~~~~~~~debugging outlines~~~~~~~~*/
+/* .footer :global(*) {
+  outline: 1px solid red !important;
+} */
+/*~~~~~~~~debugging outlines~~~~~~~~*/
+

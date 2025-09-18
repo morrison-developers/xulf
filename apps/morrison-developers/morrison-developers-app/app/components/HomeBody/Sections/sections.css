@@ -1,0 +1,33 @@
+.title-text {
+  color: var(--color-text-primary);
+  text-align: var(--text-align);
+  text-shadow: 0px 0px 27px var(--color-shadow-accent);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-title);
+  font-style: normal;
+  font-weight: var(--font-weight-title);
+  line-height: var(--line-height-title);
+  letter-spacing: var(--letter-spacing-title);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.subtitle-text {
+  color: var(--color-text-primary);
+  text-align: var(--text-align);
+  text-shadow: 0px 0px 27px var(--color-shadow-accent);
+  font-family: var(--font-main);
+  font-size: var(--font-size-subtitle);
+  font-style: normal;
+  font-weight: var(--font-weight-subtitle);
+  margin: 0;
+  white-space: break-spaces;
+}
+
+@media (max-width: 56.25em) {
+  .title-text {
+    letter-spacing: unset; /* Intentional override */
+    line-height: 100%; /* Consider making a --line-height-title-mobile var */
+    font-weight: var(--font-weight-title-mobile);
+  }
+}
