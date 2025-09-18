@@ -15,7 +15,15 @@ export default function EventList({
   selectedDate: string | null;
   setSelectedDate: Dispatch<SetStateAction<string | null>>;
 }) {
-  const showingSingle = events.length === 1;
+
+  const now = new Date();
+
+  // Only show future events if no date is selected
+  const visibleEvents = selectedDate
+    ? events
+    : events.filter((e) => new Date(e.start) >= now);
+
+  const showingSingle = visibleEvents.length === 1;
 
   return (
     <aside className={styles.right}>
@@ -26,7 +34,7 @@ export default function EventList({
       </h4>
 
       <ul className={styles.eventList}>
-        {events.map((e) => (
+        {visibleEvents.map((e) => (
           <EventItem key={e.id} event={e} />
         ))}
         {!events.length && <li className={styles.empty}>No events</li>}
