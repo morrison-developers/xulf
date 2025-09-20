@@ -1,6 +1,7 @@
 import './global.css';
 import Script from 'next/script';
 import { SettingsProvider, PanelProvider } from '@xulf/ui/shavon-lloyd';
+import SEO from './SEO';
 
 import {
   NavBar,
@@ -14,8 +15,8 @@ import {
 } from '@xulf/ui/shavon-lloyd';
 
 export const metadata = {
-  title: 'Shavon Lloyd',
-  description: 'Baritone, Music Educator, Composer, Conductor',
+  title: 'Shavon Lloyd – Composer & Educator',
+  description: 'Explore performances, compositions, and educational work by Shavon Lloyd.',
 };
 
 export default function RootLayout({
@@ -36,6 +37,14 @@ export default function RootLayout({
   };
   return (
     <html lang="en">
+      <head>
+        <SEO 
+          title="Shavon Lloyd – Composer & Educator"
+          description="Explore performances, compositions, and educational work by Shavon Lloyd."
+          url="https://shavon-lloyd-six.vercel.app"
+          image="https://shavon-lloyd-six.vercel.app/social-card.jpg"
+        />
+      </head>
       <body>
         <SettingsProvider>
           <PanelProvider>
