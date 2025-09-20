@@ -4,7 +4,7 @@ export const EVENTS: CalEvent[] = [
   // --- early August (already happened) ---
   {
     id: '1',
-    title: 'Juilliard Opera Workshop: New Scenes',
+    title: 'Juilliard Opera Workshop: Old Scenes',
     start: '2025-08-03',
     location: 'New York, NY • Juilliard Opera',
     notes: 'Workshop performance of contemporary opera scenes',
