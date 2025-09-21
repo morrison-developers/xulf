@@ -20,8 +20,8 @@ export default function Index() {
     <>
       {/* test */}
       <LandingHero
-        background="/hero-bg.jpg"
-        logo="/logo.png"
+        background="/hero-bg.webp"
+        logo="/logo.webp"
         name="ShavonLloyd"
         tagline="Baritone | Music Educator | Composer | Conductor"
         socials={{

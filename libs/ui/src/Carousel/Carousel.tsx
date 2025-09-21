@@ -68,8 +68,8 @@ export function Carousel({
         </div>
       </div>
 
-      <img src="/chev-left.png" alt="previous" aria-label="Previous" className={styles.prev} onClick={scrollPrev} />
-      <img src="/chev-right.png" alt="next" aria-label="Next"className={styles.next}onClick={scrollNext} />
+      <img src="/chev-left.webp" alt="previous" aria-label="Previous" className={styles.prev} onClick={scrollPrev} />
+      <img src="/chev-right.webp" alt="next" aria-label="Next"className={styles.next}onClick={scrollNext} />
 
       {showDots && (
         <div className={styles.dots}>

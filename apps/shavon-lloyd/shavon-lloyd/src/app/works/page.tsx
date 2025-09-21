@@ -22,7 +22,7 @@ export default function Page() {
     <>
       <main className={styles.main}>
         <HeroImage
-          src="/works-hero.jpg"
+          src="/works-hero.webp"
           alt="Performance stage"
           wrapperClassName={styles.heroWrap}
           imgClassName={styles.heroImg}

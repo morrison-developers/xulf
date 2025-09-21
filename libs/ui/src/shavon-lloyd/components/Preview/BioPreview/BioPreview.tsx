@@ -38,8 +38,8 @@ export default function BioPreview({ data }: BioPreviewProps) {
           </div>
         </div>
       </div>
-      <img src="/top-staff.png" alt="top staff" className={styles.topStaff} />
-      <img src="/btm-staff.png" alt="btm staff" className={styles.btmStaff} />
+      <img src="/top-staff.webp" alt="top staff" className={styles.topStaff} />
+      <img src="/btm-staff.webp" alt="btm staff" className={styles.btmStaff} />
     </section>
   );
 }
