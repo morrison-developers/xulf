@@ -32,7 +32,7 @@ export default function Footer() {
   return (
     <>
       <div className={styles.footerImgWrapper}>
-        <img src={'/footer-placeholder.jpg'} alt={'footer-placeholder'} className={styles.footerImg} />
+        <img src={'/footer-placeholder.webp'} alt={'footer-placeholder'} className={styles.footerImg} />
       </div>
       <footer className={styles.footer}>
         <div className={styles.follow}>
