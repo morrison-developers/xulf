@@ -19,7 +19,7 @@ export default function Page() {
     <>
       <div className={styles.main} >
         <HeroImage
-          src={'/contact-hero.jpg'}
+          src={'/contact-hero.webp'}
           alt={'Contact Page Hero'}
           wrapperClassName={styles.heroWrap}
           imgClassName={styles.heroImg}

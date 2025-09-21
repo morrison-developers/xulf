@@ -39,24 +39,24 @@ export default function RootLayout({
   };
 
   const priorityUrls = [
-    "/hero-bg.jpg",
-    "/logo.png",
+    "/hero-bg.webp",
+    "/logo.webp",
   ];
 
   const otherUrls = [
-    "/bio-hero.png",
-    "/btm-staff.png",
-    "/calendar-hero.jpg",
-    "/chev-left.png",
-    "/chev-right.png",
-    "/contact-hero.jpg",
+    "/bio-hero.webp",
+    "/btm-staff.webp",
+    "/calendar-hero.webp",
+    "/chev-left.webp",
+    "/chev-right.webp",
+    "/contact-hero.webp",
     "/favicon.ico",
-    "/footer-placeholder.jpg",
-    "/shavon-portrait.png",
-    "/social-card.jpg",
+    "/footer-placeholder.webp",
+    "/shavon-portrait.webp",
+    "/social-card.webp",
     "/title-text.svg",
-    "/top-staff.png",
-    "/works-hero.jpg",
+    "/top-staff.webp",
+    "/works-hero.webp",
   ];
 
   return (
@@ -66,7 +66,7 @@ export default function RootLayout({
           title="Shavon Lloyd – Composer & Educator"
           description="Explore performances, compositions, and educational work by Shavon Lloyd."
           url="https://shavon-lloyd-six.vercel.app"
-          image="https://shavon-lloyd-six.vercel.app/social-card.jpg"
+          image="https://shavon-lloyd-six.vercel.app/social-card.webp"
         />
       </head>
       <body>

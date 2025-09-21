@@ -21,7 +21,7 @@ export default function Page() {
     <>
       <main className={styles.main}>
         <HeroImage
-          src="/bio-hero.png"
+          src="/bio-hero.webp"
           alt="shavon"
           wrapperClassName={styles.heroWrap}
           imgClassName={styles.heroImg}
