@@ -22,27 +22,28 @@ export function Preloader({
     if (loaded) {
       const timeout = setTimeout(() => {
         setShow(false);
-      }, 500); // hold 1s after loaded
+      }, 500); // short hold after loaded
       return () => clearTimeout(timeout);
     }
   }, [loaded]);
 
   return (
     <>
-      {/* Children always mounted */}
+      {/* children always mounted */}
       {children}
 
-      {/* Overlay sits above until show=false */}
+      {/* overlay */}
       <AnimatePresence>
         {show && (
           <motion.div
             className={styles.overlay}
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.3 }}
           >
             <div className={styles.content}>
               <motion.div className={styles.spinner} />
+              {/* Uncomment for debugging */}
               {/* <p>{Math.round(progress * 100)}%</p> */}
             </div>
           </motion.div>

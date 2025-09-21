@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -18,7 +18,6 @@ export function usePreloadImages(
       completed++;
       if (!isCancelled) {
         setProgress(completed / total);
-        if (completed === total) setLoaded(true);
       }
     };
 
@@ -26,28 +25,27 @@ export function usePreloadImages(
       new Promise<void>((resolve) => {
         const img = new Image();
         img.src = url;
-
-        img.onload = () => {
-          img.decode?.().then(resolve).catch(resolve);
-        };
+        img.onload = () => img.decode?.().then(resolve).catch(resolve);
         img.onerror = () => resolve();
       });
 
     const start = async () => {
-      // sequential for priority
+      // sequential load for priority assets
       for (const url of priorityUrls) {
         await preloadOne(url);
         updateProgress();
       }
+      if (!isCancelled) {
+        setLoaded(true); // ✅ unblock preloader early
+      }
 
-      // parallel for others
+      // background load others
       otherUrls.forEach((url) => {
         preloadOne(url).then(updateProgress);
       });
     };
 
     start();
-
     return () => {
       isCancelled = true;
     };
