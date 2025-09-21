@@ -1,0 +1,43 @@
+.overlay {
+  position: fixed; /* or fixed if you want it to follow viewport regardless of scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--primary-accent-color, #50709A);
+  color: white;
+  overflow: hidden;
+}
+
+.spinner {
+  width: 3rem;   /* 48px */
+  height: 3rem;
+  border: 4px solid white;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gif {
+  max-width: 40rem;
+  width: 100%;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

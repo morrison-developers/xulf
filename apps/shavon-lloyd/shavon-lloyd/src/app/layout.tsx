@@ -14,6 +14,8 @@ import {
   Tabs,
 } from '@xulf/ui/shavon-lloyd';
 
+import { Preloader } from '@xulf/ui/shavon-lloyd/'
+
 export const metadata = {
   title: 'Shavon Lloyd – Composer & Educator',
   description: 'Explore performances, compositions, and educational work by Shavon Lloyd.',
@@ -35,6 +37,28 @@ export default function RootLayout({
       'query-input': 'required name=search_term_string',
     },
   };
+
+  const priorityUrls = [
+    "/hero-bg.jpg",
+    "/logo.png",
+  ];
+
+  const otherUrls = [
+    "/bio-hero.png",
+    "/btm-staff.png",
+    "/calendar-hero.jpg",
+    "/chev-left.png",
+    "/chev-right.png",
+    "/contact-hero.jpg",
+    "/favicon.ico",
+    "/footer-placeholder.jpg",
+    "/shavon-portrait.png",
+    "/social-card.jpg",
+    "/title-text.svg",
+    "/top-staff.png",
+    "/works-hero.jpg",
+  ];
+
   return (
     <html lang="en">
       <head>
@@ -46,27 +70,29 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <SettingsProvider>
-          <PanelProvider>
-            <NavWrapper 
-              desktop={<NavBar />}
-              mobile={<NavBarMobile />}
-              breakpoint={1024} // in pixels
-            />
-            <Body>
-              {children}
-            </Body>
-            <Footer />
-            {/* <Tabs
-              gap={1}
-            >
-              <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
-              <SettingsTab />
-            </Tabs> */}
-          </PanelProvider>
-        </SettingsProvider>
-        <Script id="ld-website" type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldWebsite) }} />
+        <Preloader priorityUrls={priorityUrls} otherUrls={otherUrls}>
+          <SettingsProvider>
+            <PanelProvider>
+              <NavWrapper 
+                desktop={<NavBar />}
+                mobile={<NavBarMobile />}
+                breakpoint={1024} // in pixels
+              />
+              <Body>
+                {children}
+              </Body>
+              <Footer />
+              {/* <Tabs
+                gap={1}
+              >
+                <MusicTab playlistId="https://open.spotify.com/embed/playlist/06GGOttT4RqlE6ocEam8Cu?utm_source=generator" />
+                <SettingsTab />
+              </Tabs> */}
+            </PanelProvider>
+          </SettingsProvider>
+          <Script id="ld-website" type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(ldWebsite) }} />
+        </Preloader>
       </body>
     </html>
   );
