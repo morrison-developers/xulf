@@ -6,7 +6,7 @@ import styles from './Works.module.css';
 
 import { Carousel } from '@xulf/ui';
 import { Work, HeroImage, VideoCard } from '@xulf/ui/shavon-lloyd';
-import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from '../content/works';
+import { CHORAL_WORKS } from '../content/works';
 
 export default function Page() {
   const ld = {
@@ -44,27 +44,6 @@ export default function Page() {
           {/* carousel with details below */}
           <Carousel className={styles.carousel} options={{ loop: true }}>
             {CHORAL_WORKS.map(w => (
-              <VideoCard key={w.id} w={w} />
-            ))}
-          </Carousel>
-        </section>
-
-        {/* Instrumental Section */}
-        <section className={styles.instrumentalSection}>
-          <div className={styles.instrumentalNotes}>
-            <h3 className="h3">Instrumental</h3>
-            {/* plain text list above */}
-            <ul className={styles.workList}>
-              {INSTRUMENTAL_WORKS.map(w => (
-                <li key={w.id} className={'li'}>
-                  {w.title} <em>{w.ensemble}</em> ({w.year})
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* carousel with details below */}
-          <Carousel className={styles.carousel} options={{ loop: true }}>
-            {INSTRUMENTAL_WORKS.map(w => (
               <VideoCard key={w.id} w={w} />
             ))}
           </Carousel>

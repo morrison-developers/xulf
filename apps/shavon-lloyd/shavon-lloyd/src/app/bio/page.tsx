@@ -34,15 +34,30 @@ export default function Page() {
         </section>
 
         <section className={styles.textBlock}>
-          <h3 className={'h3'}>Condensed Biography</h3>
-          {content.condensed.split('\n\n').map((p, i) => (
+          <h3 className={'h3'}>Compositions</h3>
+          {content.compositions.split('\n\n').map((p, i) => (
             <p key={i}  className={'p'}>{p}</p>
           ))}
         </section>
+
+        <section className={styles.textBlock}>
+          <h3 className={'h3'}>Press Quotes</h3>
+          {content.pressQuotes.map((quote, i) => (
+            <p key={i} className={'p'}>{quote}</p>
+          ))}
+        </section>
+
         <div className={styles.downloadWrap}>
-          <h2 className={'h2'}>Download Full Resolution Headshot</h2>
+          <h2 className="h2">Download Full Resolution Headshot</h2>
           <Button
-            onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
+            onClick={() => {
+              const link = document.createElement('a');
+              link.href = '/headshot.jpeg';
+              link.download = 'shavon-lloyd-headshot.jpeg';
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }}
           >
             DOWNLOAD
           </Button>

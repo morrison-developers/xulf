@@ -1,6 +1,6 @@
 import './global.css';
 import Script from 'next/script';
-import { SettingsProvider, PanelProvider } from '@xulf/ui/shavon-lloyd';
+import { SettingsProvider, PanelProvider, PreloaderVideo } from '@xulf/ui/shavon-lloyd';
 import SEO from './SEO';
 
 import {
@@ -52,7 +52,6 @@ export default function RootLayout({
     "/contact-hero.webp",
     "/favicon.ico",
     "/footer-placeholder.webp",
-    "/shavon-portrait.webp",
     "/social-card.webp",
     "/title-text.svg",
     "/top-staff.webp",
@@ -76,7 +75,7 @@ export default function RootLayout({
               <NavWrapper 
                 desktop={<NavBar />}
                 mobile={<NavBarMobile />}
-                breakpoint={1024} // in pixels
+                breakpoint={1088} // in pixels
               />
               <Body>
                 {children}
