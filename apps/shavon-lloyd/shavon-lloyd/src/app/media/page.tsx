@@ -18,7 +18,7 @@ export default function Page() {
     <>
       <main className={styles.main} >
         <HeroImage
-          src="/calendar-hero.webp"
+          src="/media-hero.webp"
           alt="Performance still"
           wrapperClassName={styles.heroWrap}
           imgClassName={styles.heroImg}

@@ -4,7 +4,7 @@ export type Work = {
   role?: string;
   ensemble?: string;
   details?: string;
-  year?: string | number;
+  year?: string | number | null;
   youtubeId: string;
   category: 'Choral' | 'Instrumental';
 };

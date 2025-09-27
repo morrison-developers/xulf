@@ -4,7 +4,7 @@ import Script from 'next/script';
 import styles from './page.module.css';
 import { BioPreview, Calendar, Carousel, ContactForm, LandingHero, VideoCard } from '@xulf/ui';
 import bioPreviewData from './content/bio-preview-content.json';
-import { CHORAL_WORKS, INSTRUMENTAL_WORKS } from './content/works';
+import { CHORAL_WORKS } from './content/works';
 import { EVENTS } from './content/calendar';
 
 export default function Index() {
@@ -50,13 +50,13 @@ export default function Index() {
           </div>
         </section>
 
-        <section className={styles.worksSection}>
+        {/* <section className={styles.worksSection}>
           <Carousel className={styles.carousel} options={{ loop: true }}>
             {INSTRUMENTAL_WORKS.map(w => (
               <VideoCard key={w.id} w={w} />
             ))}
           </Carousel>
-        </section>
+        </section> */}
 
         <div className={styles.contactSection}>
           <section className={styles.leftCol}>
