@@ -2,7 +2,7 @@
   border-radius: 0.5rem;
   background: var(--white, #D7E2EB);
   box-shadow: 4px 4px 8px 0 var(--primary-color-3, #0B121B);
-  padding: 2rem;
+  padding: clamp(1rem, 4vw, 2rem);
   width: 100%;
 }
 
@@ -29,7 +29,7 @@
 
 /* --- body --- */
 .cardBody {
-  padding: 1rem 1.25rem;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
