@@ -92,7 +92,11 @@ export default function NavBarMobile() {
         <nav>
           <div className={styles.mobileList} >
             {navItems.map(({ href, label }) => (
-              <Link href={href} className={`${styles.link} ${pathname === href ? styles.active : ''}`}>
+              <Link
+                key={href}
+                href={href}
+                className={`${styles.link} ${pathname === href ? styles.active : ''}`}
+              >
                 {label}
               </Link>
             ))}

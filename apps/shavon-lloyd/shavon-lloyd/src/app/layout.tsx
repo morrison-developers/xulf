@@ -52,7 +52,6 @@ export default function RootLayout({
     "/contact-hero.webp",
     "/favicon.ico",
     "/footer-placeholder.webp",
-    "/shavon-portrait.webp",
     "/social-card.webp",
     "/title-text.svg",
     "/top-staff.webp",
