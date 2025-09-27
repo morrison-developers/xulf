@@ -1,6 +1,6 @@
 import './global.css';
 import Script from 'next/script';
-import { SettingsProvider, PanelProvider } from '@xulf/ui/shavon-lloyd';
+import { SettingsProvider, PanelProvider, PreloaderVideo } from '@xulf/ui/shavon-lloyd';
 import SEO from './SEO';
 
 import {
