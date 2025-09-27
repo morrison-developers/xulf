@@ -16,6 +16,11 @@
   padding: 4rem;
 }
 
+.textBlock h2,
+.textBlock h3 {
+  margin-bottom: clamp(0.5rem, 1vw, 1rem;)
+}
+
 .heroImg {
   aspect-ratio: 2 / 1;
   width: 100%;
