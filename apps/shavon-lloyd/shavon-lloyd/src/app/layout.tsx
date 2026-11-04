@@ -2,6 +2,7 @@ import './global.css';
 import Script from 'next/script';
 import { SettingsProvider, PanelProvider, PreloaderVideo } from '@xulf/ui/shavon-lloyd';
 import SEO from './SEO';
+import { Analytics } from '@vercel/analytics/next';
 
 import {
   NavBar,
@@ -92,6 +93,7 @@ export default function RootLayout({
           <Script id="ld-website" type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(ldWebsite) }} />
         </Preloader>
+        <Analytics />
       </body>
     </html>
   );

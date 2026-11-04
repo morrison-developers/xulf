@@ -1,5 +1,6 @@
 import './global.css';
 import { StyledComponentsRegistry } from './registry';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'Page Under Construction',
@@ -18,6 +19,7 @@ export default function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <Analytics />
       </body>
     </html>
   );
