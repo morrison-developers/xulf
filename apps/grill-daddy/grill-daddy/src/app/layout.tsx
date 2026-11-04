@@ -1,6 +1,7 @@
 import './global.css';
 import { StyledComponentsRegistry } from './registry';
 import { GrillProvider } from './context/GrillContext';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'Grillio',
@@ -20,6 +21,7 @@ export default function RootLayout({
           <main>{children}</main>
         </StyledComponentsRegistry>
       </GrillProvider>
+      <Analytics />
       </body>
     </html>
   );

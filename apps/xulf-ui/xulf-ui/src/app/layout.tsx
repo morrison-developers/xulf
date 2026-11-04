@@ -2,6 +2,7 @@ import './global.css';
 import { StyledComponentsRegistry } from './registry';
 import { SessionWrapper } from './session-wrapper';
 import { DndProvider } from '../../../../../libs/drag/src/drag/DndProvider';
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: 'Welcome to demo2',
@@ -23,6 +24,7 @@ export default function RootLayout({
             {/* </DndProvider> */}
           </SessionWrapper>
         </StyledComponentsRegistry>
+        <Analytics />
       </body>
     </html>
   );
